@@ -1,6 +1,3 @@
-<!-- ============================================================
-     PROJECTS PAGE — All projects with screenshots, descriptions, live links
-     ============================================================ -->
 <section class="section" style="padding-top:120px;" aria-labelledby="proj-heading">
   <div class="container">
     <div class="section-head reveal">
@@ -9,7 +6,6 @@
       <p class="section-subtitle">Real academic and personal projects demonstrating backend engineering, full-stack development, and UI design skills.</p>
     </div>
 
-    <!-- Filter buttons -->
     <div class="filter-bar reveal" role="group" aria-label="Filter projects by category">
       <button class="filter-btn active" data-filter="all">All</button>
       <button class="filter-btn" data-filter="fullstack">Full Stack</button>
@@ -17,52 +13,11 @@
       <button class="filter-btn" data-filter="frontend">Frontend</button>
     </div>
 
-    <!-- Projects Grid -->
     <div class="projects-grid" id="projects-grid">
 
 
-      <!-- ══ Project 0: SnapMark ══ -->
-      <article class="proj-card reveal" data-category="backend" aria-label="SnapMark public bookmarking app">
-        <div class="proj-screenshots">
-          <div class="proj-screenshots-main proj-screenshots-placeholder" style="background:linear-gradient(135deg,#07101c,#0a1e38,#071628);">
-            <div class="proj-placeholder-inner">
-              <span class="proj-placeholder-icon">🔖</span>
-              <span class="proj-placeholder-label">Node.js · MongoDB Atlas · Netlify</span>
-            </div>
-          </div>
-          <div class="proj-screenshot-shine" aria-hidden="true"></div>
-        </div>
-        <div class="proj-card-body">
-          <div class="proj-card-header">
-            <div class="proj-tags">
-              <span class="tag">Node.js</span>
-              <span class="tag">MongoDB Atlas</span>
-              <span class="tag">REST API</span>
-              <span class="tag">Netlify Functions</span>
-              <span class="tag">CRUD</span>
-            </div>
-            <div class="proj-status proj-status--live">🟢 Live</div>
-          </div>
-          <h2 class="proj-title">SnapMark — Public Bookmarking App</h2>
-          <p class="proj-desc">
-            A full-stack bookmarking app demonstrating a complete <strong>Node.js → MongoDB Atlas → Netlify Functions</strong> deployment. Users save links with titles, descriptions, and tags. Data persists to a real cloud database — this is a genuine REST API with GET, POST, and DELETE endpoints connected to MongoDB Atlas.
-          </p>
-          <ul class="proj-features">
-            <li>Real MongoDB Atlas database — data persists across all users and sessions</li>
-            <li>Three REST API endpoints: <code>GET</code>, <code>POST</code>, <code>DELETE</code> via Netlify serverless functions</li>
-            <li>Input validation on both server (Node.js) and client (JavaScript)</li>
-            <li>Tag-based filtering, Google Favicon API integration, live API response preview panel</li>
-          </ul>
-          <div class="proj-links">
-            <a href="#" target="_blank" rel="noopener" class="btn btn-primary" id="snapmark-live-link">
-              🌐 Live Demo →
-            </a>
-            <span class="proj-link-note" style="font-size:.7rem;">Add your Netlify URL after deploying</span>
-          </div>
-        </div>
-      </article>
+      
 
-      <!-- ══ Project 1: Centro Café ══ -->
       <article class="proj-card reveal" data-category="fullstack" aria-label="Centro Café project">
         <div class="proj-screenshots">
           <div class="proj-screenshots-main">
@@ -99,7 +54,6 @@
         </div>
       </article>
 
-      <!-- ══ Project 2: Research Conference App ══ -->
       <article class="proj-card reveal reveal-delay-1" data-category="frontend" aria-label="Research Conference App project">
         <div class="proj-screenshots">
           <div class="proj-screenshots-main">
@@ -136,7 +90,6 @@
         </div>
       </article>
 
-      <!-- ══ Project 3: Nexus Support (Community Help Desk) ══ -->
       <article class="proj-card reveal reveal-delay-2" data-category="fullstack" aria-label="Nexus Support Help Desk project">
         <div class="proj-screenshots">
           <div class="proj-screenshots-main">
@@ -173,12 +126,45 @@
         </div>
       </article>
 
+      <article class="proj-card reveal reveal-delay-3" data-category="frontend" aria-label="Calculator App project">
+        <div class="proj-screenshots">
+          <div class="proj-screenshots-main">
+            <img src="assets/images/calc.PNG" alt="Neumorphic Web Calculator App Interface" class="proj-ss-img proj-ss-primary" loading="lazy" />
+          </div>
+          <div class="proj-screenshot-shine" aria-hidden="true"></div>
+        </div>
+        <div class="proj-card-body">
+          <div class="proj-card-header">
+            <div class="proj-tags">
+              <span class="tag">JavaScript</span>
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">Vercel Deploy</span>
+            </div>
+            <div class="proj-status proj-status--live">🟢 Live</div>
+          </div>
+          <h2 class="proj-title">Web Calculator App</h2>
+          <p class="proj-desc">
+            A responsive, interactive web-based calculator application featuring a sleek, neumorphic design. Deployed to Vercel, it features a clean and modern user interface alongside precise real-time math parsing and logic handling.
+          </p>
+          <ul class="proj-features">
+            <li>Modern neumorphic UI design with intuitive button feedback</li>
+            <li>Fast and dynamic frontend logic handling standard arithmetic operations</li>
+            <li>Interactive and responsive user interface suited for mobile and desktop</li>
+            <li>Real-time screen rendering and state management</li>
+          </ul>
+          <div class="proj-links">
+            <a href="https://calculator-gamma-sepia-36.vercel.app/" target="_blank" rel="noopener" class="btn btn-primary">
+              🌐 Live Demo →
+            </a>
+          </div>
+        </div>
+      </article>
 
-    </div><!-- /projects-grid -->
-  </div>
+
+    </div></div>
 </section>
 
-<!-- Project filter script (re-executed by router after injection) -->
 <script>
 (function initProjectFilter() {
   const btns  = document.querySelectorAll('.filter-btn');
