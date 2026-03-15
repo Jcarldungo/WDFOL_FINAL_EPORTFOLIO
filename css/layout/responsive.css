@@ -1,0 +1,53 @@
+/* =============================================================================
+   RESPONSIVE — Global responsive overrides for layout and navigation.
+   Per-component responsive rules live in their own files (co-location).
+   This file handles cross-cutting layout breakpoints only.
+   Separation rationale: Centralized global overrides prevent conflicts
+   and give a single place to audit responsive behavior at a macro level.
+   ============================================================================= */
+
+/* ── Tablet (≤ 1024px) ────────────────────────────────── */
+@media (max-width: 1024px) {
+  /* Two-column layouts collapse to one */
+  .two-col,
+  .two-col--offset,
+  .two-col--reverse {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Mobile (≤ 768px) ─────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Hide desktop nav, show hamburger */
+  .nav-links              { display: none; }
+  .nav-actions .btn       { display: none; }
+  .hamburger              { display: flex; }
+  .mobile-menu            { display: flex; }
+
+  /* Auto-grid single column */
+  .auto-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Small mobile (≤ 480px) ───────────────────────────── */
+@media (max-width: 480px) {
+  .container { width: 95vw; }
+}
+
+/* ── Reduced motion ───────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration  : 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration : 0.01ms !important;
+    scroll-behavior     : auto !important;
+  }
+
+  .reveal,
+  .reveal-left,
+  .reveal-right {
+    opacity  : 1;
+    transform: none;
+  }
+}

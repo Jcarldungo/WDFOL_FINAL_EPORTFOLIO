@@ -1,0 +1,157 @@
+/* ============================================================
+   NAVBAR — Fixed header, bare logo, nav links, theme toggle
+   ============================================================ */
+
+#navbar {
+  position : fixed;
+  top: 0; left: 0; right: 0;
+  z-index  : var(--z-navbar);
+  transition: all var(--transition-slow);
+}
+
+#navbar.scrolled {
+  background      : var(--bg-glass);
+  backdrop-filter : blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom   : 1px solid var(--border);
+  box-shadow      : 0 4px 32px rgba(0,0,0,.2);
+}
+
+.nav-inner {
+  display        : flex;
+  align-items    : center;
+  justify-content: space-between;
+  padding        : 18px 0;
+  transition     : padding var(--transition-slow);
+}
+#navbar.scrolled .nav-inner { padding: 12px 0; }
+
+/* ── Logo: BARE image, no box, no border ── */
+.nav-logo {
+  display    : flex;
+  align-items: center;
+  gap        : 0;
+  cursor     : pointer;
+  text-decoration: none;
+}
+
+.logo-img {
+  width    : 46px;
+  height   : 46px;
+  object-fit: contain;
+  display  : block;
+  transition: transform var(--transition-base), filter var(--transition-base), opacity var(--transition-base);
+}
+
+/* Dark mode: invert black logo → glowing accent color */
+[data-theme="dark"] .logo-img {
+  filter: invert(1) brightness(2) sepia(1) saturate(4) hue-rotate(175deg);
+}
+[data-theme="light"] .logo-img {
+  filter: none;
+}
+
+.nav-logo:hover .logo-img {
+  transform: scale(1.08) rotate(-3deg);
+  opacity  : 0.85;
+}
+
+/* ── Desktop nav links ── */
+.nav-links { display: flex; align-items: center; gap: 4px; }
+
+.nav-link {
+  font-size    : 0.88rem;
+  font-weight  : 500;
+  padding      : 8px 16px;
+  border-radius: var(--radius-pill);
+  color        : var(--text-2);
+  transition   : color var(--transition-fast);
+  position     : relative;
+  cursor       : pointer;
+  letter-spacing: 0.01em;
+}
+
+.nav-link::after {
+  content   : '';
+  position  : absolute;
+  bottom: 3px; left: 50%;
+  transform : translateX(-50%);
+  width: 0; height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width var(--transition-base);
+}
+.nav-link:hover        { color: var(--text); }
+.nav-link.active       { color: var(--text); }
+.nav-link.active::after,
+.nav-link:hover::after { width: 20px; }
+
+/* ── Right actions ── */
+.nav-actions { display: flex; align-items: center; gap: 10px; }
+
+.theme-toggle {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border    : 1px solid var(--border-2);
+  background: var(--surface);
+  color     : var(--text-2);
+  display   : flex; align-items: center; justify-content: center;
+  transition: border-color var(--transition-base), transform var(--transition-base);
+  font-size : 1.05rem;
+}
+.theme-toggle:hover { border-color: var(--accent); transform: rotate(20deg); }
+
+/* ── Hamburger ── */
+.hamburger {
+  display       : none;
+  flex-direction: column;
+  gap: 5px; width: 38px; padding: 4px;
+  background: none; border: none; cursor: pointer;
+}
+.hamburger span {
+  display: block; height: 2px; border-radius: 2px;
+  background: var(--text);
+  transition: all var(--transition-base);
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── Mobile menu ── */
+.mobile-menu {
+  display        : none;
+  position       : fixed; inset: 0;
+  z-index        : var(--z-mobile);
+  background     : var(--bg);
+  padding        : 120px 40px 40px;
+  flex-direction : column; gap: 8px;
+  transform      : translateX(100%);
+  transition     : transform var(--transition-spring);
+}
+.mobile-menu.open { transform: translateX(0); }
+
+.mobile-link {
+  font-family  : var(--font-display);
+  font-size    : 2.4rem; font-weight: 800;
+  color        : var(--text);
+  padding      : 12px 0;
+  border-bottom: 1px solid var(--border);
+  transition   : color var(--transition-fast), padding-left var(--transition-fast);
+  cursor       : pointer;
+}
+.mobile-link:hover { color: var(--accent); padding-left: 8px; }
+
+/* ── Progress bar ── */
+#progress-bar {
+  position: fixed; top: 0; left: 0;
+  height  : 3px;
+  background: linear-gradient(90deg, var(--accent), var(--purple));
+  z-index : var(--z-overlay);
+  width   : 0%; transition: width .1s linear;
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .mobile-menu { display: flex; }
+}

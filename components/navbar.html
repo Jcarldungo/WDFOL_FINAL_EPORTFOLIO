@@ -1,0 +1,40 @@
+<div id="progress-bar" role="progressbar" aria-label="Reading progress"></div>
+
+<nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
+  <a class="mobile-link" data-page="home">Home</a>
+  <a class="mobile-link" data-page="about">About</a>
+  <a class="mobile-link" data-page="projects">Projects</a>
+  <a class="mobile-link" data-page="blog">Blog</a>
+  <a class="mobile-link" data-page="resume">Resume</a>
+  <a class="mobile-link" data-page="contact">Contact</a>
+</nav>
+
+<header id="navbar" role="banner">
+  <div class="container">
+    <div class="nav-inner">
+      <!-- Logo: bare PNG image, no box wrapper -->
+      <a class="nav-logo" data-page="home" aria-label="Jann Carl Dungo — Home">
+        <img src="assets/icons/logo.png" alt="JD Logo" class="logo-img" />
+      </a>
+
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a class="nav-link active" data-page="home"    tabindex="0">Home</a>
+        <a class="nav-link"       data-page="about"    tabindex="0">About</a>
+        <a class="nav-link"       data-page="projects" tabindex="0">Projects</a>
+        <a class="nav-link"       data-page="blog"     tabindex="0">Blog</a>
+        <a class="nav-link"       data-page="resume"   tabindex="0">Resume</a>
+        <a class="nav-link"       data-page="contact"  tabindex="0">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
+          <span id="theme-icon" aria-hidden="true">☀️</span>
+        </button>
+        <a class="btn btn-primary btn-sm" data-page="contact">Hire Me</a>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>

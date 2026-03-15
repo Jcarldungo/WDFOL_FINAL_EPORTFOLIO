@@ -1,0 +1,403 @@
+<!-- ============================================================
+     BLOG PAGE — Premium dark futuristic, 4 articles
+     ============================================================ -->
+
+<!-- Ambient canvas particles -->
+<canvas id="blog-particles" aria-hidden="true"></canvas>
+
+<!-- Page hero -->
+<section class="blog-hero">
+  <!-- Radial glow behind heading -->
+  <div class="blog-hero-glow" aria-hidden="true"></div>
+  <!-- Abstract blurred shapes -->
+  <div class="blog-orb blog-orb--1" aria-hidden="true"></div>
+  <div class="blog-orb blog-orb--2" aria-hidden="true"></div>
+  <div class="blog-orb blog-orb--3" aria-hidden="true"></div>
+
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="blog-hero-inner">
+      <div class="blog-hero-eyebrow">
+        <span class="blog-eyebrow-dot"></span>
+        Writing &amp; Thoughts
+      </div>
+      <h1 class="blog-hero-title">
+        Dev <span class="blog-title-accent">Notes</span>
+      </h1>
+      <p class="blog-hero-desc">
+        Learning notes, real experiences, and honest thoughts from my journey
+        as a BSIT student and backend developer.
+      </p>
+      <div class="blog-hero-line" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Blog grid -->
+<section class="blog-main" aria-label="Blog articles">
+  <div class="container">
+    <div class="blog-grid">
+
+      <!-- ── Card 1: Journey article ── -->
+      <article class="blog-card blog-card--featured" data-blog="journey" tabindex="0" role="button" aria-label="Read: My Journey as a Backend Developer Student">
+        <div class="blog-card-glow" aria-hidden="true"></div>
+        <div class="blog-card-cover" style="--cover-a:#0a1628;--cover-b:#1a3a5c;">
+          <div class="blog-cover-bg"></div>
+          <span class="blog-cover-icon">🚀</span>
+          <div class="blog-cover-line" aria-hidden="true"></div>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <span class="blog-meta-date">Feb 2026</span>
+            <span class="blog-meta-sep">·</span>
+            <span class="blog-meta-read">8 min read</span>
+            <span class="blog-meta-sep">·</span>
+            <span class="blog-meta-new">New</span>
+          </div>
+          <div class="blog-card-divider" aria-hidden="true"></div>
+          <h2 class="blog-card-title">My Journey as a Backend Developer Student</h2>
+          <p class="blog-card-excerpt">
+            From zero knowledge to building REST APIs — an honest look at what it's really like
+            learning backend development as a BSIT student at Holy Angel University.
+          </p>
+          <div class="blog-card-tags">
+            <span class="blog-tag">Career</span>
+            <span class="blog-tag">Node.js</span>
+            <span class="blog-tag">Student Life</span>
+          </div>
+          <button class="blog-read-btn" data-blog="journey">
+            <span>Read Full Article</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+          </button>
+        </div>
+      </article>
+
+      <!-- ── Card 2: Responsive design ── -->
+      <article class="blog-card" data-blog="responsive" tabindex="0" role="button" aria-label="Read: Tips for Building Responsive Websites">
+        <div class="blog-card-glow" aria-hidden="true"></div>
+        <div class="blog-card-cover" style="--cover-a:#180d2e;--cover-b:#2d1a5c;">
+          <div class="blog-cover-bg"></div>
+          <span class="blog-cover-icon">📱</span>
+          <div class="blog-cover-line" aria-hidden="true"></div>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <span class="blog-meta-date">Jan 2026</span>
+            <span class="blog-meta-sep">·</span>
+            <span class="blog-meta-read">6 min read</span>
+          </div>
+          <div class="blog-card-divider" aria-hidden="true"></div>
+          <h2 class="blog-card-title">Tips for Building Responsive Websites That Actually Work</h2>
+          <p class="blog-card-excerpt">
+            Practical CSS tips learned from building real academic projects.
+            No fluff — just what actually makes a website shine on every screen.
+          </p>
+          <div class="blog-card-tags">
+            <span class="blog-tag">CSS</span>
+            <span class="blog-tag">Responsive</span>
+            <span class="blog-tag">HTML5</span>
+          </div>
+          <button class="blog-read-btn" data-blog="responsive">
+            <span>Read Full Article</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+          </button>
+        </div>
+      </article>
+
+      <!-- ── Card 3: JWT Auth ── -->
+      <article class="blog-card" data-blog="jwt" tabindex="0" role="button" aria-label="Read: Understanding JWT Authentication">
+        <div class="blog-card-glow" aria-hidden="true"></div>
+        <div class="blog-card-cover" style="--cover-a:#0d2a1a;--cover-b:#1a5c3a;">
+          <div class="blog-cover-bg"></div>
+          <span class="blog-cover-icon">🔐</span>
+          <div class="blog-cover-line" aria-hidden="true"></div>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <span class="blog-meta-date">Dec 2025</span>
+            <span class="blog-meta-sep">·</span>
+            <span class="blog-meta-read">10 min read</span>
+          </div>
+          <div class="blog-card-divider" aria-hidden="true"></div>
+          <h2 class="blog-card-title">Understanding JWT Authentication in Node.js</h2>
+          <p class="blog-card-excerpt">
+            A practical breakdown of JSON Web Tokens — from signing and verification to
+            refresh token flows, built from real experience on the Centro Café project.
+          </p>
+          <div class="blog-card-tags">
+            <span class="blog-tag">Node.js</span>
+            <span class="blog-tag">JWT</span>
+            <span class="blog-tag">Security</span>
+          </div>
+          <button class="blog-read-btn" data-blog="jwt">
+            <span>Read Full Article</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+          </button>
+        </div>
+      </article>
+
+      <!-- ── Card 4: Personal Reflection ── -->
+      <article class="blog-card" data-blog="reflection" tabindex="0" role="button" aria-label="Read: A Personal Reflection on My First Year of Coding">
+        <div class="blog-card-glow" aria-hidden="true"></div>
+        <div class="blog-card-cover" style="--cover-a:#1a0d2e;--cover-b:#2e1a4a;">
+          <div class="blog-cover-bg"></div>
+          <span class="blog-cover-icon">✍️</span>
+          <div class="blog-cover-line" aria-hidden="true"></div>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <span class="blog-meta-date">Feb 2026</span>
+            <span class="blog-meta-sep">·</span>
+            <span class="blog-meta-read">5 min read</span>
+          </div>
+          <div class="blog-card-divider" aria-hidden="true"></div>
+          <h2 class="blog-card-title">Dear Freshman Me: A Letter to My Past Self</h2>
+          <p class="blog-card-excerpt">
+            A personal reflection on everything I wish I knew when I started BSIT — the mistakes,
+            the breakthroughs, and the moments that made me who I am as a developer today.
+          </p>
+          <div class="blog-card-tags">
+            <span class="blog-tag">Reflection</span>
+            <span class="blog-tag">Personal</span>
+            <span class="blog-tag">Growth</span>
+          </div>
+          <button class="blog-read-btn" data-blog="reflection">
+            <span>Read Full Article</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+          </button>
+        </div>
+      </article>
+
+    </div><!-- /blog-grid -->
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     ARTICLE OVERLAY
+     ════════════════════════════════════ -->
+<div class="blog-overlay" id="blog-overlay" hidden role="dialog" aria-modal="true">
+  <div class="blog-overlay-backdrop"></div>
+  <div class="blog-overlay-panel">
+    <button class="blog-overlay-close" id="blog-overlay-close" aria-label="Close article">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <span>Close</span>
+    </button>
+    <div class="blog-overlay-content" id="blog-overlay-content"></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     ARTICLE TEMPLATES
+     ════════════════════════════════════ -->
+
+<template id="tpl-journey">
+  <div class="ba-cover" style="background:linear-gradient(135deg,#0a1628,#1a3a5c,#0d2040);"><span class="ba-cover-icon">🚀</span></div>
+  <div class="ba-inner">
+    <div class="ba-tags"><span class="blog-tag">Career</span><span class="blog-tag">Node.js</span><span class="blog-tag">Student Life</span><span class="ba-read">Feb 2026 · 8 min read</span></div>
+    <h1 class="ba-title">My Journey as a Backend Developer Student</h1>
+    <p class="ba-lead">I'm Jann Carl Dungo — a 3rd year BSIT student at Holy Angel University. This is my honest story of going from a complete beginner to someone who actually builds REST APIs and manages databases. Spoiler: it wasn't a straight line.</p>
+    <h2>Where It Started</h2>
+    <p>Like most BSIT students, I started with the basics — HTML, CSS, a little JavaScript. I remember being genuinely amazed when I got my first webpage to look good on a phone. But then came the real question: <em>what do I actually want to build?</em></p>
+    <p>The answer came during a Web Systems class where we were introduced to server-side scripting with PHP. Something clicked. The idea that there was an entire world of logic running behind every website — handling data, authenticating users, serving content dynamically — was fascinating. I knew immediately: backend development was my path.</p>
+    <h2>The First Real Project: Centro Café</h2>
+    <p>My first serious backend project was <strong>Centro Café</strong>, an e-commerce app built with the MEVN stack. This project taught me more than any lecture could. I designed a RESTful API from scratch — thought through routes, controllers, middleware, database schemas. I made every rookie mistake: hardcoded credentials, no input validation, no error handling. And I fixed every single one.</p>
+    <p>The moment JWT authentication worked — users could actually log in and sessions persisted — I felt genuinely proud. That's backend development: the wins aren't always visible, but they're deeply satisfying.</p>
+    <h2>Java, OOP, and Thinking in Systems</h2>
+    <p>Later, working on the Delivery Agent Management System in Java shifted my thinking entirely. Object-oriented programming forced me to think in terms of systems — what are the entities? What are their behaviors? How do they relate? This made me a better backend developer overall, even in JavaScript.</p>
+    <h2>What I've Learned (Honestly)</h2>
+    <ol><li><strong>Build things that break.</strong> The best learning happens when your API returns a 500 error at 11pm and you figure out why.</li><li><strong>Read other people's code.</strong> GitHub is a free education. I've learned more from open-source Node.js projects than most tutorials.</li><li><strong>Stay consistent, not intense.</strong> Coding an hour every day beats a 10-hour marathon once a week.</li></ol>
+    <h2>What's Next</h2>
+    <p>I'm currently in my 3rd year, working as a Student Aide at the HAU Library while building my skills. My goal is a backend developer internship where I work on real production systems. If you're a fellow student reading this: you don't need to know everything before you start. Just start. Build something. Break it. Fix it. Repeat.</p>
+    <div class="ba-sig"><img src="assets/images/profile.png" alt="Jann Carl Dungo"/><div><div class="ba-sig-name">Jann Carl Dungo</div><div class="ba-sig-role">Backend Developer · BSIT @ HAU</div></div></div>
+  </div>
+</template>
+
+<template id="tpl-responsive">
+  <div class="ba-cover" style="background:linear-gradient(135deg,#180d2e,#2d1a5c,#120d3a);"><span class="ba-cover-icon">📱</span></div>
+  <div class="ba-inner">
+    <div class="ba-tags"><span class="blog-tag">CSS</span><span class="blog-tag">Responsive</span><span class="blog-tag">HTML5</span><span class="ba-read">Jan 2026 · 6 min read</span></div>
+    <h1 class="ba-title">Tips for Building Responsive Websites That Actually Work</h1>
+    <p class="ba-lead">Responsive design sounds simple until your beautifully crafted desktop layout turns into a disaster on a 375px screen. Here are the tips that have actually helped me — learned from real academic projects, not just documentation.</p>
+    <h2>1. Start Mobile-First, Always</h2>
+    <p>The biggest mistake I made early on was building for a large screen first, then trying to squeeze it into mobile. It's so much harder. Instead, design for mobile, then <em>expand</em> using <code>min-width</code> media queries.</p>
+    <pre><code>/* Mobile default */
+.grid { display: flex; flex-direction: column; gap: 16px; }
+
+@media (min-width: 768px) {
+  .grid { flex-direction: row; flex-wrap: wrap; }
+}
+@media (min-width: 1024px) {
+  .grid { display: grid; grid-template-columns: repeat(3,1fr); }
+}</code></pre>
+    <h2>2. Use Relative Units Everywhere</h2>
+    <p>Pixels are static. Real screens are not. Use <code>rem</code> for font sizes, <code>%</code> for widths, and <code>clamp()</code> for fluid typography:</p>
+    <pre><code>font-size: clamp(1rem, 2.5vw, 1.5rem);</code></pre>
+    <h2>3. CSS Grid + auto-fill = Magic</h2>
+    <p>For most responsive card grids, this single rule is all you need — no media queries:</p>
+    <pre><code>.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}</code></pre>
+    <h2>4. Test on Real Devices</h2>
+    <p>Chrome DevTools is great but it's not a substitute for real hardware. Always send your project to your phone and check it manually. Touch targets, scrolling, and font rendering look different in reality.</p>
+    <h2>5. Don't Forget Accessibility</h2>
+    <p>Responsive design is also about everyone being able to use your site. Use semantic HTML, ensure touch targets are at least 44×44px, and check color contrast ratios (minimum 4.5:1).</p>
+    <div class="ba-sig"><img src="assets/images/profile.png" alt="Jann Carl Dungo"/><div><div class="ba-sig-name">Jann Carl Dungo</div><div class="ba-sig-role">Backend Developer · BSIT @ HAU</div></div></div>
+  </div>
+</template>
+
+<template id="tpl-jwt">
+  <div class="ba-cover" style="background:linear-gradient(135deg,#0d2a1a,#1a5c3a,#0d2e1a);"><span class="ba-cover-icon">🔐</span></div>
+  <div class="ba-inner">
+    <div class="ba-tags"><span class="blog-tag">Node.js</span><span class="blog-tag">JWT</span><span class="blog-tag">Security</span><span class="ba-read">Dec 2025 · 10 min read</span></div>
+    <h1 class="ba-title">Understanding JWT Authentication in Node.js</h1>
+    <p class="ba-lead">When I implemented authentication for Centro Café, I had to deeply understand how JWT tokens actually work — not just copy-paste from a tutorial. This is what I learned.</p>
+    <h2>What is a JWT?</h2>
+    <p>A JSON Web Token is a compact, URL-safe string that encodes a JSON payload and is cryptographically signed. It has three parts separated by dots: <code>header.payload.signature</code>. The server signs the token with a secret key; anyone can read the header and payload, but nobody can forge the signature without the key.</p>
+    <h2>The Basic Flow</h2>
+    <ol><li>User logs in with email/password</li><li>Server verifies credentials, creates a JWT signed with <code>JWT_SECRET</code></li><li>Client stores the JWT (usually in memory or an HttpOnly cookie)</li><li>Every subsequent request includes the JWT in the <code>Authorization: Bearer &lt;token&gt;</code> header</li><li>Server middleware verifies the signature on every protected route</li></ol>
+    <h2>Implementation in Express.js</h2>
+    <pre><code>const jwt = require('jsonwebtoken');
+
+// Generate token on login
+const token = jwt.sign(
+  { userId: user._id, email: user.email },
+  process.env.JWT_SECRET,
+  { expiresIn: '15m' }
+);
+
+// Middleware to protect routes
+const authMiddleware = (req, res, next) => {
+  const token = req.headers.authorization?.split(' ')[1];
+  if (!token) return res.status(401).json({ error: 'No token' });
+  try {
+    req.user = jwt.verify(token, process.env.JWT_SECRET);
+    next();
+  } catch {
+    res.status(401).json({ error: 'Invalid token' });
+  }
+};</code></pre>
+    <h2>Access Tokens vs Refresh Tokens</h2>
+    <p>Short-lived access tokens (15min) keep your API secure. Long-lived refresh tokens (7 days, stored in an HttpOnly cookie) let users stay logged in without repeatedly entering their password. When the access token expires, the client silently requests a new one using the refresh token.</p>
+    <h2>Mistakes I Made</h2>
+    <p>Three things I got wrong initially: storing JWTs in <code>localStorage</code> (vulnerable to XSS), not setting an expiry time, and hardcoding the secret key. All three are serious security issues. Use <code>httpOnly</code> cookies for refresh tokens, always set <code>expiresIn</code>, and load secrets from environment variables.</p>
+    <div class="ba-sig"><img src="assets/images/profile.png" alt="Jann Carl Dungo"/><div><div class="ba-sig-name">Jann Carl Dungo</div><div class="ba-sig-role">Backend Developer · BSIT @ HAU</div></div></div>
+  </div>
+</template>
+
+<template id="tpl-reflection">
+  <div class="ba-cover" style="background:linear-gradient(135deg,#1a0d2e,#2e1a4a,#1a0d3a);"><span class="ba-cover-icon">✍️</span></div>
+  <div class="ba-inner">
+    <div class="ba-tags"><span class="blog-tag">Reflection</span><span class="blog-tag">Personal</span><span class="blog-tag">Growth</span><span class="ba-read">Feb 2026 · 5 min read</span></div>
+    <h1 class="ba-title">Dear Freshman Me: A Letter to My Past Self</h1>
+    <p class="ba-lead">If I could go back to the first day I walked into my BSIT class and sit down next to my freshman self, this is what I'd say. Not a list of shortcuts — just honest truths I had to learn the hard way.</p>
+    <h2>You Will Feel Lost — That's Normal</h2>
+    <p>I remember sitting in our first Web Systems class, staring at HTML for the first time and thinking: <em>what am I doing here?</em> Everyone around me seemed to already know things I didn't. Some had been coding since high school. I hadn't. And for a long time, I thought that gap would never close.</p>
+    <p>What I didn't know then is that almost everyone feels that way. The ones who seemed confident were just better at hiding the confusion. The gap closes — not because you suddenly become a genius, but because you keep showing up.</p>
+    <h2>Your First Project Will Be Terrible (Build It Anyway)</h2>
+    <p>My first HTML page was genuinely bad. Inline styles everywhere. No semantic tags. One massive wall of code with no indentation. I was embarrassed by it. But here's the thing — building something bad taught me more than watching any tutorial. The moment I broke something and had to figure out how to fix it, I started actually learning.</p>
+    <p>Build ugly things. Break them. Fix them. Repeat. Perfection comes later. Action comes first.</p>
+    <h2>Learn How to Read Error Messages</h2>
+    <p>I used to panic every time I saw a red error in the console. I'd close my laptop, take a break, and come back hoping it somehow fixed itself. (It never did.) Learning to <em>read</em> error messages — really read them — was one of the most valuable skills I picked up. They're not insults. They're instructions.</p>
+    <h2>Stop Comparing Your Progress</h2>
+    <p>Social media makes it look like every developer your age is already shipping apps, winning hackathons, and landing internships. The reality is messier. Everyone has a different starting point, different resources, and a different timeline. Your job is to be better than you were last week — not better than someone else's highlight reel.</p>
+    <h2>The Quiet Hours Matter Most</h2>
+    <p>My biggest growth didn't happen in class. It happened at 11pm debugging a Node.js route I couldn't figure out. It happened on a Sunday afternoon reading through someone else's GitHub repo trying to understand how they structured their code. It happened in small, invisible moments of effort that nobody saw but me.</p>
+    <p>Those quiet hours add up. They always do.</p>
+    <h2>What I'm Most Proud Of</h2>
+    <p>If I'm honest, I'm not most proud of the projects I built or the certifications I earned. I'm most proud that I kept going when it was hard. That I stayed curious when things didn't make sense. That I built real things for real reasons, not just to pass a class.</p>
+    <p>If you're reading this as a fellow student who sometimes feels like you're falling behind — you're not. You're exactly where you need to be. Just keep building.</p>
+    <div class="ba-sig"><img src="assets/images/profile.png" alt="Jann Carl Dungo"/><div><div class="ba-sig-name">Jann Carl Dungo</div><div class="ba-sig-role">Backend Developer · BSIT @ HAU</div></div></div>
+  </div>
+</template>
+
+<!-- Blog JS: 3D tilt, particle canvas, overlay, scroll reveal -->
+<script>
+(function() {
+  /* ── Particle canvas ── */
+  const canvas = document.getElementById('blog-particles');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [];
+    function resize() {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = document.querySelector('.blog-hero')?.offsetHeight || 500;
+    }
+    function makeParticle() {
+      return { x: Math.random()*W, y: Math.random()*H,
+               r: Math.random()*1.5+.3, vx: (Math.random()-.5)*.3,
+               vy: (Math.random()-.5)*.3, a: Math.random()*.5+.1 };
+    }
+    function init() { resize(); particles = Array.from({length:60}, makeParticle); }
+    function draw() {
+      ctx.clearRect(0,0,W,H);
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle = `rgba(56,189,248,${p.a})`;
+        ctx.fill();
+        p.x += p.vx; p.y += p.vy;
+        if (p.x<0||p.x>W||p.y<0||p.y>H) Object.assign(p, makeParticle());
+      });
+      requestAnimationFrame(draw);
+    }
+    window.addEventListener('resize', init);
+    init(); draw();
+  }
+
+  /* ── 3D tilt on blog cards ── */
+  document.querySelectorAll('.blog-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width  - .5;
+      const y = (e.clientY - r.top)  / r.height - .5;
+      card.style.transform = `perspective(900px) rotateY(${x*10}deg) rotateX(${-y*8}deg) translateY(-8px) scale(1.02)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+
+  /* ── Card click / keyboard open article ── */
+  document.querySelectorAll('.blog-card').forEach(card => {
+    const btn = card.querySelector('.blog-read-btn');
+    if (btn) btn.addEventListener('click', e => { e.stopPropagation(); openArticle(btn.dataset.blog); });
+    card.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') openArticle(card.dataset.blog); });
+  });
+
+  /* ── Overlay ── */
+  const overlay  = document.getElementById('blog-overlay');
+  const content  = document.getElementById('blog-overlay-content');
+  const closeBtn = document.getElementById('blog-overlay-close');
+  const backdrop = overlay?.querySelector('.blog-overlay-backdrop');
+
+  function openArticle(slug) {
+    const tpl = document.getElementById('tpl-'+slug);
+    if (!tpl||!overlay) return;
+    content.innerHTML = tpl.innerHTML;
+    overlay.hidden    = false;
+    document.body.style.overflow = 'hidden';
+    overlay.scrollTop = 0;
+  }
+  function closeArticle() {
+    if (!overlay) return;
+    overlay.hidden = true;
+    document.body.style.overflow = '';
+  }
+  closeBtn?.addEventListener('click', closeArticle);
+  backdrop?.addEventListener('click', closeArticle);
+  document.addEventListener('keydown', e => { if(e.key==='Escape') closeArticle(); });
+
+  /* ── Scroll reveal for cards ── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationDelay = (i * 0.12) + 's';
+        entry.target.classList.add('blog-card--visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.blog-card').forEach(c => observer.observe(c));
+})();
+</script>

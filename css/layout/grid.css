@@ -1,0 +1,110 @@
+/* =============================================================================
+   LAYOUT — Container, section wrapper, SPA page system, glass card primitive.
+   Separation rationale: Layout primitives are the skeleton. They must never
+   contain component-specific rules — they are composable "slots" only.
+   ============================================================================= */
+
+/* ── Container ────────────────────────────────────────── */
+.container {
+  width         : min(1200px, 92vw);
+  margin-inline : auto;
+}
+
+/* ── Section wrapper ──────────────────────────────────── */
+.section {
+  padding-block: clamp(64px, 10vw, 120px);
+}
+
+/* ── SPA Page system ──────────────────────────────────── */
+.page          { display: none; position: relative; z-index: var(--z-base); }
+.page.active   { display: block; animation: fadeInPage 0.5s ease; }
+
+/* ── Loading state ────────────────────────────────────── */
+.page-loading {
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
+  min-height      : 60vh;
+  color           : var(--text-3);
+  font-family     : var(--font-mono);
+  font-size       : 0.9rem;
+  letter-spacing  : 0.1em;
+  gap             : 12px;
+}
+
+.page-loading::before {
+  content      : '';
+  width        : 20px;
+  height       : 20px;
+  border       : 2px solid var(--border-2);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation    : spin 0.8s linear infinite;
+}
+
+/* ── Glass card primitive ─────────────────────────────── */
+/* Composable: can be applied to any element for glass effect */
+.glass-card {
+  background        : var(--bg-glass);
+  border            : 1px solid var(--border);
+  border-radius     : var(--radius);
+  backdrop-filter   : blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition:
+    border-color var(--transition-base),
+    box-shadow   var(--transition-base),
+    transform    var(--transition-base);
+}
+
+.glass-card:hover {
+  border-color: var(--border-2);
+  box-shadow  : var(--shadow);
+}
+
+/* ── Two-column layout ────────────────────────────────── */
+.two-col {
+  display              : grid;
+  grid-template-columns: 1fr 1fr;
+  gap                  : var(--space-3xl);
+  align-items          : start;
+}
+
+.two-col--offset {
+  grid-template-columns: 1fr 1.5fr;
+}
+
+.two-col--reverse {
+  grid-template-columns: 1.5fr 1fr;
+}
+
+/* ── Auto-fill card grid ──────────────────────────────── */
+.auto-grid {
+  display              : grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--min-col, 280px), 1fr));
+  gap                  : var(--space-lg);
+}
+
+/* ── Alt section background ───────────────────────────── */
+.section-alt {
+  background: var(--bg-2);
+}
+
+/* ── Section head block ───────────────────────────────── */
+.section-head {
+  margin-bottom: var(--space-2xl);
+}
+
+/* ── Centered section head ────────────────────────────── */
+.section-head--center {
+  text-align: center;
+}
+
+.section-head--center .section-label {
+  justify-content: center;
+}
+
+.section-head--center .section-label::before { display: none; }
+
+.section-head--center .section-subtitle {
+  margin-inline: auto;
+}

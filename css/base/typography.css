@@ -1,0 +1,85 @@
+/* =============================================================================
+   TYPOGRAPHY — Type scale, utility classes, and gradient text.
+   Separation rationale: Typography is its own design system axis.
+   Changes to type should never touch layout or component files.
+   ============================================================================= */
+
+/* ── Section anatomy ──────────────────────────────────── */
+.section-label {
+  font-family   : var(--font-mono);
+  font-size     : 0.78rem;
+  letter-spacing: 0.18em;
+  color         : var(--accent);
+  text-transform: uppercase;
+  display       : flex;
+  align-items   : center;
+  gap           : 10px;
+  margin-bottom : 14px;
+}
+
+.section-label::before {
+  content     : '';
+  width       : 32px;
+  height      : 1px;
+  background  : var(--accent);
+  flex-shrink : 0;
+}
+
+.section-title {
+  font-family   : var(--font-display);
+  font-size     : clamp(2rem, 5vw, 3.2rem);
+  font-weight   : 800;
+  line-height   : 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom : 1rem;
+}
+
+.section-subtitle {
+  color    : var(--text-2);
+  font-size: 1.05rem;
+  max-width: 600px;
+}
+
+/* ── Gradient text ────────────────────────────────────── */
+.gradient-text {
+  background             : linear-gradient(135deg, var(--accent) 0%, var(--purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip        : text;
+}
+
+/* ── Inline code ──────────────────────────────────────── */
+code {
+  font-family  : var(--font-mono);
+  font-size    : 0.88em;
+  background   : var(--surface-2);
+  border       : 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding      : 2px 6px;
+  color        : var(--accent);
+}
+
+/* ── Code block syntax coloring (hero snippet) ────────── */
+.c-keyword  { color: #a78bfa; }
+.c-fn       { color: #38bdf8; }
+.c-string   { color: #34d399; }
+.c-comment  { color: #4a5568; }
+.c-orange   { color: #fb923c; }
+
+/* ── Page heading h1 used on inner pages ──────────────── */
+.page-title {
+  font-family   : var(--font-display);
+  font-size     : clamp(2.4rem, 6vw, 4rem);
+  font-weight   : 800;
+  line-height   : 1.0;
+  letter-spacing: -0.03em;
+}
+
+/* ── Body prose ───────────────────────────────────────── */
+.prose {
+  color      : var(--text-2);
+  line-height: 1.85;
+}
+
+.prose p { margin-bottom: var(--space-md); }
+.prose p:last-child { margin-bottom: 0; }

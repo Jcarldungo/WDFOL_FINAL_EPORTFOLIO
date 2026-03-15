@@ -1,0 +1,29 @@
+/* =============================================================================
+   CONTACT PAGE — Two-column layout: info left, form right.
+   ============================================================================= */
+
+.contact-grid {
+  display              : grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap                  : var(--space-3xl);
+  align-items          : start;
+  margin-top           : var(--space-2xl);
+}
+
+.contact-info h3 {
+  font-family  : var(--font-display);
+  font-size    : 1.4rem;
+  font-weight  : 700;
+  margin-bottom: 12px;
+}
+
+.contact-info > p {
+  color        : var(--text-2);
+  line-height  : 1.75;
+  margin-bottom: var(--space-xl);
+}
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .contact-grid { grid-template-columns: 1fr; }
+}

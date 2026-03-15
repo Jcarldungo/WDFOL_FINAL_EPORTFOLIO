@@ -1,0 +1,140 @@
+/* =============================================================================
+   FORMS — Contact form, inputs, validation states, submit button, success UI.
+   Separation rationale: Forms contain complex state logic (default, focus,
+   error, loading, success). Isolating prevents side effects on other elements.
+   ============================================================================= */
+
+/* ── Form wrapper ─────────────────────────────────────── */
+.contact-form {
+  background   : var(--surface);
+  border       : 1px solid var(--border);
+  border-radius: var(--radius);
+  padding      : var(--space-2xl);
+}
+
+/* ── Form group (label + input + error) ───────────────── */
+.form-group {
+  margin-bottom: 22px;
+  position     : relative;
+}
+
+/* ── Label ────────────────────────────────────────────── */
+.form-label {
+  display       : block;
+  font-size     : 0.82rem;
+  font-weight   : 500;
+  color         : var(--text-2);
+  margin-bottom : var(--space-sm);
+  font-family   : var(--font-mono);
+  letter-spacing: 0.05em;
+}
+
+/* ── Input & Textarea (shared base) ──────────────────── */
+.form-input,
+.form-textarea {
+  width           : 100%;
+  padding         : 14px 18px;
+  background      : var(--bg);
+  border          : 1px solid var(--border);
+  border-radius   : var(--radius-sm);
+  color           : var(--text);
+  font-family     : var(--font-body);
+  font-size       : 0.95rem;
+  line-height     : 1.5;
+  transition      :
+    border-color var(--transition-fast),
+    box-shadow   var(--transition-fast);
+  outline         : none;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--text-3);
+}
+
+/* Focus */
+.form-input:focus,
+.form-textarea:focus {
+  border-color: var(--accent);
+  box-shadow  : 0 0 0 3px rgba(56, 189, 248, 0.12);
+}
+
+/* Error state */
+.form-input.error,
+.form-textarea.error {
+  border-color: var(--red);
+  box-shadow  : 0 0 0 3px rgba(248, 113, 113, 0.12);
+}
+
+.form-textarea {
+  min-height : 130px;
+  resize     : vertical;
+}
+
+/* ── Inline error message ─────────────────────────────── */
+.form-error {
+  font-size  : 0.78rem;
+  color      : var(--red);
+  margin-top : 5px;
+  display    : none;
+  animation  : slideDown 0.2s ease;
+}
+
+.form-error.visible { display: block; }
+
+/* ── Submit button ────────────────────────────────────── */
+.submit-btn {
+  width          : 100%;
+  padding        : 15px;
+  background     : var(--accent);
+  color          : #fff;
+  font-size      : 1rem;
+  font-weight    : 600;
+  border-radius  : var(--radius-sm);
+  transition     : all var(--transition-base);
+  position       : relative;
+  overflow       : hidden;
+  display        : flex;
+  align-items    : center;
+  justify-content: center;
+  gap            : 10px;
+  border         : none;
+  cursor         : pointer;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: var(--accent-2);
+  box-shadow: 0 0 28px var(--accent-glow);
+  transform : translateY(-2px);
+}
+
+.submit-btn:active  { transform: translateY(0); }
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor : not-allowed;
+}
+
+/* ── Success state ────────────────────────────────────── */
+.form-success {
+  display   : none;
+  text-align: center;
+  padding   : var(--space-xl);
+  animation : fadeInPage 0.5s ease;
+}
+
+.form-success-icon { font-size: 3rem; margin-bottom: 12px; }
+
+.form-success h3 {
+  font-family  : var(--font-display);
+  font-size    : 1.4rem;
+  font-weight  : 700;
+  margin-bottom: 8px;
+}
+
+.form-success p { color: var(--text-2); }
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 768px) {
+  .contact-form { padding: var(--space-lg); }
+}

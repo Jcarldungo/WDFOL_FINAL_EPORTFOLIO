@@ -1,0 +1,226 @@
+<!-- HOME PAGE -->
+<section class="hero" aria-labelledby="hero-heading">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="hero-eyebrow">
+          <span class="status-dot" aria-hidden="true"></span>
+          3rd Year BSIT · Holy Angel University · Web Development
+        </div>
+        <h1 class="hero-name" id="hero-heading">
+          Jann Carl<br><span class="gradient-text">Dungo</span>
+        </h1>
+        <div class="hero-title-wrap" aria-live="polite">
+          <span id="typed-text"></span><span class="typed-cursor" aria-hidden="true"></span>
+        </div>
+        <p class="hero-desc">
+          Aspiring backend developer passionate about building
+          <strong>structured, efficient systems</strong> using Node.js, PHP, REST APIs,
+          and databases. Committed to continuous learning and eager to collaborate on meaningful projects.
+        </p>
+
+        <!-- Currently learning strip -->
+        <div class="hero-learning" aria-label="Currently learning">
+          <span class="hero-learning-dot" aria-hidden="true"></span>
+          <span class="hero-learning-label">Currently learning</span>
+          <span class="hero-learning-items">Docker · Microservices Architecture · TypeScript</span>
+        </div>
+
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="assets/resume.pdf" download="JannCarlDungo_Resume.pdf">⬇ Download Resume</a>
+          <a class="btn btn-outline" data-page="projects">View Projects →</a>
+        </div>
+        <div class="hero-stats" aria-label="Highlights">
+          <div class="stat-item">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Projects Built</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">8+</div>
+            <div class="stat-label">Certifications</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">HAU</div>
+            <div class="stat-label">BSIT · Web Dev</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-avatar-wrap">
+          <div class="avatar-ring">
+            <div class="avatar-inner avatar-photo">
+              <img src="assets/images/profile.png" alt="Jann Carl Dungo" class="profile-photo" />
+            </div>
+          </div>
+          <div class="float-badge badge-1"><span class="float-badge-icon">⚙️</span><span>Node.js / Express</span></div>
+          <div class="float-badge badge-2"><span class="float-badge-icon">🐘</span><span>PHP &amp; MySQL</span></div>
+          <div class="float-badge badge-3"><span class="float-badge-icon">🍃</span><span>MongoDB · REST API</span></div>
+        </div>
+
+        <div class="hero-code-card" role="img" aria-label="Code snippet">
+          <div class="code-header">
+            <span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>
+            <span class="code-filename">jann.js</span>
+          </div>
+          <div>
+            <span class="c-keyword">const</span> jann = {<br>
+            &nbsp;&nbsp;name: <span class="c-string">'Jann Carl Dungo'</span>,<br>
+            &nbsp;&nbsp;role: <span class="c-string">'Backend Developer'</span>,<br>
+            &nbsp;&nbsp;backend: [<span class="c-string">'Node.js'</span>, <span class="c-string">'Express'</span>, <span class="c-string">'PHP'</span>],<br>
+            &nbsp;&nbsp;db: [<span class="c-string">'MongoDB'</span>, <span class="c-string">'MySQL'</span>],<br>
+            &nbsp;&nbsp;<span class="c-fn">serve</span>: <span class="c-keyword">async</span> (req, res) =&gt; {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="c-keyword">const</span> data = <span class="c-keyword">await</span> <span class="c-fn">db.query</span>(req);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;res.<span class="c-fn">json</span>({ status: <span class="c-string">'200 OK'</span>, data });<br>
+            &nbsp;&nbsp;}<br>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator" aria-hidden="true">
+    <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+    <span>scroll</span>
+  </div>
+</section>
+
+<!-- FEATURED PROJECTS -->
+<section class="section" aria-labelledby="feat-title">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-label">Selected Work</div>
+      <h2 class="section-title" id="feat-title">Featured <span class="gradient-text">Projects</span></h2>
+      <p class="section-subtitle">Live projects demonstrating full-stack, Angular, and backend development skills.</p>
+    </div>
+
+    <div class="feat-projects-grid">
+
+      <article class="feat-card reveal reveal-delay-1">
+        <div class="feat-card-img feat-card-img--photo">
+          <img src="assets/images/project-centro.png" alt="Centro Café website" loading="lazy" class="feat-card-photo" />
+          <div class="feat-card-img-overlay"></div>
+        </div>
+        <div class="feat-card-body">
+          <div class="feat-card-tags">
+            <span class="tag">Node.js</span><span class="tag">Vue.js</span><span class="tag">MongoDB</span>
+          </div>
+          <h3 class="feat-card-title">Centro Café</h3>
+          <p class="feat-card-desc">Full-stack e-commerce MEVN app for a local café — scalable RESTful API with reactive Vue.js frontend.</p>
+          <div class="feat-card-links">
+            <a href="https://midtermbadgedungo.netlify.app/" target="_blank" rel="noopener" class="card-link">Live Demo →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="feat-card reveal reveal-delay-2">
+        <div class="feat-card-img feat-card-img--photo">
+          <img src="assets/images/project-research-conf.png" alt="Research Conference App" loading="lazy" class="feat-card-photo" />
+          <div class="feat-card-img-overlay"></div>
+        </div>
+        <div class="feat-card-body">
+          <div class="feat-card-tags">
+            <span class="tag">Angular</span><span class="tag">RxJS</span><span class="tag">TypeScript</span>
+          </div>
+          <h3 class="feat-card-title">Research Conference App</h3>
+          <p class="feat-card-desc">Angular SPA for international research conference discovery and registration, with RxJS reactive data flows.</p>
+          <div class="feat-card-links">
+            <a href="https://dungoresearchconf.netlify.app/" target="_blank" rel="noopener" class="card-link">Live Demo →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="feat-card reveal reveal-delay-3">
+        <div class="feat-card-img feat-card-img--photo">
+          <img src="assets/images/project-nexus.png" alt="Nexus Support Help Desk" loading="lazy" class="feat-card-photo" />
+          <div class="feat-card-img-overlay"></div>
+        </div>
+        <div class="feat-card-body">
+          <div class="feat-card-tags">
+            <span class="tag">Angular</span><span class="tag">REST API</span><span class="tag">Dark UI</span>
+          </div>
+          <h3 class="feat-card-title">Nexus Support — Help Desk</h3>
+          <p class="feat-card-desc">Community IT help desk with real-time ticket activity, service models, and a dark futuristic UI.</p>
+          <div class="feat-card-links">
+            <a href="https://prelimprojectgroup6.netlify.app/" target="_blank" rel="noopener" class="card-link">Live Demo →</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <div style="text-align:center;margin-top:44px;" class="reveal">
+      <a class="btn btn-outline" data-page="projects">See All Projects →</a>
+    </div>
+  </div>
+</section>
+
+<!-- LATEST FROM THE BLOG -->
+<section class="section" aria-labelledby="blog-teaser-title">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-label">Latest Writing</div>
+      <h2 class="section-title" id="blog-teaser-title">From the <span class="gradient-text">Blog</span></h2>
+    </div>
+
+    <div class="blog-teasers reveal">
+
+      <a class="blog-teaser-card" data-page="blog" role="button" tabindex="0" aria-label="Read blog post: My Journey as a Backend Developer Student">
+        <div class="btc-cover" style="background:linear-gradient(135deg,#0a1628,#1a3a5c);">🚀</div>
+        <div class="btc-body">
+          <div class="btc-meta">
+            <span class="btc-tag">Career</span>
+            <span class="btc-date">Feb 2026 · 8 min</span>
+            <span class="btc-new">New</span>
+          </div>
+          <div class="btc-title">My Journey as a Backend Developer Student</div>
+          <div class="btc-excerpt">From zero knowledge to building REST APIs — an honest look at what it's really like learning backend development as a BSIT student.</div>
+          <div class="btc-link">Read Article →</div>
+        </div>
+      </a>
+
+      <a class="blog-teaser-card" data-page="blog" role="button" tabindex="0" aria-label="Read blog post: Dear Freshman Me">
+        <div class="btc-cover" style="background:linear-gradient(135deg,#1a0d2e,#2e1a4a);">✍️</div>
+        <div class="btc-body">
+          <div class="btc-meta">
+            <span class="btc-tag">Reflection</span>
+            <span class="btc-date">Feb 2026 · 5 min</span>
+            <span class="btc-new">New</span>
+          </div>
+          <div class="btc-title">Dear Freshman Me: A Letter to My Past Self</div>
+          <div class="btc-excerpt">A personal reflection on everything I wish I knew when I started BSIT — the mistakes, breakthroughs, and moments that shaped me.</div>
+          <div class="btc-link">Read Article →</div>
+        </div>
+      </a>
+
+    </div>
+
+    <div style="text-align:center;margin-top:32px;" class="reveal">
+      <a class="btn btn-outline" data-page="blog">See All Posts →</a>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK ABOUT -->
+<section class="section section-alt" aria-label="Quick intro">
+  <div class="container">
+    <div class="quick-about reveal">
+      <div class="quick-about-photo">
+        <img src="assets/images/profile.png" alt="Jann Carl Dungo" class="quick-photo-img" />
+      </div>
+      <div class="quick-about-text">
+        <div class="section-label">Who I Am</div>
+        <h2 class="section-title" style="font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:12px;">
+          Hi, I'm <span class="gradient-text">Jann Carl</span> 👋
+        </h2>
+        <p style="color:var(--text-2);line-height:1.8;margin-bottom:20px;">
+          A BSIT student at Holy Angel University passionate about backend development.
+          I build structured, efficient systems and explore new technologies —
+          from RESTful APIs to full-stack deployments.
+        </p>
+        <a class="btn btn-primary" data-page="about">Read More About Me →</a>
+      </div>
+    </div>
+  </div>
+</section>

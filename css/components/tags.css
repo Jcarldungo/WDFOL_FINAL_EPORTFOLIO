@@ -1,0 +1,111 @@
+/* =============================================================================
+   TAGS & BADGES — All label/chip/tag/filter-button components.
+   Separation rationale: Tags appear in cards, projects, blog, and hero.
+   One file prevents "tag drift" where different pages use inconsistent styles.
+   ============================================================================= */
+
+/* ── Feat card tag ────────────────────────────────────── */
+.feat-card-tags {
+  display      : flex;
+  gap          : var(--space-sm);
+  flex-wrap    : wrap;
+  margin-bottom: 12px;
+}
+
+.tag {
+  font-family   : var(--font-mono);
+  font-size     : 0.72rem;
+  padding       : 3px 10px;
+  border-radius : var(--radius-pill);
+  border        : 1px solid var(--border-2);
+  color         : var(--accent);
+  white-space   : nowrap;
+}
+
+/* ── Tech stack tag (project cards) ──────────────────── */
+.project-tech-stack {
+  display      : flex;
+  flex-wrap    : wrap;
+  gap          : var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.tech-tag {
+  font-family  : var(--font-mono);
+  font-size    : 0.72rem;
+  padding      : 4px 10px;
+  border-radius: var(--radius-pill);
+  background   : var(--surface-2);
+  border       : 1px solid var(--border);
+  color        : var(--text-2);
+}
+
+/* ── Blog tag ─────────────────────────────────────────── */
+.blog-tag {
+  font-size    : 0.75rem;
+  padding      : 3px 10px;
+  border-radius: var(--radius-pill);
+  background   : rgba(56, 189, 248, 0.1);
+  color        : var(--accent);
+  border       : 1px solid var(--border-2);
+}
+
+/* ── Resume skill chip ────────────────────────────────── */
+.resume-skill-chip {
+  font-family  : var(--font-mono);
+  font-size    : 0.78rem;
+  padding      : 4px 12px;
+  border-radius: var(--radius-pill);
+  border       : 1px solid var(--border);
+  background   : var(--surface-2);
+  color        : var(--text-2);
+}
+
+/* ── Project filter buttons ───────────────────────────── */
+.projects-filter {
+  display    : flex;
+  gap        : 10px;
+  flex-wrap  : wrap;
+  margin-top : var(--space-xl);
+  margin-bottom: var(--space-2xl);
+}
+
+.filter-btn {
+  font-family  : var(--font-mono);
+  font-size    : 0.8rem;
+  padding      : 7px 18px;
+  border-radius: var(--radius-pill);
+  border       : 1px solid var(--border);
+  color        : var(--text-2);
+  background   : transparent;
+  transition   : all var(--transition-fast);
+  cursor       : pointer;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  border-color: var(--accent);
+  color       : var(--accent);
+  background  : rgba(56, 189, 248, 0.08);
+}
+
+/* ── Floating badge (hero visual) ─────────────────────── */
+.float-badge {
+  position        : absolute;
+  background      : var(--bg-glass);
+  border          : 1px solid var(--border-2);
+  backdrop-filter : blur(16px);
+  border-radius   : var(--radius);
+  padding         : 10px 16px;
+  display         : flex;
+  align-items     : center;
+  gap             : 10px;
+  font-size       : 0.84rem;
+  font-weight     : 500;
+  white-space     : nowrap;
+  box-shadow      : var(--shadow);
+  animation       : floatBadge 4s ease-in-out infinite alternate;
+  pointer-events  : none;
+}
+
+.float-badge-icon { font-size: 1.3rem; }

@@ -1,0 +1,116 @@
+/* =============================================================================
+   RESET — Normalize cross-browser inconsistencies.
+   Based on modern CSS reset best practices (Josh Comeau / Andy Bell).
+   Separation rationale: Reset must load first, before any design CSS.
+   ============================================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing : border-box;
+  margin     : 0;
+  padding    : 0;
+}
+
+html {
+  scroll-behavior  : smooth;
+  font-size        : 16px;
+  text-size-adjust : 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family    : var(--font-body);
+  background     : var(--bg);
+  color          : var(--text);
+  line-height    : 1.7;
+  overflow-x     : hidden;
+  transition     : background var(--transition-slow), color var(--transition-slow);
+  min-height     : 100vh;
+}
+
+/* Remove default list styles */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Remove default anchor styles */
+a {
+  color          : inherit;
+  text-decoration: none;
+}
+
+/* Make images behave */
+img,
+picture,
+video,
+canvas,
+svg {
+  display  : block;
+  max-width: 100%;
+}
+
+/* Buttons inherit font */
+button,
+input,
+textarea,
+select {
+  font-family: var(--font-body);
+  font-size  : inherit;
+}
+
+button { cursor: pointer; border: none; background: none; }
+
+/* Remove default fieldset/legend styles */
+fieldset { border: none; }
+
+/* Ensure consistent heading rendering */
+h1, h2, h3, h4, h5, h6 {
+  font-size  : inherit;
+  font-weight: inherit;
+}
+
+/* Text selection */
+::selection {
+  background: var(--accent);
+  color      : #fff;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar       { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background   : var(--accent);
+  border-radius: 99px;
+}
+
+/* Focus ring — visible for keyboard users, hidden for mouse */
+:focus-visible {
+  outline       : 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius : 4px;
+}
+
+/* Hide focus ring for mouse users */
+:focus:not(:focus-visible) { outline: none; }
+
+/* Prevent ambient blobs from causing horizontal scroll on mobile */
+body, #main-content { overflow-x: hidden; }
+
+/* Accessibility: skip-to-content link */
+.skip-link {
+  position    : absolute;
+  top         : -100px;
+  left        : 16px;
+  background  : var(--accent);
+  color       : #fff;
+  padding     : 10px 20px;
+  border-radius: var(--radius-pill);
+  font-weight : 700;
+  font-size   : .9rem;
+  z-index     : 9999;
+  text-decoration: none;
+  transition  : top .2s ease;
+}
+.skip-link:focus { top: 16px; }

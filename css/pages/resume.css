@@ -1,0 +1,317 @@
+/* =============================================================================
+   RESUME PAGE — GAM-inspired dark cinematic design
+   ============================================================================= */
+
+/* ── Hero header ─────────────────────────────────────── */
+.resume-hero {
+  padding-top   : 120px;
+  padding-bottom: 80px;
+  text-align    : center;
+  position      : relative;
+  overflow      : hidden;
+}
+
+.resume-hero-bg {
+  position  : absolute;
+  inset     : 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(56,189,248,.08) 0%, transparent 70%),
+              radial-gradient(ellipse 60% 40% at 80% 100%, rgba(167,139,250,.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.resume-hero-head { max-width: 700px; margin: 0 auto; position: relative; z-index: 1; }
+
+.resume-hero-title {
+  font-family   : var(--font-display);
+  font-size     : clamp(4rem, 10vw, 7rem);
+  font-weight   : 900;
+  letter-spacing: -0.04em;
+  line-height   : 0.9;
+  text-transform: uppercase;
+  margin        : var(--space-md) 0 var(--space-lg);
+}
+
+.resume-hero-sub {
+  font-size    : 0.95rem;
+  color        : var(--text-2);
+  max-width    : 500px;
+  margin       : 0 auto var(--space-xl);
+  line-height  : 1.7;
+}
+
+/* Contact pills row */
+.resume-contact-pills {
+  display    : flex;
+  gap        : 10px;
+  flex-wrap  : wrap;
+  justify-content: center;
+  margin-bottom: var(--space-xl);
+}
+
+.resume-pill {
+  display      : flex;
+  align-items  : center;
+  gap          : 7px;
+  padding      : 8px 18px;
+  border-radius: var(--radius-pill);
+  border       : 1px solid var(--border-2);
+  background   : var(--surface);
+  font-size    : 0.82rem;
+  font-family  : var(--font-mono);
+  color        : var(--text-2);
+  text-decoration: none;
+  transition   : border-color var(--transition-base), color var(--transition-base), transform var(--transition-base);
+}
+.resume-pill:hover {
+  border-color: var(--accent);
+  color       : var(--accent);
+  transform   : translateY(-2px);
+}
+
+/* Big download button */
+.btn-resume-dl {
+  display      : inline-flex;
+  align-items  : center;
+  gap          : 10px;
+  padding      : 16px 40px;
+  border-radius: var(--radius-pill);
+  border       : 1.5px solid var(--border-2);
+  background   : transparent;
+  font-family  : var(--font-mono);
+  font-size    : 0.8rem;
+  font-weight  : 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color        : var(--text);
+  text-decoration: none;
+  transition   : all var(--transition-base);
+}
+.btn-resume-dl:hover {
+  border-color: var(--accent);
+  color       : var(--accent);
+  background  : rgba(56,189,248,.06);
+  transform   : translateY(-2px);
+  box-shadow  : 0 0 30px var(--accent-glow);
+}
+
+/* ── Two-col grid ─────────────────────────────────────── */
+.resume-body-grid {
+  display              : grid;
+  grid-template-columns: 240px 1fr;
+  gap                  : var(--space-xl);
+  align-items          : start;
+  margin-top           : var(--space-2xl);
+}
+
+/* ── Left sidebar ─────────────────────────────────────── */
+.resume-sidebar { display: flex; flex-direction: column; gap: var(--space-lg); }
+
+.resume-sidebar-photo {
+  width        : 100%;
+  border-radius: var(--radius);
+  border       : 1px solid var(--border-2);
+  display      : block;
+  object-fit   : cover;
+  object-position: center top;
+  aspect-ratio : 3 / 4;
+  filter       : grayscale(10%) contrast(1.05);
+  box-shadow   : var(--shadow-lg);
+}
+
+.resume-sidebar-card {
+  background   : var(--surface);
+  border       : 1px solid var(--border);
+  border-radius: var(--radius);
+  padding      : var(--space-lg);
+  transition   : border-color var(--transition-base);
+}
+.resume-sidebar-card:hover { border-color: var(--border-2); }
+
+.resume-sidebar-heading {
+  font-family  : var(--font-display);
+  font-size    : 0.85rem;
+  font-weight  : 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color        : var(--accent);
+  margin-bottom: var(--space-md);
+  display      : flex;
+  align-items  : center;
+  gap          : 8px;
+}
+
+.rs-icon { font-size: 1rem; }
+
+.rs-edu-badge {
+  display      : inline-block;
+  font-size    : 0.7rem;
+  padding      : 3px 10px;
+  border-radius: var(--radius-pill);
+  background   : rgba(56,189,248,.12);
+  border       : 1px solid rgba(56,189,248,.3);
+  color        : var(--accent);
+  font-family  : var(--font-mono);
+  margin-bottom: 10px;
+}
+.rs-edu-degree { font-weight: 700; font-size: 0.85rem; margin-bottom: 3px; }
+.rs-edu-major  { font-size: 0.78rem; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+.rs-edu-period { font-size: 0.73rem; color: var(--text-3); font-family: var(--font-mono); margin-bottom: 10px; }
+.rs-edu-courses { font-size: 0.76rem; color: var(--text-2); line-height: 1.6; }
+
+.rs-softskills { list-style: none; padding: 0; }
+.rs-softskills li { font-size: 0.82rem; color: var(--text-2); padding: 5px 0; border-bottom: 1px solid var(--border); }
+.rs-softskills li:last-child { border-bottom: none; }
+
+/* ── Right main column ────────────────────────────────── */
+.resume-main-col { display: flex; flex-direction: column; gap: var(--space-lg); }
+
+.resume-main-card {
+  background   : var(--surface);
+  border       : 1px solid var(--border);
+  border-radius: var(--radius);
+  padding      : var(--space-xl);
+  transition   : border-color var(--transition-base);
+}
+.resume-main-card:hover { border-color: var(--border-2); }
+
+.resume-main-heading {
+  font-family  : var(--font-display);
+  font-size    : 0.88rem;
+  font-weight  : 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color        : var(--accent);
+  margin-bottom: var(--space-lg);
+  display      : flex;
+  align-items  : center;
+  gap          : 10px;
+  padding-bottom: var(--space-sm);
+  border-bottom : 1px solid var(--border);
+}
+
+.rs-summary { font-size: 0.9rem; color: var(--text-2); line-height: 1.8; }
+
+/* Tech grid */
+.rs-tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
+.rs-tech-label { font-size: 0.78rem; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+.rs-tech-tags  { display: flex; flex-wrap: wrap; gap: 6px; }
+.rs-tech-tags span {
+  font-size    : 0.72rem;
+  padding      : 4px 10px;
+  border-radius: var(--radius-pill);
+  background   : var(--surface-2);
+  border       : 1px solid var(--border);
+  color        : var(--text-2);
+}
+
+/* Timeline */
+.rs-timeline { display: flex; flex-direction: column; gap: var(--space-xl); }
+
+.rs-tl-item {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap    : var(--space-md);
+}
+
+.rs-tl-dot {
+  width        : 12px;
+  height       : 12px;
+  border-radius: 50%;
+  background   : var(--accent);
+  border       : 2px solid var(--bg);
+  box-shadow   : 0 0 10px var(--accent-glow);
+  margin-top   : 4px;
+  flex-shrink  : 0;
+}
+
+.rs-tl-role { font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; }
+.rs-tl-meta { font-size: 0.76rem; color: var(--text-3); font-family: var(--font-mono); margin-bottom: 10px; }
+.rs-tl-org  { color: var(--accent); font-weight: 600; }
+
+.rs-tl-list { list-style: none; padding: 0; }
+.rs-tl-list li {
+  font-size  : 0.84rem;
+  color      : var(--text-2);
+  padding    : 4px 0 4px 14px;
+  position   : relative;
+  line-height: 1.55;
+}
+.rs-tl-list li::before { content: '•'; position: absolute; left: 0; color: var(--accent); }
+
+/* Projects */
+.rs-projects { display: flex; flex-direction: column; gap: var(--space-md); }
+.rs-project  {
+  padding      : var(--space-md);
+  border-radius: var(--radius-sm);
+  background   : var(--bg-2);
+  border       : 1px solid var(--border);
+  transition   : border-color var(--transition-fast);
+}
+.rs-project:hover { border-color: var(--accent); }
+.rs-proj-name { font-weight: 700; font-size: 0.88rem; margin-bottom: 4px; }
+.rs-proj-tech {
+  font-family  : var(--font-mono);
+  font-size    : 0.7rem;
+  color        : var(--accent);
+  margin-left  : 8px;
+  font-weight  : 400;
+}
+.rs-proj-desc { font-size: 0.8rem; color: var(--text-2); line-height: 1.5; }
+
+/* ── PDF notice banner ─────────────────────────────────── */
+.resume-pdf-notice {
+  display      : flex;
+  align-items  : flex-start;
+  gap          : 14px;
+  padding      : 16px 22px;
+  background   : rgba(251,191,36,.07);
+  border       : 1px solid rgba(251,191,36,.22);
+  border-radius: var(--radius-sm);
+  margin-top   : var(--space-xl);
+  font-size    : 0.83rem;
+  color        : var(--text-2);
+  line-height  : 1.6;
+}
+
+.pdf-notice-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+.resume-pdf-notice strong { color: var(--yellow, #fbbf24); }
+.resume-pdf-notice code {
+  font-family : var(--font-mono);
+  font-size   : 0.8em;
+  padding     : 1px 5px;
+  border-radius: 4px;
+  background  : rgba(251,191,36,.1);
+  color       : var(--yellow, #fbbf24);
+}
+
+/* ── Cert sidebar list ─────────────────────────────────── */
+.rs-cert-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.rs-cert-list li { display: flex; gap: 10px; align-items: flex-start; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+.rs-cert-list li:last-child { border-bottom: none; padding-bottom: 0; }
+.rs-cert-bullet { font-size: 0.9rem; flex-shrink: 0; margin-top: 1px; }
+.rs-cert-name {
+  font-size   : 0.8rem;
+  font-weight : 600;
+  color       : var(--text);
+  text-decoration: none;
+  display     : block;
+  transition  : color .2s ease;
+}
+.rs-cert-name:hover { color: var(--accent); }
+.rs-cert-issuer { font-size: 0.7rem; color: var(--text-3); font-family: var(--font-mono); margin-top: 2px; }
+
+/* ── Project live link ─────────────────────────────────── */
+.rs-proj-live {
+  font-family  : var(--font-mono);
+  font-size    : 0.68rem;
+  padding      : 2px 9px;
+  border-radius: var(--radius-pill);
+  border       : 1px solid rgba(52,211,153,.3);
+  background   : rgba(52,211,153,.08);
+  color        : #34d399;
+  text-decoration: none;
+  margin-left  : 8px;
+  white-space  : nowrap;
+  transition   : background .2s, border-color .2s;
+}
+.rs-proj-live:hover { background: rgba(52,211,153,.18); border-color: rgba(52,211,153,.5); }
