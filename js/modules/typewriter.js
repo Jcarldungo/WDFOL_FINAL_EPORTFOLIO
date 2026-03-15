@@ -11,9 +11,8 @@
 
 const PHRASES = [
   'Backend Developer',
-  'Node.js Engineer',
-  'BSIT Student @ HAU',
-  'PHP & MySQL Developer',
+  'Full Stack Developer',
+  'BSIT Student @ HAU',,
   'REST API Builder',
   'Problem Solver',
 ];
