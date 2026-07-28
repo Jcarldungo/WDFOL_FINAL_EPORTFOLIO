@@ -124,7 +124,7 @@
           <h2 class="blog-card-title">Understanding JWT Authentication in Node.js</h2>
           <p class="blog-card-excerpt">
             A practical breakdown of JSON Web Tokens — from signing and verification to
-            refresh token flows, built from real experience on the Centro Café project.
+            refresh token flows, built from real experience implementing auth in Node.js.
           </p>
           <div class="blog-card-tags">
             <span class="blog-tag">Node.js</span>
@@ -201,16 +201,16 @@
     <h2>Where It Started</h2>
     <p>Like most BSIT students, I started with the basics — HTML, CSS, a little JavaScript. I remember being genuinely amazed when I got my first webpage to look good on a phone. But then came the real question: <em>what do I actually want to build?</em></p>
     <p>The answer came during a Web Systems class where we were introduced to server-side scripting with PHP. Something clicked. The idea that there was an entire world of logic running behind every website — handling data, authenticating users, serving content dynamically — was fascinating. I knew immediately: backend development was my path.</p>
-    <h2>The First Real Project: Centro Café</h2>
-    <p>My first serious backend project was <strong>Centro Café</strong>, an e-commerce app built with the MEVN stack. This project taught me more than any lecture could. I designed a RESTful API from scratch — thought through routes, controllers, middleware, database schemas. I made every rookie mistake: hardcoded credentials, no input validation, no error handling. And I fixed every single one.</p>
-    <p>The moment JWT authentication worked — users could actually log in and sessions persisted — I felt genuinely proud. That's backend development: the wins aren't always visible, but they're deeply satisfying.</p>
+    <h2>The First Real Client: WeePlay Therapy Center</h2>
+    <p>My first project with an actual client was the website for <strong>WeePlay Therapy Center</strong>, a pediatric therapy clinic in Mabalacat, Pampanga. Coursework had never prepared me for this part: the people using it weren't classmates or a professor grading a rubric — they were parents looking for help for their child. That changes what "done" means.</p>
+    <p>I built it from scratch with no framework — semantic HTML, my own CSS design system, and vanilla JavaScript — because the site needed to load fast on the low-end phones most of those parents browse on. Getting it live on a real domain, knowing families would actually use it, taught me more about priorities than any lecture could.</p>
     <h2>Java, OOP, and Thinking in Systems</h2>
     <p>Later, working on the Delivery Agent Management System in Java shifted my thinking entirely. Object-oriented programming forced me to think in terms of systems — what are the entities? What are their behaviors? How do they relate? This made me a better backend developer overall, even in JavaScript.</p>
     <h2>What I've Learned (Honestly)</h2>
     <ol><li><strong>Build things that break.</strong> The best learning happens when your API returns a 500 error at 11pm and you figure out why.</li><li><strong>Read other people's code.</strong> GitHub is a free education. I've learned more from open-source Node.js projects than most tutorials.</li><li><strong>Stay consistent, not intense.</strong> Coding an hour every day beats a 10-hour marathon once a week.</li></ol>
     <h2>What's Next</h2>
     <p>I'm currently in my 3rd year, working as a Student Aide at the HAU Library while building my skills. My goal is a backend developer internship where I work on real production systems. If you're a fellow student reading this: you don't need to know everything before you start. Just start. Build something. Break it. Fix it. Repeat.</p>
-    <div class="ba-sig"><img src="assets/images/profile.png" alt="Jann Carl Dungo"/><div><div class="ba-sig-name">Jann Carl Dungo</div><div class="ba-sig-role">Backend Developer · BSIT @ HAU</div></div></div>
+    <div class="ba-sig"><img src="assets/images/profile.webp" alt="Jann Carl Dungo"/><div><div class="ba-sig-name">Jann Carl Dungo</div><div class="ba-sig-role">Backend Developer · BSIT @ HAU</div></div></div>
   </div>
 </template>
 
@@ -245,7 +245,7 @@
     <p>Chrome DevTools is great but it's not a substitute for real hardware. Always send your project to your phone and check it manually. Touch targets, scrolling, and font rendering look different in reality.</p>
     <h2>5. Don't Forget Accessibility</h2>
     <p>Responsive design is also about everyone being able to use your site. Use semantic HTML, ensure touch targets are at least 44×44px, and check color contrast ratios (minimum 4.5:1).</p>
-    <div class="ba-sig"><img src="assets/images/profile.png" alt="Jann Carl Dungo"/><div><div class="ba-sig-name">Jann Carl Dungo</div><div class="ba-sig-role">Backend Developer · BSIT @ HAU</div></div></div>
+    <div class="ba-sig"><img src="assets/images/profile.webp" alt="Jann Carl Dungo"/><div><div class="ba-sig-name">Jann Carl Dungo</div><div class="ba-sig-role">Backend Developer · BSIT @ HAU</div></div></div>
   </div>
 </template>
 
@@ -254,7 +254,7 @@
   <div class="ba-inner">
     <div class="ba-tags"><span class="blog-tag">Node.js</span><span class="blog-tag">JWT</span><span class="blog-tag">Security</span><span class="ba-read">Dec 2025 · 10 min read</span></div>
     <h1 class="ba-title">Understanding JWT Authentication in Node.js</h1>
-    <p class="ba-lead">When I implemented authentication for Centro Café, I had to deeply understand how JWT tokens actually work — not just copy-paste from a tutorial. This is what I learned.</p>
+    <p class="ba-lead">When I first implemented authentication in a Node.js project, I had to deeply understand how JWT tokens actually work — not just copy-paste from a tutorial. This is what I learned.</p>
     <h2>What is a JWT?</h2>
     <p>A JSON Web Token is a compact, URL-safe string that encodes a JSON payload and is cryptographically signed. It has three parts separated by dots: <code>header.payload.signature</code>. The server signs the token with a secret key; anyone can read the header and payload, but nobody can forge the signature without the key.</p>
     <h2>The Basic Flow</h2>
@@ -284,7 +284,7 @@ const authMiddleware = (req, res, next) => {
     <p>Short-lived access tokens (15min) keep your API secure. Long-lived refresh tokens (7 days, stored in an HttpOnly cookie) let users stay logged in without repeatedly entering their password. When the access token expires, the client silently requests a new one using the refresh token.</p>
     <h2>Mistakes I Made</h2>
     <p>Three things I got wrong initially: storing JWTs in <code>localStorage</code> (vulnerable to XSS), not setting an expiry time, and hardcoding the secret key. All three are serious security issues. Use <code>httpOnly</code> cookies for refresh tokens, always set <code>expiresIn</code>, and load secrets from environment variables.</p>
-    <div class="ba-sig"><img src="assets/images/profile.png" alt="Jann Carl Dungo"/><div><div class="ba-sig-name">Jann Carl Dungo</div><div class="ba-sig-role">Backend Developer · BSIT @ HAU</div></div></div>
+    <div class="ba-sig"><img src="assets/images/profile.webp" alt="Jann Carl Dungo"/><div><div class="ba-sig-name">Jann Carl Dungo</div><div class="ba-sig-role">Backend Developer · BSIT @ HAU</div></div></div>
   </div>
 </template>
 
@@ -310,7 +310,7 @@ const authMiddleware = (req, res, next) => {
     <h2>What I'm Most Proud Of</h2>
     <p>If I'm honest, I'm not most proud of the projects I built or the certifications I earned. I'm most proud that I kept going when it was hard. That I stayed curious when things didn't make sense. That I built real things for real reasons, not just to pass a class.</p>
     <p>If you're reading this as a fellow student who sometimes feels like you're falling behind — you're not. You're exactly where you need to be. Just keep building.</p>
-    <div class="ba-sig"><img src="assets/images/profile.png" alt="Jann Carl Dungo"/><div><div class="ba-sig-name">Jann Carl Dungo</div><div class="ba-sig-role">Backend Developer · BSIT @ HAU</div></div></div>
+    <div class="ba-sig"><img src="assets/images/profile.webp" alt="Jann Carl Dungo"/><div><div class="ba-sig-name">Jann Carl Dungo</div><div class="ba-sig-role">Backend Developer · BSIT @ HAU</div></div></div>
   </div>
 </template>
 
