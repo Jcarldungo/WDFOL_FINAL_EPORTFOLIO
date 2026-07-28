@@ -178,21 +178,27 @@
         <div class="proj-card-body">
           <div class="proj-card-header">
             <div class="proj-tags">
-              <span class="tag">HTML</span>
-              <span class="tag">CSS</span>
-              <span class="tag">JavaScript</span>
+              <span class="tag">Next.js 15</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">Prisma</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">Tailwind</span>
             </div>
             <div class="proj-status proj-status--live">🟢 Live</div>
           </div>
           <h2 class="proj-title">StudyTrack</h2>
           <p class="proj-desc">
-            A web application designed to help users effectively track and manage their study progress. It offers an intuitive interface for monitoring tasks and educational goals, ensuring a streamlined study workflow.<br><br>
-            <strong>Tech Stack:</strong> HTML, CSS, JavaScript, Vercel
+            A full-stack study task manager for tracking coursework by subject, deadline, and priority. Built with the Next.js App Router — server-rendered pages plus a REST API backed by a Prisma schema over PostgreSQL, so tasks persist properly instead of living in browser storage.<br><br>
+            The data model was the interesting part: separating <em>deadline</em> from <em>createdAt</em> and <em>updatedAt</em> means the dashboard can sort by what's due next rather than by what was typed last.<br><br>
+            <strong>Tech Stack:</strong> Next.js 15, TypeScript, Prisma, PostgreSQL, Tailwind CSS, Vercel
           </p>
           <ul class="proj-features">
-            <li>Intuitive user interface for monitoring study progress</li>
-            <li>Responsive design optimized for multiple devices</li>
-            <li>Deployed securely and dynamically via Vercel</li>
+            <li>REST API routes — <code>GET</code>/<code>POST</code> on the collection, <code>GET</code>/<code>PATCH</code>/<code>DELETE</code> per task</li>
+            <li>Prisma schema with typed models and generated client</li>
+            <li>PostgreSQL persistence on a managed serverless database</li>
+            <li>Filter by subject, priority, and completion state</li>
+            <li>Stats bar summarising progress across all tasks</li>
+            <li>Typed end to end in TypeScript, styled with Tailwind</li>
           </ul>
           <div class="proj-links">
             <a href="https://final-study-track.vercel.app/" target="_blank" rel="noopener" class="btn btn-primary">
