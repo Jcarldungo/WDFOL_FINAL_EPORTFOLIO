@@ -34,27 +34,25 @@
 .proj-card:nth-child(even) .proj-screenshots { order: 2; }
 
 /* ── Screenshot panel ──────────────────────────────────────────────
-   BUG FIX #1: .proj-screenshots used to be a stretched grid item with no
-   aspect-ratio, so its height was dictated entirely by the sibling
-   .proj-card-body (sized by text length). object-fit:cover then scaled
-   the image by max(boxW/natW, boxH/natH) — for the gastos card (longest
-   copy, smallest source image) that scale factor exceeded 1, enlarging
-   the image ~29% past its native resolution and cropping ~67% of its
-   width, which read as the image "spilling" out of the card.
-   First fix gave the panel a fixed aspect-ratio + object-fit:contain —
-   that stopped the crop/upscale, but for a *portrait* screenshot
-   (WeePlay's full-page capture, 1100×1600) inside a landscape 16:10 box,
-   contain shrinks the image down small and centers it, leaving a slab of
-   dead space around it. Fixed aspect-ratio + cover, top-anchored, fills
-   the box completely for every card: landscape screenshots (gastos,
-   StudyTrack) crop a mild ~16% off the sides, portrait ones (WeePlay)
-   show a clean "top of the page" peek instead of floating in empty
-   space. ── */
+   BUG FIX #1 (original): .proj-screenshots was a stretched grid item with
+   no aspect-ratio, so object-fit:cover scaled the image by
+   max(boxW/natW, boxH/natH) — for the gastos card that factor exceeded 1,
+   enlarging the image ~29% and cropping ~67% of its width.
+   BUG FIX #2 (this one): giving the panel a fixed aspect-ratio +
+   align-self:start "fixed" that, but capped the box's height independent
+   of the row — so for any card whose text column is taller than a 16:10
+   box (WeePlay's 7-item feature list), the box just sat there small at
+   the top of the row with the rest of the row showing blank card
+   background beneath it. That's a worse bug than the one it replaced:
+   guaranteed dead space instead of an occasional harsh crop.
+   Actual fix: match what the pre-redesign site did and never should have
+   lost — let the panel stretch to the row's own height (driven by
+   whichever column is taller) with a sane floor, and keep object-fit:cover
+   top-anchored so it always fills whatever height it gets, never leaving
+   dead space. A tall row crops a screenshot's sides more; it never leaves
+   a gap. ── */
 .proj-screenshots {
-  aspect-ratio: 16 / 10;
-  height      : auto;
-  align-self  : start;
-  min-height  : 0;
+  min-height  : 420px;
   position    : relative;
   overflow    : hidden;
   background  : var(--panel);
