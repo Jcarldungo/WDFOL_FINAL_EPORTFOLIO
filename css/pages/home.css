@@ -4,8 +4,13 @@
    ============================================================================= */
 
 /* ── Hero wrapper ─────────────────────────────────────── */
+/* Was min-height:92vh — on any screen taller than the hero's own content
+   (most desktop windows), place-items:center split the leftover height into
+   dead air above and below the text/portrait instead of showing more page.
+   82vh plus the portrait caption below gives the section a floor without
+   force-centering into a void. */
 .hero {
-  min-height  : 92vh;
+  min-height  : 82vh;
   display     : grid;
   place-items : center;
   padding-top : 100px;
@@ -84,6 +89,23 @@
   margin       : 0 auto;
   filter       : grayscale(12%) contrast(1.03);
 }
+
+/* Caption plate — anchors the portrait like a spec label instead of leaving
+   it a lone photo floating in the column; also gives the visual column a
+   defined bottom edge instead of trailing into empty paper. */
+.hero-portrait-caption {
+  max-width    : 420px;
+  margin       : 0 auto;
+  padding      : 10px 2px 0;
+  display      : flex;
+  align-items  : center;
+  gap          : 8px;
+  font-family  : var(--font-mono);
+  font-size    : 0.72rem;
+  letter-spacing: 0.04em;
+  color        : var(--text-3);
+}
+.hero-portrait-caption-sep { color: var(--border-2); }
 
 /* ── Currently Learning strip ────────────────────────── */
 .hero-learning {

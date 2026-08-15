@@ -17,8 +17,11 @@
 }
 
 /* ── Section wrapper ──────────────────────────────────── */
+/* Was clamp(64px, 10vw, 120px) — with colour reserved for status pills only,
+   120px of dead air between every section read as empty rather than calm.
+   Tightened the ceiling so pages carry more content per scroll. */
 .section {
-  padding-block: clamp(64px, 10vw, 120px);
+  padding-block: clamp(56px, 7vw, 88px);
 }
 
 /* NOTE: .page / .page.active are NOT used — the router (js/modules/router.js)

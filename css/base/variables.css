@@ -5,14 +5,15 @@
 
    REDESIGN NOTE — monochrome palette:
    Colour is reserved for meaning only (status pills, form errors). Everything
-   else — headings, buttons, links, focus rings — is ink-on-paper. The named
-   tokens below (--paper / --panel / --ink / --ink-2 / --rule / --live / --wip
-   / --fail) are the canonical palette described in the design plan. The
-   legacy token names the rest of the codebase already uses (--bg, --surface,
-   --text, --accent, --green, etc.) are kept as aliases onto those canonical
-   tokens, so every component file that already reads var(--accent) or
-   var(--green) picks up the new monochrome values automatically instead of
-   requiring a mechanical find/replace across a dozen files.
+   else — headings, buttons, links, focus rings — is ink-on-paper, in both the
+   light and dark theme. This was confirmed deliberately: a "lifeless / too
+   much empty space" pass fixed with a real accent hue and was reverted back
+   to monochrome per the account owner's explicit call — the flatness gets
+   fixed through spacing, contrast, and layout density instead, not colour.
+   The named tokens below (--paper / --panel / --ink / --ink-2 / --rule /
+   --live / --wip / --fail) are the canonical palette. Legacy token names the
+   rest of the codebase already uses (--bg, --surface, --text, --accent,
+   --green, etc.) are kept as aliases onto those canonical tokens.
    ============================================================================= */
 
 :root {
