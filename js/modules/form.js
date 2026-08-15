@@ -76,7 +76,7 @@ export function initForm() {
       .catch((error) => {
         console.error('EmailJS error:', error);
         const text = submitBtn.querySelector('.btn-text');
-        if (text) text.textContent = 'Failed — please try again';
+        if (text) text.textContent = "Couldn't send that — try again, or email jcdungo20@gmail.com directly";
         submitBtn.disabled = false;
         submitBtn.classList.remove('loading');
       });
