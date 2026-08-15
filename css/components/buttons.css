@@ -34,31 +34,29 @@
 
 .btn:hover::after { opacity: 1; }
 
-/* ── Primary (filled, accent color) ──────────────────── */
+/* ── Primary (filled ink — the primary visual weight site-wide) ──── */
 .btn-primary {
-  background: var(--accent);
-  color     : #fff;
-  box-shadow: 0 0 28px var(--accent-glow);
+  background: var(--ink);
+  color     : var(--paper);
 }
 
 .btn-primary:hover {
-  box-shadow: 0 0 44px var(--accent-glow);
+  box-shadow: var(--shadow);
   transform : translateY(-2px);
 }
 
 .btn-primary:active { transform: translateY(0); }
 
-/* ── Outline (ghost) ──────────────────────────────────── */
+/* ── Outline (ghost) — secondary weight ───────────────── */
 .btn-outline {
   border    : 1px solid var(--border-2);
   color     : var(--text);
-  background: var(--bg-glass);
-  backdrop-filter: blur(12px);
+  background: transparent;
 }
 
 .btn-outline:hover {
-  border-color: var(--accent);
-  color       : var(--accent);
+  border-color: var(--ink);
+  color       : var(--ink);
   transform   : translateY(-2px);
 }
 
@@ -100,7 +98,7 @@
   width          : 18px;
   height         : 18px;
   border         : 2px solid rgba(255, 255, 255, 0.3);
-  border-top-color: #fff;
+  border-top-color: var(--paper);
   border-radius  : 50%;
   animation      : spin 0.8s linear infinite;
   display        : none;
