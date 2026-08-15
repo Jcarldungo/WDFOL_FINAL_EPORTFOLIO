@@ -55,15 +55,15 @@
 /* Focus */
 .form-input:focus,
 .form-textarea:focus {
-  border-color: var(--ink);
-  box-shadow  : 0 0 0 3px var(--accent-glow);
+  border-color: var(--accent);
+  box-shadow  : 0 0 0 3px rgba(56, 189, 248, 0.12);
 }
 
 /* Error state */
 .form-input.error,
 .form-textarea.error {
-  border-color: var(--fail);
-  box-shadow  : 0 0 0 3px color-mix(in srgb, var(--fail) 15%, transparent);
+  border-color: var(--red);
+  box-shadow  : 0 0 0 3px rgba(248, 113, 113, 0.12);
 }
 
 .form-textarea {
@@ -74,7 +74,7 @@
 /* ── Inline error message ─────────────────────────────── */
 .form-error {
   font-size  : 0.78rem;
-  color      : var(--fail);
+  color      : var(--red);
   margin-top : 5px;
   display    : none;
   animation  : slideDown 0.2s ease;
@@ -86,8 +86,8 @@
 .submit-btn {
   width          : 100%;
   padding        : 15px;
-  background     : var(--ink);
-  color          : var(--paper);
+  background     : var(--accent);
+  color          : #fff;
   font-size      : 1rem;
   font-weight    : 600;
   border-radius  : var(--radius-sm);
@@ -103,7 +103,8 @@
 }
 
 .submit-btn:hover:not(:disabled) {
-  box-shadow: var(--shadow);
+  background: var(--accent-2);
+  box-shadow: 0 0 28px var(--accent-glow);
   transform : translateY(-2px);
 }
 
@@ -121,6 +122,8 @@
   padding   : var(--space-xl);
   animation : fadeInPage 0.5s ease;
 }
+
+.form-success-icon { font-size: 3rem; margin-bottom: 12px; }
 
 .form-success h3 {
   font-family  : var(--font-display);

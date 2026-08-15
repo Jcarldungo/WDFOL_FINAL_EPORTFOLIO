@@ -2,19 +2,35 @@
 
 
 <!-- ============================================================
-     BLOG PAGE — Writing sells itself; no cover art needed
+     BLOG PAGE — Premium dark futuristic, 4 articles
      ============================================================ -->
+
+<!-- Ambient canvas particles -->
+<canvas id="blog-particles" aria-hidden="true"></canvas>
 
 <!-- Page hero -->
 <section class="blog-hero">
-  <div class="container">
+  <!-- Radial glow behind heading -->
+  <div class="blog-hero-glow" aria-hidden="true"></div>
+  <!-- Abstract blurred shapes -->
+  <div class="blog-orb blog-orb--1" aria-hidden="true"></div>
+  <div class="blog-orb blog-orb--2" aria-hidden="true"></div>
+  <div class="blog-orb blog-orb--3" aria-hidden="true"></div>
+
+  <div class="container" style="position:relative;z-index:2;">
     <div class="blog-hero-inner">
-      <div class="blog-hero-eyebrow">Writing &amp; Thoughts</div>
-      <h1 class="blog-hero-title">Dev Notes</h1>
+      <div class="blog-hero-eyebrow">
+        <span class="blog-eyebrow-dot"></span>
+        Writing &amp; Thoughts
+      </div>
+      <h1 class="blog-hero-title">
+        Dev <span class="blog-title-accent">Notes</span>
+      </h1>
       <p class="blog-hero-desc">
         Learning notes, real experiences, and honest thoughts from my journey
         as a BSIT student and backend developer.
       </p>
+      <div class="blog-hero-line" aria-hidden="true"></div>
     </div>
   </div>
 </section>
@@ -26,8 +42,11 @@
 
       <!-- ── Card 1: Journey article ── -->
       <article class="blog-card blog-card--featured" data-blog="journey" tabindex="0" role="button" aria-label="Read: My Journey as a Backend Developer Student">
-        <div class="blog-card-cover">
-          <p class="blog-cover-quote">This is my honest story of going from a complete beginner to someone who actually builds REST APIs and manages databases.</p>
+        <div class="blog-card-glow" aria-hidden="true"></div>
+        <div class="blog-card-cover" style="--cover-a:#0a1628;--cover-b:#1a3a5c;">
+          <div class="blog-cover-bg"></div>
+          <span class="blog-cover-icon">🚀</span>
+          <div class="blog-cover-line" aria-hidden="true"></div>
         </div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
@@ -57,8 +76,11 @@
 
       <!-- ── Card 2: Responsive design ── -->
       <article class="blog-card" data-blog="responsive" tabindex="0" role="button" aria-label="Read: Tips for Building Responsive Websites">
-        <div class="blog-card-cover">
-          <p class="blog-cover-quote">Responsive design sounds simple until your beautifully crafted desktop layout turns into a disaster on a 375px screen.</p>
+        <div class="blog-card-glow" aria-hidden="true"></div>
+        <div class="blog-card-cover" style="--cover-a:#180d2e;--cover-b:#2d1a5c;">
+          <div class="blog-cover-bg"></div>
+          <span class="blog-cover-icon">📱</span>
+          <div class="blog-cover-line" aria-hidden="true"></div>
         </div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
@@ -86,8 +108,11 @@
 
       <!-- ── Card 3: JWT Auth ── -->
       <article class="blog-card" data-blog="jwt" tabindex="0" role="button" aria-label="Read: Understanding JWT Authentication">
-        <div class="blog-card-cover">
-          <p class="blog-cover-quote">When I first implemented authentication in a Node.js project, I had to deeply understand how JWT tokens actually work — not just copy-paste from a tutorial.</p>
+        <div class="blog-card-glow" aria-hidden="true"></div>
+        <div class="blog-card-cover" style="--cover-a:#0d2a1a;--cover-b:#1a5c3a;">
+          <div class="blog-cover-bg"></div>
+          <span class="blog-cover-icon">🔐</span>
+          <div class="blog-cover-line" aria-hidden="true"></div>
         </div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
@@ -115,8 +140,11 @@
 
       <!-- ── Card 4: Personal Reflection ── -->
       <article class="blog-card" data-blog="reflection" tabindex="0" role="button" aria-label="Read: A Personal Reflection on My First Year of Coding">
-        <div class="blog-card-cover">
-          <p class="blog-cover-quote">If I could go back to the first day I walked into my BSIT class and sit down next to my freshman self, this is what I'd say.</p>
+        <div class="blog-card-glow" aria-hidden="true"></div>
+        <div class="blog-card-cover" style="--cover-a:#1a0d2e;--cover-b:#2e1a4a;">
+          <div class="blog-cover-bg"></div>
+          <span class="blog-cover-icon">✍️</span>
+          <div class="blog-cover-line" aria-hidden="true"></div>
         </div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
@@ -165,6 +193,7 @@
      ════════════════════════════════════ -->
 
 <template id="tpl-journey">
+  <div class="ba-cover" style="background:linear-gradient(135deg,#0a1628,#1a3a5c,#0d2040);"><span class="ba-cover-icon">🚀</span></div>
   <div class="ba-inner">
     <div class="ba-tags"><span class="blog-tag">Career</span><span class="blog-tag">Node.js</span><span class="blog-tag">Student Life</span><span class="ba-read">Feb 2026 · 8 min read</span></div>
     <h1 class="ba-title">My Journey as a Backend Developer Student</h1>
@@ -186,6 +215,7 @@
 </template>
 
 <template id="tpl-responsive">
+  <div class="ba-cover" style="background:linear-gradient(135deg,#180d2e,#2d1a5c,#120d3a);"><span class="ba-cover-icon">📱</span></div>
   <div class="ba-inner">
     <div class="ba-tags"><span class="blog-tag">CSS</span><span class="blog-tag">Responsive</span><span class="blog-tag">HTML5</span><span class="ba-read">Jan 2026 · 6 min read</span></div>
     <h1 class="ba-title">Tips for Building Responsive Websites That Actually Work</h1>
@@ -220,6 +250,7 @@
 </template>
 
 <template id="tpl-jwt">
+  <div class="ba-cover" style="background:linear-gradient(135deg,#0d2a1a,#1a5c3a,#0d2e1a);"><span class="ba-cover-icon">🔐</span></div>
   <div class="ba-inner">
     <div class="ba-tags"><span class="blog-tag">Node.js</span><span class="blog-tag">JWT</span><span class="blog-tag">Security</span><span class="ba-read">Dec 2025 · 10 min read</span></div>
     <h1 class="ba-title">Understanding JWT Authentication in Node.js</h1>
@@ -258,6 +289,7 @@ const authMiddleware = (req, res, next) => {
 </template>
 
 <template id="tpl-reflection">
+  <div class="ba-cover" style="background:linear-gradient(135deg,#1a0d2e,#2e1a4a,#1a0d3a);"><span class="ba-cover-icon">✍️</span></div>
   <div class="ba-inner">
     <div class="ba-tags"><span class="blog-tag">Reflection</span><span class="blog-tag">Personal</span><span class="blog-tag">Growth</span><span class="ba-read">Feb 2026 · 5 min read</span></div>
     <h1 class="ba-title">Dear Freshman Me: A Letter to My Past Self</h1>
@@ -282,9 +314,53 @@ const authMiddleware = (req, res, next) => {
   </div>
 </template>
 
-<!-- Blog JS: overlay, scroll reveal -->
+<!-- Blog JS: 3D tilt, particle canvas, overlay, scroll reveal -->
 <script>
 (function() {
+  /* ── Particle canvas ── */
+  const canvas = document.getElementById('blog-particles');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [];
+    function resize() {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = document.querySelector('.blog-hero')?.offsetHeight || 500;
+    }
+    function makeParticle() {
+      return { x: Math.random()*W, y: Math.random()*H,
+               r: Math.random()*1.5+.3, vx: (Math.random()-.5)*.3,
+               vy: (Math.random()-.5)*.3, a: Math.random()*.5+.1 };
+    }
+    function init() { resize(); particles = Array.from({length:60}, makeParticle); }
+    function draw() {
+      ctx.clearRect(0,0,W,H);
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle = `rgba(56,189,248,${p.a})`;
+        ctx.fill();
+        p.x += p.vx; p.y += p.vy;
+        if (p.x<0||p.x>W||p.y<0||p.y>H) Object.assign(p, makeParticle());
+      });
+      requestAnimationFrame(draw);
+    }
+    window.addEventListener('resize', init);
+    init(); draw();
+  }
+
+  /* ── 3D tilt on blog cards ── */
+  document.querySelectorAll('.blog-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width  - .5;
+      const y = (e.clientY - r.top)  / r.height - .5;
+      card.style.transform = `perspective(900px) rotateY(${x*10}deg) rotateX(${-y*8}deg) translateY(-8px) scale(1.02)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+
   /* ── Card click / keyboard open article ── */
   document.querySelectorAll('.blog-card').forEach(card => {
     const btn = card.querySelector('.blog-read-btn');
@@ -315,25 +391,16 @@ const authMiddleware = (req, res, next) => {
   backdrop?.addEventListener('click', closeArticle);
   document.addEventListener('keydown', e => { if(e.key==='Escape') closeArticle(); });
 
-  /* ── Scroll reveal for cards ──
-   * threshold 0 + a negative bottom rootMargin fires as a card enters the
-   * viewport rather than after ~12% of it has already scrolled in — the
-   * later threshold was producing blank viewports while scrolling normally.
-   * No per-card stagger delay, for the same reason. */
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const cards = document.querySelectorAll('.blog-card');
-  if (reduceMotion) {
-    cards.forEach(c => c.classList.add('blog-card--visible'));
-  } else {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('blog-card--visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0, rootMargin: '0px 0px -12% 0px' });
-    cards.forEach(c => observer.observe(c));
-  }
+  /* ── Scroll reveal for cards ── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationDelay = (i * 0.12) + 's';
+        entry.target.classList.add('blog-card--visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.blog-card').forEach(c => observer.observe(c));
 })();
 </script>

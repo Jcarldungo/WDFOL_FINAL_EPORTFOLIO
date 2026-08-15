@@ -5,7 +5,8 @@
  *  1. loadComponents  — Inject navbar + footer HTML into the DOM shell
  *  2. theme.init      — Apply saved theme ASAP (before first paint)
  *  3. navbar.init     — Attach scroll + hamburger listeners
- *  4. router.init     — Attach click delegation + load the initial page
+ *  4. particles.init  — Start canvas animation loop (non-blocking)
+ *  5. router.init     — Attach click delegation + load initial page
  *
  * Architecture rationale:
  * - ES6 modules enforce explicit dependency graphs (no globals)
@@ -23,6 +24,7 @@
 import { loadComponents } from './modules/loader.js';
 import { init as initTheme }  from './modules/theme.js';
 import { init as initNavbar } from './modules/navbar.js';
+import { init as initParticles } from './modules/particles.js';
 import { init as initRouter } from './modules/router.js';
 
 /**
@@ -40,7 +42,10 @@ async function bootstrap() {
   // 3. Attach navbar scroll + mobile menu listeners
   initNavbar();
 
-  // 4. Init router — fetches and injects the page matching the current URL
+  // 4. Start particle canvas (visual enhancement — non-blocking)
+  initParticles();
+
+  // 5. Init router — fetches and injects the initial page (home)
   initRouter();
 }
 

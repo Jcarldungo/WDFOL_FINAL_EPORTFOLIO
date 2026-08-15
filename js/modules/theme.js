@@ -9,7 +9,7 @@
  */
 
 const STORAGE_KEY = 'portfolio-theme';
-const DEFAULT_THEME = 'light';
+const DEFAULT_THEME = 'dark';
 
 /**
  * Apply a theme by setting the data-theme attribute on <html>
@@ -19,7 +19,7 @@ const DEFAULT_THEME = 'light';
 function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
   const icon = document.getElementById('theme-icon');
-  if (icon) icon.textContent = theme === 'dark' ? '☼' : '☾';
+  if (icon) icon.textContent = theme === 'dark' ? '☀️' : '🌙';
 }
 
 /**

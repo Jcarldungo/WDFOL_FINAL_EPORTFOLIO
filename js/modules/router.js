@@ -13,7 +13,8 @@
 
 import { observeReveal }      from './scrollReveal.js';
 import { initForm }           from './form.js';
-import { initConstraintMeters } from './constraintMeter.js';
+import { animateSkillBars }   from './skillBars.js';
+import { initTypewriter }     from './typewriter.js';
 
 /** Known page ids — also the *.html fragment name in /pages/ */
 const PAGES = ['home', 'about', 'projects', 'blog', 'resume', 'contact'];
@@ -91,9 +92,14 @@ function updateNavLinks(pageId) {
 function runPageHooks(pageId) {
   requestAnimationFrame(() => {
     observeReveal();
-    initConstraintMeters();
 
     switch (pageId) {
+      case 'home':
+        initTypewriter();
+        break;
+      case 'about':
+        setTimeout(animateSkillBars, 400);
+        break;
       case 'contact':
         initForm();
         break;

@@ -19,13 +19,16 @@
   overflow     : hidden;
   border       : 1px solid var(--border);
   background   : var(--surface);
-  transition   : border-color var(--transition-base), box-shadow var(--transition-base);
+  transition   :
+    transform     0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow    0.35s ease,
+    border-color  var(--transition-base);
   cursor       : pointer;
 }
 
 .feat-card:hover {
-  border-color: var(--ink-2);
-  box-shadow  : var(--shadow);
+  transform   : translateY(-8px);
+  box-shadow  : 0 20px 60px rgba(0, 0, 0, 0.35), 0 0 0 1px var(--border-2);
 }
 
 .feat-card-img {

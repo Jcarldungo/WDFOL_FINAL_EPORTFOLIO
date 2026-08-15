@@ -43,9 +43,9 @@
   transition: transform var(--transition-base), filter var(--transition-base), opacity var(--transition-base);
 }
 
-/* Dark mode: invert the black logo to white — monochrome, no brand hue */
+/* Dark mode: invert black logo → glowing accent color */
 [data-theme="dark"] .logo-img {
-  filter: invert(1) brightness(1.15);
+  filter: invert(1) brightness(2) sepia(1) saturate(4) hue-rotate(175deg);
 }
 [data-theme="light"] .logo-img {
   filter: none;

@@ -40,7 +40,6 @@
 @import url('components/forms.css');
 @import url('components/tags.css');
 @import url('components/effects.css');
-@import url('components/constraint-meter.css');
 
 /* ── 7. Page-level styles ─────────────────────────────── */
 @import url('pages/home.css');
