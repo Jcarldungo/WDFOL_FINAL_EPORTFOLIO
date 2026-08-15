@@ -34,17 +34,22 @@
 .proj-card:nth-child(even) .proj-screenshots { order: 2; }
 
 /* ── Screenshot panel ──────────────────────────────────────────────
-   BUG FIX: .proj-screenshots used to be a stretched grid item with no
+   BUG FIX #1: .proj-screenshots used to be a stretched grid item with no
    aspect-ratio, so its height was dictated entirely by the sibling
    .proj-card-body (sized by text length). object-fit:cover then scaled
    the image by max(boxW/natW, boxH/natH) — for the gastos card (longest
    copy, smallest source image) that scale factor exceeded 1, enlarging
    the image ~29% past its native resolution and cropping ~67% of its
-   width, which read as the image "spilling" out of the card even though
-   overflow:hidden was correctly containing it the whole time.
-   Fix: give the panel a fixed aspect-ratio so its height is no longer at
-   the mercy of the text column, and switch to object-fit:contain so nothing
-   is ever cropped or upscaled past its native size. ── */
+   width, which read as the image "spilling" out of the card.
+   First fix gave the panel a fixed aspect-ratio + object-fit:contain —
+   that stopped the crop/upscale, but for a *portrait* screenshot
+   (WeePlay's full-page capture, 1100×1600) inside a landscape 16:10 box,
+   contain shrinks the image down small and centers it, leaving a slab of
+   dead space around it. Fixed aspect-ratio + cover, top-anchored, fills
+   the box completely for every card: landscape screenshots (gastos,
+   StudyTrack) crop a mild ~16% off the sides, portrait ones (WeePlay)
+   show a clean "top of the page" peek instead of floating in empty
+   space. ── */
 .proj-screenshots {
   aspect-ratio: 16 / 10;
   height      : auto;
@@ -60,8 +65,8 @@
 .proj-ss-img {
   width          : 100%;
   height         : 100%;
-  object-fit     : contain;
-  object-position: center;
+  object-fit     : cover;
+  object-position: top center;
   display        : block;
   filter         : none;
 }
