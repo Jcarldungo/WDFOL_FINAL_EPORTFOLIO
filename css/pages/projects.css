@@ -2,30 +2,6 @@
    PROJECTS PAGE — Full project cards with screenshots, tags, live links
    ============================================================================= */
 
-/* ── Filter bar ───────────────────────────────────────── */
-.filter-bar {
-  display        : flex;
-  gap            : 10px;
-  flex-wrap      : wrap;
-  margin         : var(--space-xl) 0 var(--space-2xl);
-}
-
-.filter-btn {
-  padding      : 9px 22px;
-  border-radius: var(--radius-pill);
-  border       : 1.5px solid var(--border-2);
-  background   : var(--surface);
-  color        : var(--text-2);
-  font-family  : var(--font-mono);
-  font-size    : 0.78rem;
-  font-weight  : 600;
-  letter-spacing: 0.05em;
-  cursor       : pointer;
-  transition   : all var(--transition-base);
-}
-.filter-btn:hover  { border-color: var(--accent); color: var(--accent); }
-.filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: 0 0 20px var(--accent-glow); }
-
 /* ── Projects grid ────────────────────────────────────── */
 .projects-grid {
   display              : grid;
@@ -176,7 +152,11 @@
   position  : relative;
   line-height: 1.5;
 }
-.proj-features li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: .75rem; top: 6px; }
+.proj-features li::before { content: '▸'; position: absolute; left: 0; color: var(--ink-2); font-size: .75rem; top: 6px; }
+
+/* Constraint meter sits between two .proj-desc blocks on the gastos card —
+   give it the same measure as the surrounding prose. */
+.proj-card-body .constraint-meter { max-width: 100%; }
 
 /* ── Project links ─────────────────────────────────────── */
 .proj-links { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-top: var(--space-sm); }
@@ -191,10 +171,84 @@
   background   : var(--surface-2);
 }
 
-/* ── Hidden filter state ─────────────────────────────── */
-.proj-card.hidden {
-  display: none;
+/* ══════════════════════════════════════════════════════
+   TIER 2 — COURSEWORK: compact index rows.
+   Thumbnail (16:10, same ratio as the tier-1 screenshot panel) left,
+   title + description + tags + live link right. No case-study narrative —
+   these keep whatever one-line description already existed.
+   ══════════════════════════════════════════════════════ */
+.course-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--space-lg);
 }
+
+.course-row {
+  display      : flex;
+  gap          : var(--space-lg);
+  align-items  : flex-start;
+  padding      : var(--space-lg) 0;
+  border-bottom: 1px solid var(--border);
+}
+.course-list .course-row:last-child { border-bottom: none; }
+
+.course-thumb {
+  flex-shrink  : 0;
+  width        : 128px;
+  aspect-ratio : 16 / 10;
+  border-radius: var(--radius-sm);
+  overflow     : hidden;
+  background   : var(--panel);
+  border       : 1px solid var(--border);
+  display      : block;
+  transition   : border-color var(--transition-base);
+}
+.course-thumb:hover { border-color: var(--ink-2); }
+.course-thumb img {
+  width     : 100%;
+  height    : 100%;
+  object-fit: contain;
+  display   : block;
+}
+
+.course-body { flex: 1; min-width: 0; }
+
+.course-title {
+  font-family   : var(--font-display);
+  font-size     : 1.05rem;
+  font-weight   : 700;
+  letter-spacing: -0.01em;
+  margin-bottom : 4px;
+}
+
+.course-desc {
+  font-size  : 0.85rem;
+  color      : var(--text-2);
+  line-height: 1.6;
+  margin-bottom: 10px;
+  max-width  : 62ch;
+}
+
+.course-meta {
+  display        : flex;
+  align-items    : center;
+  justify-content: space-between;
+  gap            : 12px;
+  flex-wrap      : wrap;
+}
+
+.course-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.course-link {
+  font-family  : var(--font-mono);
+  font-size    : 0.78rem;
+  color        : var(--text);
+  white-space  : nowrap;
+  /* keep the tap target comfortably >=44px even though the text is small */
+  padding      : 10px 2px;
+  margin       : -10px -2px;
+}
+.course-link:hover { text-decoration: underline; }
 
 /* ── Responsive ─────────────────────────────────────── */
 @media (max-width: 900px) {
@@ -204,5 +258,8 @@
   .proj-card-body               { padding: var(--space-lg); }
 }
 @media (max-width: 480px) {
-  .proj-title            { font-size: 1.3rem; }
+  .proj-title  { font-size: 1.3rem; }
+
+  .course-row  { flex-direction: column; }
+  .course-thumb { width: 100%; }
 }

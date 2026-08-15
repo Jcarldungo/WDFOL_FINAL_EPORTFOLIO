@@ -159,10 +159,10 @@
 .constraint-band-copy--foot {
   margin-top   : var(--space-lg);
   margin-bottom: 0;
-  display      : flex;
-  align-items  : baseline;
-  gap          : 10px;
-  flex-wrap    : wrap;
+}
+.constraint-band-copy--foot .card-link {
+  display    : inline-flex;
+  margin-left: 8px;
 }
 
 /* ── Quick About strip ────────────────────────────────── */

@@ -2,25 +2,17 @@
   <div class="container">
     <div class="section-head reveal">
       <div class="section-label">Portfolio</div>
-      <h1 class="section-title" id="proj-heading">My <span class="gradient-text">Projects</span></h1>
+      <h1 class="section-title" id="proj-heading">My Projects</h1>
       <p class="section-subtitle">Real academic and personal projects demonstrating backend engineering, full-stack development, and UI design skills.</p>
-    </div>
-
-    <div class="filter-bar reveal" role="group" aria-label="Filter projects by category">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="fullstack">Full Stack</button>
-      <button class="filter-btn" data-filter="backend">Backend</button>
-      <button class="filter-btn" data-filter="frontend">Frontend</button>
     </div>
 
     <div class="projects-grid" id="projects-grid">
 
-      <article class="proj-card reveal" data-category="frontend" aria-label="WeePlay Therapy Center project">
+      <article class="proj-card reveal" aria-label="WeePlay Therapy Center project">
         <div class="proj-screenshots">
           <div class="proj-screenshots-main">
-            <img src="assets/images/project-weeplay.png" alt="WeePlay Therapy Center website homepage showing the clinic's sensory play room" class="proj-ss-img proj-ss-primary" loading="lazy" />
+            <img src="assets/images/project-weeplay.jpg" alt="WeePlay Therapy Center website homepage showing the clinic's sensory play room" class="proj-ss-img proj-ss-primary" loading="lazy" />
           </div>
-          <div class="proj-screenshot-shine" aria-hidden="true"></div>
         </div>
         <div class="proj-card-body">
           <div class="proj-card-header">
@@ -31,7 +23,7 @@
               <span class="tag">Responsive</span>
               <span class="tag">SEO</span>
             </div>
-            <div class="proj-status proj-status--live">🟢 Live</div>
+            <div class="proj-status proj-status--live">Live</div>
           </div>
           <h2 class="proj-title">WeePlay Therapy Center</h2>
           <p class="proj-desc">
@@ -50,130 +42,75 @@
           </ul>
           <div class="proj-links">
             <a href="https://weeplay-therapy.vercel.app" target="_blank" rel="noopener" class="btn btn-primary">
-              🌐 Live Demo →
+              Live Demo →
             </a>
           </div>
         </div>
       </article>
 
-      <article class="proj-card reveal reveal-delay-1" data-category="fullstack" aria-label="Centro Café project">
+      <article class="proj-card reveal" id="proj-gastos" aria-label="gastos expense tracker project">
         <div class="proj-screenshots">
           <div class="proj-screenshots-main">
-            <img src="assets/images/project-centro.png" alt="Centro Café website homepage showing coffee cups" class="proj-ss-img proj-ss-primary" loading="lazy" />
+            <img src="assets/images/project-gastos.png" alt="gastos expense tracker dashboard showing card balances and recent activity" class="proj-ss-img proj-ss-primary" loading="lazy" />
           </div>
-          <div class="proj-screenshot-shine" aria-hidden="true"></div>
         </div>
         <div class="proj-card-body">
           <div class="proj-card-header">
             <div class="proj-tags">
-              <span class="tag">Node.js</span>
-              <span class="tag">Vue.js</span>
-              <span class="tag">MongoDB</span>
-              <span class="tag">Express.js</span>
+              <span class="tag">Vanilla JS</span>
+              <span class="tag">Vercel Serverless</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">PWA</span>
               <span class="tag">REST API</span>
             </div>
-            <div class="proj-status proj-status--live">🟢 Live</div>
+            <div class="proj-status proj-status--live">Live</div>
           </div>
-          <h2 class="proj-title">Centro Café</h2>
+          <h2 class="proj-title">gastos</h2>
           <p class="proj-desc">
-            A full-stack e-commerce web application for a local café in Angeles City. Built with the MEVN stack, it features a scalable RESTful API backend with real-time product data, employee profiles, and service listings. The frontend uses reactive Vue.js components for a fast, dynamic user experience.<br><br>
-            <strong>Tech Stack:</strong> MongoDB, Express.js, Vue.js, Node.js
+            An offline-first expense tracker built for logging a purchase in three taps, even with no signal. No framework — vanilla JS talking to Vercel serverless functions over a Neon Postgres database, with a service worker queueing entries made offline and syncing them once the connection returns.<br><br>
+            The interesting part was fitting it onto a free plan: Vercel's Hobby tier caps a deployment at 12 serverless functions, and the app's ~32 routes (auth, transactions, budgets, bills, goals, splitting expenses with friends) each started as its own file.
+          </p>
+
+          <div class="constraint-meter" data-value="10" data-max="12">
+            <div class="cm-track" role="meter" aria-valuenow="10" aria-valuemin="0" aria-valuemax="12"
+                 aria-label="10 of 12 serverless functions used, ceiling 12">
+              <div class="cm-fill" style="width:83.33%"></div>
+              <div class="cm-ceiling-line"></div>
+            </div>
+            <div class="cm-labels">
+              <span class="cm-fill-label">10 dispatchers</span>
+              <span class="cm-ceiling-label">ceiling: 12</span>
+            </div>
+            <p class="cm-readout"><span class="cm-numeral" data-count-to="10">10</span> / 12 serverless functions used</p>
+          </div>
+
+          <p class="proj-desc">
+            Consolidating them into 10 thin dispatcher functions — routed by a single <code>vercel.json</code> rewrite table shared by production and local dev — got it under the cap with zero change to any URL or response shape.<br><br>
+            <strong>Tech Stack:</strong> Vanilla JavaScript, Vercel Serverless Functions, Neon PostgreSQL, Service Worker/PWA, Web Push
           </p>
           <ul class="proj-features">
-            <li>Scalable RESTful API with Node.js &amp; Express.js</li>
-            <li>MongoDB for flexible, schema-less product data</li>
-            <li>Reactive Vue.js frontend with real-time sync</li>
-            <li>Employee &amp; services management sections</li>
+            <li>Card balances derived from the transaction ledger, not typed in — including transfers between cards</li>
+            <li>Offline outbox: entries logged with no signal queue locally and sync automatically once back online</li>
+            <li>Split an expense with friends and settle up later, with itemized per-person history</li>
+            <li>Web Push alerts for bills coming due and budgets crossing 80%, via a nightly Vercel Cron</li>
+            <li>Money kept as strings end to end (never a JS float) and dates read back as calendar strings, not <code>Date</code> objects, to avoid timezone drift</li>
           </ul>
           <div class="proj-links">
-            <a href="https://prelimprojectgroup6.netlify.app/" target="_blank" rel="noopener" class="btn btn-primary">
-              🌐 Live Demo →
+            <a href="https://gastos-xi-rose.vercel.app" target="_blank" rel="noopener" class="btn btn-primary">
+              Live Demo →
+            </a>
+            <a href="https://github.com/Jcarldungo/gastos" target="_blank" rel="noopener" class="btn btn-secondary">
+              GitHub Repo →
             </a>
           </div>
         </div>
       </article>
 
-      <article class="proj-card reveal reveal-delay-1" data-category="frontend" aria-label="Research Conference App project">
-        <div class="proj-screenshots">
-          <div class="proj-screenshots-main">
-            <img src="assets/images/project-research-conf.png" alt="Research Conference App showing conference listings" class="proj-ss-img proj-ss-primary" loading="lazy" />
-          </div>
-          <div class="proj-screenshot-shine" aria-hidden="true"></div>
-        </div>
-        <div class="proj-card-body">
-          <div class="proj-card-header">
-            <div class="proj-tags">
-              <span class="tag">Angular</span>
-              <span class="tag">RxJS</span>
-              <span class="tag">TypeScript</span>
-              <span class="tag">REST API</span>
-              <span class="tag">Responsive</span>
-            </div>
-            <div class="proj-status proj-status--live">🟢 Live</div>
-          </div>
-          <h2 class="proj-title">Research Conference App</h2>
-          <p class="proj-desc">
-            A responsive Angular SPA for discovering and registering for international research conferences. Features location-based conference listings (France, Seoul, San Francisco, Boston), partner showcasing, and event registration flows.<br><br>
-            <strong>Tech Stack:</strong> Angular, TypeScript, RxJS, REST API
-          </p>
-          <ul class="proj-features">
-            <li>Angular SPA with TypeScript &amp; RxJS reactive patterns</li>
-            <li>International conference listings with image cards</li>
-            <li>Partner &amp; About pages with dynamic routing</li>
-            <li>Early-bird registration UI with responsive layouts</li>
-          </ul>
-          <div class="proj-links">
-            <a href="https://dungoresearchconf.netlify.app/" target="_blank" rel="noopener" class="btn btn-primary">
-              🌐 Live Demo →
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <article class="proj-card reveal reveal-delay-2" data-category="fullstack" aria-label="Nexus Support Help Desk project">
-        <div class="proj-screenshots">
-          <div class="proj-screenshots-main">
-            <img src="assets/images/project-nexus.png" alt="Nexus Support application showing ticket management dashboard" class="proj-ss-img proj-ss-primary" loading="lazy" />
-          </div>
-          <div class="proj-screenshot-shine" aria-hidden="true"></div>
-        </div>
-        <div class="proj-card-body">
-          <div class="proj-card-header">
-            <div class="proj-tags">
-              <span class="tag">Angular</span>
-              <span class="tag">RxJS</span>
-              <span class="tag">TypeScript</span>
-              <span class="tag">REST API</span>
-              <span class="tag">Dark UI</span>
-            </div>
-            <div class="proj-status proj-status--live">🟢 Live</div>
-          </div>
-          <h2 class="proj-title">Nexus Support — Help Desk</h2>
-          <p class="proj-desc">
-            A community IT help desk application for managing and resolving employee support tickets. Features a dark, modern UI with real-time ticket activity feed, categorized ticket browsing, service model discovery, and a contact system.<br><br>
-            <strong>Tech Stack:</strong> Angular, TypeScript, RxJS, RESTful APIs
-          </p>
-          <ul class="proj-features">
-            <li>Real-time ticket activity feed (VPN failures, password resets, etc.)</li>
-            <li>Browse &amp; filter IT support tickets by category</li>
-            <li>Service models &amp; diagnostics pages</li>
-            <li>Dark futuristic UI with responsive mobile layouts</li>
-          </ul>
-          <div class="proj-links">
-            <a href="https://midtermbadgedungo.netlify.app/
-" target="_blank" rel="noopener" class="btn btn-primary">
-              🌐 Live Demo →
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <article class="proj-card reveal reveal-delay-3" data-category="fullstack" aria-label="StudyTrack project">
+      <article class="proj-card reveal" aria-label="StudyTrack project">
         <div class="proj-screenshots">
           <div class="proj-screenshots-main">
             <img src="assets/images/studytrackpick.PNG" alt="StudyTrack web application" class="proj-ss-img proj-ss-primary" loading="lazy" />
           </div>
-          <div class="proj-screenshot-shine" aria-hidden="true"></div>
         </div>
         <div class="proj-card-body">
           <div class="proj-card-header">
@@ -184,7 +121,7 @@
               <span class="tag">PostgreSQL</span>
               <span class="tag">Tailwind</span>
             </div>
-            <div class="proj-status proj-status--live">🟢 Live</div>
+            <div class="proj-status proj-status--live">Live</div>
           </div>
           <h2 class="proj-title">StudyTrack</h2>
           <p class="proj-desc">
@@ -202,127 +139,10 @@
           </ul>
           <div class="proj-links">
             <a href="https://final-study-track.vercel.app/" target="_blank" rel="noopener" class="btn btn-primary">
-              🌐 Live Demo →
+              Live Demo →
             </a>
             <a href="https://github.com/Jcarldungo/Final_StudyTrack" target="_blank" rel="noopener" class="btn btn-secondary">
-              🐙 GitHub Repo →
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <article class="proj-card reveal reveal-delay-4" data-category="frontend" aria-label="Calculator App project">
-        <div class="proj-screenshots">
-          <div class="proj-screenshots-main">
-            <img src="assets/images/calc.PNG" alt="Neumorphic Web Calculator App Interface" class="proj-ss-img proj-ss-primary" loading="lazy" />
-          </div>
-          <div class="proj-screenshot-shine" aria-hidden="true"></div>
-        </div>
-        <div class="proj-card-body">
-          <div class="proj-card-header">
-            <div class="proj-tags">
-              <span class="tag">JavaScript</span>
-              <span class="tag">HTML</span>
-              <span class="tag">CSS</span>
-            </div>
-            <div class="proj-status proj-status--live">🟢 Live</div>
-          </div>
-          <h2 class="proj-title">Web Calculator App</h2>
-          <p class="proj-desc">
-            A responsive, interactive web-based calculator application featuring a sleek, neumorphic design. It features a clean and modern user interface alongside precise real-time math parsing and logic handling.<br><br>
-            <strong>Tech Stack:</strong> HTML, CSS, JavaScript
-          </p>
-          <ul class="proj-features">
-            <li>Modern neumorphic UI design with intuitive button feedback</li>
-            <li>Fast and dynamic frontend logic handling standard arithmetic operations</li>
-            <li>Interactive and responsive user interface suited for mobile and desktop</li>
-            <li>Real-time screen rendering and state management</li>
-          </ul>
-          <div class="proj-links">
-            <a href="https://calculator-project1-two.vercel.app/" target="_blank" rel="noopener" class="btn btn-primary">
-              🌐 Live Demo →
-            </a>
-            <a href="https://github.com/Jcarldungo/calculator" target="_blank" rel="noopener" class="btn btn-secondary">
-              🐙 GitHub Repo →
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <article class="proj-card reveal reveal-delay-5" data-category="frontend" aria-label="Apex AI Fitness project">
-        <div class="proj-screenshots">
-          <div class="proj-screenshots-main">
-            <img src="assets/images/apex-ai.png" alt="Apex AI Fitness Website Interface" class="proj-ss-img proj-ss-primary" loading="lazy" />
-          </div>
-          <div class="proj-screenshot-shine" aria-hidden="true"></div>
-        </div>
-        <div class="proj-card-body">
-          <div class="proj-card-header">
-            <div class="proj-tags">
-              <span class="tag">Fitness</span>
-              <span class="tag">HTML/CSS</span>
-              <span class="tag">JavaScript</span>
-            </div>
-            <div class="proj-status proj-status--live">🟢 Live</div>
-          </div>
-          <h2 class="proj-title">Apex AI</h2>
-          <p class="proj-desc">
-            A modern fitness and wellness website tailored to help users elevate their workout routines. It features a highly responsive design and intuitive navigation to explore fitness plans, tracking tools, and health resources.<br><br>
-            <strong>Tech Stack:</strong> HTML, CSS, JavaScript, Netlify
-          </p>
-          <ul class="proj-features">
-            <li>Dynamic UI tailored specifically for fitness tracking and workout plans</li>
-            <li>Responsive layout optimized for both mobile and desktop users</li>
-            <li>Seamless integration and fast deployment via Netlify</li>
-          </ul>
-          <div class="proj-links">
-            <a href="https://apex-aii.netlify.app/" target="_blank" rel="noopener" class="btn btn-primary">
-              🌐 Live Demo →
-            </a>
-            <a href="https://github.com/Jcarldungo/apex-ai" target="_blank" rel="noopener" class="btn btn-secondary">
-              🐙 GitHub Repo →
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <article class="proj-card reveal reveal-delay-5" data-category="fullstack" aria-label="gastos expense tracker project">
-        <div class="proj-screenshots">
-          <div class="proj-screenshots-main">
-            <img src="assets/images/project-gastos.png" alt="gastos expense tracker dashboard showing card balances and recent activity" class="proj-ss-img proj-ss-primary" loading="lazy" />
-          </div>
-          <div class="proj-screenshot-shine" aria-hidden="true"></div>
-        </div>
-        <div class="proj-card-body">
-          <div class="proj-card-header">
-            <div class="proj-tags">
-              <span class="tag">Vanilla JS</span>
-              <span class="tag">Vercel Serverless</span>
-              <span class="tag">PostgreSQL</span>
-              <span class="tag">PWA</span>
-              <span class="tag">REST API</span>
-            </div>
-            <div class="proj-status proj-status--live">🟢 Live</div>
-          </div>
-          <h2 class="proj-title">gastos</h2>
-          <p class="proj-desc">
-            An offline-first expense tracker built for logging a purchase in three taps, even with no signal. No framework — vanilla JS talking to Vercel serverless functions over a Neon Postgres database, with a service worker queueing entries made offline and syncing them once the connection returns.<br><br>
-            The interesting part was fitting it onto a free plan: Vercel's Hobby tier caps a deployment at 12 serverless functions, and the app's ~32 routes (auth, transactions, budgets, bills, goals, splitting expenses with friends) each started as its own file. Consolidating them into 10 thin dispatcher functions — routed by a single <code>vercel.json</code> rewrite table shared by production and local dev — got it under the cap with zero change to any URL or response shape.<br><br>
-            <strong>Tech Stack:</strong> Vanilla JavaScript, Vercel Serverless Functions, Neon PostgreSQL, Service Worker/PWA, Web Push
-          </p>
-          <ul class="proj-features">
-            <li>Card balances derived from the transaction ledger, not typed in — including transfers between cards</li>
-            <li>Offline outbox: entries logged with no signal queue locally and sync automatically once back online</li>
-            <li>Split an expense with friends and settle up later, with itemized per-person history</li>
-            <li>Web Push alerts for bills coming due and budgets crossing 80%, via a nightly Vercel Cron</li>
-            <li>Money kept as strings end to end (never a JS float) and dates read back as calendar strings, not <code>Date</code> objects, to avoid timezone drift</li>
-          </ul>
-          <div class="proj-links">
-            <a href="https://gastos-xi-rose.vercel.app" target="_blank" rel="noopener" class="btn btn-primary">
-              🌐 Live Demo →
-            </a>
-            <a href="https://github.com/Jcarldungo/gastos" target="_blank" rel="noopener" class="btn btn-secondary">
-              🐙 GitHub Repo →
+              GitHub Repo →
             </a>
           </div>
         </div>
@@ -332,21 +152,97 @@
   </div>
 </section>
 
-<script>
-(function initProjectFilter() {
-  const btns  = document.querySelectorAll('.filter-btn');
-  const cards = document.querySelectorAll('.proj-card');
+<!-- ── COURSEWORK — compact index of smaller academic/practice projects ── -->
+<section class="section section-alt" aria-labelledby="coursework-heading">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-label">Also Built</div>
+      <h2 class="section-title" id="coursework-heading">Coursework</h2>
+      <p class="section-subtitle">Smaller academic and practice projects — real, working, but scoped for a class deliverable rather than a live client.</p>
+    </div>
 
-  btns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      btns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
-      cards.forEach(card => {
-        const cat = card.dataset.category;
-        card.classList.toggle('hidden', filter !== 'all' && cat !== filter);
-      });
-    });
-  });
-})();
-</script>
+    <div class="course-list reveal">
+
+      <div class="course-row">
+        <a href="https://prelimprojectgroup6.netlify.app/" target="_blank" rel="noopener" class="course-thumb" aria-label="Centro Café live demo">
+          <img src="assets/images/project-centro.png" alt="Centro Café website homepage" loading="lazy" />
+        </a>
+        <div class="course-body">
+          <h3 class="course-title">Centro Café</h3>
+          <p class="course-desc">Full-stack e-commerce MEVN app for a local café — scalable RESTful API with a reactive Vue.js frontend.</p>
+          <div class="course-meta">
+            <div class="course-tags">
+              <span class="tech-tag">Node.js</span><span class="tech-tag">Vue.js</span><span class="tech-tag">MongoDB</span>
+            </div>
+            <a href="https://prelimprojectgroup6.netlify.app/" target="_blank" rel="noopener" class="course-link">Live Demo →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-row">
+        <a href="https://dungoresearchconf.netlify.app/" target="_blank" rel="noopener" class="course-thumb" aria-label="Research Conference App live demo">
+          <img src="assets/images/project-research-conf.png" alt="Research Conference App showing conference listings" loading="lazy" />
+        </a>
+        <div class="course-body">
+          <h3 class="course-title">Research Conference App</h3>
+          <p class="course-desc">Angular SPA for discovering and registering for international research conferences, with RxJS reactive data flows.</p>
+          <div class="course-meta">
+            <div class="course-tags">
+              <span class="tech-tag">Angular</span><span class="tech-tag">RxJS</span><span class="tech-tag">TypeScript</span>
+            </div>
+            <a href="https://dungoresearchconf.netlify.app/" target="_blank" rel="noopener" class="course-link">Live Demo →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-row">
+        <a href="https://midtermbadgedungo.netlify.app/" target="_blank" rel="noopener" class="course-thumb" aria-label="Nexus Support live demo">
+          <img src="assets/images/project-nexus.png" alt="Nexus Support application showing ticket management dashboard" loading="lazy" />
+        </a>
+        <div class="course-body">
+          <h3 class="course-title">Nexus Support — Help Desk</h3>
+          <p class="course-desc">Community IT help desk with a real-time ticket activity feed, service models, and a dark, responsive UI.</p>
+          <div class="course-meta">
+            <div class="course-tags">
+              <span class="tech-tag">Angular</span><span class="tech-tag">RxJS</span><span class="tech-tag">REST API</span>
+            </div>
+            <a href="https://midtermbadgedungo.netlify.app/" target="_blank" rel="noopener" class="course-link">Live Demo →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-row">
+        <a href="https://calculator-project1-two.vercel.app/" target="_blank" rel="noopener" class="course-thumb" aria-label="Web Calculator App live demo">
+          <img src="assets/images/calc.PNG" alt="Neumorphic web calculator app interface" loading="lazy" />
+        </a>
+        <div class="course-body">
+          <h3 class="course-title">Web Calculator App</h3>
+          <p class="course-desc">A responsive web calculator with a neumorphic UI and real-time arithmetic parsing.</p>
+          <div class="course-meta">
+            <div class="course-tags">
+              <span class="tech-tag">JavaScript</span><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span>
+            </div>
+            <a href="https://calculator-project1-two.vercel.app/" target="_blank" rel="noopener" class="course-link">Live Demo →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-row">
+        <a href="https://apex-aii.netlify.app/" target="_blank" rel="noopener" class="course-thumb" aria-label="Apex AI live demo">
+          <img src="assets/images/apex-ai.png" alt="Apex AI fitness website interface" loading="lazy" />
+        </a>
+        <div class="course-body">
+          <h3 class="course-title">Apex AI</h3>
+          <p class="course-desc">Fitness and wellness website with a responsive layout for browsing workout plans and tracking tools.</p>
+          <div class="course-meta">
+            <div class="course-tags">
+              <span class="tech-tag">HTML/CSS</span><span class="tech-tag">JavaScript</span>
+            </div>
+            <a href="https://apex-aii.netlify.app/" target="_blank" rel="noopener" class="course-link">Live Demo →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
