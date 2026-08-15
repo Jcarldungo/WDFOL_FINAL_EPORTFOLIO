@@ -3,23 +3,42 @@
  * Client-side SPA router. Dynamically fetches HTML page fragments and
  * injects them into #main-content. Re-executes inline scripts after injection
  * (innerHTML does NOT run <script> tags by default).
+ *
+ * Real URL routing: navigating between pages calls history.pushState() so
+ * the address bar reflects the current page (e.g. /projects), the browser
+ * back/forward buttons work, and a hard refresh on a sub-page loads that
+ * page directly (via vercel.json rewriting every path to /index.html, then
+ * this module reading location.pathname on boot).
  */
 
-import { observeReveal }   from './scrollReveal.js';
-import { animateSkillBars } from './skillBars.js';
-import { initFilter }      from './filter.js';
-import { initForm }        from './form.js';
-import { initTypewriter }  from './typewriter.js';
+import { observeReveal }      from './scrollReveal.js';
+import { initForm }           from './form.js';
+import { initConstraintMeters } from './constraintMeter.js';
+
+/** Known page ids — also the *.html fragment name in /pages/ */
+const PAGES = ['home', 'about', 'projects', 'blog', 'resume', 'contact'];
 
 /** Cache loaded page fragments to avoid repeated network requests */
 const pageCache = new Map();
 
 /**
- * FIX: Start as null so the first navigateTo('home') always loads.
+ * FIX: Start as null so the first navigateTo() always loads.
  * Previously was 'home' which caused the guard to fire early on init,
  * leaving the page blank until another route was clicked.
  */
 let currentPage = null;
+
+/** Convert a URL pathname to a known pageId. Falls back to 'home'. */
+function pathToPage(pathname) {
+  const slug = pathname.replace(/^\/+|\/+$/g, ''); // strip leading/trailing slashes
+  if (slug === '' ) return 'home';
+  return PAGES.includes(slug) ? slug : 'home';
+}
+
+/** Convert a pageId to the canonical URL path. */
+function pageToPath(pageId) {
+  return pageId === 'home' ? '/' : `/${pageId}`;
+}
 
 /**
  * Fetch an HTML fragment from /pages/<pageId>.html
@@ -64,7 +83,7 @@ function showLoader(container) {
 }
 
 function updateNavLinks(pageId) {
-  document.querySelectorAll('.nav-link, .mobile-link').forEach(link => {
+  document.querySelectorAll('.nav-link, .mobile-link, .footer-link').forEach(link => {
     link.classList.toggle('active', link.dataset.page === pageId);
   });
 }
@@ -72,17 +91,9 @@ function updateNavLinks(pageId) {
 function runPageHooks(pageId) {
   requestAnimationFrame(() => {
     observeReveal();
+    initConstraintMeters();
 
     switch (pageId) {
-      case 'home':
-        initTypewriter();
-        break;
-      case 'about':
-        setTimeout(animateSkillBars, 400);
-        break;
-      case 'projects':
-        initFilter();
-        break;
       case 'contact':
         initForm();
         break;
@@ -90,7 +101,16 @@ function runPageHooks(pageId) {
   });
 }
 
-export async function navigateTo(pageId) {
+/**
+ * Navigate to a page.
+ * @param {string} pageId
+ * @param {{ push?: boolean }} [options] - pass { push: false } when called
+ *   from a popstate handler or on initial boot, where the URL is already
+ *   correct and should not be pushed onto the history stack again.
+ */
+export async function navigateTo(pageId, { push = true } = {}) {
+  if (!PAGES.includes(pageId)) pageId = 'home';
+
   // FIX: Only skip if it's ALREADY the current page AND has already been loaded once
   if (pageId === currentPage && currentPage !== null) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -104,6 +124,10 @@ export async function navigateTo(pageId) {
   updateNavLinks(pageId);
   showLoader(container);
   window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  if (push) {
+    history.pushState({ pageId }, '', pageToPath(pageId));
+  }
 
   const html = await fetchPage(pageId);
   container.innerHTML = html;
@@ -126,6 +150,18 @@ export function init() {
     navigateTo(link.dataset.page);
   });
 
-  // FIX: currentPage is null so this will always load on init
-  navigateTo('home');
+  // Browser back/forward — re-render the page for the new URL without
+  // pushing a duplicate history entry.
+  window.addEventListener('popstate', (e) => {
+    const pageId = e.state?.pageId || pathToPage(window.location.pathname);
+    navigateTo(pageId, { push: false });
+  });
+
+  // Initial load: read the current URL so a direct link or a hard refresh
+  // on a sub-page (e.g. /projects) opens that page instead of always
+  // defaulting to home. Replace (not push) so we don't create an extra
+  // history entry for the page that's already showing.
+  const initialPage = pathToPage(window.location.pathname);
+  history.replaceState({ pageId: initialPage }, '', pageToPath(initialPage));
+  navigateTo(initialPage, { push: false });
 }

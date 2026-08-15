@@ -1,0 +1,85 @@
+/* =============================================================================
+   CONSTRAINT METER — signature component. A gauge for a real measured
+   quantity against a real labelled ceiling, not a generic progress bar:
+   the track continues past the fill to a marked, labelled limit line, and
+   a specific number (not a percentage) sits underneath. Used in exactly two
+   places: the Home hero constraint band and the gastos project card.
+   ============================================================================= */
+
+.constraint-meter {
+  display       : flex;
+  flex-direction: column;
+  gap           : 10px;
+  max-width     : 480px;
+}
+
+/* ── Track + fill + ceiling marker ────────────────────── */
+.cm-track {
+  position     : relative;
+  height       : 14px;
+  background   : var(--surface-2);
+  border       : 1px solid var(--border);
+  border-radius: 3px;
+}
+
+.cm-fill {
+  position     : absolute;
+  inset        : 0;
+  width        : 0%;
+  background   : var(--ink);
+  border-radius: 2px 0 0 2px;
+}
+
+/* Vertical marker at the ceiling (right edge = data-max) */
+.cm-ceiling-line {
+  position  : absolute;
+  top       : -5px;
+  bottom    : -5px;
+  right     : -1px;
+  width     : 2px;
+  background: var(--ink);
+}
+
+/* ── Labels row: fill label left, ceiling label right ── */
+.cm-labels {
+  display        : flex;
+  align-items    : baseline;
+  justify-content: space-between;
+  gap            : 12px;
+  font-family    : var(--font-mono);
+  font-size      : var(--text-xs);
+}
+
+.cm-fill-label {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.cm-ceiling-label {
+  color         : var(--text-3);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space   : nowrap;
+}
+
+/* ── Readout: the real specific number, always visible as text ── */
+.cm-readout {
+  font-size  : var(--text-sm);
+  color      : var(--text-2);
+}
+
+.cm-numeral {
+  font-family        : var(--font-mono);
+  font-weight        : 700;
+  color              : var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Responsive: ceiling label moves under the track below 480px ── */
+@media (max-width: 480px) {
+  .cm-labels {
+    flex-direction: column;
+    align-items   : flex-start;
+    gap           : 4px;
+  }
+}

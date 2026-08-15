@@ -23,7 +23,7 @@ body {
   font-family    : var(--font-body);
   background     : var(--bg);
   color          : var(--text);
-  line-height    : 1.7;
+  line-height    : 1.65;
   overflow-x     : hidden;
   transition     : background var(--transition-slow), color var(--transition-slow);
   min-height     : 100vh;
@@ -85,11 +85,14 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 99px;
 }
 
-/* Focus ring — visible for keyboard users, hidden for mouse */
+/* Focus ring — visible for keyboard users, hidden for mouse.
+   A solid ink ring plus a small paper halo so it stays legible whether it
+   lands on --paper or a --panel card, in either theme. */
 :focus-visible {
-  outline       : 2px solid var(--accent);
-  outline-offset: 3px;
+  outline       : 2px solid var(--ink);
+  outline-offset: 2px;
   border-radius : 4px;
+  box-shadow    : 0 0 0 4px var(--paper);
 }
 
 /* Hide focus ring for mouse users */

@@ -5,8 +5,14 @@
    ============================================================================= */
 
 /* ── Container ────────────────────────────────────────── */
+/* Flat 24px inline gutter at every width, capped at 1200px, instead of a
+   percentage-based width that keeps tightening as the viewport shrinks
+   (previously min(1200px,92vw) → 95vw below 480px). Gutters stay constant
+   down to the smallest phones this way. */
 .container {
-  width         : min(1200px, 92vw);
+  width         : 100%;
+  max-width     : 1200px;
+  padding-inline: 24px;
   margin-inline : auto;
 }
 
@@ -15,9 +21,10 @@
   padding-block: clamp(64px, 10vw, 120px);
 }
 
-/* ── SPA Page system ──────────────────────────────────── */
-.page          { display: none; position: relative; z-index: var(--z-base); }
-.page.active   { display: block; animation: fadeInPage 0.5s ease; }
+/* NOTE: .page / .page.active are NOT used — the router (js/modules/router.js)
+   injects each page fragment directly into #main-content's innerHTML rather
+   than toggling a .page.active class on sibling page containers. Verified by
+   reading router.js's navigateTo() before removing these rules. */
 
 /* ── Loading state ────────────────────────────────────── */
 .page-loading {

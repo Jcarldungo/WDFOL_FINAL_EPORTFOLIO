@@ -13,8 +13,15 @@
 /** Reusable observer instance — shared across all pages */
 let observer = null;
 
-/** Intersection threshold — element must be this % visible to trigger */
-const THRESHOLD = 0.12;
+/**
+ * Intersection threshold — 0 means "fires as soon as one pixel is visible"
+ * rather than waiting for 12% of a tall card to have scrolled in. Combined
+ * with rootMargin below, this makes reveals fire on entry instead of after
+ * the user has already scrolled most of the way past a tall element —
+ * previously up to ~1.2s of blank viewport on normal-speed scrolling.
+ */
+const THRESHOLD = 0;
+const ROOT_MARGIN = '0px 0px -12% 0px';
 
 /**
  * Create the IntersectionObserver (once).
@@ -32,7 +39,7 @@ function createObserver() {
         }
       });
     },
-    { threshold: THRESHOLD }
+    { threshold: THRESHOLD, rootMargin: ROOT_MARGIN }
   );
 }
 

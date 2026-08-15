@@ -29,9 +29,9 @@
 }
 
 /* ── Small mobile (≤ 480px) ───────────────────────────── */
-@media (max-width: 480px) {
-  .container { width: 95vw; }
-}
+/* .container already holds a flat 24px gutter at every width (see
+   layout/grid.css) — no override needed here. Keeping this breakpoint
+   block as a marker/anchor for future small-mobile rules. */
 
 /* ── Reduced motion ───────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
