@@ -1,222 +1,176 @@
 /* =============================================================================
-   PROJECTS PAGE — Full project cards with screenshots, tags, live links
+   PROJECTS PAGE — index of numbered rows + a live preview panel, and the
+   full-screen case-study modal each row's arrow opens.
    ============================================================================= */
 
-/* ── Filter bar ───────────────────────────────────────── */
-.filter-bar {
-  display        : flex;
-  gap            : 10px;
-  flex-wrap      : wrap;
-  margin         : var(--space-xl) 0 var(--space-2xl);
-}
-
-.filter-btn {
-  padding      : 9px 22px;
-  border-radius: var(--radius-pill);
-  border       : 1.5px solid var(--border-2);
-  background   : var(--surface);
-  color        : var(--text-2);
-  font-family  : var(--font-mono);
-  font-size    : 0.78rem;
-  font-weight  : 600;
-  letter-spacing: 0.05em;
-  cursor       : pointer;
-  transition   : all var(--transition-base);
-}
-.filter-btn:hover  { border-color: var(--accent); color: var(--accent); }
-.filter-btn.active { background: var(--accent); border-color: var(--accent); color: var(--bg); box-shadow: 0 0 20px var(--accent-glow); }
-
-/* ── Projects grid ────────────────────────────────────── */
-.projects-grid {
+/* ══════════════════════════════════════════════════════
+   INDEX + PREVIEW
+   ══════════════════════════════════════════════════════ */
+.proj-index {
   display              : grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1.05fr;
   gap                  : var(--space-3xl);
+  align-items          : start;
+  margin-top           : var(--space-2xl);
 }
 
-/* ── Single project card ──────────────────────────────── */
-.proj-card {
-  background   : var(--surface);
-  border       : 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow     : hidden;
-  display      : grid;
-  grid-template-columns: 1fr 1fr;
-  align-items  : stretch;
-  transition   : border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
-}
-.proj-card:hover {
-  border-color: var(--border-2);
-  box-shadow  : var(--shadow-lg);
-  transform   : translateY(-4px);
-}
-
-/* Alternate layout: odd cards — screenshot right */
-.proj-card:nth-child(even) { direction: rtl; }
-.proj-card:nth-child(even) > * { direction: ltr; }
-
-/* ── Screenshot panel ─────────────────────────────────── */
-.proj-screenshots {
-  position : relative;
-  overflow : hidden;
-  min-height: 320px;
-  background: var(--bg-2);
-}
-
-.proj-screenshots-main { width: 100%; height: 100%; }
-
-.proj-ss-img {
-  width     : 100%;
-  height    : 100%;
-  object-fit: cover;
-  object-position: top center;
-  display   : block;
-  transition: transform var(--transition-slow);
-  filter    : brightness(0.92);
-}
-.proj-card:hover .proj-ss-img {
-  transform: scale(1.04);
-  filter   : brightness(1);
-}
-
-/* Screenshot shine overlay */
-.proj-screenshot-shine {
-  position  : absolute;
-  inset     : 0;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255,.06) 0%,
-    transparent 50%,
-    rgba(210, 210, 210,.04) 100%
-  );
-  pointer-events: none;
-  transition: opacity var(--transition-base);
-}
-.proj-card:hover .proj-screenshot-shine { opacity: 0; }
-
-/* Placeholder for projects without screenshots */
-.proj-screenshots-placeholder {
-  display       : flex;
-  align-items   : center;
-  justify-content: center;
-  height        : 100%;
-  min-height    : 320px;
-}
-.proj-placeholder-inner {
-  display       : flex;
-  flex-direction: column;
-  align-items   : center;
-  gap           : 12px;
-}
-.proj-placeholder-icon  { font-size: 4rem; filter: drop-shadow(0 4px 16px rgba(0,0,0,.4)); }
-.proj-placeholder-label { font-family: var(--font-mono); font-size: 0.8rem; color: rgba(255,255,255,.4); letter-spacing: 0.1em; }
-
-/* ── Card body (text side) ────────────────────────────── */
-.proj-card-body {
-  padding        : var(--space-2xl);
-  display        : flex;
-  flex-direction : column;
-  gap            : var(--space-md);
-  justify-content: center;
-}
-
-.proj-card-header {
-  display    : flex;
-  align-items: flex-start;
-  gap        : 12px;
-  flex-wrap  : wrap;
-  margin-bottom: var(--space-sm);
-}
-
-.proj-tags { display: flex; gap: 7px; flex-wrap: wrap; flex: 1; }
-
-/* Status badge */
-.proj-status {
-  font-family  : var(--font-mono);
-  font-size    : 0.7rem;
-  padding      : 4px 12px;
-  border-radius: var(--radius-pill);
-  font-weight  : 600;
-  white-space  : nowrap;
-  flex-shrink  : 0;
-}
-.proj-status--live {
-  background: rgba(52,211,153,.12);
-  border    : 1px solid rgba(52,211,153,.3);
-  color     : #34d399;
-}
-.proj-status--academic {
-  background: rgba(251,191,36,.1);
-  border    : 1px solid rgba(251,191,36,.25);
-  color     : #fbbf24;
-}
-
-.proj-title {
-  font-family   : var(--font-display);
-  font-size     : clamp(1.4rem, 2.5vw, 1.9rem);
-  font-weight   : 800;
-  letter-spacing: -0.02em;
-  line-height   : 1.2;
-}
-
-.proj-desc {
-  font-size  : 0.88rem;
-  color      : var(--text-2);
-  line-height: 1.8;
-}
-
-.proj-features {
+/* ── Left column: numbered rows ── */
+.proj-rows {
   list-style: none;
   padding   : 0;
   margin    : 0;
-  display   : flex;
-  flex-direction: column;
-  gap       : 6px;
-}
-.proj-features li {
-  font-size : 0.83rem;
-  color     : var(--text-2);
-  padding   : 4px 0 4px 16px;
-  position  : relative;
-  line-height: 1.5;
-}
-.proj-features li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: .75rem; top: 6px; }
-
-/* ── Project links ─────────────────────────────────────── */
-.proj-links { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-top: var(--space-sm); }
-
-.proj-link-note {
-  font-family  : var(--font-mono);
-  font-size    : 0.75rem;
-  color        : var(--text-3);
-  padding      : 8px 14px;
-  border-radius: var(--radius-pill);
-  border       : 1px solid var(--border);
-  background   : var(--surface-2);
+  border-top: 1px solid var(--border);
 }
 
-/* ── Hidden filter state ─────────────────────────────── */
-.proj-card.hidden {
-  display: none;
+.proj-row {
+  display    : grid;
+  grid-template-columns: 46px 1fr 44px;
+  align-items: center;
+  gap        : var(--space-md);
+  padding    : var(--space-lg) var(--space-md);
+  border-bottom: 1px solid var(--border);
+  cursor     : pointer;
+  position   : relative;
+  transition : background var(--transition-base);
 }
 
-/* ── Responsive ─────────────────────────────────────── */
-@media (max-width: 900px) {
-  .proj-card             { grid-template-columns: 1fr; direction: ltr; }
-  .proj-card:nth-child(even) { direction: ltr; }
-  .proj-screenshots      { min-height: 240px; }
-  .proj-screenshots-placeholder { min-height: 200px; }
-  .proj-card-body        { padding: var(--space-lg); }
+.proj-row::before {
+  content   : '';
+  position  : absolute;
+  left      : 0; top: 0; bottom: 0;
+  width     : 2px;
+  background: var(--accent);
+  opacity   : 0;
+  transition: opacity var(--transition-base);
 }
-@media (max-width: 480px) {
-  .proj-screenshots      { min-height: 200px; }
-  .proj-title            { font-size: 1.3rem; }
+
+/* Active = whichever row the preview is currently showing. Driven by
+   JS on hover/focus rather than :hover alone, so the panel and the
+   highlighted row can never disagree. */
+.proj-row.is-active {
+  background: var(--surface);
+}
+.proj-row.is-active::before { opacity: 1; }
+
+.proj-row:focus-visible {
+  outline       : 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.proj-row-num {
+  font-family   : var(--font-mono);
+  font-size     : 0.8rem;
+  color         : var(--text-3);
+  letter-spacing: 0.06em;
+  align-self    : start;
+  padding-top   : 4px;
+}
+
+.proj-row-title {
+  font-family   : var(--font-display);
+  font-size     : 1.25rem;
+  font-weight   : 700;
+  letter-spacing: -0.01em;
+  color         : var(--text);
+  margin        : 0 0 6px;
+  transition    : color var(--transition-fast);
+}
+.proj-row.is-active .proj-row-title { color: var(--accent); }
+
+.proj-row-desc {
+  font-size  : 0.88rem;
+  color      : var(--text-2);
+  line-height: 1.6;
+  margin     : 0 0 8px;
+  max-width  : 46ch;
+}
+
+.proj-row-meta {
+  display    : inline-flex;
+  align-items: center;
+  gap        : 7px;
+  font-family: var(--font-mono);
+  font-size  : 0.72rem;
+  color      : var(--text-3);
+}
+
+.proj-row-dot {
+  width : 6px;
+  height: 6px;
+  border-radius: 50%;
+  background   : var(--green);
+  flex-shrink  : 0;
+}
+
+/* Arrow button */
+.proj-row-btn {
+  width          : 38px;
+  height         : 38px;
+  display        : inline-flex;
+  align-items    : center;
+  justify-content: center;
+  border-radius  : 50%;
+  border         : 1px solid var(--border-2);
+  background     : transparent;
+  color          : var(--text-2);
+  cursor         : pointer;
+  flex-shrink    : 0;
+  transition     : all var(--transition-base);
+}
+
+.proj-row.is-active .proj-row-btn {
+  border-color: var(--accent);
+  background  : var(--accent);
+  color       : var(--bg);
+}
+.proj-row-btn:hover { transform: translateY(-1px); }
+.proj-row-btn:focus-visible {
+  outline       : 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ── Right column: preview ── */
+.proj-preview {
+  position: sticky;
+  top     : 110px;
+}
+
+.proj-preview-frame {
+  border       : 1px solid var(--border-2);
+  border-radius: var(--radius);
+  overflow     : hidden;
+  background   : var(--surface);
+  box-shadow   : var(--shadow-lg);
+}
+
+.proj-preview-bar {
+  display    : flex;
+  align-items: center;
+  gap        : 6px;
+  padding    : 10px 14px;
+  background : var(--surface-2);
+  border-bottom: 1px solid var(--border);
+}
+
+.proj-preview-dot {
+  width : 9px;
+  height: 9px;
+  border-radius: 50%;
+  background   : var(--border-2);
+}
+
+.proj-preview-frame img {
+  width     : 100%;
+  display   : block;
+  /* A tall screenshot would otherwise push the sticky panel past the
+     viewport and break the "stays put while you scan rows" behaviour. */
+  max-height: 62vh;
+  object-fit: cover;
+  object-position: top center;
 }
 
 /* ══════════════════════════════════════════════════════
-   PROJECT VIEWER — full-screen case-study reader opened from a
-   card's "View details" button. Same template+overlay pattern as
-   blog.html's article reader, extended with prev/next paging since
-   there's more than one project to step through.
+   CASE-STUDY MODAL
    ══════════════════════════════════════════════════════ */
 .proj-viewer {
   position: fixed; inset: 0;
@@ -240,17 +194,17 @@
   position     : relative;
   z-index      : 1;
   width        : 100%;
-  max-width    : 760px;
+  max-width    : 1080px;
   background   : var(--bg);
   border       : 1px solid var(--border-2);
   border-radius: 24px;
   overflow     : hidden;
-  box-shadow   : 0 40px 120px rgba(0,0,0,.8), 0 0 0 1px rgba(255, 255, 255,.08);
+  box-shadow   : 0 40px 120px rgba(0,0,0,.8);
   animation    : overlayIn .4s cubic-bezier(.16,1,.3,1) both;
 }
 @keyframes overlayIn { from{opacity:0;transform:translateY(28px) scale(.98);} to{opacity:1;transform:translateY(0) scale(1);} }
 
-/* ── Top bar: mark + counter, prev/next, close ── */
+/* ── Top bar ── */
 .pv-topbar {
   position    : sticky;
   top         : 0;
@@ -258,13 +212,15 @@
   display     : flex;
   align-items : center;
   justify-content: space-between;
-  padding     : 14px 20px;
-  background  : rgba(8,12,20,.85);
+  padding     : 14px 22px;
+  background  : var(--bg-glass);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
 }
-.pv-topbar-left { display: flex; align-items: center; gap: 12px; }
+.pv-topbar-left  { display: flex; align-items: center; gap: 12px; }
+.pv-topbar-right { display: flex; align-items: center; gap: 8px; }
+
 .pv-mark {
   font-family: var(--font-display);
   font-weight: 800;
@@ -272,13 +228,21 @@
   color      : var(--text);
   letter-spacing: -0.02em;
 }
+
+.pv-topbar-label {
+  font-family   : var(--font-mono);
+  font-size     : 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color         : var(--text-3);
+}
+
 .pv-counter {
   font-family: var(--font-mono);
   font-size  : 0.75rem;
   color      : var(--text-3);
-  letter-spacing: 0.05em;
+  margin-right: 6px;
 }
-.pv-topbar-right { display: flex; align-items: center; gap: 8px; }
 
 .pv-nav-btn, .pv-close {
   width        : 34px;
@@ -299,63 +263,86 @@
   background  : var(--accent-glow);
 }
 
-/* ── Body content ── */
-.pv-body { padding: 40px 44px 52px; }
+/* ── Body ── */
+.pv-body { padding: 0 0 52px; }
+
+/* ── Hero: text left, framed screenshot right, watermark behind ── */
+.pv-hero {
+  position  : relative;
+  display   : grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap       : var(--space-2xl);
+  align-items: center;
+  padding   : 56px 44px;
+  border-bottom: 1px solid var(--border);
+  overflow  : hidden;
+}
+
+.pv-watermark {
+  position   : absolute;
+  top        : -18px;
+  left       : -12px;
+  font-family: var(--font-display);
+  font-size  : clamp(5rem, 13vw, 11rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color      : var(--text);
+  opacity    : .04;
+  pointer-events: none;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.pv-hero-text { position: relative; z-index: 1; }
 
 .pv-eyebrow {
-  font-family  : var(--font-mono);
-  font-size    : 0.75rem;
-  letter-spacing: 0.1em;
+  font-family   : var(--font-mono);
+  font-size     : 0.72rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color        : var(--accent);
-  margin-bottom: 10px;
+  color         : var(--accent);
+  margin-bottom : 12px;
 }
 
 .pv-title {
   font-family   : var(--font-display);
-  font-size     : clamp(1.8rem, 4vw, 2.4rem);
+  font-size     : clamp(2rem, 4.5vw, 3rem);
   font-weight   : 800;
-  letter-spacing: -0.02em;
-  margin-bottom : 20px;
+  letter-spacing: -0.03em;
+  line-height   : 1.05;
+  margin        : 0 0 16px;
 }
 
-.pv-tags { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 22px; }
-
-.pv-desc {
-  font-size  : 0.92rem;
+.pv-lede {
+  font-size  : 1rem;
   color      : var(--text-2);
-  line-height: 1.8;
-  margin-bottom: 22px;
-}
-.pv-desc code {
-  font-family: var(--font-mono); font-size: .85em;
-  padding: 2px 7px; border-radius: 5px;
-  background: var(--surface-2); border: 1px solid var(--border); color: var(--accent);
+  line-height: 1.7;
+  margin     : 0 0 20px;
+  max-width  : 46ch;
 }
 
-.pv-features {
-  list-style: none; padding: 0; margin: 0 0 28px;
-  display: flex; flex-direction: column; gap: 6px;
-}
-.pv-features li {
-  font-size: 0.85rem; color: var(--text-2);
-  padding: 4px 0 4px 16px; position: relative; line-height: 1.5;
-}
-.pv-features li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: .75rem; top: 6px; }
-.pv-features code {
-  font-family: var(--font-mono); font-size: .85em;
-  padding: 2px 7px; border-radius: 5px;
-  background: var(--surface-2); border: 1px solid var(--border); color: var(--accent);
+.pv-roles { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
+
+.pv-role {
+  font-size    : 0.78rem;
+  padding      : 6px 14px;
+  border-radius: var(--radius-pill);
+  border       : 1px solid var(--border-2);
+  background   : var(--surface);
+  color        : var(--text-2);
 }
 
-.pv-links { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+.pv-links { display: flex; gap: 10px; flex-wrap: wrap; }
 
-/* ── Browser-chrome mockup around the screenshot ── */
+/* Browser-chrome mockup */
 .pv-frame {
+  position     : relative;
+  z-index      : 1;
   border       : 1px solid var(--border-2);
   border-radius: var(--radius);
   overflow     : hidden;
-  background   : var(--bg-2);
+  background   : var(--surface);
+  box-shadow   : var(--shadow-lg);
 }
 .pv-frame-bar {
   display    : flex;
@@ -365,20 +352,208 @@
   background : var(--surface-2);
   border-bottom: 1px solid var(--border);
 }
-.pv-frame-dot {
-  width: 9px; height: 9px; border-radius: 50%;
-  background: var(--border-2);
-}
+.pv-frame-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--border-2); }
 .pv-frame-url {
-  margin-left : 10px;
-  font-family : var(--font-mono);
-  font-size   : 0.72rem;
-  color       : var(--text-3);
+  margin-left: 10px;
+  font-family: var(--font-mono);
+  font-size  : 0.72rem;
+  color      : var(--text-3);
 }
 .pv-frame img { width: 100%; display: block; }
 
-/* ── Responsive ── */
-@media (max-width: 640px) {
-  .pv-body { padding: 28px 22px 40px; }
-  .pv-title { font-size: 1.6rem; }
+/* ── Case study ── */
+.pv-case { padding: 48px 44px 8px; }
+
+.pv-case-label,
+.pv-built-label {
+  display       : flex;
+  align-items   : center;
+  gap           : 10px;
+  font-family   : var(--font-mono);
+  font-size     : 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color         : var(--text-3);
+  margin-bottom : var(--space-lg);
+}
+.pv-case-label::before,
+.pv-built-label::before {
+  content: '';
+  width  : 28px;
+  height : 1px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.pv-case-block { margin-bottom: var(--space-xl); }
+
+.pv-case-head {
+  font-family   : var(--font-mono);
+  font-size     : 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color         : var(--text-2);
+  margin-bottom : 10px;
+}
+
+.pv-case-block p {
+  font-size  : 0.92rem;
+  color      : var(--text-2);
+  line-height: 1.8;
+  margin     : 0;
+  max-width  : 78ch;
+}
+
+.pv-case-list {
+  list-style: none;
+  padding   : 0;
+  margin    : 0;
+  display   : flex;
+  flex-direction: column;
+  gap       : 8px;
+}
+
+.pv-case-list li {
+  font-size  : 0.9rem;
+  color      : var(--text-2);
+  line-height: 1.7;
+  padding-left: 22px;
+  position   : relative;
+  max-width  : 78ch;
+}
+
+/* Two marker styles so "what I did" and "outcome" read as different
+   kinds of statement — actions vs. results — without needing colour. */
+.pv-case-list--did li::before {
+  content : '→';
+  position: absolute;
+  left    : 0;
+  color   : var(--text-3);
+}
+.pv-case-list--out li::before {
+  content : '✓';
+  position: absolute;
+  left    : 0;
+  color   : var(--green);
+}
+
+.pv-case-list code,
+.pv-case-block code {
+  font-family: var(--font-mono);
+  font-size  : .85em;
+  padding    : 2px 7px;
+  border-radius: 5px;
+  background : var(--surface-2);
+  border     : 1px solid var(--border);
+  color      : var(--accent);
+}
+
+/* ── Built with ── */
+.pv-built { padding: 24px 44px 8px; }
+.pv-built-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.pv-chip {
+  font-family  : var(--font-mono);
+  font-size    : 0.75rem;
+  padding      : 6px 14px;
+  border-radius: var(--radius-pill);
+  border       : 1px solid var(--border);
+  background   : var(--surface);
+  color        : var(--text-2);
+}
+
+/* ── CTA ── */
+.pv-cta {
+  margin       : 40px 44px 0;
+  padding      : var(--space-2xl);
+  border       : 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background   : var(--surface);
+  text-align   : center;
+}
+
+.pv-cta-title {
+  font-family   : var(--font-display);
+  font-size     : clamp(1.3rem, 2.6vw, 1.7rem);
+  font-weight   : 800;
+  letter-spacing: -0.02em;
+  margin        : 0 0 10px;
+}
+
+.pv-cta-desc {
+  color      : var(--text-2);
+  line-height: 1.7;
+  max-width  : 52ch;
+  margin     : 0 auto var(--space-lg);
+  font-size  : 0.92rem;
+}
+
+.pv-cta-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+/* ── Next project ── */
+.pv-next {
+  margin       : 40px 44px 0;
+  padding-top  : var(--space-lg);
+  border-top   : 1px solid var(--border);
+  display      : flex;
+  align-items  : center;
+  justify-content: space-between;
+  gap          : var(--space-md);
+  flex-wrap    : wrap;
+}
+
+.pv-next-label {
+  font-family   : var(--font-mono);
+  font-size     : 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color         : var(--text-3);
+}
+
+.pv-next-btn {
+  font-family   : var(--font-display);
+  font-size     : 1.15rem;
+  font-weight   : 700;
+  letter-spacing: -0.01em;
+  color         : var(--text);
+  background    : transparent;
+  border        : none;
+  cursor        : pointer;
+  padding       : 0;
+  transition    : color var(--transition-fast);
+}
+.pv-next-btn:hover { color: var(--accent); }
+
+/* ══════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════ */
+@media (max-width: 980px) {
+  /* The preview panel is a desktop affordance — it depends on hovering
+     one row while looking at another region. On touch there's no hover,
+     so it becomes a large image that never changes. Rows carry the
+     content on their own; the arrow still opens the full case study. */
+  .proj-index   { grid-template-columns: 1fr; gap: var(--space-xl); }
+  .proj-preview { display: none; }
+
+  .pv-hero      { grid-template-columns: 1fr; padding: 40px 24px; gap: var(--space-xl); }
+  .pv-watermark { font-size: clamp(4rem, 20vw, 7rem); }
+  .pv-case      { padding: 36px 24px 8px; }
+  .pv-built     { padding: 20px 24px 8px; }
+  .pv-cta,
+  .pv-next      { margin-left: 24px; margin-right: 24px; }
+  .pv-cta       { padding: var(--space-lg); }
+}
+
+@media (max-width: 560px) {
+  .proj-row {
+    grid-template-columns: 32px 1fr 36px;
+    gap    : 10px;
+    padding: var(--space-md) 10px;
+  }
+  .proj-row-title { font-size: 1.05rem; }
+  .proj-row-btn   { width: 34px; height: 34px; }
+
+  .proj-viewer        { padding: 0; }
+  .proj-viewer-panel  { border-radius: 0; border: none; min-height: 100vh; }
+  .pv-topbar-label    { display: none; }
 }

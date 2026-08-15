@@ -102,30 +102,41 @@
   color        : var(--accent);
 }
 
-.skill-item {
-  display        : flex;
-  justify-content: space-between;
-  align-items    : center;
-  margin-bottom  : 12px;
+/* Skill list — replaced the old .skill-item/.skill-bar/.skill-fill
+   percentage meters. A self-assigned "78%" isn't a measurement of
+   anything, so the bars were decoration pretending to be data; the
+   plain list says the same true thing (these are the tools used)
+   without inventing a number to go with it. */
+.skill-list {
+  list-style: none;
+  padding   : 0;
+  margin    : 0;
+  display   : flex;
+  flex-direction: column;
 }
 
-.skill-name { font-size: 0.88rem; color: var(--text); }
-.skill-pct  { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-3); }
-
-.skill-bar {
-  height       : 4px;
-  background   : var(--border);
-  border-radius: 2px;
-  margin-top   : 5px;
-  overflow     : hidden;
+.skill-list li {
+  font-size     : 0.88rem;
+  color         : var(--text);
+  padding       : 9px 0 9px 18px;
+  position      : relative;
+  border-bottom : 1px solid var(--border);
 }
 
-.skill-fill {
-  height       : 100%;
-  border-radius: 2px;
-  background   : linear-gradient(90deg, var(--accent), var(--purple));
-  width        : 0;
-  transition   : width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+.skill-list li:last-child { border-bottom: none; }
+
+/* Bullet is pinned to the first text line (padding-top + half a line,
+   minus half the dot) rather than to the li's own 50% — a 50%-based
+   dot drifts on any item whose text wraps to two lines. */
+.skill-list li::before {
+  content   : '';
+  position  : absolute;
+  left      : 0;
+  top       : calc(9px + 0.75em - 2.5px);
+  width     : 5px;
+  height    : 5px;
+  border-radius: 50%;
+  background: var(--text-3);
 }
 
 /* ══════════════════════════════════════════════════════

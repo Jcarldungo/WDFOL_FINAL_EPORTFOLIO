@@ -1,119 +1,75 @@
+<!-- ============================================================
+     PROJECTS PAGE — index + live preview.
+     Left: numbered rows, one per project. Hovering/focusing a row
+     swaps the preview panel on the right. The arrow button opens the
+     full case-study modal below.
+     ============================================================ -->
 <section class="section" style="padding-top:120px;" aria-labelledby="proj-heading">
   <div class="container">
     <div class="section-head reveal">
       <div class="section-label">Portfolio</div>
-      <h1 class="section-title" id="proj-heading">My <span class="gradient-text">Projects</span></h1>
-      <p class="section-subtitle">Real academic and personal projects demonstrating backend engineering, full-stack development, and UI design skills.</p>
+      <h1 class="section-title" id="proj-heading">What I've built — <span class="gradient-text">and what I can do</span></h1>
+      <p class="section-subtitle">Real client and personal work. Open any one to read how it was built and what it had to solve.</p>
     </div>
 
-    <div class="projects-grid" id="projects-grid">
+    <div class="proj-index reveal">
 
-      <article class="proj-card reveal" aria-label="WeePlay Therapy Center project">
-        <div class="proj-screenshots">
-          <div class="proj-screenshots-main">
-            <img src="assets/images/project-weeplay.jpg" alt="WeePlay Therapy Center website homepage showing the clinic's sensory play room" class="proj-ss-img proj-ss-primary" loading="lazy" />
-          </div>
-          <div class="proj-screenshot-shine" aria-hidden="true"></div>
-        </div>
-        <div class="proj-card-body">
-          <div class="proj-card-header">
-            <div class="proj-tags">
-              <span class="tag">HTML5</span>
-              <span class="tag">CSS3</span>
-              <span class="tag">JavaScript</span>
-              <span class="tag">Responsive</span>
-              <span class="tag">SEO</span>
-            </div>
-            <div class="proj-status proj-status--live">🟢 Live</div>
-          </div>
-          <h2 class="proj-title">WeePlay Therapy Center</h2>
-          <p class="proj-desc">
-            A production website for a pediatric therapy clinic in Mabalacat, Pampanga — my first real client project, currently live and serving actual families. WeePlay provides Occupational, Speech &amp; Language, and Physical Therapy plus SPED tutorials, and the site had to communicate warmth and trust to parents while staying fast and accessible on the low-end phones most of them browse on.<br><br>
-            Built from scratch with no framework: hand-written semantic HTML, a custom CSS design system, and vanilla JavaScript. Deployed on Vercel with continuous deployment from GitHub.<br><br>
-            <strong>Tech Stack:</strong> HTML5, CSS3, Vanilla JavaScript, Vercel
-          </p>
-          <ul class="proj-features">
-            <li>Real client site for a working business — not a practice project</li>
-            <li>Custom CSS design system with themed tokens, no UI framework</li>
-            <li>Mobile-first responsive layout tuned for low-end phones</li>
-            <li>Accessible by design — skip links, ARIA labels, keyboard navigation</li>
-            <li>Click-to-call, Facebook Messenger, and inquiry contact paths</li>
-            <li>Photo gallery of the therapy space, services, and parent reviews</li>
-            <li>Open Graph &amp; SEO meta for clean link previews when shared</li>
-          </ul>
-          <div class="proj-links">
-            <a href="https://weeplay-therapy.vercel.app" target="_blank" rel="noopener" class="btn btn-primary">
-              🌐 Live Demo →
-            </a>
-            <button type="button" class="btn btn-outline proj-view-btn" data-project="0">
-              View details
-            </button>
-          </div>
-        </div>
-      </article>
+      <!-- ── Left: numbered project rows ── -->
+      <ol class="proj-rows" id="proj-rows" aria-label="Project list">
 
-      <article class="proj-card reveal reveal-delay-1" id="proj-gastos" aria-label="gastos expense tracker project">
-        <div class="proj-screenshots">
-          <div class="proj-screenshots-main">
-            <img src="assets/images/project-gastos.jpg" alt="gastos sign-in card with a View demo option — no signup needed, resets each visit" class="proj-ss-img proj-ss-primary" loading="lazy" />
+        <li class="proj-row is-active" data-project="0" tabindex="0" aria-label="WeePlay Therapy Center — open case study">
+          <span class="proj-row-num">01</span>
+          <div class="proj-row-body">
+            <h2 class="proj-row-title">WeePlay Therapy Center</h2>
+            <p class="proj-row-desc">A production website for a pediatric therapy clinic — my first real client project.</p>
+            <span class="proj-row-meta"><span class="proj-row-dot" aria-hidden="true"></span>weeplay-therapy.vercel.app</span>
           </div>
-          <div class="proj-screenshot-shine" aria-hidden="true"></div>
+          <button type="button" class="proj-row-btn" data-project="0" aria-label="Open WeePlay Therapy Center case study">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M6 14 14 6M14 6H8M14 6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </li>
+
+        <li class="proj-row" data-project="1" tabindex="0" aria-label="gastos — open case study">
+          <span class="proj-row-num">02</span>
+          <div class="proj-row-body">
+            <h2 class="proj-row-title">gastos</h2>
+            <p class="proj-row-desc">An offline-first expense tracker built to fit inside a hard free-tier function cap.</p>
+            <span class="proj-row-meta"><span class="proj-row-dot" aria-hidden="true"></span>gastos-xi-rose.vercel.app</span>
+          </div>
+          <button type="button" class="proj-row-btn" data-project="1" aria-label="Open gastos case study">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M6 14 14 6M14 6H8M14 6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </li>
+
+      </ol>
+
+      <!-- ── Right: preview of whichever row is active ── -->
+      <div class="proj-preview" aria-hidden="true">
+        <div class="proj-preview-frame">
+          <div class="proj-preview-bar">
+            <span class="proj-preview-dot"></span><span class="proj-preview-dot"></span><span class="proj-preview-dot"></span>
+          </div>
+          <img src="assets/images/project-weeplay.jpg" alt="" id="proj-preview-img" />
         </div>
-        <div class="proj-card-body">
-          <div class="proj-card-header">
-            <div class="proj-tags">
-              <span class="tag">Vanilla JS</span>
-              <span class="tag">Vercel Serverless</span>
-              <span class="tag">PostgreSQL</span>
-              <span class="tag">PWA</span>
-              <span class="tag">REST API</span>
-            </div>
-            <div class="proj-status proj-status--live">🟢 Live</div>
-          </div>
-          <h2 class="proj-title">gastos</h2>
-          <p class="proj-desc">
-            An offline-first expense tracker built for logging a purchase in three taps, even with no signal. No framework — vanilla JS talking to Vercel serverless functions over a Neon Postgres database, with a service worker queueing entries made offline and syncing them once the connection returns.<br><br>
-            The interesting part was fitting it onto a free plan: Vercel's Hobby tier caps a deployment at 12 serverless functions, and the app's ~32 routes (auth, transactions, budgets, bills, goals, splitting expenses with friends) each started as its own file. Consolidating them into 10 thin dispatcher functions — routed by a single <code>vercel.json</code> rewrite table shared by production and local dev — got it under the cap with zero change to any URL or response shape.<br><br>
-            <strong>Tech Stack:</strong> Vanilla JavaScript, Vercel Serverless Functions, Neon PostgreSQL, Service Worker/PWA, Web Push
-          </p>
-          <ul class="proj-features">
-            <li>Card balances derived from the transaction ledger, not typed in — including transfers between cards</li>
-            <li>Offline outbox: entries logged with no signal queue locally and sync automatically once back online</li>
-            <li>Split an expense with friends and settle up later, with itemized per-person history</li>
-            <li>Web Push alerts for bills coming due and budgets crossing 80%, via a nightly Vercel Cron</li>
-            <li>Money kept as strings end to end (never a JS float) and dates read back as calendar strings, not <code>Date</code> objects, to avoid timezone drift</li>
-          </ul>
-          <div class="proj-links">
-            <a href="https://gastos-xi-rose.vercel.app" target="_blank" rel="noopener" class="btn btn-primary">
-              🌐 Live Demo →
-            </a>
-            <a href="https://github.com/Jcarldungo/gastos" target="_blank" rel="noopener" class="btn btn-secondary">
-              🐙 GitHub Repo →
-            </a>
-            <button type="button" class="btn btn-outline proj-view-btn" data-project="1">
-              View details
-            </button>
-          </div>
-        </div>
-      </article>
+      </div>
 
     </div>
   </div>
 </section>
 
-<!-- ── PROJECT VIEWER — click "View details" on any card to open a
-     full-screen case study, arrow through the rest without closing it.
-     Same template+overlay pattern as blog.html's article reader; extended
-     here with prev/next since there's more than one thing to page through. ── -->
-<div class="proj-viewer" id="proj-viewer" hidden role="dialog" aria-modal="true" aria-label="Project details">
+<!-- ============================================================
+     CASE-STUDY MODAL — opened by a row's arrow button.
+     ============================================================ -->
+<div class="proj-viewer" id="proj-viewer" hidden role="dialog" aria-modal="true" aria-label="Project case study">
   <div class="proj-viewer-backdrop"></div>
   <div class="proj-viewer-panel">
     <div class="pv-topbar">
       <div class="pv-topbar-left">
         <span class="pv-mark">JD</span>
-        <span class="pv-counter" id="pv-counter">01 / 02</span>
+        <span class="pv-topbar-label">Selected work</span>
       </div>
       <div class="pv-topbar-right">
+        <span class="pv-counter" id="pv-counter">01 / 02</span>
         <button type="button" class="pv-nav-btn" id="pv-prev" aria-label="Previous project">
           <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M12 15l-5-5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
@@ -130,69 +86,181 @@
 </div>
 
 <template id="tpl-pv-0">
-  <div class="pv-eyebrow">Client project · Live</div>
-  <h2 class="pv-title">WeePlay Therapy Center</h2>
-  <div class="pv-tags">
-    <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">Responsive</span><span class="tag">SEO</span>
-  </div>
-  <p class="pv-desc">
-    A production website for a pediatric therapy clinic in Mabalacat, Pampanga — my first real client project, currently live and serving actual families. WeePlay provides Occupational, Speech &amp; Language, and Physical Therapy plus SPED tutorials, and the site had to communicate warmth and trust to parents while staying fast and accessible on the low-end phones most of them browse on.<br><br>
-    Built from scratch with no framework: hand-written semantic HTML, a custom CSS design system, and vanilla JavaScript. Deployed on Vercel with continuous deployment from GitHub.
-  </p>
-  <ul class="pv-features">
-    <li>Real client site for a working business — not a practice project</li>
-    <li>Custom CSS design system with themed tokens, no UI framework</li>
-    <li>Mobile-first responsive layout tuned for low-end phones</li>
-    <li>Accessible by design — skip links, ARIA labels, keyboard navigation</li>
-    <li>Click-to-call, Facebook Messenger, and inquiry contact paths</li>
-    <li>Photo gallery of the therapy space, services, and parent reviews</li>
-    <li>Open Graph &amp; SEO meta for clean link previews when shared</li>
-  </ul>
-  <div class="pv-links">
-    <a href="https://weeplay-therapy.vercel.app" target="_blank" rel="noopener" class="btn btn-primary">🌐 Live Demo →</a>
-  </div>
-  <div class="pv-frame">
-    <div class="pv-frame-bar">
-      <span class="pv-frame-dot"></span><span class="pv-frame-dot"></span><span class="pv-frame-dot"></span>
-      <span class="pv-frame-url">weeplay-therapy.vercel.app</span>
+  <div class="pv-hero">
+    <span class="pv-watermark" aria-hidden="true">WeePlay</span>
+    <div class="pv-hero-text">
+      <div class="pv-eyebrow">Client project</div>
+      <h2 class="pv-title">WeePlay Therapy Center</h2>
+      <p class="pv-lede">A production website for a pediatric therapy clinic in Mabalacat, Pampanga — live and serving actual families.</p>
+      <div class="pv-roles">
+        <span class="pv-role">Frontend Developer</span>
+        <span class="pv-role">UI Implementation</span>
+      </div>
+      <div class="pv-links">
+        <a href="https://weeplay-therapy.vercel.app" target="_blank" rel="noopener" class="btn btn-primary">🌐 Live site →</a>
+      </div>
     </div>
-    <img src="assets/images/project-weeplay.jpg" alt="WeePlay Therapy Center website homepage" loading="lazy" />
+    <div class="pv-frame">
+      <div class="pv-frame-bar">
+        <span class="pv-frame-dot"></span><span class="pv-frame-dot"></span><span class="pv-frame-dot"></span>
+        <span class="pv-frame-url">weeplay-therapy.vercel.app</span>
+      </div>
+      <img src="assets/images/project-weeplay.jpg" alt="WeePlay Therapy Center homepage" loading="lazy" />
+    </div>
+  </div>
+
+  <div class="pv-case">
+    <div class="pv-case-label">Case study</div>
+
+    <div class="pv-case-block">
+      <div class="pv-case-head">The problem</div>
+      <p>A therapy clinic needed a site that communicated warmth and trust to parents, while staying fast on the low-end phones most of them actually browse on.</p>
+    </div>
+
+    <div class="pv-case-block">
+      <div class="pv-case-head">What I did</div>
+      <ul class="pv-case-list pv-case-list--did">
+        <li>Built it from scratch with no framework — hand-written semantic HTML and a custom CSS design system.</li>
+        <li>Made it mobile-first and accessible: skip links, ARIA labels, and full keyboard navigation.</li>
+        <li>Wired up the paths a parent actually uses — click-to-call, Messenger, and an inquiry form.</li>
+        <li>Added Open Graph and SEO meta so shared links preview cleanly.</li>
+      </ul>
+    </div>
+
+    <div class="pv-case-block">
+      <div class="pv-case-head">Outcome</div>
+      <ul class="pv-case-list pv-case-list--out">
+        <li>Live and in use by a working business — not a practice project.</li>
+        <li>Loads fast on low-end phones, which is most of the clinic's traffic.</li>
+        <li>Deployed on Vercel with continuous deployment from GitHub.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pv-built">
+    <div class="pv-built-label">Built with</div>
+    <div class="pv-built-chips">
+      <span class="pv-chip">HTML5</span><span class="pv-chip">CSS3</span><span class="pv-chip">Vanilla JS</span><span class="pv-chip">Vercel</span>
+    </div>
+  </div>
+
+  <div class="pv-cta">
+    <h3 class="pv-cta-title">Want something like this built for you?</h3>
+    <p class="pv-cta-desc">Tell me what you have in mind — no obligation, just a quick chat to see if we're a fit.</p>
+    <div class="pv-cta-actions">
+      <a class="btn btn-primary" href="mailto:jcdungo20@gmail.com">✉ jcdungo20@gmail.com</a>
+    </div>
+  </div>
+
+  <div class="pv-next">
+    <span class="pv-next-label">Next project</span>
+    <button type="button" class="pv-next-btn" data-goto="1">gastos →</button>
   </div>
 </template>
 
 <template id="tpl-pv-1">
-  <div class="pv-eyebrow">Personal project · Live</div>
-  <h2 class="pv-title">gastos</h2>
-  <div class="pv-tags">
-    <span class="tag">Vanilla JS</span><span class="tag">Vercel Serverless</span><span class="tag">PostgreSQL</span><span class="tag">PWA</span><span class="tag">REST API</span>
-  </div>
-  <p class="pv-desc">
-    An offline-first expense tracker built for logging a purchase in three taps, even with no signal. No framework — vanilla JS talking to Vercel serverless functions over a Neon Postgres database, with a service worker queueing entries made offline and syncing them once the connection returns.<br><br>
-    The interesting part was fitting it onto a free plan: Vercel's Hobby tier caps a deployment at 12 serverless functions, and the app's ~32 routes each started as its own file — consolidated into <strong>10 thin dispatcher functions</strong>, routed by a single <code>vercel.json</code> rewrite table shared by production and local dev, with zero change to any URL or response shape.
-  </p>
-  <ul class="pv-features">
-    <li>Card balances derived from the transaction ledger, not typed in — including transfers between cards</li>
-    <li>Offline outbox: entries logged with no signal queue locally and sync automatically once back online</li>
-    <li>Split an expense with friends and settle up later, with itemized per-person history</li>
-    <li>Web Push alerts for bills coming due and budgets crossing 80%, via a nightly Vercel Cron</li>
-    <li>Money kept as strings end to end (never a JS float) and dates read back as calendar strings, not <code>Date</code> objects, to avoid timezone drift</li>
-  </ul>
-  <div class="pv-links">
-    <a href="https://gastos-xi-rose.vercel.app" target="_blank" rel="noopener" class="btn btn-primary">🌐 Live Demo →</a>
-    <a href="https://github.com/Jcarldungo/gastos" target="_blank" rel="noopener" class="btn btn-outline">🐙 GitHub Repo →</a>
-  </div>
-  <div class="pv-frame">
-    <div class="pv-frame-bar">
-      <span class="pv-frame-dot"></span><span class="pv-frame-dot"></span><span class="pv-frame-dot"></span>
-      <span class="pv-frame-url">gastos-xi-rose.vercel.app</span>
+  <div class="pv-hero">
+    <span class="pv-watermark" aria-hidden="true">gastos</span>
+    <div class="pv-hero-text">
+      <div class="pv-eyebrow">Personal project</div>
+      <h2 class="pv-title">gastos</h2>
+      <p class="pv-lede">An offline-first expense tracker for logging a purchase in three taps, even with no signal.</p>
+      <div class="pv-roles">
+        <span class="pv-role">Full-Stack Developer</span>
+        <span class="pv-role">Database Design</span>
+      </div>
+      <div class="pv-links">
+        <a href="https://gastos-xi-rose.vercel.app" target="_blank" rel="noopener" class="btn btn-primary">🌐 Live site →</a>
+        <a href="https://github.com/Jcarldungo/gastos" target="_blank" rel="noopener" class="btn btn-outline">🐙 GitHub</a>
+      </div>
     </div>
-    <img src="assets/images/project-gastos.jpg" alt="gastos sign-in card" loading="lazy" />
+    <div class="pv-frame">
+      <div class="pv-frame-bar">
+        <span class="pv-frame-dot"></span><span class="pv-frame-dot"></span><span class="pv-frame-dot"></span>
+        <span class="pv-frame-url">gastos-xi-rose.vercel.app</span>
+      </div>
+      <img src="assets/images/project-gastos.jpg" alt="gastos sign-in screen" loading="lazy" />
+    </div>
+  </div>
+
+  <div class="pv-case">
+    <div class="pv-case-label">Case study</div>
+
+    <div class="pv-case-block">
+      <div class="pv-case-head">The problem</div>
+      <p>Logging an expense needed to survive a dead signal, and the whole app had to fit on a free plan that caps a deployment at 12 serverless functions — while the app needed about 32 routes.</p>
+    </div>
+
+    <div class="pv-case-block">
+      <div class="pv-case-head">What I did</div>
+      <ul class="pv-case-list pv-case-list--did">
+        <li>Consolidated ~32 routes into 10 thin dispatcher functions, routed by a single <code>vercel.json</code> rewrite table shared by production and local dev — with zero change to any URL or response shape.</li>
+        <li>Built an offline outbox: a service worker queues entries made with no signal and syncs them once the connection returns.</li>
+        <li>Derived card balances from the transaction ledger instead of storing a typed-in number, so the balance can't drift from the history.</li>
+        <li>Kept money as strings end to end (never a JS float) and read dates back as calendar strings, not <code>Date</code> objects, to avoid timezone drift.</li>
+      </ul>
+    </div>
+
+    <div class="pv-case-block">
+      <div class="pv-case-head">Outcome</div>
+      <ul class="pv-case-list pv-case-list--out">
+        <li>Runs entirely within the free tier — 10 of 12 functions used.</li>
+        <li>Works with no connection and reconciles itself once back online.</li>
+        <li>Installable to a phone's home screen, with Web Push alerts for bills and budgets.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pv-built">
+    <div class="pv-built-label">Built with</div>
+    <div class="pv-built-chips">
+      <span class="pv-chip">Vanilla JS</span><span class="pv-chip">Vercel Serverless</span><span class="pv-chip">Neon PostgreSQL</span><span class="pv-chip">Service Worker / PWA</span><span class="pv-chip">Web Push</span>
+    </div>
+  </div>
+
+  <div class="pv-cta">
+    <h3 class="pv-cta-title">Want something like this built for you?</h3>
+    <p class="pv-cta-desc">Tell me what you have in mind — no obligation, just a quick chat to see if we're a fit.</p>
+    <div class="pv-cta-actions">
+      <a class="btn btn-primary" href="mailto:jcdungo20@gmail.com">✉ jcdungo20@gmail.com</a>
+    </div>
+  </div>
+
+  <div class="pv-next">
+    <span class="pv-next-label">Next project</span>
+    <button type="button" class="pv-next-btn" data-goto="0">WeePlay Therapy Center →</button>
   </div>
 </template>
 
-<!-- Project viewer JS -->
 <script>
 (function() {
+  /* ── Index: hovering/focusing a row swaps the preview image ── */
+  const rows       = document.querySelectorAll('.proj-row');
+  const previewImg = document.getElementById('proj-preview-img');
+
+  /* Preview source per project, read from each template's own hero
+     image so there's one place to change a screenshot. */
+  const previewSrc = [];
+  document.querySelectorAll('template[id^="tpl-pv-"]').forEach((tpl, i) => {
+    const img = tpl.content.querySelector('.pv-frame img');
+    if (img) previewSrc[i] = img.getAttribute('src');
+  });
+
+  function activate(index) {
+    rows.forEach(r => r.classList.toggle('is-active', Number(r.dataset.project) === index));
+    if (previewImg && previewSrc[index]) previewImg.src = previewSrc[index];
+  }
+
+  rows.forEach(row => {
+    const i = Number(row.dataset.project);
+    row.addEventListener('mouseenter', () => activate(i));
+    row.addEventListener('focus',      () => activate(i));
+    row.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i, row); }
+    });
+  });
+
+  /* ── Case-study modal ── */
   const viewer  = document.getElementById('proj-viewer');
   const body    = document.getElementById('pv-body');
   const counter = document.getElementById('pv-counter');
@@ -213,6 +281,13 @@
     body.innerHTML = tpl.innerHTML;
     counter.textContent = String(index + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
     body.scrollTop = 0;
+    /* "Next project" inside the rendered template jumps straight to
+       that project rather than just stepping forward — with 2 projects
+       they're the same, but they stop being the same the moment a
+       third lands, so it reads the target off the button. */
+    body.querySelector('.pv-next-btn')?.addEventListener('click', e => {
+      render(Number(e.currentTarget.dataset.goto));
+    });
   }
 
   function open(index, trigger) {
@@ -232,8 +307,11 @@
   function next() { render((current + 1) % total); }
   function prev() { render((current - 1 + total) % total); }
 
-  document.querySelectorAll('.proj-view-btn').forEach(btn => {
-    btn.addEventListener('click', () => open(Number(btn.dataset.project), btn));
+  document.querySelectorAll('.proj-row-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      open(Number(btn.dataset.project), btn);
+    });
   });
 
   closeBtn.addEventListener('click', close);
@@ -243,9 +321,9 @@
 
   document.addEventListener('keydown', e => {
     if (viewer.hidden) return;
-    if (e.key === 'Escape') close();
+    if (e.key === 'Escape')     close();
     if (e.key === 'ArrowRight') next();
-    if (e.key === 'ArrowLeft') prev();
+    if (e.key === 'ArrowLeft')  prev();
   });
 })();
 </script>

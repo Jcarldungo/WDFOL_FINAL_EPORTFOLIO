@@ -13,11 +13,10 @@
 
 import { observeReveal }      from './scrollReveal.js';
 import { initForm }           from './form.js';
-import { animateSkillBars }   from './skillBars.js';
 import { initTypewriter }     from './typewriter.js';
 
 /** Known page ids — also the *.html fragment name in /pages/ */
-const PAGES = ['home', 'about', 'projects', 'blog', 'resume', 'contact'];
+const PAGES = ['home', 'about', 'projects', 'services', 'resume', 'contact'];
 
 /** Cache loaded page fragments to avoid repeated network requests */
 const pageCache = new Map();
@@ -96,9 +95,6 @@ function runPageHooks(pageId) {
     switch (pageId) {
       case 'home':
         initTypewriter();
-        break;
-      case 'about':
-        setTimeout(animateSkillBars, 400);
         break;
       case 'contact':
         initForm();
