@@ -220,7 +220,7 @@
    ══════════════════════════════════════════════════════ */
 .proj-viewer {
   position: fixed; inset: 0;
-  z-index : 900;
+  z-index : var(--z-overlay);
   display : flex;
   align-items: flex-start;
   justify-content: center;
