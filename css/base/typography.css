@@ -59,12 +59,15 @@ code {
   color        : var(--accent);
 }
 
-/* ── Code block syntax coloring (hero snippet) ────────── */
-.c-keyword  { color: #a78bfa; }
-.c-fn       { color: #38bdf8; }
-.c-string   { color: #34d399; }
-.c-comment  { color: #4a5568; }
-.c-orange   { color: #fb923c; }
+/* ── Code block syntax coloring (hero snippet) ──────────
+   Monochrome: weight/shade carries what colour used to (keyword bold-
+   bright, string mid-tone, comment/orange both dim) instead of a
+   different hue per token type. */
+.c-keyword  { color: var(--text); font-weight: 600; }
+.c-fn       { color: var(--text-2); }
+.c-string   { color: var(--text); }
+.c-comment  { color: var(--text-3); }
+.c-orange   { color: var(--text-3); }
 
 /* ── Page heading h1 used on inner pages ──────────────── */
 .page-title {

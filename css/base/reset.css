@@ -74,7 +74,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Text selection */
 ::selection {
   background: var(--accent);
-  color      : #fff;
+  color      : var(--bg);
 }
 
 /* Custom scrollbar */
@@ -104,7 +104,7 @@ body, #main-content { overflow-x: hidden; }
   top         : -100px;
   left        : 16px;
   background  : var(--accent);
-  color       : #fff;
+  color       : var(--bg);
   padding     : 10px 20px;
   border-radius: var(--radius-pill);
   font-weight : 700;

@@ -170,7 +170,7 @@
   cursor    : pointer;
   transition: background var(--transition-fast), border-color var(--transition-fast);
 }
-.cert-lightbox-close:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.cert-lightbox-close:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
 
 .cert-lightbox-meta { text-align: center; }
 .cert-lightbox-name   { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
@@ -212,7 +212,7 @@
 .exp-icon {
   font-size: 1.8rem; width: 48px; height: 48px;
   border-radius: var(--radius-sm);
-  background: linear-gradient(135deg, rgba(56,189,248,.1), rgba(167,139,250,.1));
+  background: linear-gradient(135deg, rgba(255, 255, 255,.1), rgba(210, 210, 210,.1));
   border: 1px solid var(--border);
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }

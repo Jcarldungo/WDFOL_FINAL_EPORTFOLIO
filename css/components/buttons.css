@@ -37,7 +37,11 @@
 /* ── Primary (filled, accent color) ──────────────────── */
 .btn-primary {
   background: var(--accent);
-  color     : #fff;
+  /* Was a hardcoded #fff — fine while --accent was always a saturated
+     cyan, but now --accent IS near-white in the dark theme, so white
+     text on it was invisible. var(--bg) is always the opposite end of
+     the ink/paper pair from --accent in both themes. */
+  color     : var(--bg);
   box-shadow: 0 0 28px var(--accent-glow);
 }
 
@@ -99,8 +103,14 @@
 .btn .spinner {
   width          : 18px;
   height         : 18px;
-  border         : 2px solid rgba(255, 255, 255, 0.3);
-  border-top-color: #fff;
+  /* Was rgba(255,255,255,.3) track + #fff highlight — assumed the button
+     background was always a saturated colour. --accent is now literally
+     the theme's ink/paper (near-white in dark, near-black in light), so
+     a white spinner vanished on the dark theme's near-white buttons.
+     A neutral gray track works in both; var(--bg) is always the correct
+     contrast color against --accent (see .btn-primary above). */
+  border         : 2px solid rgba(128, 128, 128, 0.35);
+  border-top-color: var(--bg);
   border-radius  : 50%;
   animation      : spin 0.8s linear infinite;
   display        : none;

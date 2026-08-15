@@ -24,6 +24,19 @@ const CONNECTION_DISTANCE = 120;
 /** Derived count — capped to avoid perf issues on large screens */
 const getParticleCount = () => Math.min(80, Math.floor(window.innerWidth / 20));
 
+/**
+ * Monochrome particle colour — was a hardcoded cyan (56,189,248), which
+ * doesn't exist anywhere else in the palette anymore. Reads the live
+ * data-theme attribute so particles stay visible against either
+ * background: near-white on the dark theme, near-black on light.
+ * Cheap enough to call every frame (a single attribute read).
+ */
+function particleRGB() {
+  return document.documentElement.getAttribute('data-theme') === 'light'
+    ? '20, 24, 28'
+    : '255, 255, 255';
+}
+
 class Particle {
   constructor() {
     this.reset();
@@ -50,7 +63,7 @@ class Particle {
   draw() {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(56, 189, 248, ${this.a})`;
+    ctx.fillStyle = `rgba(${particleRGB()}, ${this.a})`;
     ctx.fill();
   }
 }
@@ -66,7 +79,7 @@ function drawConnections() {
       if (d < CONNECTION_DISTANCE) {
         const opacity = (1 - d / CONNECTION_DISTANCE) * 0.08;
         ctx.beginPath();
-        ctx.strokeStyle = `rgba(56, 189, 248, ${opacity})`;
+        ctx.strokeStyle = `rgba(${particleRGB()}, ${opacity})`;
         ctx.lineWidth   = 0.5;
         ctx.moveTo(particles[i].x, particles[i].y);
         ctx.lineTo(particles[j].x, particles[j].y);

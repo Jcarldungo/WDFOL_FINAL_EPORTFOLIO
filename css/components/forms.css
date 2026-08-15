@@ -56,7 +56,7 @@
 .form-input:focus,
 .form-textarea:focus {
   border-color: var(--accent);
-  box-shadow  : 0 0 0 3px rgba(56, 189, 248, 0.12);
+  box-shadow  : 0 0 0 3px rgba(255, 255, 255, 0.12);
 }
 
 /* Error state */
@@ -87,7 +87,7 @@
   width          : 100%;
   padding        : 15px;
   background     : var(--accent);
-  color          : #fff;
+  color          : var(--bg);
   font-size      : 1rem;
   font-weight    : 600;
   border-radius  : var(--radius-sm);
