@@ -286,6 +286,48 @@
         </div>
       </article>
 
+      <article class="proj-card reveal reveal-delay-5" data-category="fullstack" aria-label="gastos expense tracker project">
+        <div class="proj-screenshots">
+          <div class="proj-screenshots-main">
+            <img src="assets/images/project-gastos.png" alt="gastos expense tracker dashboard showing card balances and recent activity" class="proj-ss-img proj-ss-primary" loading="lazy" />
+          </div>
+          <div class="proj-screenshot-shine" aria-hidden="true"></div>
+        </div>
+        <div class="proj-card-body">
+          <div class="proj-card-header">
+            <div class="proj-tags">
+              <span class="tag">Vanilla JS</span>
+              <span class="tag">Vercel Serverless</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">PWA</span>
+              <span class="tag">REST API</span>
+            </div>
+            <div class="proj-status proj-status--live">🟢 Live</div>
+          </div>
+          <h2 class="proj-title">gastos</h2>
+          <p class="proj-desc">
+            An offline-first expense tracker built for logging a purchase in three taps, even with no signal. No framework — vanilla JS talking to Vercel serverless functions over a Neon Postgres database, with a service worker queueing entries made offline and syncing them once the connection returns.<br><br>
+            The interesting part was fitting it onto a free plan: Vercel's Hobby tier caps a deployment at 12 serverless functions, and the app's ~32 routes (auth, transactions, budgets, bills, goals, splitting expenses with friends) each started as its own file. Consolidating them into 10 thin dispatcher functions — routed by a single <code>vercel.json</code> rewrite table shared by production and local dev — got it under the cap with zero change to any URL or response shape.<br><br>
+            <strong>Tech Stack:</strong> Vanilla JavaScript, Vercel Serverless Functions, Neon PostgreSQL, Service Worker/PWA, Web Push
+          </p>
+          <ul class="proj-features">
+            <li>Card balances derived from the transaction ledger, not typed in — including transfers between cards</li>
+            <li>Offline outbox: entries logged with no signal queue locally and sync automatically once back online</li>
+            <li>Split an expense with friends and settle up later, with itemized per-person history</li>
+            <li>Web Push alerts for bills coming due and budgets crossing 80%, via a nightly Vercel Cron</li>
+            <li>Money kept as strings end to end (never a JS float) and dates read back as calendar strings, not <code>Date</code> objects, to avoid timezone drift</li>
+          </ul>
+          <div class="proj-links">
+            <a href="https://gastos-xi-rose.vercel.app" target="_blank" rel="noopener" class="btn btn-primary">
+              🌐 Live Demo →
+            </a>
+            <a href="https://github.com/Jcarldungo/gastos" target="_blank" rel="noopener" class="btn btn-secondary">
+              🐙 GitHub Repo →
+            </a>
+          </div>
+        </div>
+      </article>
+
     </div>
   </div>
 </section>
