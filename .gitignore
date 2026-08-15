@@ -1,0 +1,9 @@
+# Vercel CLI artifacts — machine-specific, and .env.local holds tokens.
+.vercel/
+.env.local
+.env*.local
+
+# OS / editor noise
+Thumbs.db
+desktop.ini
+.DS_Store
