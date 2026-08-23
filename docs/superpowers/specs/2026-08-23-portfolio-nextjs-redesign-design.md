@@ -59,8 +59,12 @@ emoji icons, floating badges, multiple competing decorative devices) toward:
 - **No emoji as UI chrome** (see decisions table). A small monochrome
   line-icon set is acceptable if icons are needed at all, but plain
   typographic labels are the default.
-- **Restrained motion** — purposeful reveal-on-scroll is fine; anything
-  decorative-only competes with the "considered product" feel.
+- **Keep the existing motion/transition system** — scroll reveals, hover
+  states, the avatar counter-spin, scroll indicator, and other general
+  animation polish all carry over to the rebuild as-is. This is scoped to
+  motion only; it does not override the content decisions below (the
+  typewriter goes for being a rotating-content gimmick, not for being
+  animated).
 - **No rotating typewriter title** on Home — a single, confident title
   line instead. The rotating-phrase gimmick is another template signal.
 - **Drop the stat-counter row** (Live Projects / Certifications / Year)
