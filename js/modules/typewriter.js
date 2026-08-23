@@ -10,7 +10,6 @@
  */
 
 const PHRASES = [
-  'Backend Developer',
   'Full Stack Developer',
   'BSIT Student @ HAU',
   'REST API Builder',
