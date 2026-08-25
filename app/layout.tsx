@@ -2,6 +2,8 @@ import { Syne, DM_Sans, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { AmbientBackground } from '@/components/AmbientBackground';
+import { Nav } from '@/components/Nav';
+import { Footer } from '@/components/Footer';
 import './globals.css';
 
 const THEME_INIT_SCRIPT = `
@@ -47,7 +49,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider>
           <AmbientBackground />
           <a href="#main-content" className="skip-link">Skip to main content</a>
-          {children}
+          <Nav />
+          <main id="main-content" role="main">{children}</main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
