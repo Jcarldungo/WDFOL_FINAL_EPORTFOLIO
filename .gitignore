@@ -12,5 +12,8 @@ Thumbs.db
 desktop.ini
 .DS_Store
 
+# TypeScript incremental build cache
+*.tsbuildinfo
+
 # Local git worktrees (isolated workspaces for in-progress branches)
 .worktrees/
