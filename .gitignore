@@ -1,3 +1,7 @@
+# Next.js build output and dependencies
+node_modules/
+.next/
+
 # Vercel CLI artifacts — machine-specific, and .env.local holds tokens.
 .vercel/
 .env.local
