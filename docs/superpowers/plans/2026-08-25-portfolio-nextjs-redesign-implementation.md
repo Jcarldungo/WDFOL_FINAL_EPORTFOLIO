@@ -342,21 +342,21 @@ import './globals.css';
 const syne = Syne({
   subsets: ['latin'],
   weight: ['400', '600', '700', '800'],
-  variable: '--font-display',
+  variable: '--font-display-family',
   display: 'swap',
 });
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
   weight: ['300', '400', '500'],
-  variable: '--font-body',
+  variable: '--font-body-family',
   display: 'swap',
 });
 
 const jetBrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['400', '500'],
-  variable: '--font-mono',
+  variable: '--font-mono-family',
   display: 'swap',
 });
 
@@ -373,26 +373,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }
 ```
 
-`next/font` injects each font's actual family name into the CSS variable it's given, so `app/styles/base/variables.css`'s `--font-display: 'Syne', sans-serif;` line needs one adjustment: change it to fall back to the `next/font`-provided variable instead of hardcoding the family name, since `next/font` — not a `<link>` tag — is what actually loads these fonts now:
+`next/font` injects each font's actual family name into the CSS variable it's given via its `variable` option. To avoid that variable colliding with the same-named token `app/styles/base/variables.css` already declares, the `next/font` calls in Step 11 above use the suffixed names `--font-display-family`, `--font-body-family`, `--font-mono-family` (not `--font-display` etc.) — confirm that's what you wrote in Step 11 before continuing. Then update `app/styles/base/variables.css` to reference those suffixed variables instead of the hardcoded family names:
 
 ```css
-/* app/styles/base/variables.css — update these three lines: */
---font-display : var(--font-display), sans-serif;
---font-body    : var(--font-body), sans-serif;
---font-mono    : var(--font-mono), monospace;
-```
-
-Wait — that's circular (a variable can't reference itself). Instead, rename the `next/font` variable names to avoid collision: use `--font-display-family` etc. as the `next/font` `variable` option, and keep `app/styles/base/variables.css` referencing those:
-
-```tsx
-// app/layout.tsx — corrected variable names
-const syne = Syne({ /* ... */ variable: '--font-display-family' });
-const dmSans = DM_Sans({ /* ... */ variable: '--font-body-family' });
-const jetBrainsMono = JetBrains_Mono({ /* ... */ variable: '--font-mono-family' });
-```
-
-```css
-/* app/styles/base/variables.css */
+/* app/styles/base/variables.css — replace these three lines: */
 --font-display : var(--font-display-family), sans-serif;
 --font-body    : var(--font-body-family), sans-serif;
 --font-mono    : var(--font-mono-family), monospace;
@@ -1775,10 +1759,10 @@ git commit -m "Build Projects index and dynamic case-study route"
 ### Task 9: Contact page + EmailJS form
 
 **Files:**
-- Create: `app/contact/page.tsx`, `components/ContactForm.tsx`
+- Create: `app/contact/page.tsx`, `app/contact/ContactReveal.tsx`, `components/ContactForm.tsx`
 
 **Interfaces:**
-- Consumes: `siteInfo` from `lib/content.ts` (including `siteInfo.emailjs`).
+- Consumes: `siteInfo` from `lib/content.ts` (including `siteInfo.emailjs`); `useScrollReveal` from `lib/useScrollReveal.ts`.
 - Produces: `<ContactForm />`, a self-contained client component (no props) rendering the form and handling its own validation/submit/success/error states.
 
 - [ ] **Step 1: Create `components/ContactForm.tsx`**, porting `js/modules/form.js`'s validation rules and EmailJS call into React state (no more manual DOM class toggling or form-cloning to strip old listeners — React re-render replaces that entirely):
@@ -1921,11 +1905,25 @@ export function ContactForm() {
 }
 ```
 
-- [ ] **Step 2: Create `app/contact/page.tsx`**, porting `pages/contact.html`'s info column (contact detail rows now plain text, no emoji icons) plus `<ContactForm />`:
+- [ ] **Step 2: Create `app/contact/ContactReveal.tsx`** (same reveal-wrapper pattern as Tasks 6–8, needed because `page.tsx` must stay a server component for its `metadata` export, while `useScrollReveal` is a client-only hook):
+
+```tsx
+'use client';
+
+import { useScrollReveal } from '@/lib/useScrollReveal';
+
+export function ContactReveal({ children }: { children: React.ReactNode }) {
+  useScrollReveal();
+  return <>{children}</>;
+}
+```
+
+- [ ] **Step 3: Create `app/contact/page.tsx`**, porting `pages/contact.html`'s info column (contact detail rows now plain text, no emoji icons) plus `<ContactForm />`, wrapped in `<ContactReveal>`:
 
 ```tsx
 import { siteInfo } from '@/lib/content';
 import { ContactForm } from '@/components/ContactForm';
+import { ContactReveal } from './ContactReveal';
 
 export const metadata = {
   title: 'Contact | Jann Carl Dungo',
@@ -1934,6 +1932,7 @@ export const metadata = {
 
 export default function Contact() {
   return (
+    <ContactReveal>
     <section className="section" style={{ paddingTop: 120 }} aria-labelledby="contact-heading">
       <div className="container">
         <div className="section-head reveal">
@@ -1989,26 +1988,10 @@ export default function Contact() {
         </div>
       </div>
     </section>
+    </ContactReveal>
   );
 }
 ```
-
-Note: this page does not need a `*Reveal` client wrapper like Tasks 6–8 — `.reveal`/`.reveal-left`/`.reveal-right` here are only on the section head and the two grid columns (3 elements total), and `<ContactForm />` is already a client component, so add `useScrollReveal()` directly by making this page's default export... actually `page.tsx` needs to stay a server component for the `metadata` export to work per Next.js rules, so follow the same `ContactReveal` wrapper pattern as the previous three pages: create `app/contact/ContactReveal.tsx` identical in shape to `HomeReveal`/`AboutReveal`/`ProjectsReveal`, and wrap the `<section>` in it.
-
-- [ ] **Step 3: Create `app/contact/ContactReveal.tsx`**
-
-```tsx
-'use client';
-
-import { useScrollReveal } from '@/lib/useScrollReveal';
-
-export function ContactReveal({ children }: { children: React.ReactNode }) {
-  useScrollReveal();
-  return <>{children}</>;
-}
-```
-
-Then wrap `app/contact/page.tsx`'s returned `<section>` in `<ContactReveal>...</ContactReveal>` and import it.
 
 - [ ] **Step 4: Verify the build**
 
