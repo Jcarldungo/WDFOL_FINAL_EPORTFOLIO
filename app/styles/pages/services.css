@@ -14,7 +14,7 @@
 /* ── One service row ──────────────────────────────────── */
 .svc-row {
   display    : grid;
-  grid-template-columns: 56px 48px 1fr;
+  grid-template-columns: 56px 1fr;
   align-items: start;
   gap        : var(--space-md);
   padding    : var(--space-lg) var(--space-md);
@@ -49,29 +49,6 @@
   color         : var(--text-3);
   letter-spacing: 0.06em;
   padding-top   : 12px;
-}
-
-/* ── Icon plate ───────────────────────────────────────── */
-.svc-icon {
-  width          : 42px;
-  height         : 42px;
-  display        : inline-flex;
-  align-items    : center;
-  justify-content: center;
-  border-radius  : var(--radius-sm);
-  border         : 1px solid var(--border);
-  background     : var(--surface);
-  color          : var(--text-2);
-  flex-shrink    : 0;
-  transition     : border-color var(--transition-base),
-                   background var(--transition-base),
-                   color var(--transition-base);
-}
-
-.svc-row:hover .svc-icon {
-  border-color: var(--accent);
-  background  : var(--accent);
-  color       : var(--bg);
 }
 
 /* ── Text ─────────────────────────────────────────────── */
@@ -135,10 +112,6 @@
     gap    : 12px;
     padding: var(--space-md) 12px;
   }
-  /* Icon plate is the first thing to go on a phone — the number and
-     title already identify the row, and 42px of chrome per row costs
-     more than it explains at this width. */
-  .svc-icon  { display: none; }
   .svc-num   { padding-top: 4px; }
   .svc-body  { padding-top: 0; }
   .svc-title { font-size: 1.05rem; }
