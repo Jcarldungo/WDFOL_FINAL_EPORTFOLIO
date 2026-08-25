@@ -4,7 +4,7 @@
    Centralizing here avoids duplicated keyframes and ensures consistency.
    ============================================================================= */
 
-/* ── Scroll Reveal Utilities ──────────────────────────── */
+/* ── Scroll Reveal Utilities ──────────────────────────────── */
 /* Applied via JS IntersectionObserver; .visible class triggers the transition */
 
 .reveal {
@@ -44,12 +44,6 @@
 .reveal-delay-3 { transition-delay: 0.30s; }
 .reveal-delay-4 { transition-delay: 0.40s; }
 .reveal-delay-5 { transition-delay: 0.50s; }
-
-/* ── Page transition ──────────────────────────────────── */
-@keyframes fadeInPage {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
 
 /* ── Hero entrance ────────────────────────────────────── */
 @keyframes slideDown {
