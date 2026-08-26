@@ -1,3 +1,4 @@
+import type { Metadata, Viewport } from 'next';
 import { Syne, DM_Sans, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
 import { ThemeProvider } from '@/components/ThemeProvider';
@@ -5,6 +6,60 @@ import { AmbientBackground } from '@/components/AmbientBackground';
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 import './globals.css';
+
+export const metadata: Metadata = {
+  metadataBase: new URL('https://janncarldungo.vercel.app'),
+  title: {
+    default: 'Jann Carl Dungo | Full-Stack Developer',
+    template: '%s',
+  },
+  description:
+    'Jann Carl Dungo (jcdungoo20) — Full-Stack Developer building efficient full-stack systems with React, Vue.js, Node.js, PHP, and REST APIs.',
+  keywords: [
+    'Jann Carl Dungo',
+    'jcdungoo20',
+    'full-stack developer',
+    'Holy Angel University',
+    'Node.js',
+    'PHP',
+    'React',
+    'Vue.js',
+    'Angular',
+    'MySQL',
+    'MongoDB',
+    'REST API',
+    'web development',
+    'Pampanga',
+  ],
+  authors: [{ name: 'Jann Carl Dungo' }],
+  alternates: { canonical: '/' },
+  openGraph: {
+    title: 'Jann Carl Dungo | Full-Stack Developer',
+    description:
+      'Building structured, efficient full-stack systems with React, Vue.js, Node.js, PHP, and RESTful APIs.',
+    type: 'website',
+    siteName: 'Jann Carl Dungo',
+    url: 'https://janncarldungo.vercel.app/',
+    images: [
+      {
+        url: '/images/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Jann Carl Dungo — Full-Stack Developer',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Jann Carl Dungo | Full-Stack Developer',
+    description: 'Full-Stack Developer. React, Vue.js, Node.js, PHP, MySQL, MongoDB.',
+    images: ['/images/og-image.jpg'],
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: '#0b0d10',
+};
 
 const THEME_INIT_SCRIPT = `
 (function() {

@@ -2,8 +2,7 @@
   "name": "jann-carl-dungo-portfolio",
   "private": true,
   "version": "0.1.0",
-  "description": "A modern, animated backend developer portfolio built with **vanilla HTML, CSS, and JavaScript** using production-level architecture patterns. No build tools or frameworks required.",
-  "main": "index.js",
+  "description": "Full-Stack Developer portfolio built with Next.js (App Router), TypeScript, and Tailwind CSS.",
   "directories": {
     "doc": "docs"
   },
@@ -14,7 +13,7 @@
     "lint": "next lint"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jann Carl Dungo",
   "license": "ISC",
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

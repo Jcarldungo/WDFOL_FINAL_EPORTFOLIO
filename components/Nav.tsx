@@ -53,7 +53,7 @@ export function Nav() {
     <>
       <div id="progress-bar" role="progressbar" aria-label="Reading progress" style={{ width: `${progress}%` }} />
 
-      <nav className={`mobile-menu${menuOpen ? ' open' : ''}`} aria-label="Mobile navigation" aria-hidden={!menuOpen}>
+      <nav id="mobile-menu" className={`mobile-menu${menuOpen ? ' open' : ''}`} aria-label="Mobile navigation" aria-hidden={!menuOpen}>
         {NAV_LINKS.map((link) => (
           <Link key={link.href} href={link.href} className="mobile-link">
             {link.label}

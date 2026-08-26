@@ -44,13 +44,11 @@
   transition: opacity var(--transition-base);
 }
 
-/* Active = whichever row the preview is currently showing. Driven by
-   JS on hover/focus rather than :hover alone, so the panel and the
-   highlighted row can never disagree. */
-.proj-row.is-active {
+/* Hover/focus feedback for the row: background fill + left accent bar. */
+.proj-row:hover, .proj-row:focus-within {
   background: var(--surface);
 }
-.proj-row.is-active::before { opacity: 1; }
+.proj-row:hover::before, .proj-row:focus-within::before { opacity: 1; }
 
 .proj-row:focus-visible {
   outline       : 2px solid var(--accent);
@@ -75,7 +73,7 @@
   margin        : 0 0 6px;
   transition    : color var(--transition-fast);
 }
-.proj-row.is-active .proj-row-title { color: var(--accent); }
+.proj-row:hover .proj-row-title, .proj-row:focus-within .proj-row-title { color: var(--accent); }
 
 .proj-row-desc {
   font-size  : 0.88rem;
@@ -118,7 +116,7 @@
   transition     : all var(--transition-base);
 }
 
-.proj-row.is-active .proj-row-btn {
+.proj-row:hover .proj-row-btn, .proj-row:focus-within .proj-row-btn {
   border-color: var(--accent);
   background  : var(--accent);
   color       : var(--bg);
