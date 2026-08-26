@@ -26,6 +26,7 @@ export default function About() {
                   alt="Jann Carl Dungo — profile photo"
                   width={900}
                   height={1200}
+                  quality={90}
                   sizes="(max-width: 1024px) 92vw, 40vw"
                   className="about-photo-real"
                 />

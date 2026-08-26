@@ -42,7 +42,7 @@ export default function Home() {
               <div className="hero-avatar-wrap">
                 <div className="avatar-ring">
                   <div className="avatar-inner avatar-photo">
-                    <Image src="/images/profile.jpg" alt="Jann Carl Dungo" width={340} height={340} className="profile-photo" />
+                    <Image src="/images/profile.jpg" alt="Jann Carl Dungo" width={340} height={340} quality={90} className="profile-photo" />
                   </div>
                 </div>
               </div>
@@ -108,7 +108,7 @@ export default function Home() {
             {projects.map((project, i) => (
               <article key={project.slug} className={`feat-card reveal reveal-delay-${i + 1}`}>
                 <div className="feat-card-img feat-card-img--photo">
-                  <Image src={project.heroImage} alt={`${project.title} screenshot`} width={640} height={400} className="feat-card-photo" />
+                  <Image src={project.heroImage} alt={`${project.title} screenshot`} width={640} height={400} quality={90} className="feat-card-photo" />
                   <div className="feat-card-img-overlay"></div>
                 </div>
                 <div className="feat-card-body">
@@ -137,7 +137,7 @@ export default function Home() {
         <div className="container">
           <div className="quick-about reveal">
             <div className="quick-about-photo">
-              <Image src="/images/profile.jpg" alt="Jann Carl Dungo" width={200} height={200} className="quick-photo-img" />
+              <Image src="/images/profile.jpg" alt="Jann Carl Dungo" width={200} height={200} quality={90} className="quick-photo-img" />
             </div>
             <div className="quick-about-text">
               <div className="section-label">Who I Am</div>

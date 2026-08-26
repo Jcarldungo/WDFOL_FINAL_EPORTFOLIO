@@ -31,7 +31,7 @@ export default function Projects() {
                 <div className="proj-preview-bar">
                   <span className="proj-preview-dot"></span><span className="proj-preview-dot"></span><span className="proj-preview-dot"></span>
                 </div>
-                <Image src={projects[0].heroImage} alt="" width={640} height={400} />
+                <Image src={projects[0].heroImage} alt="" width={640} height={400} quality={90} />
               </div>
             </div>
           </div>
