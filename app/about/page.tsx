@@ -21,7 +21,14 @@ export default function About() {
           <div className="two-col two-col--offset" style={{ marginTop: 48 }}>
             <div className="about-photo reveal-left">
               <div className="about-photo-frame">
-                <Image src="/images/profile.jpg" alt="Jann Carl Dungo — profile photo" width={320} height={400} className="about-photo-real" />
+                <Image
+                  src="/images/profile.jpg"
+                  alt="Jann Carl Dungo — profile photo"
+                  width={900}
+                  height={1200}
+                  sizes="(max-width: 1024px) 92vw, 40vw"
+                  className="about-photo-real"
+                />
               </div>
               <div className="about-logo-below">
                 <Image src="/icons/logo.png" alt="JD Logo" width={40} height={40} className="about-logo-img" />

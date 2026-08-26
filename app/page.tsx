@@ -42,7 +42,7 @@ export default function Home() {
               <div className="hero-avatar-wrap">
                 <div className="avatar-ring">
                   <div className="avatar-inner avatar-photo">
-                    <Image src="/images/profile.jpg" alt="Jann Carl Dungo" width={220} height={220} className="profile-photo" />
+                    <Image src="/images/profile.jpg" alt="Jann Carl Dungo" width={340} height={340} className="profile-photo" />
                   </div>
                 </div>
               </div>
