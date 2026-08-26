@@ -1,0 +1,35 @@
+{
+  "name": "jann-carl-dungo-portfolio",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Full-Stack Developer portfolio built with Next.js (App Router), TypeScript, and Tailwind CSS.",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "keywords": [],
+  "author": "Jann Carl Dungo",
+  "license": "ISC",
+  "dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "next": "^15.5.23",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.5",
+    "autoprefixer": "^10.5.4",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^15.5.24",
+    "postcss": "^8.5.26",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^5.9.3"
+  }
+}

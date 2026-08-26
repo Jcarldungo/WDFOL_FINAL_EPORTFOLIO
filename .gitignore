@@ -1,3 +1,7 @@
+# Next.js build output and dependencies
+node_modules/
+.next/
+
 # Vercel CLI artifacts — machine-specific, and .env.local holds tokens.
 .vercel/
 .env.local
@@ -7,6 +11,9 @@
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# TypeScript incremental build cache
+*.tsbuildinfo
 
 # Local git worktrees (isolated workspaces for in-progress branches)
 .worktrees/
