@@ -48,11 +48,11 @@ export default function Home() {
                 <Image
                   src="/images/profile.jpg"
                   alt=""
-                  width={440}
-                  height={550}
+                  width={400}
+                  height={400}
                   quality={90}
                   priority
-                  sizes="(max-width: 768px) 150px, (max-width: 1024px) 200px, 340px"
+                  sizes="(max-width: 768px) 168px, (max-width: 1024px) 220px, 320px"
                   placeholder="blur"
                   blurDataURL={BLUR_DATA_URL}
                 />
