@@ -25,12 +25,22 @@ export function ProjectsIndex({ projects }: { projects: Project[] }) {
         {projects.map((project, i) => (
           <IndexRow
             key={project.slug}
-            className={`reveal reveal-delay-${i + 1}`}
+            className={`proj-index-row reveal reveal-delay-${i + 1}`}
             num={String(i + 1).padStart(2, '0')}
             title={project.title}
             titleAs="h2"
             href={`/projects/${project.slug}`}
             desc={project.shortDesc}
+            media={
+              <Image
+                src={project.previewImage ?? project.heroImage}
+                alt={`${project.title} — screenshot`}
+                width={640}
+                height={400}
+                quality={90}
+                sizes="(max-width: 768px) 90vw, 45vw"
+              />
+            }
             meta={
               <>
                 <span className="index-row-meta-dot" aria-hidden="true" />

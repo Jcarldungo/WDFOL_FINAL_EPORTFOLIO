@@ -14,7 +14,12 @@
   margin-top           : var(--space-2xl);
 }
 
-/* Left column uses the shared .index-row primitive (see index-row.css). */
+/* Left column uses the shared .index-row primitive (see index-row.css).
+   The inline preview each row carries is only for the touch layout — on
+   desktop the sticky panel shows it, so hide the per-row copy. */
+@media (min-width: 1025px) {
+  .proj-index-row .index-row-media { display: none; }
+}
 
 /* ── Right column: preview ── */
 .proj-preview {
@@ -332,12 +337,11 @@
 /* ══════════════════════════════════════════════════════
    RESPONSIVE
    ══════════════════════════════════════════════════════ */
-@media (max-width: 980px) {
-  /* The preview panel is a desktop affordance — it depends on hovering
-     one row while looking at another region. On touch there's no hover,
-     so it becomes a large image that never changes. Rows carry the
-     content on their own; the arrow still opens the full case study. */
-  .proj-index   { grid-template-columns: 1fr; gap: var(--space-xl); }
+@media (max-width: 1024px) {
+  /* The sticky preview panel needs hover + a second region to look at —
+     neither exists on touch. Below this width each row carries its own
+     inline screenshot instead and the sticky panel is dropped. */
+  .proj-index   { grid-template-columns: 1fr; gap: var(--space-lg); }
   .proj-preview { display: none; }
 
   .pv-hero      { grid-template-columns: 1fr; padding: 40px 24px; gap: var(--space-xl); }

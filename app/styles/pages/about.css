@@ -122,6 +122,6 @@
 .cert-row-name { font-weight: 700; font-size: 0.95rem; }
 .cert-row-meta { font-size: 0.8rem; color: var(--text-3); font-family: var(--font-mono); margin-top: 2px; }
 
-@media (max-width: 480px) {
+@media (max-width: 430px) {
   .cert-row { flex-direction: column; align-items: flex-start; gap: 6px; }
 }

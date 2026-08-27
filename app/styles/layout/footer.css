@@ -1,71 +1,97 @@
 /* =============================================================================
-   FOOTER — Site-wide footer component.
-   Separation rationale: Footer is a standalone layout region independent
-   from page content. Isolating it makes component replacement trivial.
+   FOOTER — The page's closing statement: tagline + CTA, then the utility bar.
    ============================================================================= */
 
 footer {
-  background: var(--bg-2);
-  border-top: 1px solid var(--border);
-  padding   : var(--space-2xl) 0;
-  position  : relative;
-  z-index   : var(--z-base);
+  background   : var(--bg-2);
+  border-top   : 1px solid var(--border);
+  padding-block: var(--section-pad) var(--space-2xl);
+  position     : relative;
+  z-index      : var(--z-base);
 }
 
-.footer-inner {
-  display        : flex;
+.footer-cta {
+  display      : flex;
+  align-items  : center;
   justify-content: space-between;
-  align-items    : center;
-  flex-wrap      : wrap;
-  gap            : var(--space-lg);
+  gap          : var(--space-xl);
+  flex-wrap    : wrap;
+  padding-bottom: var(--space-2xl);
+  border-bottom : 1px solid var(--border);
 }
 
+.footer-tagline {
+  font-family   : var(--font-display);
+  font-size     : var(--fs-700);
+  font-weight   : 800;
+  line-height   : var(--lh-tight);
+  letter-spacing: -0.03em;
+}
+
+.footer-bar {
+  display        : flex;
+  align-items    : center;
+  justify-content: space-between;
+  gap            : var(--space-lg);
+  flex-wrap      : wrap;
+  padding-block  : var(--space-xl);
+}
+
+.footer-socials { display: flex; gap: 4px; }
+.footer-social-link {
+  display        : flex;
+  align-items    : center;
+  justify-content: center;
+  width          : 40px;
+  height         : 40px;
+  border-radius  : var(--radius-sm);
+  color          : var(--text-3);
+  transition     : color var(--transition-fast), background var(--transition-fast);
+}
+.footer-social-link:hover { color: var(--accent); background: var(--surface); }
+
+.footer-links {
+  display  : flex;
+  flex-wrap: wrap;
+  gap      : var(--space-sm);
+}
+.footer-link {
+  display     : inline-flex;
+  align-items : center;
+  min-height  : 36px;
+  padding     : 0 12px;
+  font-size   : var(--fs-200);
+  color       : var(--text-3);
+  border-radius: var(--radius-pill);
+  transition  : color var(--transition-fast);
+}
+.footer-link:hover { color: var(--text); }
+
+.footer-base {
+  display        : flex;
+  align-items    : baseline;
+  justify-content: space-between;
+  gap            : var(--space-md);
+  flex-wrap      : wrap;
+  padding-top    : var(--space-lg);
+}
 .footer-brand {
   font-family   : var(--font-display);
   font-weight   : 800;
-  font-size     : 1.1rem;
+  font-size     : 1rem;
   letter-spacing: -0.02em;
 }
-
 .footer-copy {
-  font-size : 0.85rem;
-  color     : var(--text-3);
-  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size  : var(--fs-100);
+  color      : var(--text-3);
 }
-
-.footer-links {
-  display: flex;
-  gap    : var(--space-lg);
-}
-
-.footer-link {
-  font-size : 0.85rem;
-  color     : var(--text-3);
-  transition: color var(--transition-fast);
-  cursor    : pointer;
-}
-
-.footer-link:hover { color: var(--accent); }
 
 /* ── Responsive ───────────────────────────────────────── */
 @media (max-width: 768px) {
-  .footer-inner {
-    flex-direction: column;
-    align-items   : flex-start;
-    gap           : var(--space-sm);
-  }
-
-  .footer-links {
-    flex-wrap: wrap;
-    gap      : var(--space-md);
-  }
+  footer { padding-top: var(--section-pad-tight); }
+  .footer-cta { flex-direction: column; align-items: flex-start; gap: var(--space-lg); }
+  .footer-cta .btn { width: 100%; justify-content: center; }
+  .footer-bar { flex-direction: column-reverse; align-items: flex-start; gap: var(--space-lg); }
+  .footer-link:first-child { padding-left: 0; }
 }
-
-.footer-socials { display:flex;gap:12px;margin-top:12px; }
-.footer-social-link {
-  color      : var(--text-3);
-  transition : color .25s, transform .25s;
-  display    : flex;
-  align-items: center;
-}
-.footer-social-link:hover { color:var(--accent); transform:translateY(-2px); }
