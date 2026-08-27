@@ -5,6 +5,12 @@ import { skills, certifications, experience, softSkills, siteInfo } from '@/lib/
 export const metadata = {
   title: 'About | Jann Carl Dungo',
   description: 'Full-stack developer bio, skills, experience, and certifications for Jann Carl Dungo.',
+  alternates: { canonical: '/about' },
+  openGraph: {
+    title: 'About | Jann Carl Dungo',
+    description: 'Full-stack developer bio, skills, experience, and certifications for Jann Carl Dungo.',
+    url: '/about',
+  },
 };
 
 export default function About() {
@@ -82,7 +88,7 @@ export default function About() {
           <div className="skill-categories">
             {skills.map((cat, i) => (
               <div key={cat.title} className={`skill-cat-card reveal reveal-delay-${i + 1}`}>
-                <div className="skill-cat-title">{cat.title}</div>
+                <h3 className="skill-cat-title">{cat.title}</h3>
                 <ul className="skill-list">
                   {cat.items.map((item) => <li key={item}>{item}</li>)}
                 </ul>
@@ -104,7 +110,7 @@ export default function About() {
             {certifications.map((cert) => (
               <li key={cert.name} className="cert-row">
                 <div className="cert-row-body">
-                  <div className="cert-row-name">{cert.name}</div>
+                  <h3 className="cert-row-name">{cert.name}</h3>
                   <div className="cert-row-meta">{cert.issuer} · {cert.date}</div>
                 </div>
                 <a href={cert.verifyUrl} target="_blank" rel="noopener" className="card-link">Verify →</a>
@@ -125,7 +131,7 @@ export default function About() {
               <div key={job.title} className={`exp-card reveal reveal-delay-${i + 1}`}>
                 <div className="exp-icon">{job.index}</div>
                 <div className="exp-body">
-                  <div className="exp-title">{job.title}</div>
+                  <h3 className="exp-title">{job.title}</h3>
                   <div className="exp-org">{job.org} · {job.period}</div>
                   <ul className="exp-list">
                     {job.bullets.map((b) => <li key={b}>{b}</li>)}

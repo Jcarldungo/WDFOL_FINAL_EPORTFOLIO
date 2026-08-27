@@ -111,8 +111,19 @@
   font-size  : 1rem;
   color      : var(--text-2);
   line-height: 1.7;
-  margin     : 0 0 20px;
+  margin     : 0 0 16px;
   max-width  : 46ch;
+}
+
+/* One curated technical highlight, called out under the lede */
+.pv-achievement {
+  font-size   : var(--fs-300);
+  color       : var(--text);
+  line-height : var(--lh-normal);
+  max-width   : 46ch;
+  margin      : 0 0 20px;
+  padding-left: 14px;
+  border-left : 2px solid var(--accent);
 }
 
 .pv-roles { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
