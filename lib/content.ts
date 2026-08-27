@@ -8,6 +8,12 @@ export type Project = {
   liveUrl: string;
   githubUrl?: string;
   heroImage: string;
+  /** Higher-res, hero-fold-only crop used by the cropped index preview panel
+   *  (object-fit: cover). Falls back to heroImage when not set — heroImage
+   *  itself is shown uncropped on the case-study page, so a project only
+   *  needs this when heroImage's resolution/composition isn't sharp enough
+   *  once cover-cropped down to the preview panel's render size. */
+  previewImage?: string;
   frameUrl: string;
   builtWith: string[];
   problem: string;
@@ -26,6 +32,7 @@ export const projects: Project[] = [
     roles: ['Frontend Developer', 'UI Implementation'],
     liveUrl: 'https://weeplay-therapy.vercel.app',
     heroImage: '/images/project-weeplay.jpg',
+    previewImage: '/images/project-weeplay-preview.jpg',
     frameUrl: 'weeplay-therapy.vercel.app',
     builtWith: ['HTML5', 'CSS3', 'Vanilla JS', 'Vercel'],
     problem:

@@ -1,6 +1,5 @@
-import Image from 'next/image';
 import { projects } from '@/lib/content';
-import { ProjectCard } from '@/components/ProjectCard';
+import { ProjectsIndex } from './ProjectsIndex';
 import { ProjectsReveal } from './ProjectsReveal';
 
 export const metadata = {
@@ -19,22 +18,7 @@ export default function Projects() {
             <p className="section-subtitle">Real client and personal work. Open any one to read how it was built and what it had to solve.</p>
           </div>
 
-          <div className="proj-index reveal">
-            <ol className="proj-rows" aria-label="Project list">
-              {projects.map((project, i) => (
-                <ProjectCard key={project.slug} project={project} index={i} />
-              ))}
-            </ol>
-
-            <div className="proj-preview" aria-hidden="true">
-              <div className="proj-preview-frame">
-                <div className="proj-preview-bar">
-                  <span className="proj-preview-dot"></span><span className="proj-preview-dot"></span><span className="proj-preview-dot"></span>
-                </div>
-                <Image src={projects[0].heroImage} alt="" width={640} height={400} quality={90} />
-              </div>
-            </div>
-          </div>
+          <ProjectsIndex projects={projects} />
         </div>
       </section>
     </ProjectsReveal>
