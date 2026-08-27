@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTheme } from './ThemeProvider';
 
 const NAV_LINKS = [
@@ -17,18 +17,40 @@ export function Nav() {
   const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
-  const [progress, setProgress] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
+  const progressRef = useRef<HTMLDivElement>(null);
 
+  // One rAF-batched read per frame. The progress bar is written straight
+  // to the DOM (transform: scaleX) so scrolling never triggers a render;
+  // `scrolled` only flips state when the boolean actually changes.
   useEffect(() => {
-    function onScroll() {
-      setScrolled(window.scrollY > 40);
+    let ticking = false;
+    let lastScrolled = false;
+
+    function apply() {
+      ticking = false;
+      const y = window.scrollY;
       const doc = document.documentElement;
       const scrollable = doc.scrollHeight - doc.clientHeight;
-      setProgress(scrollable > 0 ? Math.min((window.scrollY / scrollable) * 100, 100) : 0);
+      const ratio = scrollable > 0 ? Math.min(y / scrollable, 1) : 0;
+      if (progressRef.current) {
+        progressRef.current.style.transform = `scaleX(${ratio})`;
+      }
+      const next = y > 40;
+      if (next !== lastScrolled) {
+        lastScrolled = next;
+        setScrolled(next);
+      }
     }
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(apply);
+    }
+
     window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    apply();
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
@@ -51,7 +73,7 @@ export function Nav() {
 
   return (
     <>
-      <div id="progress-bar" role="progressbar" aria-label="Reading progress" style={{ width: `${progress}%` }} />
+      <div id="progress-bar" ref={progressRef} role="progressbar" aria-label="Reading progress" />
 
       <nav id="mobile-menu" className={`mobile-menu${menuOpen ? ' open' : ''}`} aria-label="Mobile navigation" aria-hidden={!menuOpen}>
         {NAV_LINKS.map((link) => (

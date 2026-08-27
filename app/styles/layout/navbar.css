@@ -143,15 +143,15 @@
 
 /* ── Progress bar ── */
 #progress-bar {
-  position: fixed; top: 0; left: 0;
-  height  : 3px;
-  background: linear-gradient(90deg, var(--accent), var(--purple));
-  z-index : var(--z-overlay);
-  width   : 0%; transition: width .1s linear;
-}
-
-@media (max-width: 768px) {
-  .nav-links { display: none; }
-  .hamburger { display: flex; }
-  .mobile-menu { display: flex; }
+  position        : fixed;
+  top             : 0;
+  left            : 0;
+  width           : 100%;
+  height          : 3px;
+  background       : linear-gradient(90deg, var(--accent), var(--purple));
+  z-index         : var(--z-overlay);
+  transform       : scaleX(0);
+  transform-origin: left;
+  transition      : transform .1s linear;
+  will-change     : transform;
 }

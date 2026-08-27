@@ -1,9 +1,19 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const CONNECTION_DISTANCE = 120;
-const getParticleCount = () => Math.min(80, Math.floor(window.innerWidth / 20));
+
+/** Level-3 ambient motion (particle field) only runs on a real desktop
+ *  pointer with motion allowed. Everything else gets the static blobs. */
+function level3Allowed() {
+  if (typeof window.matchMedia !== 'function') return false;
+  return (
+    window.matchMedia('(min-width: 1024px)').matches &&
+    window.matchMedia('(pointer: fine)').matches &&
+    window.matchMedia('(prefers-reduced-motion: no-preference)').matches
+  );
+}
 
 class Particle {
   x = 0; y = 0; vx = 0; vy = 0; r = 0; a = 0;
@@ -47,20 +57,49 @@ function particleRGB() {
 
 export function AmbientBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [particlesEnabled, setParticlesEnabled] = useState(false);
+
+  // Decide once on mount whether to mount the canvas at all; keep it in
+  // sync if the reduced-motion preference changes.
+  useEffect(() => {
+    const update = () => setParticlesEnabled(level3Allowed());
+    update();
+    if (typeof window.matchMedia !== 'function') return;
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
 
   useEffect(() => {
+    if (!particlesEnabled) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    const wide = window.innerWidth >= 1440;
+    const cap = wide ? 60 : 36;
+    const drawLines = wide;
+
     let particles: Particle[] = [];
     let rafId = 0;
+    let running = false;
+    let resizeRaf = 0;
+
+    function buildParticles() {
+      const count = Math.min(cap, Math.floor(window.innerWidth / 24));
+      particles = Array.from({ length: count }, () => new Particle(canvas!));
+    }
 
     function resize() {
       canvas!.width = window.innerWidth;
       canvas!.height = window.innerHeight;
-      particles = Array.from({ length: getParticleCount() }, () => new Particle(canvas!));
+      buildParticles();
+    }
+
+    function onResize() {
+      cancelAnimationFrame(resizeRaf);
+      resizeRaf = requestAnimationFrame(resize);
     }
 
     function drawConnections() {
@@ -82,23 +121,50 @@ export function AmbientBackground() {
       }
     }
 
-    function animate() {
+    function frame() {
       ctx!.clearRect(0, 0, canvas!.width, canvas!.height);
       const rgb = particleRGB();
       particles.forEach((p) => { p.update(); p.draw(ctx!, rgb); });
-      drawConnections();
-      rafId = requestAnimationFrame(animate);
+      if (drawLines) drawConnections();
+      rafId = requestAnimationFrame(frame);
+    }
+
+    function start() {
+      if (running) return;
+      running = true;
+      frame();
+    }
+
+    function stop() {
+      running = false;
+      cancelAnimationFrame(rafId);
+    }
+
+    // Pause when the tab is hidden or the hero (first ~1.4 viewports) has
+    // scrolled well out of view — no point animating a background nobody
+    // is looking at.
+    function shouldRun() {
+      return !document.hidden && window.scrollY < window.innerHeight * 1.4;
+    }
+    function sync() {
+      if (shouldRun()) start();
+      else stop();
     }
 
     resize();
-    window.addEventListener('resize', resize, { passive: true });
-    animate();
+    sync();
+    window.addEventListener('resize', onResize, { passive: true });
+    window.addEventListener('scroll', sync, { passive: true });
+    document.addEventListener('visibilitychange', sync);
 
     return () => {
-      cancelAnimationFrame(rafId);
-      window.removeEventListener('resize', resize);
+      stop();
+      cancelAnimationFrame(resizeRaf);
+      window.removeEventListener('resize', onResize);
+      window.removeEventListener('scroll', sync);
+      document.removeEventListener('visibilitychange', sync);
     };
-  }, []);
+  }, [particlesEnabled]);
 
   return (
     <>
@@ -107,7 +173,7 @@ export function AmbientBackground() {
         <div className="blob blob-2" />
         <div className="blob blob-3" />
       </div>
-      <canvas id="particle-canvas" ref={canvasRef} aria-hidden="true" />
+      {particlesEnabled && <canvas id="particle-canvas" ref={canvasRef} aria-hidden="true" />}
     </>
   );
 }

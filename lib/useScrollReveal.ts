@@ -3,7 +3,6 @@
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
-const THRESHOLD = 0.12;
 const SELECTOR = '.reveal, .reveal-left, .reveal-right';
 
 /**
@@ -31,17 +30,25 @@ export function useScrollReveal() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          // Reveal when it scrolls into view, and also if it was scrolled
+          // past faster than the observer could fire (top above the fold) —
+          // otherwise a quick flick leaves whole sections stuck invisible.
+          if (entry.isIntersecting || entry.boundingClientRect.top < 0) {
             entry.target.classList.add('visible');
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: THRESHOLD }
+      { threshold: 0.1, rootMargin: '0px 0px -8% 0px' }
     );
 
+    const vh = window.innerHeight;
     els.forEach((el) => {
-      if (!el.classList.contains('visible')) observer.observe(el);
+      if (el.classList.contains('visible')) return;
+      // Anything already on screen at mount reveals immediately (its
+      // entrance transition still plays); the rest waits for scroll.
+      if (el.getBoundingClientRect().top < vh) el.classList.add('visible');
+      else observer.observe(el);
     });
 
     return () => observer.disconnect();
