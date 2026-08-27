@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { skills, certifications, experience, softSkills, siteInfo } from '@/lib/content';
-import { AboutReveal } from './AboutReveal';
 
 export const metadata = {
   title: 'About | Jann Carl Dungo',
@@ -10,8 +9,8 @@ export const metadata = {
 
 export default function About() {
   return (
-    <AboutReveal>
-      <section className="section" style={{ paddingTop: 120 }} aria-labelledby="about-heading">
+    <>
+      <section className="section section--page-top" aria-labelledby="about-heading">
         <div className="container">
           <div className="section-head reveal">
             <div className="section-label">Who I Am</div>
@@ -137,6 +136,6 @@ export default function About() {
           </div>
         </div>
       </section>
-    </AboutReveal>
+    </>
   );
 }

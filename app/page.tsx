@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { projects, capabilities } from '@/lib/content';
-import { HomeReveal } from './HomeReveal';
+import { IndexRow } from '@/components/IndexRow';
 
 export const metadata = {
   title: 'Jann Carl Dungo | Full-Stack Developer',
@@ -11,7 +11,7 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <HomeReveal>
+    <>
       <section className="hero" aria-labelledby="hero-heading">
         <div className="container">
           <div className="hero-grid">
@@ -82,15 +82,16 @@ export default function Home() {
             <div className="section-label">What I Do</div>
             <h2 className="section-title" id="capabilities-title">Where I <span className="gradient-text">add value</span></h2>
           </div>
-          <ol className="svc-list" aria-label="Capabilities">
+          <ol className="index-rows" aria-label="Capabilities">
             {capabilities.map((cap, i) => (
-              <li key={cap.num} className={`svc-row reveal reveal-delay-${(i % 4) + 1}`}>
-                <span className="svc-num">{cap.num}</span>
-                <div className="svc-body">
-                  <h3 className="svc-title">{cap.title}</h3>
-                  <p className="svc-desc">{cap.desc}</p>
-                </div>
-              </li>
+              <IndexRow
+                key={cap.num}
+                className={`reveal reveal-delay-${(i % 4) + 1}`}
+                num={cap.num}
+                title={cap.title}
+                titleAs="h3"
+                desc={cap.desc}
+              />
             ))}
           </ol>
         </div>
@@ -167,6 +168,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </HomeReveal>
+    </>
   );
 }

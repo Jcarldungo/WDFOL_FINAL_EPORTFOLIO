@@ -1,6 +1,5 @@
 import { projects } from '@/lib/content';
 import { ProjectsIndex } from './ProjectsIndex';
-import { ProjectsReveal } from './ProjectsReveal';
 
 export const metadata = {
   title: 'Projects | Jann Carl Dungo',
@@ -9,8 +8,8 @@ export const metadata = {
 
 export default function Projects() {
   return (
-    <ProjectsReveal>
-      <section className="section" style={{ paddingTop: 120 }} aria-labelledby="proj-heading">
+    <>
+      <section className="section section--page-top" aria-labelledby="proj-heading">
         <div className="container">
           <div className="section-head reveal">
             <div className="section-label">Portfolio</div>
@@ -21,6 +20,6 @@ export default function Projects() {
           <ProjectsIndex projects={projects} />
         </div>
       </section>
-    </ProjectsReveal>
+    </>
   );
 }

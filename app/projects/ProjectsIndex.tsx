@@ -3,19 +3,43 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import type { Project } from '@/lib/content';
-import { ProjectCard } from '@/components/ProjectCard';
+import { IndexRow } from '@/components/IndexRow';
+
+const arrowIcon = (
+  <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+    <path d="M6 14 14 6M14 6H8M14 6v6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
 
 /** Row list + preview panel, coupled: hovering or focusing a row swaps the
- *  screenshot shown in the sticky preview frame beside it. */
+ *  screenshot shown in the sticky preview frame beside it. The row title is
+ *  a stretched link, so the whole row opens the case study on click/enter —
+ *  the preview swap is pure enhancement. */
 export function ProjectsIndex({ projects }: { projects: Project[] }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const active = projects[activeIndex];
 
   return (
     <div className="proj-index reveal">
-      <ol className="proj-rows" aria-label="Project list">
+      <ol className="index-rows" aria-label="Project list">
         {projects.map((project, i) => (
-          <ProjectCard key={project.slug} project={project} index={i} onActivate={() => setActiveIndex(i)} />
+          <IndexRow
+            key={project.slug}
+            className={`reveal reveal-delay-${i + 1}`}
+            num={String(i + 1).padStart(2, '0')}
+            title={project.title}
+            titleAs="h2"
+            href={`/projects/${project.slug}`}
+            desc={project.shortDesc}
+            meta={
+              <>
+                <span className="index-row-meta-dot" aria-hidden="true" />
+                {project.frameUrl}
+              </>
+            }
+            trailing={<span className="index-row-arrow" aria-hidden="true">{arrowIcon}</span>}
+            onActivate={() => setActiveIndex(i)}
+          />
         ))}
       </ol>
 

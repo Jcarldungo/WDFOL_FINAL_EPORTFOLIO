@@ -3,6 +3,7 @@ import { Syne, DM_Sans, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { AmbientBackground } from '@/components/AmbientBackground';
+import { RevealScope } from '@/components/RevealScope';
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 import './globals.css';
@@ -103,6 +104,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Script id="theme-init" strategy="beforeInteractive">{THEME_INIT_SCRIPT}</Script>
         <ThemeProvider>
           <AmbientBackground />
+          <RevealScope />
           <a href="#main-content" className="skip-link">Skip to main content</a>
           <Nav />
           <main id="main-content" role="main">{children}</main>

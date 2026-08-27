@@ -1,6 +1,5 @@
 import { siteInfo } from '@/lib/content';
 import { ContactForm } from '@/components/ContactForm';
-import { ContactReveal } from './ContactReveal';
 
 export const metadata = {
   title: 'Contact | Jann Carl Dungo',
@@ -9,8 +8,7 @@ export const metadata = {
 
 export default function Contact() {
   return (
-    <ContactReveal>
-    <section className="section" style={{ paddingTop: 120 }} aria-labelledby="contact-heading">
+    <section className="section section--page-top" aria-labelledby="contact-heading">
       <div className="container">
         <div className="section-head reveal">
           <div className="section-label">Get In Touch</div>
@@ -65,6 +63,5 @@ export default function Contact() {
         </div>
       </div>
     </section>
-    </ContactReveal>
   );
 }
