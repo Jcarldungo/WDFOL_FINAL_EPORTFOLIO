@@ -1,9 +1,21 @@
 import Link from 'next/link';
 import type { Project } from '@/lib/content';
 
-export function ProjectCard({ project, index }: { project: Project; index: number }) {
+export function ProjectCard({
+  project,
+  index,
+  onActivate,
+}: {
+  project: Project;
+  index: number;
+  onActivate?: () => void;
+}) {
   return (
-    <li className={`proj-row reveal reveal-delay-${index + 1}`}>
+    <li
+      className={`proj-row reveal reveal-delay-${index + 1}`}
+      onMouseEnter={onActivate}
+      onFocus={onActivate}
+    >
       <span className="proj-row-num">{String(index + 1).padStart(2, '0')}</span>
       <div className="proj-row-body">
         <h2 className="proj-row-title">{project.title}</h2>

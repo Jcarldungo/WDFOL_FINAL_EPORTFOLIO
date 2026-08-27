@@ -45,7 +45,14 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
               <span className="pv-frame-dot"></span><span className="pv-frame-dot"></span><span className="pv-frame-dot"></span>
               <span className="pv-frame-url">{project.frameUrl}</span>
             </div>
-            <Image src={project.heroImage} alt={`${project.title} screenshot`} width={960} height={600} quality={90} />
+            <Image
+              src={project.heroImage}
+              alt={`${project.title} screenshot`}
+              width={960}
+              height={600}
+              quality={90}
+              sizes="(max-width: 980px) 92vw, 620px"
+            />
           </div>
         </div>
 
