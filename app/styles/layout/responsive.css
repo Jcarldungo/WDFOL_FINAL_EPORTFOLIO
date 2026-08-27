@@ -10,27 +10,25 @@
 @media (max-width: 1024px) {
   /* Two-column layouts collapse to one */
   .two-col,
-  .two-col--offset,
-  .two-col--reverse {
+  .two-col--offset {
     grid-template-columns: 1fr;
   }
 }
 
 /* ── Mobile (≤ 768px) ─────────────────────────────────── */
 @media (max-width: 768px) {
-  /* Hide desktop nav, show hamburger */
-  .nav-links              { display: none; }
-  .nav-actions .btn       { display: none; }
-  .hamburger              { display: flex; }
-  .mobile-menu            { display: flex; }
-
-  /* Auto-grid single column */
-  .auto-grid { grid-template-columns: 1fr; }
+  /* Desktop nav + its inline actions collapse into the hamburger menu,
+     which carries the links, the theme toggle and the Hire Me button. */
+  .nav-links          { display: none; }
+  .nav-actions .btn   { display: none; }
+  .nav-actions-toggle { display: none; }
+  .hamburger          { display: flex; }
+  .mobile-menu        { display: flex; }
 }
 
-/* ── Small mobile (≤ 480px) ───────────────────────────── */
-@media (max-width: 480px) {
-  .container { width: 95vw; }
+/* ── Small mobile (≤ 430px) ───────────────────────────── */
+@media (max-width: 430px) {
+  .container { width: 94vw; }
 }
 
 /* ── Reduced motion ───────────────────────────────────── */

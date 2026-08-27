@@ -1,16 +1,16 @@
 /* =============================================================================
-   CONTACT PAGE — Two-column layout: info left, form right.
+   CONTACT PAGE — Two-column: info left (email is the obvious action), form right.
    ============================================================================= */
 
 .contact-grid {
   display              : grid;
-  grid-template-columns: 1fr 1.5fr;
+  grid-template-columns: 1fr 1.4fr;
   gap                  : var(--space-3xl);
   align-items          : start;
   margin-top           : var(--space-2xl);
 }
 
-.contact-info h3 {
+.contact-info h2 {
   font-family  : var(--font-display);
   font-size    : 1.4rem;
   font-weight  : 700;
@@ -19,9 +19,61 @@
 
 .contact-info > p {
   color        : var(--text-2);
-  line-height  : 1.75;
+  line-height  : var(--lh-normal);
+  margin-bottom: var(--space-lg);
+  max-width    : 42ch;
+}
+
+/* Primary action — visually the loudest thing in the column */
+.contact-email {
+  display       : block;
+  font-family   : var(--font-mono);
+  font-size     : clamp(1rem, 2.2vw, 1.35rem);
+  letter-spacing: -0.01em;
+  color         : var(--text);
+  word-break    : break-all;
+  padding-bottom: 4px;
+  border-bottom : 2px solid var(--accent);
+  transition    : color var(--transition-fast);
+}
+.contact-email:hover { color: var(--accent); }
+
+.contact-status {
+  display       : flex;
+  align-items   : center;
+  gap           : 9px;
+  font-family   : var(--font-mono);
+  font-size     : var(--fs-100);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color         : var(--green);
+  margin        : var(--space-md) 0 var(--space-xl);
+}
+
+.contact-meta {
+  display    : grid;
+  gap        : 14px;
   margin-bottom: var(--space-xl);
 }
+.contact-meta > div {
+  display       : grid;
+  grid-template-columns: 84px 1fr;
+  gap           : 12px;
+  padding-bottom: 12px;
+  border-bottom : 1px solid var(--border);
+}
+.contact-meta > div:last-child { border-bottom: none; padding-bottom: 0; }
+.contact-meta dt {
+  font-family   : var(--font-mono);
+  font-size     : var(--fs-100);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color         : var(--text-3);
+  padding-top   : 2px;
+}
+.contact-meta dd { font-size: var(--fs-300); color: var(--text-2); }
+.contact-meta dd a { transition: color var(--transition-fast); }
+.contact-meta dd a:hover { color: var(--accent); }
 
 /* ── Responsive ───────────────────────────────────────── */
 @media (max-width: 1024px) {

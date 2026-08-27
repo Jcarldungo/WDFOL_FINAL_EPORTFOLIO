@@ -10,29 +10,12 @@
   margin-inline : auto;
 }
 
-/* ── Section wrapper ──────────────────────────────────── */
-.section {
-  padding-block: clamp(64px, 10vw, 120px);
-}
-
-/* ── Glass card primitive ─────────────────────────────── */
-/* Composable: can be applied to any element for glass effect */
-.glass-card {
-  background        : var(--bg-glass);
-  border            : 1px solid var(--border);
-  border-radius     : var(--radius);
-  backdrop-filter   : blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  transition:
-    border-color var(--transition-base),
-    box-shadow   var(--transition-base),
-    transform    var(--transition-base);
-}
-
-.glass-card:hover {
-  border-color: var(--border-2);
-  box-shadow  : var(--shadow);
-}
+/* ── Section wrapper ──────────────────────────────────────
+   One default rhythm + intentional density modifiers. */
+.section          { padding-block: var(--section-pad); }
+.section--tight   { padding-block: var(--section-pad-tight); }
+.section--generous{ padding-block: var(--section-pad-generous); }
+.section--page-top{ padding-top: var(--section-pad-page-top); }
 
 /* ── Two-column layout ────────────────────────────────── */
 .two-col {
@@ -46,17 +29,6 @@
   grid-template-columns: 1fr 1.5fr;
 }
 
-.two-col--reverse {
-  grid-template-columns: 1.5fr 1fr;
-}
-
-/* ── Auto-fill card grid ──────────────────────────────── */
-.auto-grid {
-  display              : grid;
-  grid-template-columns: repeat(auto-fit, minmax(var(--min-col, 280px), 1fr));
-  gap                  : var(--space-lg);
-}
-
 /* ── Alt section background ───────────────────────────── */
 .section-alt {
   background: var(--bg-2);
@@ -65,6 +37,16 @@
 /* ── Section head block ───────────────────────────────── */
 .section-head {
   margin-bottom: var(--space-2xl);
+}
+
+/* ── 404 ──────────────────────────────────────────────── */
+.notfound { max-width: 46ch; }
+.notfound .section-title { margin-top: 10px; }
+.notfound-actions {
+  display  : flex;
+  gap      : 14px;
+  flex-wrap: wrap;
+  margin-top: var(--space-xl);
 }
 
 /* ── Centered section head ────────────────────────────── */

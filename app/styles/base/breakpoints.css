@@ -1,0 +1,14 @@
+/* =============================================================================
+   BREAKPOINTS — Single documented set. Use ONLY these values in @media rules.
+
+   Plain CSS can't share a variable inside a media query, so this file is the
+   canonical reference; every stylesheet must match it exactly. Phase 7 of the
+   redesign migrates the remaining ad-hoc values (980 / 720 / 560) onto it.
+
+     --bp-xl   1280px   large desktop → laptop
+     --bp-lg   1024px   laptop → tablet   (two-col collapse, projects preview drop)
+     --bp-md    768px   tablet → mobile   (nav → hamburger, grids → 1 col)
+     --bp-sm    430px   large phone → small phone
+
+   All rules are max-width (desktop-first), matching the existing codebase.
+   ============================================================================= */

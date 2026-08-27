@@ -3,12 +3,13 @@ import { Syne, DM_Sans, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { AmbientBackground } from '@/components/AmbientBackground';
+import { RevealScope } from '@/components/RevealScope';
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://janncarldungo.vercel.app'),
+  metadataBase: new URL('https://janncarl.vercel.app'),
   title: {
     default: 'Jann Carl Dungo | Full-Stack Developer',
     template: '%s',
@@ -39,7 +40,7 @@ export const metadata: Metadata = {
       'Building structured, efficient full-stack systems with React, Vue.js, Node.js, PHP, and RESTful APIs.',
     type: 'website',
     siteName: 'Jann Carl Dungo',
-    url: 'https://janncarldungo.vercel.app/',
+    url: 'https://janncarl.vercel.app',
     images: [
       {
         url: '/images/og-image.jpg',
@@ -58,13 +59,19 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#0b0d10',
+  themeColor: [
+    { media: '(prefers-color-scheme: dark)', color: '#0b0d10' },
+    { media: '(prefers-color-scheme: light)', color: '#f6f7f8' },
+  ],
 };
 
 const THEME_INIT_SCRIPT = `
 (function() {
   try {
-    var saved = localStorage.getItem('portfolio-theme') || 'dark';
+    var saved = localStorage.getItem('portfolio-theme');
+    if (saved !== 'light' && saved !== 'dark') {
+      saved = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
     document.documentElement.setAttribute('data-theme', saved);
   } catch (e) {}
 })();
@@ -103,6 +110,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Script id="theme-init" strategy="beforeInteractive">{THEME_INIT_SCRIPT}</Script>
         <ThemeProvider>
           <AmbientBackground />
+          <RevealScope />
           <a href="#main-content" className="skip-link">Skip to main content</a>
           <Nav />
           <main id="main-content" role="main">{children}</main>

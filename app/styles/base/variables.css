@@ -19,6 +19,25 @@
   --font-body    : var(--font-body-family), sans-serif;
   --font-mono    : var(--font-mono-family), monospace;
 
+  /* ── Type Scale ──────────────────────────────────────────
+     One ladder for the whole site. Small/UI steps are fixed rem;
+     display steps are fluid clamp(min, vw, max). Migrate hard-coded
+     per-component sizes onto this incrementally (headings first). */
+  --fs-100 : 0.72rem;
+  --fs-200 : 0.8rem;
+  --fs-300 : 0.9rem;
+  --fs-400 : 1rem;
+  --fs-500 : 1.125rem;
+  --fs-600 : clamp(1.25rem, 1.6vw, 1.5rem);
+  --fs-700 : clamp(1.6rem, 3vw, 2.1rem);
+  --fs-800 : clamp(2rem, 5vw, 3.2rem);
+  --fs-900 : clamp(2.8rem, 6vw, 5rem);
+
+  --lh-tight  : 1.05;
+  --lh-snug   : 1.3;
+  --lh-normal : 1.7;
+  --lh-loose  : 1.85;
+
   /* ── Spacing Scale ───────────────────────────────────── */
   --space-xs  : 4px;
   --space-sm  : 8px;
@@ -27,6 +46,19 @@
   --space-xl  : 32px;
   --space-2xl : 48px;
   --space-3xl : 64px;
+
+  /* ── Section rhythm ──────────────────────────────────────
+     Deliberate vertical density, not one size for every section.
+     .section uses --section-pad; modifiers pick tight / generous.
+     --section-pad-page-top clears the fixed nav on an inner page's
+     first section (replaces inline style={{ paddingTop: 120 }}). */
+  --section-pad-tight    : clamp(48px, 7vw, 80px);
+  --section-pad          : clamp(64px, 9vw, 108px);
+  --section-pad-generous : clamp(96px, 13vw, 172px);
+  --section-pad-page-top : clamp(112px, 14vw, 176px);
+
+  /* ── Container widths ────────────────────────────────── */
+  --container-narrow : min(760px, 92vw);
 
   /* ── Border Radius ───────────────────────────────────── */
   --radius-sm   : 8px;
@@ -39,6 +71,8 @@
   --transition-base   : 0.3s ease;
   --transition-slow   : 0.5s ease;
   --transition-spring : 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring       : cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-soft     : cubic-bezier(0.33, 1, 0.68, 1);
 
   /* ── Z-index scale ───────────────────────────────────── */
   --z-base     : 0;
@@ -60,8 +94,8 @@
   --border      : rgba(255, 255, 255, 0.10);
   --border-2    : rgba(255, 255, 255, 0.18);
   --text        : #eef0f2;
-  --text-2      : #9aa1a9;
-  --text-3      : #6b7278;
+  --text-2      : #a3aab2;
+  --text-3      : #828a92;
   --accent      : #eef0f2;
   --accent-2    : #ffffff;
   --accent-glow : rgba(255, 255, 255, 0.14);
@@ -83,8 +117,8 @@
   --border      : rgba(18, 22, 26, 0.10);
   --border-2    : rgba(18, 22, 26, 0.20);
   --text        : #14171a;
-  --text-2      : #52585f;
-  --text-3      : #7c828a;
+  --text-2      : #4a4f56;
+  --text-3      : #656b73;
   --accent      : #14171a;
   --accent-2    : #000000;
   --accent-glow : rgba(18, 22, 26, 0.12);

@@ -60,12 +60,20 @@ body::before {
 }
 
 /* ── Particle canvas ──────────────────────────────────── */
+/* The canvas element is only mounted on desktop / fine-pointer / motion-
+   allowed (see AmbientBackground.tsx); this just positions it. */
 #particle-canvas {
   position      : fixed;
   inset         : 0;
   pointer-events: none;
   z-index       : 0;
   opacity       : 0.4;
+}
+
+/* Stop the blob drift cleanly (rather than the blanket 0.01ms freeze) when
+   the user asks for reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  .blob { animation: none; }
 }
 
 /* ── Social link icons ────────────────────────────────── */
@@ -90,11 +98,12 @@ body::before {
   flex-shrink    : 0;
 }
 
-.social-link:hover {
+.social-link:hover,
+.social-link:focus-visible {
   border-color: var(--accent);
   color       : var(--accent);
   transform   : translateY(-3px);
-  background  : rgba(255, 255, 255, 0.07);
+  background  : var(--surface-2);
 }
 
 /* ── Mac window dots ──────────────────────────────────── */
@@ -111,15 +120,4 @@ body::before {
   display       : inline-block;
   animation     : pulse 2s ease-in-out infinite;
   box-shadow    : 0 0 8px var(--green);
-}
-
-/* ── Cursor/caret for typed text ──────────────────────── */
-.typed-cursor {
-  display        : inline-block;
-  width          : 3px;
-  height         : 1.1em;
-  background     : var(--accent);
-  margin-left    : 4px;
-  vertical-align : text-bottom;
-  animation      : blink 1s step-end infinite;
 }

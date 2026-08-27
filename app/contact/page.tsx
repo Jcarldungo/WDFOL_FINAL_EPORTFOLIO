@@ -1,16 +1,20 @@
 import { siteInfo } from '@/lib/content';
 import { ContactForm } from '@/components/ContactForm';
-import { ContactReveal } from './ContactReveal';
 
 export const metadata = {
   title: 'Contact | Jann Carl Dungo',
   description: 'Get in touch with Jann Carl Dungo for internships, freelance full-stack work, or collaborations.',
+  alternates: { canonical: '/contact' },
+  openGraph: {
+    title: 'Contact | Jann Carl Dungo',
+    description: 'Get in touch with Jann Carl Dungo for internships, freelance full-stack work, or collaborations.',
+    url: '/contact',
+  },
 };
 
 export default function Contact() {
   return (
-    <ContactReveal>
-    <section className="section" style={{ paddingTop: 120 }} aria-labelledby="contact-heading">
+    <section className="section section--page-top" aria-labelledby="contact-heading">
       <div className="container">
         <div className="section-head reveal">
           <div className="section-label">Get In Touch</div>
@@ -21,27 +25,30 @@ export default function Contact() {
         <div className="contact-grid">
           <div className="reveal-left">
             <div className="contact-info">
-              <h3>Say Hello</h3>
-              <p>Whether you&apos;re looking for a full-stack developer intern, want to collaborate on a project, or just want to connect — feel free to reach out!</p>
+              <h2>Say hello</h2>
+              <p>Looking for a full-stack developer intern, want to collaborate, or just want to connect? The fastest way to reach me is email.</p>
 
-              <div className="contact-detail">
-                <div><div className="contact-detail-label">Phone</div><a href={siteInfo.phoneHref} className="contact-detail-val">{siteInfo.phone}</a></div>
-              </div>
-              <div className="contact-detail">
-                <div><div className="contact-detail-label">Email</div><a href={`mailto:${siteInfo.email}`} className="contact-detail-val">{siteInfo.email}</a></div>
-              </div>
-              <div className="contact-detail">
-                <div><div className="contact-detail-label">Location</div><div className="contact-detail-val">{siteInfo.location}</div></div>
-              </div>
-              <div className="contact-detail">
-                <div><div className="contact-detail-label">University</div><div className="contact-detail-val">{siteInfo.university}</div></div>
-              </div>
-              <div className="contact-detail">
-                <div><div className="contact-detail-label">Status</div><div className="contact-detail-val" style={{ color: 'var(--green)' }}>● Open to opportunities</div></div>
-              </div>
-              <div className="contact-detail">
-                <div><div className="contact-detail-label">Response Time</div><div className="contact-detail-val">I typically reply within <strong>24–48 hours</strong>.</div></div>
-              </div>
+              <a href={`mailto:${siteInfo.email}`} className="contact-email">{siteInfo.email}</a>
+
+              <p className="contact-status">
+                <span className="status-dot" aria-hidden="true"></span>
+                Open to opportunities · replies within 24–48 hours
+              </p>
+
+              <dl className="contact-meta">
+                <div>
+                  <dt>Phone</dt>
+                  <dd><a href={siteInfo.phoneHref}>{siteInfo.phone}</a></dd>
+                </div>
+                <div>
+                  <dt>Location</dt>
+                  <dd>{siteInfo.location}</dd>
+                </div>
+                <div>
+                  <dt>University</dt>
+                  <dd>{siteInfo.university}</dd>
+                </div>
+              </dl>
 
               <div className="social-links" aria-label="Social media links">
                 <a href={siteInfo.github} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="GitHub" title="GitHub">
@@ -59,12 +66,12 @@ export default function Contact() {
 
           <div className="reveal-right">
             <div className="contact-form">
+              <h2 className="sr-only">Send a message</h2>
               <ContactForm />
             </div>
           </div>
         </div>
       </div>
     </section>
-    </ContactReveal>
   );
 }
