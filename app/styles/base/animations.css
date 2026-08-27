@@ -45,7 +45,7 @@
 .reveal-delay-4 { transition-delay: 0.40s; }
 .reveal-delay-5 { transition-delay: 0.50s; }
 
-/* ── Hero entrance ────────────────────────────────────── */
+/* ── Entrance (hero stagger + form messages) ──────────── */
 @keyframes slideDown {
   from { opacity: 0; transform: translateY(-16px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -56,35 +56,15 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes slideRight {
-  from { opacity: 0; transform: translateX(36px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
-/* ── Ambient / decorative ─────────────────────────────── */
+/* ── Ambient / state ──────────────────────────────────── */
 @keyframes floatBlob {
   from { transform: translate(0, 0) scale(1); }
   to   { transform: translate(40px, 30px) scale(1.08); }
 }
 
-@keyframes spinSlow {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-@keyframes counterSpin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(-360deg); }
-}
-
 @keyframes pulse {
   0%, 100% { opacity: 1;   transform: scale(1); }
   50%       { opacity: 0.6; transform: scale(0.85); }
-}
-
-@keyframes scrollWheel {
-  from { transform: translateY(0); opacity: 1; }
-  to   { transform: translateY(8px); opacity: 0; }
 }
 
 @keyframes spin {

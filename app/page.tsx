@@ -14,40 +14,48 @@ export default function Home() {
     <>
       <section className="hero" aria-labelledby="hero-heading">
         <div className="container">
-          <div className="hero-grid">
-            <div className="hero-text">
-              <div className="hero-eyebrow">
+          <div className="hero-layout">
+            <div className="hero-lead">
+              <p className="hero-kicker">
                 <span className="status-dot" aria-hidden="true"></span>
-                4th Year BSIT · Holy Angel University · Web Development
-              </div>
+                Open to internships &amp; freelance work
+              </p>
               <h1 className="hero-name" id="hero-heading">
-                Jann Carl<br /><span className="gradient-text">Dungo</span>
+                Jann Carl Dungo
+                <span className="hero-role">Full-Stack Developer</span>
               </h1>
-              <div className="hero-title-wrap">
-                <span className="page-title" style={{ fontSize: 'clamp(1.4rem, 3vw, 2rem)' }}>Full-Stack Developer</span>
-              </div>
+              <p className="hero-support">BSIT — Web Development · Holy Angel University</p>
               <p className="hero-desc">
-                Aspiring full-stack developer passionate about building{' '}
-                <strong>structured, efficient systems</strong> using React, Vue.js, Node.js, PHP, REST APIs,
-                and databases. Committed to continuous learning and eager to collaborate on meaningful projects.
+                I build <strong>structured, efficient full-stack systems</strong> with React,
+                Vue.js, Node.js, PHP, and REST APIs — from the database schema to the
+                deployed frontend.
               </p>
 
               <div className="hero-cta">
-                <a className="btn btn-primary" href="/resume.pdf" download="JannCarlDungo_Resume.pdf">Download Resume</a>
-                <Link className="btn btn-outline" href="/projects">View Projects →</Link>
+                <Link className="btn btn-primary" href="/projects">View My Work →</Link>
+                <Link className="btn btn-outline" href="/contact">Let&apos;s Connect</Link>
+                <a className="hero-resume" href="/resume.pdf" download="JannCarlDungo_Resume.pdf">
+                  Résumé (PDF)
+                </a>
               </div>
+
+              <p className="hero-stack">React · Node.js · Laravel · SQL</p>
             </div>
 
-            <div className="hero-visual" aria-hidden="true">
-              <div className="hero-avatar-wrap">
-                <div className="avatar-ring">
-                  <div className="avatar-inner avatar-photo">
-                    <Image src="/images/profile.jpg" alt="Jann Carl Dungo" width={340} height={340} quality={90} className="profile-photo" />
-                  </div>
-                </div>
-              </div>
+            <div className="hero-media" aria-hidden="true">
+              <figure className="hero-portrait">
+                <Image
+                  src="/images/profile.jpg"
+                  alt=""
+                  width={440}
+                  height={550}
+                  quality={90}
+                  priority
+                  sizes="(max-width: 1024px) 200px, 360px"
+                />
+              </figure>
 
-              <div className="hero-code-card" role="img" aria-label="Code snippet">
+              <div className="hero-code-card">
                 <div className="code-header">
                   <span className="dot-red"></span><span className="dot-yellow"></span><span className="dot-green"></span>
                   <span className="code-filename">jann.js</span>
@@ -68,11 +76,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </div>
-
-        <div className="scroll-indicator" aria-hidden="true">
-          <div className="scroll-mouse"><div className="scroll-wheel"></div></div>
-          <span>scroll</span>
         </div>
       </section>
 
