@@ -10,8 +10,7 @@
 @media (max-width: 1024px) {
   /* Two-column layouts collapse to one */
   .two-col,
-  .two-col--offset,
-  .two-col--reverse {
+  .two-col--offset {
     grid-template-columns: 1fr;
   }
 }
@@ -23,9 +22,6 @@
   .nav-actions .btn       { display: none; }
   .hamburger              { display: flex; }
   .mobile-menu            { display: flex; }
-
-  /* Auto-grid single column */
-  .auto-grid { grid-template-columns: 1fr; }
 }
 
 /* ── Small mobile (≤ 480px) ───────────────────────────── */

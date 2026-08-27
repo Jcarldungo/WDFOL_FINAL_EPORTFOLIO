@@ -115,12 +115,27 @@
   cursor : not-allowed;
 }
 
+/* Loading spinner — ContactForm renders .spinner + .btn-text inside
+   .submit-btn.loading (this is not a .btn, so the buttons.css spinner
+   rules never matched it and it rendered unstyled). */
+.submit-btn .spinner {
+  width           : 18px;
+  height          : 18px;
+  border          : 2px solid rgba(128, 128, 128, 0.35);
+  border-top-color: var(--bg);
+  border-radius   : 50%;
+  animation       : spin 0.8s linear infinite;
+  flex-shrink     : 0;
+}
+
+.submit-btn.loading .btn-text { opacity: 0.7; }
+
 /* ── Success state ────────────────────────────────────── */
 .form-success {
   display   : block;
   text-align: center;
   padding   : var(--space-xl);
-  animation : fadeInPage 0.5s ease;
+  animation : slideUp 0.4s var(--ease-out-soft) both;
 }
 
 .form-success-icon { font-size: 3rem; margin-bottom: 12px; }

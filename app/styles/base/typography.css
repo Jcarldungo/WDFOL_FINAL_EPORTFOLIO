@@ -77,12 +77,3 @@ code {
   line-height   : 1.0;
   letter-spacing: -0.03em;
 }
-
-/* ── Body prose ───────────────────────────────────────── */
-.prose {
-  color      : var(--text-2);
-  line-height: 1.85;
-}
-
-.prose p { margin-bottom: var(--space-md); }
-.prose p:last-child { margin-bottom: 0; }

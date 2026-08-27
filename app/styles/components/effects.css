@@ -112,14 +112,3 @@ body::before {
   animation     : pulse 2s ease-in-out infinite;
   box-shadow    : 0 0 8px var(--green);
 }
-
-/* ── Cursor/caret for typed text ──────────────────────── */
-.typed-cursor {
-  display        : inline-block;
-  width          : 3px;
-  height         : 1.1em;
-  background     : var(--accent);
-  margin-left    : 4px;
-  vertical-align : text-bottom;
-  animation      : blink 1s step-end infinite;
-}

@@ -82,11 +82,6 @@
   50%       { opacity: 0.6; transform: scale(0.85); }
 }
 
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
-}
-
 @keyframes scrollWheel {
   from { transform: translateY(0); opacity: 1; }
   to   { transform: translateY(8px); opacity: 0; }
@@ -95,8 +90,3 @@
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
-
-/* ── Entrance shorthand classes ───────────────────────── */
-.anim-slide-down  { animation: slideDown  0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
-.anim-slide-up    { animation: slideUp    0.9s cubic-bezier(0.16, 1, 0.3, 1) both; }
-.anim-slide-right { animation: slideRight 1.0s cubic-bezier(0.16, 1, 0.3, 1) both; }

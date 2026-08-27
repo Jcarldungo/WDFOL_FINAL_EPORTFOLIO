@@ -74,127 +74,6 @@
   margin-top: var(--space-xl);
 }
 
-/* ── CERTIFICATE IMAGE GRID ── */
-.cert-image-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap    : var(--space-lg);
-  margin-top: var(--space-xl);
-}
-
-.cert-img-card {
-  background   : var(--surface);
-  border       : 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow     : hidden;
-  cursor       : pointer;
-  transition   : transform var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
-}
-.cert-img-card:hover {
-  transform   : translateY(-6px);
-  border-color: var(--accent);
-  box-shadow  : 0 16px 48px rgba(0,0,0,.3), 0 0 30px var(--accent-glow);
-}
-.cert-img-card:focus-visible {
-  outline     : 2px solid var(--accent);
-  outline-offset: 3px;
-}
-
-.cert-img-preview {
-  position    : relative;
-  aspect-ratio: 16 / 10;
-  overflow    : hidden;
-  background  : #fff;
-}
-.cert-img-preview img {
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: top center;
-  display: block;
-  transition: transform var(--transition-slow);
-}
-.cert-img-card:hover .cert-img-preview img { transform: scale(1.04); }
-
-.cert-img-overlay {
-  position  : absolute; inset: 0;
-  background: rgba(0,0,0,.45);
-  display   : flex; align-items: center; justify-content: center;
-  opacity   : 0;
-  transition: opacity var(--transition-base);
-}
-.cert-img-card:hover .cert-img-overlay { opacity: 1; }
-
-.cert-zoom-icon { font-size: 2rem; filter: drop-shadow(0 2px 8px rgba(0,0,0,.5)); }
-
-.cert-img-info { padding: 14px 16px; }
-.cert-img-name   { font-weight: 700; font-size: 0.88rem; margin-bottom: 4px; }
-.cert-img-issuer { font-size: 0.76rem; color: var(--accent); font-family: var(--font-mono); margin-bottom: 3px; }
-.cert-img-date   { font-size: 0.72rem; color: var(--text-3); }
-
-/* ── LIGHTBOX ── */
-.cert-lightbox {
-  position: fixed; inset: 0;
-  z-index : var(--z-overlay, 1000);
-  display : flex; align-items: center; justify-content: center;
-  padding : var(--space-lg);
-}
-.cert-lightbox[hidden] { display: none; }
-
-.cert-lightbox-backdrop {
-  position  : absolute; inset: 0;
-  background: rgba(0,0,0,.85);
-  backdrop-filter: blur(8px);
-}
-
-.cert-lightbox-inner {
-  position      : relative;
-  z-index       : 1;
-  max-width     : 900px;
-  width         : 100%;
-  display       : flex;
-  flex-direction: column;
-  align-items   : center;
-  gap           : 14px;
-  animation     : slideUp .3s cubic-bezier(.16,1,.3,1) both;
-}
-
-.cert-lightbox-close {
-  position  : absolute;
-  top: -48px; right: 0;
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  background: var(--surface);
-  border    : 1px solid var(--border-2);
-  color     : var(--text);
-  font-size : 1rem;
-  display   : flex; align-items: center; justify-content: center;
-  cursor    : pointer;
-  transition: background var(--transition-fast), border-color var(--transition-fast);
-}
-.cert-lightbox-close:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
-
-.cert-lightbox-meta { text-align: center; }
-.cert-lightbox-name   { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
-.cert-lightbox-issuer { font-size: 0.82rem; color: var(--accent); font-family: var(--font-mono); }
-
-.cert-lightbox-img-wrap {
-  width        : 100%;
-  border-radius: var(--radius);
-  overflow     : hidden;
-  box-shadow   : 0 24px 80px rgba(0,0,0,.6);
-  background   : #fff;
-}
-.cert-lightbox-img { width: 100%; display: block; object-fit: contain; max-height: 65vh; }
-
-/* Lightbox action buttons */
-.cert-lightbox-actions {
-  display        : flex;
-  gap            : 12px;
-  margin-top     : 16px;
-  justify-content: center;
-  flex-wrap      : wrap;
-}
-.cert-lightbox-actions .btn { min-width: 160px; text-align: center; }
-
 /* ── Experience ── */
 .exp-grid {
   display: grid;
@@ -226,12 +105,7 @@
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .skill-categories { grid-template-columns: 1fr; }
-  .cert-image-grid  { grid-template-columns: 1fr 1fr; }
   .exp-grid         { grid-template-columns: 1fr; }
-  .two-col          { grid-template-columns: 1fr; }
-}
-@media (max-width: 480px) {
-  .cert-image-grid  { grid-template-columns: 1fr; }
 }
 
 /* ── Compact certification list (replaces the old image-grid) ── */
