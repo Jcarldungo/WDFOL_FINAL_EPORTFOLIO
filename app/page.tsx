@@ -79,10 +79,54 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section" aria-labelledby="capabilities-title">
+      <section className="section" aria-labelledby="feat-title">
         <div className="container">
           <div className="section-head reveal">
-            <div className="section-label">What I Do</div>
+            <div className="section-label">Selected Work</div>
+            <h2 className="section-title" id="feat-title">The <span className="gradient-text">proof</span></h2>
+            <p className="section-subtitle">Two things I&apos;ve shipped: a live client website, and a full-stack app built around a hard hosting constraint.</p>
+          </div>
+
+          <div className="feat-projects-grid">
+            {projects.map((project, i) => (
+              <article key={project.slug} className={`feat-card reveal reveal-delay-${i + 1}`}>
+                <Link href={`/projects/${project.slug}`} className="feat-card-link">
+                  <div className="feat-card-media">
+                    <Image
+                      src={project.heroImage}
+                      alt={`${project.title} — screenshot`}
+                      width={640}
+                      height={400}
+                      quality={90}
+                      sizes="(max-width: 768px) 92vw, (max-width: 1200px) 46vw, 560px"
+                      className="feat-card-photo"
+                    />
+                  </div>
+                  <div className="feat-card-body">
+                    <p className="feat-card-focus">{project.focus}</p>
+                    <h3 className="feat-card-title">{project.title}</h3>
+                    <p className="feat-card-desc">{project.shortDesc}</p>
+                    <p className="feat-card-achievement">{project.achievement}</p>
+                    <div className="feat-card-foot">
+                      <span className="feat-card-stack">{project.stackLabel ?? project.builtWith[0]}</span>
+                      <span className="feat-card-cta">Read case study →</span>
+                    </div>
+                  </div>
+                </Link>
+              </article>
+            ))}
+          </div>
+
+          <div className="feat-projects-more reveal">
+            <Link className="btn btn-outline" href="/projects">See all projects →</Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--tight" aria-labelledby="capabilities-title">
+        <div className="container">
+          <div className="section-head reveal">
+            <div className="section-label">What I Build</div>
             <h2 className="section-title" id="capabilities-title">Where I <span className="gradient-text">add value</span></h2>
           </div>
           <ol className="index-rows" aria-label="Capabilities">
@@ -97,43 +141,6 @@ export default function Home() {
               />
             ))}
           </ol>
-        </div>
-      </section>
-
-      <section className="section" aria-labelledby="feat-title">
-        <div className="container">
-          <div className="section-head reveal">
-            <div className="section-label">Selected Work</div>
-            <h2 className="section-title" id="feat-title">Featured <span className="gradient-text">Projects</span></h2>
-            <p className="section-subtitle">Two live builds: a real client site, and a full-stack app built around a hard hosting constraint. More landing here soon.</p>
-          </div>
-
-          <div className="feat-projects-grid">
-            {projects.map((project, i) => (
-              <article key={project.slug} className={`feat-card reveal reveal-delay-${i + 1}`}>
-                <div className="feat-card-img feat-card-img--photo">
-                  <Image src={project.heroImage} alt={`${project.title} screenshot`} width={640} height={400} quality={90} className="feat-card-photo" />
-                  <div className="feat-card-img-overlay"></div>
-                </div>
-                <div className="feat-card-body">
-                  <div className="feat-card-tags">
-                    {project.builtWith.slice(0, 3).map((tag) => (
-                      <span key={tag} className="tag">{tag}</span>
-                    ))}
-                  </div>
-                  <h3 className="feat-card-title">{project.title}</h3>
-                  <p className="feat-card-desc">{project.shortDesc}</p>
-                  <div className="feat-card-links">
-                    <Link href={`/projects/${project.slug}`} className="card-link">Read case study →</Link>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          <div style={{ textAlign: 'center', marginTop: 44 }} className="reveal">
-            <Link className="btn btn-outline" href="/projects">See All Projects →</Link>
-          </div>
         </div>
       </section>
 
@@ -159,7 +166,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section" aria-labelledby="cta-title">
+      <section className="section section--generous" aria-labelledby="cta-title">
         <div className="container">
           <div className="svc-cta reveal">
             <h2 className="svc-cta-title" id="cta-title">Have something in mind?</h2>

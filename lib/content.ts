@@ -2,6 +2,13 @@ export type Project = {
   slug: string;
   title: string;
   eyebrow: string;
+  /** Short project-type label for cards, e.g. "Offline-first full-stack PWA". */
+  focus: string;
+  /** ONE curated technical highlight, drawn from the case study — never a
+   *  fabricated metric. Shown as a callout on cards and the case-study hero. */
+  achievement: string;
+  /** Clean tech-category label for cards when builtWith[0] reads badly. */
+  stackLabel?: string;
   shortDesc: string;
   lede: string;
   roles: string[];
@@ -26,6 +33,9 @@ export const projects: Project[] = [
     slug: 'weeplay',
     title: 'WeePlay Therapy Center',
     eyebrow: 'Client project',
+    focus: 'Live client website',
+    achievement: 'Hand-built CSS design system, zero framework — accessible and fast on the low-end phones parents actually use.',
+    stackLabel: 'HTML · CSS · JS',
     shortDesc:
       'Live client website for a pediatric therapy clinic in Pampanga — custom CSS design system, mobile-first and accessible, no framework.',
     lede: 'A production website for a pediatric therapy clinic in Mabalacat, Pampanga — live and serving actual families.',
@@ -53,6 +63,9 @@ export const projects: Project[] = [
     slug: 'gastos',
     title: 'gastos',
     eyebrow: 'Personal project',
+    focus: 'Offline-first full-stack PWA',
+    achievement: '32 API routes folded into 10 serverless functions — zero URL changes, fits entirely in the free tier.',
+    stackLabel: 'Vanilla JS · Serverless · Postgres',
     shortDesc:
       'Offline-first expense tracker built around a free-tier function limit — 32 routes folded into 10 dispatchers with zero URL changes.',
     lede: 'An offline-first expense tracker for logging a purchase in three taps, even with no signal.',
