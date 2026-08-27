@@ -129,15 +129,20 @@
   border-radius : 50%;
   border        : 1px solid var(--border-2);
 }
+/* A light travelling around the ring — thin arc, slow rotation. */
 .hero-portrait::before {
   content       : '';
   position      : absolute;
-  inset         : -1px;
+  inset         : -2px;
   border-radius : 50%;
-  border        : 1px solid transparent;
-  border-top-color  : var(--accent-glow);
-  border-left-color : var(--accent-glow);
+  border        : 2px solid transparent;
+  border-top-color  : var(--accent);
+  border-right-color: color-mix(in srgb, var(--accent) 35%, transparent);
   pointer-events: none;
+  animation     : spinSlow 5s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-portrait::before { animation: none; }
 }
 .hero-portrait img {
   width         : 100%;
