@@ -39,6 +39,16 @@
   margin-bottom: var(--space-2xl);
 }
 
+/* ── 404 ──────────────────────────────────────────────── */
+.notfound { max-width: 46ch; }
+.notfound .section-title { margin-top: 10px; }
+.notfound-actions {
+  display  : flex;
+  gap      : 14px;
+  flex-wrap: wrap;
+  margin-top: var(--space-xl);
+}
+
 /* ── Centered section head ────────────────────────────── */
 .section-head--center {
   text-align: center;

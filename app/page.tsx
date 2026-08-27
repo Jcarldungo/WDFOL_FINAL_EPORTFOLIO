@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { projects, capabilities } from '@/lib/content';
+import { BLUR_DATA_URL } from '@/lib/blur';
 import { IndexRow } from '@/components/IndexRow';
 
 export const metadata = {
@@ -51,7 +52,9 @@ export default function Home() {
                   height={550}
                   quality={90}
                   priority
-                  sizes="(max-width: 1024px) 200px, 360px"
+                  sizes="(max-width: 768px) 150px, (max-width: 1024px) 200px, 340px"
+                  placeholder="blur"
+                  blurDataURL={BLUR_DATA_URL}
                 />
               </figure>
 
@@ -99,6 +102,8 @@ export default function Home() {
                       height={400}
                       quality={90}
                       sizes="(max-width: 768px) 92vw, (max-width: 1200px) 46vw, 560px"
+                      placeholder="blur"
+                      blurDataURL={BLUR_DATA_URL}
                       className="feat-card-photo"
                     />
                   </div>

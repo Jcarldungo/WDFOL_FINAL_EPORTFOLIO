@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import type { Project } from '@/lib/content';
+import { BLUR_DATA_URL } from '@/lib/blur';
 import { IndexRow } from '@/components/IndexRow';
 
 const arrowIcon = (
@@ -39,6 +40,8 @@ export function ProjectsIndex({ projects }: { projects: Project[] }) {
                 height={400}
                 quality={90}
                 sizes="(max-width: 768px) 90vw, 45vw"
+                placeholder="blur"
+                blurDataURL={BLUR_DATA_URL}
               />
             }
             meta={
@@ -66,6 +69,8 @@ export function ProjectsIndex({ projects }: { projects: Project[] }) {
             height={400}
             quality={90}
             sizes="625px"
+            placeholder="blur"
+            blurDataURL={BLUR_DATA_URL}
           />
         </div>
       </div>

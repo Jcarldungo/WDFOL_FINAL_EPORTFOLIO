@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { skills, certifications, experience, softSkills, siteInfo } from '@/lib/content';
+import { BLUR_DATA_URL } from '@/lib/blur';
 
 export const metadata = {
   title: 'About | Jann Carl Dungo',
@@ -32,7 +33,10 @@ export default function About() {
                   width={900}
                   height={1200}
                   quality={90}
+                  priority
                   sizes="(max-width: 1024px) 92vw, 40vw"
+                  placeholder="blur"
+                  blurDataURL={BLUR_DATA_URL}
                   className="about-photo-real"
                 />
               </div>

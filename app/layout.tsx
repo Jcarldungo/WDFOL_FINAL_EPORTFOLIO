@@ -9,7 +9,7 @@ import { Footer } from '@/components/Footer';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://janncarldungo.vercel.app'),
+  metadataBase: new URL('https://janncarl.vercel.app'),
   title: {
     default: 'Jann Carl Dungo | Full-Stack Developer',
     template: '%s',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
       'Building structured, efficient full-stack systems with React, Vue.js, Node.js, PHP, and RESTful APIs.',
     type: 'website',
     siteName: 'Jann Carl Dungo',
-    url: 'https://janncarldungo.vercel.app/',
+    url: 'https://janncarl.vercel.app',
     images: [
       {
         url: '/images/og-image.jpg',

@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { projects, siteInfo } from '@/lib/content';
+import { BLUR_DATA_URL } from '@/lib/blur';
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -63,7 +64,10 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
               width={960}
               height={600}
               quality={90}
-              sizes="(max-width: 980px) 92vw, 620px"
+              priority
+              sizes="(max-width: 1024px) 92vw, 620px"
+              placeholder="blur"
+              blurDataURL={BLUR_DATA_URL}
             />
           </div>
         </div>
