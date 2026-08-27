@@ -27,9 +27,10 @@ export default function Home() {
               </h1>
               <p className="hero-support">BSIT — Web Development · Holy Angel University</p>
               <p className="hero-desc">
-                I build <strong>structured, efficient full-stack systems</strong> with React,
-                Vue.js, Node.js, PHP, and REST APIs — from the database schema to the
-                deployed frontend.
+                I design and build <strong>structured full-stack systems</strong> — from
+                database architecture and backend APIs to responsive, production-ready
+                interfaces. I&apos;m continuously learning, refining my craft, and looking
+                to collaborate on meaningful projects.
               </p>
 
               <div className="hero-cta">
