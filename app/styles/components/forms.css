@@ -52,18 +52,18 @@
   color: var(--text-3);
 }
 
-/* Focus */
+/* Focus — accent-glow reads in both themes (white glow was invisible on light) */
 .form-input:focus,
 .form-textarea:focus {
   border-color: var(--accent);
-  box-shadow  : 0 0 0 3px rgba(255, 255, 255, 0.12);
+  box-shadow  : 0 0 0 3px var(--accent-glow);
 }
 
 /* Error state */
 .form-input.error,
 .form-textarea.error {
   border-color: var(--red);
-  box-shadow  : 0 0 0 3px rgba(248, 113, 113, 0.12);
+  box-shadow  : 0 0 0 3px color-mix(in srgb, var(--red) 22%, transparent);
 }
 
 .form-textarea {

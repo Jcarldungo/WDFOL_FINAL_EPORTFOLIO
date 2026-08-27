@@ -59,13 +59,19 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#0b0d10',
+  themeColor: [
+    { media: '(prefers-color-scheme: dark)', color: '#0b0d10' },
+    { media: '(prefers-color-scheme: light)', color: '#f6f7f8' },
+  ],
 };
 
 const THEME_INIT_SCRIPT = `
 (function() {
   try {
-    var saved = localStorage.getItem('portfolio-theme') || 'dark';
+    var saved = localStorage.getItem('portfolio-theme');
+    if (saved !== 'light' && saved !== 'dark') {
+      saved = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
     document.documentElement.setAttribute('data-theme', saved);
   } catch (e) {}
 })();

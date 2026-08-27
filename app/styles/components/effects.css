@@ -98,11 +98,12 @@ body::before {
   flex-shrink    : 0;
 }
 
-.social-link:hover {
+.social-link:hover,
+.social-link:focus-visible {
   border-color: var(--accent);
   color       : var(--accent);
   transform   : translateY(-3px);
-  background  : rgba(255, 255, 255, 0.07);
+  background  : var(--surface-2);
 }
 
 /* ── Mac window dots ──────────────────────────────────── */

@@ -90,7 +90,8 @@
   border-bottom : 1px solid transparent;
   transition    : color var(--transition-fast), border-color var(--transition-fast);
 }
-.hero-resume:hover { color: var(--accent); border-bottom-color: var(--border-2); }
+.hero-resume:hover,
+.hero-resume:focus-visible { color: var(--accent); border-bottom-color: var(--border-2); }
 
 .hero-stack {
   font-family   : var(--font-mono);

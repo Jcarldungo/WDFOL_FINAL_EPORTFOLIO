@@ -48,7 +48,8 @@ footer {
   color          : var(--text-3);
   transition     : color var(--transition-fast), background var(--transition-fast);
 }
-.footer-social-link:hover { color: var(--accent); background: var(--surface); }
+.footer-social-link:hover,
+.footer-social-link:focus-visible { color: var(--accent); background: var(--surface); }
 
 .footer-links {
   display  : flex;
