@@ -14,7 +14,7 @@ import type { ReactNode } from 'react';
 export type IndexRowProps = {
   num: string;
   title: string;
-  titleAs?: 'h2' | 'h3' | 'div';
+  titleAs?: 'h2' | 'h3' | 'h4' | 'div';
   href?: string;
   desc?: string;
   meta?: ReactNode;

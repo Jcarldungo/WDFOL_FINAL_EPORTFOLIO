@@ -19,8 +19,9 @@
 @import './styles/components/forms.css';
 @import './styles/components/effects.css';
 
-@import './styles/pages/home.css';
-@import './styles/pages/about.css';
-@import './styles/pages/projects.css';
-@import './styles/pages/contact.css';
-@import './styles/pages/services.css';
+@import './styles/sections/hero.css';
+@import './styles/sections/projects.css';
+@import './styles/sections/stack.css';
+@import './styles/sections/about.css';
+@import './styles/sections/experience.css';
+@import './styles/sections/contact.css';

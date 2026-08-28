@@ -1,5 +1,5 @@
 /* =============================================================================
-   HOME PAGE — Hero, "what I build", featured projects, quick-about strip.
+   HERO SECTION — identity, CTAs, portrait + signature code window.
    ============================================================================= */
 
 /* ══════════════════════════════════════════════════════
@@ -179,28 +179,6 @@
   color      : var(--text-3);
 }
 
-/* ── Quick About strip ────────────────────────────────── */
-.quick-about {
-  display    : grid;
-  grid-template-columns: 200px 1fr;
-  gap        : var(--space-3xl);
-  align-items: center;
-}
-
-.quick-about-photo { position: relative; }
-
-.quick-photo-img {
-  width        : 180px;
-  height       : 180px;
-  object-fit   : cover;
-  border-radius: var(--radius);
-  border       : 2px solid var(--border-2);
-  filter       : grayscale(15%) contrast(1.05);
-  box-shadow   : var(--shadow);
-  display      : block;
-  margin       : 0 auto;
-}
-
 /* ── Responsive ───────────────────────────────────────── */
 @media (max-width: 1024px) {
   .hero {
@@ -210,10 +188,9 @@
   .hero-layout { grid-template-columns: 1fr; gap: var(--space-2xl); }
   .hero-media  { align-items: center; }
   .hero-portrait { --portrait-size: 220px; }
-  .hero-code-card { display: none; }
-
-  .quick-about { grid-template-columns: 1fr; text-align: center; }
-  .quick-photo-img { margin: 0 auto; }
+  /* The code window is the site's signature device — shrink it rather
+     than hiding it, so it survives on every viewport. */
+  .hero-code-card { font-size: 0.72rem; padding: 14px 18px; }
 }
 
 @media (max-width: 768px) {
@@ -221,6 +198,6 @@
   .hero-cta { width: 100%; }
   .hero-cta .btn { flex: 1 1 160px; justify-content: center; }
   .hero-resume { flex-basis: 100%; margin-top: 2px; }
+  .hero-code-card { font-size: 0.68rem; padding: 12px 14px; line-height: 1.7; }
 }
-
 

@@ -1,6 +1,6 @@
 /* =============================================================================
-   INDEX ROW — shared numbered editorial row. Backs the homepage "What I
-   Build" list and the projects index. Replaces .svc-row + .proj-row.
+   INDEX ROW — shared numbered editorial row. Backs the "What I Build"
+   capabilities list inside the About section.
    Structure carries the meaning: a mono number, one display-font title,
    one line of copy, optional meta/preview, optional trailing control.
    ============================================================================= */

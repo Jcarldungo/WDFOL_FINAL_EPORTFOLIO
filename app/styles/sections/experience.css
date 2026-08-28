@@ -1,0 +1,95 @@
+/* =============================================================================
+   EXPERIENCE SECTION — a connected timeline of real work, plus real
+   certifications clustered by issuer rather than a flat resume-style list.
+   ============================================================================= */
+
+/* ── On the job: connected timeline, not a disconnected card grid ── */
+.exp-timeline-label,
+.cert-clusters-label {
+  font-family   : var(--font-mono);
+  font-size     : 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color         : var(--accent);
+  margin-bottom : var(--space-lg);
+}
+
+.exp-list-timeline {
+  position      : relative;
+  display       : flex;
+  flex-direction: column;
+  gap           : var(--space-lg);
+}
+.exp-list-timeline::before {
+  content   : '';
+  position  : absolute;
+  left      : 23px;
+  top       : 24px;
+  bottom    : 24px;
+  width     : 1px;
+  background: var(--border);
+}
+
+.exp-card {
+  position  : relative;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: var(--space-lg);
+  display: flex; gap: var(--space-md); align-items: flex-start;
+  transition: transform var(--transition-base), border-color var(--transition-base);
+}
+.exp-card:hover { transform: translateY(-4px); border-color: var(--border-2); }
+.exp-icon {
+  font-size: 1.8rem; width: 48px; height: 48px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, rgba(255, 255, 255,.1), rgba(210, 210, 210,.1));
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+.exp-body    { flex: 1; }
+.exp-title   { font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
+.exp-org     { font-size: 0.78rem; color: var(--accent); font-family: var(--font-mono); margin-bottom: 12px; }
+.exp-list    { list-style: none; padding: 0; }
+.exp-list li { font-size: 0.84rem; color: var(--text-2); padding: 3px 0 3px 14px; position: relative; line-height: 1.55; }
+.exp-list li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: .75rem; top: 5px; }
+
+/* ── Certified in: issuer clusters ── */
+.cert-clusters { margin-top: var(--space-3xl); }
+.cert-cluster-grid {
+  display              : grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap                  : var(--space-lg);
+  margin-top           : var(--space-xl);
+}
+.cert-cluster {
+  background   : var(--surface);
+  border       : 1px solid var(--border);
+  border-radius: var(--radius);
+  padding      : var(--space-lg);
+}
+.cert-cluster-issuer {
+  font-family   : var(--font-mono);
+  font-size     : 0.8rem;
+  font-weight   : 700;
+  color         : var(--text);
+  margin-bottom : var(--space-md);
+}
+.cert-cluster-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.cert-chip {
+  display      : inline-block;
+  font-size    : 0.8rem;
+  padding      : 6px 12px;
+  border-radius: var(--radius-pill);
+  border       : 1px solid var(--border-2);
+  background   : var(--surface-2);
+  color        : var(--text-2);
+  transition   : color var(--transition-fast), border-color var(--transition-fast);
+}
+.cert-chip:hover,
+.cert-chip:focus-visible { color: var(--accent); border-color: var(--accent); }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .cert-cluster-grid { grid-template-columns: 1fr; }
+}

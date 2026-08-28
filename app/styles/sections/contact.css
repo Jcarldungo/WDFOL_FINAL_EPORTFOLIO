@@ -1,5 +1,5 @@
 /* =============================================================================
-   CONTACT PAGE — Two-column: info left (email is the obvious action), form right.
+   CONTACT SECTION — Two-column: info left (email is the obvious action), form right.
    ============================================================================= */
 
 .contact-grid {
@@ -74,6 +74,14 @@
 .contact-meta dd { font-size: var(--fs-300); color: var(--text-2); }
 .contact-meta dd a { transition: color var(--transition-fast); }
 .contact-meta dd a:hover { color: var(--accent); }
+
+.contact-resume {
+  font-size    : var(--fs-300);
+  color        : var(--text-3);
+  margin-bottom: var(--space-xl);
+}
+.contact-resume a { color: var(--text-2); border-bottom: 1px solid var(--border-2); transition: color var(--transition-fast); }
+.contact-resume a:hover { color: var(--accent); }
 
 /* ── Responsive ───────────────────────────────────────── */
 @media (max-width: 1024px) {

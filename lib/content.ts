@@ -93,16 +93,22 @@ export const projects: Project[] = [
 
 export type SkillCategory = { title: string; items: string[] };
 
+/** Grouped along the shape of a request rather than by resume category —
+ *  Interface → Server → Data, plus the cross-cutting Foundation & Workflow
+ *  tools that support all three. Same real items as before, regrouped. */
 export const skills: SkillCategory[] = [
   {
-    title: 'Backend Engineering',
+    title: 'Interface',
+    items: ['HTML5 / CSS3', 'React / Inertia.js', 'Vue.js / Angular', 'Tailwind CSS'],
+  },
+  {
+    title: 'Server',
     items: ['Node.js / Express.js', 'Laravel', 'RESTful API Architecture', 'JWT Authentication', 'PHP'],
   },
-  { title: 'Languages', items: ['JavaScript (ES6+)', 'Java', 'SQL', 'Python'] },
-  { title: 'Databases', items: ['MongoDB (NoSQL)', 'MySQL (Relational)', 'DB Normalization'] },
+  { title: 'Data', items: ['MongoDB (NoSQL)', 'MySQL (Relational)', 'DB Normalization'] },
   {
-    title: 'Frontend & Tools',
-    items: ['HTML5 / CSS3', 'React / Inertia.js', 'Vue.js / Angular', 'Tailwind CSS', 'Git / GitHub', 'Figma / Postman'],
+    title: 'Foundation & Workflow',
+    items: ['JavaScript (ES6+)', 'Java', 'SQL', 'Python', 'Git / GitHub', 'Figma / Postman'],
   },
 ];
 

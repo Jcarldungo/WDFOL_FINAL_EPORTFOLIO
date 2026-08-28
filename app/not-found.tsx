@@ -16,7 +16,7 @@ export default function NotFound() {
           </p>
           <div className="notfound-actions">
             <Link className="btn btn-primary" href="/">Back home</Link>
-            <Link className="btn btn-outline" href="/projects">See projects</Link>
+            <Link className="btn btn-outline" href="/#projects">See projects</Link>
           </div>
         </div>
       </div>

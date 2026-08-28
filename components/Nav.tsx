@@ -1,17 +1,10 @@
 'use client';
 
-import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { SECTIONS, SECTION_IDS } from '@/lib/sections';
+import { useActiveSection } from '@/lib/useActiveSection';
 import { useTheme } from './ThemeProvider';
-
-const NAV_LINKS = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/projects', label: 'Projects' },
-  { href: '/contact', label: 'Contact' },
-];
 
 const SunIcon = (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
@@ -25,8 +18,8 @@ const MoonIcon = (
 );
 
 export function Nav() {
-  const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
+  const active = useActiveSection(SECTION_IDS);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const progressRef = useRef<HTMLDivElement>(null);
@@ -110,10 +103,12 @@ export function Nav() {
     };
   }, [menuOpen]);
 
-  // Close the mobile menu on every route change
+  // Close the mobile menu whenever the URL hash changes (anchor nav that
+  // isn't a direct link click — e.g. browser back/forward).
   useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
+    window.addEventListener('hashchange', closeMenu);
+    return () => window.removeEventListener('hashchange', closeMenu);
+  }, [closeMenu]);
 
   return (
     <>
@@ -127,40 +122,40 @@ export function Nav() {
         aria-hidden={!menuOpen}
         inert={!menuOpen}
       >
-        {NAV_LINKS.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className={`mobile-link${pathname === link.href ? ' active' : ''}`}
+        {SECTIONS.map((s) => (
+          <a
+            key={s.id}
+            href={`#${s.id}`}
+            className={`mobile-link${active === s.id ? ' active' : ''}`}
             onClick={closeMenu}
           >
-            {link.label}
-          </Link>
+            {s.label}
+          </a>
         ))}
         <div className="mobile-menu-actions">
           <button className="theme-toggle" aria-label="Toggle light/dark mode" onClick={toggleTheme}>
             {theme === 'dark' ? SunIcon : MoonIcon}
           </button>
-          <Link href="/contact" className="btn btn-primary" onClick={closeMenu}>Hire Me</Link>
+          <a href="#contact" className="btn btn-primary" onClick={closeMenu}>Hire Me</a>
         </div>
       </nav>
 
       <header id="navbar" role="banner" className={scrolled ? 'scrolled' : ''}>
         <div className="container">
           <div className="nav-inner">
-            <Link href="/" className="nav-logo" aria-label="Jann Carl Dungo — Home">
+            <a href="#home" className="nav-logo" aria-label="Jann Carl Dungo — Home">
               <Image src="/icons/logo.png" alt="JD Logo" width={46} height={46} className="logo-img" />
-            </Link>
+            </a>
 
             <nav className="nav-links" aria-label="Primary navigation">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`nav-link${pathname === link.href ? ' active' : ''}`}
+              {SECTIONS.map((s) => (
+                <a
+                  key={s.id}
+                  href={`#${s.id}`}
+                  className={`nav-link${active === s.id ? ' active' : ''}`}
                 >
-                  {link.label}
-                </Link>
+                  {s.label}
+                </a>
               ))}
             </nav>
 
@@ -168,7 +163,7 @@ export function Nav() {
               <button className="theme-toggle nav-actions-toggle" aria-label="Toggle light/dark mode" onClick={toggleTheme}>
                 {theme === 'dark' ? SunIcon : MoonIcon}
               </button>
-              <Link href="/contact" className="btn btn-primary btn-sm">Hire Me</Link>
+              <a href="#contact" className="btn btn-primary btn-sm">Hire Me</a>
               <button
                 ref={hamburgerRef}
                 className={`hamburger${menuOpen ? ' open' : ''}`}

@@ -1,0 +1,254 @@
+/* =============================================================================
+   PROJECTS SECTION — two inline-expandable case-study cards. Each project
+   is a native <details>/<summary> disclosure: the summary is always-visible
+   proof (screenshot, achievement, live/GitHub links); expanding it reveals
+   the full case study (problem / what I did / outcome / built with).
+   ============================================================================= */
+
+.proj-features {
+  display       : flex;
+  flex-direction: column;
+  gap           : var(--space-3xl);
+  margin-top    : var(--space-2xl);
+}
+
+.proj-feature {
+  border       : 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background   : var(--surface);
+  overflow     : hidden;
+}
+
+/* Native marker off — the whole summary is already the clickable surface,
+   and the toggle affordance below communicates state on its own. */
+.proj-feature-summary {
+  list-style : none;
+  cursor     : pointer;
+  display    : grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap        : var(--space-2xl);
+  align-items: center;
+  padding    : var(--space-2xl);
+}
+.proj-feature-summary::-webkit-details-marker { display: none; }
+.proj-feature-summary:focus-visible {
+  outline       : 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+/* Alternate media side project-to-project for rhythm across the two cards. */
+.proj-feature--flip .proj-feature-summary { grid-template-columns: 1.15fr 1fr; }
+.proj-feature--flip .pv-frame { order: 2; }
+.proj-feature--flip .pv-hero-text { order: 1; }
+
+.pv-frame {
+  border       : 1px solid var(--border-2);
+  border-radius: var(--radius);
+  overflow     : hidden;
+  background   : var(--surface-2);
+  box-shadow   : var(--shadow);
+}
+.pv-frame-bar {
+  display    : flex;
+  align-items: center;
+  gap        : 6px;
+  padding    : 10px 14px;
+  background : var(--surface-2);
+  border-bottom: 1px solid var(--border);
+}
+.pv-frame-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--border-2); }
+.pv-frame-url {
+  margin-left: 10px;
+  font-family: var(--font-mono);
+  font-size  : 0.72rem;
+  color      : var(--text-3);
+}
+.pv-frame img { width: 100%; display: block; }
+
+.pv-eyebrow {
+  font-family   : var(--font-mono);
+  font-size     : 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color         : var(--accent);
+  margin-bottom : 12px;
+}
+
+.pv-title {
+  font-family   : var(--font-display);
+  font-size     : clamp(1.5rem, 3vw, 2rem);
+  font-weight   : 800;
+  letter-spacing: -0.02em;
+  line-height   : 1.1;
+  margin        : 0 0 12px;
+}
+
+.pv-lede {
+  font-size  : 0.95rem;
+  color      : var(--text-2);
+  line-height: 1.7;
+  margin     : 0 0 14px;
+  max-width  : 46ch;
+}
+
+/* One curated technical highlight, called out under the lede */
+.pv-achievement {
+  font-size   : var(--fs-300);
+  color       : var(--text);
+  line-height : var(--lh-normal);
+  max-width   : 46ch;
+  margin      : 0 0 18px;
+  padding-left: 14px;
+  border-left : 2px solid var(--accent);
+}
+
+.pv-roles { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+
+.pv-role {
+  font-size    : 0.78rem;
+  padding      : 6px 14px;
+  border-radius: var(--radius-pill);
+  border       : 1px solid var(--border-2);
+  background   : var(--surface);
+  color        : var(--text-2);
+}
+
+.pv-links { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+.proj-feature-toggle {
+  display    : inline-flex;
+  align-items: center;
+  gap        : 6px;
+  font-size  : 0.85rem;
+  font-weight: 500;
+  color      : var(--text-2);
+  margin-left: auto;
+}
+.proj-feature-toggle span[aria-hidden] { transition: transform var(--transition-base); }
+.proj-feature[open] .proj-feature-toggle span[aria-hidden] { transform: rotate(180deg); }
+.proj-feature-toggle-close { display: none; }
+.proj-feature[open] .proj-feature-toggle-open  { display: none; }
+.proj-feature[open] .proj-feature-toggle-close { display: inline; }
+
+/* ── Case study (revealed on expand) ──────────────────── */
+.pv-case {
+  padding   : var(--space-xl) var(--space-2xl) var(--space-md);
+  border-top: 1px solid var(--border);
+  margin-top: var(--space-lg);
+}
+
+.pv-case-label,
+.pv-built-label {
+  display       : flex;
+  align-items   : center;
+  gap           : 10px;
+  font-family   : var(--font-mono);
+  font-size     : 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color         : var(--text-3);
+  margin-bottom : var(--space-lg);
+}
+.pv-case-label::before,
+.pv-built-label::before {
+  content: '';
+  width  : 28px;
+  height : 1px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.pv-case-block { margin-bottom: var(--space-xl); }
+
+.pv-case-head {
+  font-family   : var(--font-mono);
+  font-size     : 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color         : var(--text-2);
+  margin-bottom : 10px;
+}
+
+.pv-case-block p {
+  font-size  : 0.92rem;
+  color      : var(--text-2);
+  line-height: 1.8;
+  margin     : 0;
+  max-width  : 78ch;
+}
+
+.pv-case-list {
+  list-style: none;
+  padding   : 0;
+  margin    : 0;
+  display   : flex;
+  flex-direction: column;
+  gap       : 8px;
+}
+
+.pv-case-list li {
+  font-size  : 0.9rem;
+  color      : var(--text-2);
+  line-height: 1.7;
+  padding-left: 22px;
+  position   : relative;
+  max-width  : 78ch;
+}
+
+/* Two marker styles so "what I did" and "outcome" read as different
+   kinds of statement — actions vs. results — without needing colour. */
+.pv-case-list--did li::before {
+  content : '→';
+  position: absolute;
+  left    : 0;
+  color   : var(--text-3);
+}
+.pv-case-list--out li::before {
+  content : '✓';
+  position: absolute;
+  left    : 0;
+  color   : var(--green);
+}
+
+/* ── Built with ── */
+.pv-built { padding: 0 var(--space-2xl) var(--space-xl); }
+.pv-built-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.pv-chip {
+  font-family  : var(--font-mono);
+  font-size    : 0.75rem;
+  padding      : 6px 14px;
+  border-radius: var(--radius-pill);
+  border       : 1px solid var(--border);
+  background   : var(--surface);
+  color        : var(--text-2);
+}
+
+/* ── Closing inline CTA — a line, not a boxed panel ───── */
+.inline-cta {
+  margin-top: var(--space-2xl);
+  text-align: center;
+  font-size : var(--fs-500);
+  color     : var(--text-2);
+}
+.inline-cta a {
+  color        : var(--accent);
+  font-weight  : 600;
+  border-bottom: 1px solid var(--border-2);
+}
+.inline-cta a:hover { border-color: var(--accent); }
+
+/* ══════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .proj-feature-summary,
+  .proj-feature--flip .proj-feature-summary {
+    grid-template-columns: 1fr;
+    padding: var(--space-xl);
+  }
+  .proj-feature--flip .pv-frame,
+  .proj-feature--flip .pv-hero-text { order: initial; }
+  .pv-case,
+  .pv-built { padding-left: var(--space-xl); padding-right: var(--space-xl); }
+}

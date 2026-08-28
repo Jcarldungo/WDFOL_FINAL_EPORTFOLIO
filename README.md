@@ -19,10 +19,8 @@ npm install
 npm run dev
 ```
 
-## Routes
+## Structure
 
-- `/` — Home
-- `/about` — Bio, skills, certifications, experience
-- `/projects` — Project index
-- `/projects/[slug]` — Case studies (`weeplay`, `gastos`)
-- `/contact` — Contact form
+Single-page layout — all content lives on `/` as anchor-linked sections (`#home`,
+`#projects`, `#stack`, `#about`, `#experience`, `#contact`). Project case studies
+expand inline via `<details>` rather than a separate route.
