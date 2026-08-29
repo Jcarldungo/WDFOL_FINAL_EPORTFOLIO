@@ -17,7 +17,7 @@ footer {
   justify-content: space-between;
   gap            : var(--space-lg);
   flex-wrap      : wrap;
-  padding-block  : var(--space-xl);
+  padding-block  : var(--space-lg);
 }
 
 .footer-socials { display: flex; gap: 4px; }

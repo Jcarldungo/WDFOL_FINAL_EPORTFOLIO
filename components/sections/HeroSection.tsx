@@ -18,7 +18,9 @@ export function HeroSection() {
               Jann Carl Dungo
               <span className="hero-role">Full-Stack Developer</span>
             </h1>
-            <p className="hero-support">BSIT — Web Development · Holy Angel University</p>
+            <p className="hero-support">
+              BSIT — Web Development · Holy Angel University · Dean&apos;s Lister (2023–present)
+            </p>
             <p className="hero-desc">
               I design and build <strong>structured full-stack systems</strong> — from
               database architecture and backend APIs to responsive, production-ready

@@ -51,11 +51,17 @@
      Deliberate vertical density, not one size for every section.
      .section uses --section-pad; modifiers pick tight / generous.
      --section-pad-page-top clears the fixed nav on an inner page's
-     first section (replaces inline style={{ paddingTop: 120 }}). */
-  --section-pad-tight    : clamp(48px, 7vw, 80px);
-  --section-pad          : clamp(64px, 9vw, 108px);
-  --section-pad-generous : clamp(96px, 13vw, 172px);
-  --section-pad-page-top : clamp(112px, 14vw, 176px);
+     first section (replaces inline style={{ paddingTop: 120 }}).
+     Tightened ~22% in the density pass — the page was reading long
+     and empty; this is the single lever that shortens every gap
+     between sections at once. */
+  --section-pad-tight    : clamp(44px, 5.5vw, 68px);
+  --section-pad          : clamp(56px, 7vw, 92px);
+  --section-pad-generous : clamp(76px, 9.5vw, 128px);
+  --section-pad-page-top : clamp(96px, 11.5vw, 140px);
+
+  /* Space below a section's heading block, before its content. */
+  --section-head-gap     : clamp(30px, 3.5vw, 44px);
 
   /* ── Container widths ────────────────────────────────── */
   --container-narrow : min(760px, 92vw);

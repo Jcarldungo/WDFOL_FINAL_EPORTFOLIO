@@ -14,7 +14,6 @@
 @import './styles/layout/responsive.css';
 
 @import './styles/components/buttons.css';
-@import './styles/components/index-row.css';
 @import './styles/components/cards.css';
 @import './styles/components/forms.css';
 @import './styles/components/effects.css';
@@ -25,3 +24,5 @@
 @import './styles/sections/about.css';
 @import './styles/sections/experience.css';
 @import './styles/sections/contact.css';
+
+@import './styles/work/detail.css';

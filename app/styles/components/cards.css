@@ -1,10 +1,10 @@
 /* =============================================================================
-   CARDS — Shared card primitives (skill-category card, generic inline link)
-   used across sections. Separation rationale: cards are the primary content
-   containers used site-wide. One file means consistent hover states/spacing.
+   CARDS — Shared card primitives used across sections. Separation rationale:
+   cards are the primary content containers used site-wide. One file means
+   consistent hover states / spacing.
    ============================================================================= */
 
-/* Generic inline "→" link (cert clusters, etc.) */
+/* Generic inline "→" link */
 .card-link {
   font-size  : 0.85rem;
   font-weight: 500;
@@ -15,65 +15,3 @@
   transition : gap var(--transition-fast);
 }
 .card-link:hover { gap: 8px; }
-
-/* ══════════════════════════════════════════════════════
-   SKILL CATEGORY CARD (About page)
-   ══════════════════════════════════════════════════════ */
-.skill-cat-card {
-  background  : var(--surface);
-  border      : 1px solid var(--border);
-  border-radius: var(--radius);
-  padding     : var(--space-lg);
-  transition  : transform var(--transition-base), border-color var(--transition-base);
-}
-
-.skill-cat-card:hover {
-  transform   : translateY(-4px);
-  border-color: var(--border-2);
-}
-
-.skill-cat-title {
-  font-family  : var(--font-display);
-  font-weight  : 700;
-  font-size    : 1rem;
-  margin-bottom: var(--space-md);
-  color        : var(--accent);
-}
-
-/* Skill list — replaced the old .skill-item/.skill-bar/.skill-fill
-   percentage meters. A self-assigned "78%" isn't a measurement of
-   anything, so the bars were decoration pretending to be data; the
-   plain list says the same true thing (these are the tools used)
-   without inventing a number to go with it. */
-.skill-list {
-  list-style: none;
-  padding   : 0;
-  margin    : 0;
-  display   : flex;
-  flex-direction: column;
-}
-
-.skill-list li {
-  font-size     : 0.88rem;
-  color         : var(--text);
-  padding       : 9px 0 9px 18px;
-  position      : relative;
-  border-bottom : 1px solid var(--border);
-}
-
-.skill-list li:last-child { border-bottom: none; }
-
-/* Bullet is pinned to the first text line (padding-top + half a line,
-   minus half the dot) rather than to the li's own 50% — a 50%-based
-   dot drifts on any item whose text wraps to two lines. */
-.skill-list li::before {
-  content   : '';
-  position  : absolute;
-  left      : 0;
-  top       : calc(9px + 0.75em - 2.5px);
-  width     : 5px;
-  height    : 5px;
-  border-radius: 50%;
-  background: var(--text-3);
-}
-

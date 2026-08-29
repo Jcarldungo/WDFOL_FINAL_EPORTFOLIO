@@ -1,8 +1,9 @@
 export type SectionMeta = { id: string; label: string };
 
-/** Single source of truth for nav/footer anchor order and labels. Section
- *  render order in `app/page.tsx` is explicit JSX, not driven by this list —
- *  with only six sections that stays more debuggable than a registry loop. */
+/** Single source of truth for anchor order and labels. `home` stays in the
+ *  list so scroll-spy tracks the hero (otherwise "Work" reads active at the
+ *  top), but it's excluded from the rendered nav/footer links — the logo is
+ *  the home affordance. */
 export const SECTIONS: SectionMeta[] = [
   { id: 'home', label: 'Home' },
   { id: 'projects', label: 'Work' },
@@ -13,3 +14,6 @@ export const SECTIONS: SectionMeta[] = [
 ];
 
 export const SECTION_IDS: string[] = SECTIONS.map((s) => s.id);
+
+/** The subset shown as nav/footer links — everything except Home. */
+export const NAV_SECTIONS: SectionMeta[] = SECTIONS.filter((s) => s.id !== 'home');

@@ -11,18 +11,23 @@
   position     : relative;
   display      : flex;
   align-items  : center;
-  min-height   : min(680px, 90svh);
+  min-height   : min(600px, 84svh);
   padding-block: var(--section-pad-page-top) var(--section-pad);
   overflow     : hidden;
 }
 
 .hero-layout {
   display              : grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap                  : clamp(2rem, 5vw, 5rem);
+  /* minmax(0,…) so the monospace code card (wide min-content) can't blow the
+     track out past the viewport — it scrolls inside its own overflow-x box. */
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap                  : clamp(2rem, 4.5vw, 4rem);
   align-items          : center;
   width                : 100%;
 }
+
+.hero-lead,
+.hero-media { min-width: 0; }
 
 /* ── Lead: identity + CTAs ────────────────────────────── */
 .hero-kicker {
@@ -33,26 +38,26 @@
   font-size     : var(--fs-100);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color         : var(--accent);
-  margin-bottom : var(--space-lg);
+  color         : var(--text-2);
+  margin-bottom : var(--space-md);
 }
 
 .hero-name {
   font-family   : var(--font-display);
-  font-size     : var(--fs-900);
+  font-size     : clamp(2.6rem, 5.4vw, 4.4rem);
   font-weight   : 800;
   line-height   : var(--lh-tight);
   letter-spacing: -0.04em;
-  margin        : 0 0 var(--space-md);
+  margin        : 0 0 var(--space-sm);
 }
 
 .hero-role {
   display       : block;
-  font-size     : clamp(1.15rem, 2.3vw, 1.7rem);
+  font-size     : clamp(1.1rem, 2.1vw, 1.55rem);
   font-weight   : 600;
   letter-spacing: -0.01em;
   color         : var(--text-2);
-  margin-top    : 12px;
+  margin-top    : 10px;
 }
 
 .hero-support {
@@ -60,23 +65,23 @@
   font-size     : var(--fs-200);
   letter-spacing: 0.02em;
   color         : var(--text-3);
-  margin-bottom : var(--space-lg);
+  margin-bottom : var(--space-md);
 }
 
 .hero-desc {
   font-size    : var(--fs-400);
   color        : var(--text-2);
-  max-width    : 54ch;
-  line-height  : var(--lh-normal);
-  margin-bottom: var(--space-lg);
+  max-width    : 52ch;
+  line-height  : 1.65;
+  margin-bottom: var(--space-md);
 }
 
 .hero-cta {
   display    : flex;
   align-items: center;
-  gap        : 14px;
+  gap        : 12px;
   flex-wrap  : wrap;
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-md);
 }
 
 .hero-resume {
@@ -114,18 +119,18 @@
 .hero-media {
   display       : flex;
   flex-direction: column;
-  gap           : var(--space-lg);
+  gap           : var(--space-md);
 }
 
 /* Circular portrait: a static outer ring, a gap, then the photo. */
 .hero-portrait {
-  --portrait-size: clamp(240px, 24vw, 320px);
+  --portrait-size: clamp(196px, 19vw, 260px);
   position      : relative;
   align-self    : center;
   flex          : 0 0 auto;
   width         : var(--portrait-size);
   height        : var(--portrait-size);
-  padding       : 12px;
+  padding       : 10px;
   border-radius : 50%;
   border        : 1px solid var(--border-2);
 }
@@ -156,10 +161,10 @@
   background   : var(--surface);
   border       : 1px solid var(--border);
   border-radius: var(--radius);
-  padding      : 16px 20px;
+  padding      : 14px 18px;
   font-family  : var(--font-mono);
-  font-size    : 0.78rem;
-  line-height  : 1.8;
+  font-size    : 0.76rem;
+  line-height  : 1.7;
   color        : var(--text-2);
   max-width    : 100%;
   min-width    : 0;
@@ -170,7 +175,7 @@
   display      : flex;
   align-items  : center;
   gap          : var(--space-sm);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .code-filename {
@@ -185,8 +190,8 @@
     min-height   : 0;
     padding-block: var(--section-pad-page-top) var(--section-pad-tight);
   }
-  .hero-layout { grid-template-columns: 1fr; gap: var(--space-2xl); }
-  .hero-media  { align-items: center; }
+  .hero-layout { grid-template-columns: minmax(0, 1fr); gap: var(--space-2xl); }
+  .hero-media  { align-items: center; width: 100%; }
   .hero-portrait { --portrait-size: 220px; }
   /* The code window is the site's signature device — shrink it rather
      than hiding it, so it survives on every viewport. */

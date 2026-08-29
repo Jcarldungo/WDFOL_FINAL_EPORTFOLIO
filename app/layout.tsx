@@ -4,8 +4,6 @@ import Script from 'next/script';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { AmbientBackground } from '@/components/AmbientBackground';
 import { RevealScope } from '@/components/RevealScope';
-import { Nav } from '@/components/Nav';
-import { Footer } from '@/components/Footer';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -33,7 +31,6 @@ export const metadata: Metadata = {
     'Pampanga',
   ],
   authors: [{ name: 'Jann Carl Dungo' }],
-  alternates: { canonical: '/' },
   openGraph: {
     title: 'Jann Carl Dungo | Full-Stack Developer',
     description:
@@ -111,10 +108,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider>
           <AmbientBackground />
           <RevealScope />
-          <a href="#main-content" className="skip-link">Skip to main content</a>
-          <Nav />
-          <main id="main-content" role="main">{children}</main>
-          <Footer />
+          {children}
         </ThemeProvider>
       </body>
     </html>

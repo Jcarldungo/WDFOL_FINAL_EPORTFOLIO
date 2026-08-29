@@ -1,19 +1,23 @@
 /* =============================================================================
-   EXPERIENCE SECTION — a connected timeline of real work, plus real
-   certifications clustered by issuer rather than a flat resume-style list.
+   EXPERIENCE SECTION — a connected timeline of real work, then every real
+   certification as a verifiable row (issuer · name · domain tag · date · a
+   link to the issuer's record). Job entries are editorial rows on a single
+   timeline rail; credentials sit below, present and verifiable but visually
+   secondary to the jobs and the projects.
    ============================================================================= */
 
-/* ── On the job: connected timeline, not a disconnected card grid ── */
 .exp-timeline-label,
-.cert-clusters-label {
+.cert-list-label {
   font-family   : var(--font-mono);
-  font-size     : 0.78rem;
-  letter-spacing: 0.18em;
+  font-size     : 0.72rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color         : var(--accent);
-  margin-bottom : var(--space-lg);
+  color         : var(--text-3);
+  margin-bottom : var(--space-md);
 }
+.cert-list-label { margin-bottom: var(--space-xs); }
 
+/* ── On the job: connected timeline ── */
 .exp-list-timeline {
   position      : relative;
   display       : flex;
@@ -23,73 +27,147 @@
 .exp-list-timeline::before {
   content   : '';
   position  : absolute;
-  left      : 23px;
-  top       : 24px;
-  bottom    : 24px;
+  left      : 17px;
+  top       : 18px;
+  bottom    : 18px;
   width     : 1px;
-  background: var(--border);
+  background : var(--border-2);
 }
 
 .exp-card {
-  position  : relative;
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: var(--space-lg);
-  display: flex; gap: var(--space-md); align-items: flex-start;
-  transition: transform var(--transition-base), border-color var(--transition-base);
+  position   : relative;
+  display    : flex;
+  gap        : var(--space-md);
+  align-items: flex-start;
+  padding    : 2px 0;
 }
-.exp-card:hover { transform: translateY(-4px); border-color: var(--border-2); }
-.exp-icon {
-  font-size: 1.8rem; width: 48px; height: 48px;
-  border-radius: var(--radius-sm);
-  background: linear-gradient(135deg, rgba(255, 255, 255,.1), rgba(210, 210, 210,.1));
-  border: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  position: relative;
-  z-index: 1;
-}
-.exp-body    { flex: 1; }
-.exp-title   { font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
-.exp-org     { font-size: 0.78rem; color: var(--accent); font-family: var(--font-mono); margin-bottom: 12px; }
-.exp-list    { list-style: none; padding: 0; }
-.exp-list li { font-size: 0.84rem; color: var(--text-2); padding: 3px 0 3px 14px; position: relative; line-height: 1.55; }
-.exp-list li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: .75rem; top: 5px; }
 
-/* ── Certified in: issuer clusters ── */
-.cert-clusters { margin-top: var(--space-3xl); }
-.cert-cluster-grid {
+.exp-icon {
+  font-family     : var(--font-mono);
+  font-size       : 0.8rem;
+  font-weight     : 500;
+  width           : 36px;
+  height          : 36px;
+  border-radius   : 50%;
+  background      : var(--bg-2);
+  border          : 1px solid var(--border-2);
+  color           : var(--text-2);
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
+  flex-shrink     : 0;
+  position        : relative;
+  z-index         : 1;
+}
+
+.exp-body    { flex: 1; min-width: 0; padding-top: 2px; }
+.exp-title   { font-weight: 700; font-size: 1rem; margin-bottom: 3px; letter-spacing: -0.01em; }
+.exp-org     { font-size: 0.76rem; color: var(--text-3); font-family: var(--font-mono); margin-bottom: 10px; }
+.exp-list    { list-style: none; padding: 0; }
+.exp-list li {
+  font-size  : 0.875rem;
+  color      : var(--text-2);
+  padding    : 2px 0 2px 16px;
+  position   : relative;
+  line-height: 1.55;
+}
+.exp-list li::before {
+  content : '';
+  position: absolute;
+  left    : 0;
+  top     : 0.68em;
+  width   : 4px;
+  height  : 4px;
+  border-radius: 50%;
+  background: var(--text-3);
+}
+
+/* ── Certifications: one verifiable row each ─────────────
+   Issuer · name · domain tag · date · a link straight to the record. */
+.cert-list-block { margin-top: var(--space-2xl); }
+.cert-list-note {
+  font-size    : 0.85rem;
+  color        : var(--text-3);
+  margin-bottom: var(--space-lg);
+}
+
+.cert-list {
+  list-style : none;
+  padding    : 0;
+  margin     : 0;
+  border-top : 1px solid var(--border);
+}
+.cert-row { border-bottom: 1px solid var(--border); }
+
+.cert-row-link {
   display              : grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap                  : var(--space-lg);
-  margin-top           : var(--space-xl);
+  grid-template-columns: minmax(112px, 170px) 1fr auto auto auto;
+  align-items          : center;
+  gap                  : var(--space-md);
+  padding              : 13px 8px;
+  transition           : background var(--transition-fast);
 }
-.cert-cluster {
-  background   : var(--surface);
-  border       : 1px solid var(--border);
-  border-radius: var(--radius);
-  padding      : var(--space-lg);
-}
-.cert-cluster-issuer {
+.cert-row-link:hover,
+.cert-row-link:focus-visible { background: var(--surface); }
+.cert-row-link:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+.cert-issuer {
+  display       : inline-flex;
+  align-items   : center;
+  gap           : 8px;
   font-family   : var(--font-mono);
-  font-size     : 0.8rem;
-  font-weight   : 700;
-  color         : var(--text);
-  margin-bottom : var(--space-md);
+  font-size     : 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color         : var(--text-3);
+  white-space   : nowrap;
 }
-.cert-cluster-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.cert-chip {
-  display      : inline-block;
-  font-size    : 0.8rem;
-  padding      : 6px 12px;
-  border-radius: var(--radius-pill);
-  border       : 1px solid var(--border-2);
-  background   : var(--surface-2);
-  color        : var(--text-2);
-  transition   : color var(--transition-fast), border-color var(--transition-fast);
+.cert-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border-2); flex-shrink: 0; }
+
+.cert-name {
+  min-width     : 0;
+  font-family    : var(--font-display);
+  font-weight    : 700;
+  font-size      : 0.95rem;
+  letter-spacing : -0.01em;
+  color          : var(--text);
+  transition     : color var(--transition-fast);
 }
-.cert-chip:hover,
-.cert-chip:focus-visible { color: var(--accent); border-color: var(--accent); }
+.cert-row-link:hover .cert-name,
+.cert-row-link:focus-visible .cert-name { color: var(--accent); }
+
+.cert-tag {
+  font-size    : 0.72rem;
+  padding      : 3px 10px;
+  border-radius : var(--radius-pill);
+  border       : 1px solid var(--border);
+  color        : var(--text-3);
+  white-space  : nowrap;
+}
+.cert-date {
+  font-family : var(--font-mono);
+  font-size   : 0.72rem;
+  color       : var(--text-3);
+  white-space : nowrap;
+  text-align  : right;
+  min-width   : 58px;
+}
+.cert-check { color: var(--green); display: inline-flex; flex-shrink: 0; }
 
 /* ── Responsive ── */
-@media (max-width: 768px) {
-  .cert-cluster-grid { grid-template-columns: 1fr; }
+@media (max-width: 720px) {
+  .cert-row-link {
+    grid-template-columns: 1fr auto;
+    grid-template-areas  :
+      "issuer check"
+      "name   name"
+      "tag    date";
+    gap    : 5px 10px;
+    padding: 14px 6px;
+  }
+  .cert-issuer { grid-area: issuer; }
+  .cert-check  { grid-area: check; align-self: start; }
+  .cert-name   { grid-area: name; font-size: 0.98rem; margin: 3px 0 4px; }
+  .cert-tag    { grid-area: tag; justify-self: start; }
+  .cert-date   { grid-area: date; justify-self: end; align-self: center; }
 }

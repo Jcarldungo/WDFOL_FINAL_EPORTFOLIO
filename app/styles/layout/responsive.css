@@ -18,7 +18,7 @@
 /* ── Mobile (≤ 768px) ─────────────────────────────────── */
 @media (max-width: 768px) {
   /* Desktop nav + its inline actions collapse into the hamburger menu,
-     which carries the links, the theme toggle and the Hire Me button. */
+     which carries the links, the theme toggle and the primary CTA button. */
   .nav-links          { display: none; }
   .nav-actions .btn   { display: none; }
   .nav-actions-toggle { display: none; }

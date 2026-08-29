@@ -79,13 +79,13 @@ body::before {
 /* ── Social link icons ────────────────────────────────── */
 .social-links {
   display  : flex;
-  gap      : 12px;
-  margin-top: var(--space-xl);
+  gap      : 10px;
+  margin-top: var(--space-lg);
 }
 
 .social-link {
-  width          : 44px;
-  height         : 44px;
+  width          : 42px;
+  height         : 42px;
   border-radius  : var(--radius-sm);
   border         : 1px solid var(--border);
   background     : var(--surface);

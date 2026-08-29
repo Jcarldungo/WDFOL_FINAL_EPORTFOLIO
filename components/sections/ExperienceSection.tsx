@@ -1,20 +1,15 @@
-import { experience, certifications } from '@/lib/content';
+import { experience, certifications, certIssuerCount } from '@/lib/content';
 
-const ISSUER_ORDER = ['freeCodeCamp', 'Simplilearn', 'Coursera Project Network', 'Cisco Networking Academy'];
+const CheckIcon = (
+  <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true">
+    <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1.1 14.4l-4-4 1.4-1.4 2.6 2.6 5.6-5.6L17.9 9l-7 7.4z" />
+  </svg>
+);
 
-function certClusters() {
-  return ISSUER_ORDER.map((issuer) => ({
-    issuer,
-    certs: certifications.filter((c) => c.issuer === issuer),
-  })).filter((cluster) => cluster.certs.length > 0);
-}
-
-/** Experience + Credentials as one storytelling section rather than a
- *  resume wall: a connected timeline for the two real jobs, and the 8 real
- *  certifications clustered by issuer instead of 8 flat identical rows. */
+/** Experience + Credentials as one section: a connected timeline for the two
+ *  real jobs, then every real certification as a verifiable row — issuer,
+ *  name, domain tag, date, and a link straight to the issuer's record. */
 export function ExperienceSection() {
-  const clusters = certClusters();
-
   return (
     <section id="experience" className="section section-alt" aria-labelledby="experience-title">
       <div className="container">
@@ -43,30 +38,30 @@ export function ExperienceSection() {
           </div>
         </div>
 
-        <div className="cert-clusters">
-          <h3 className="cert-clusters-label">Certified in</h3>
-          <p className="section-subtitle">All certifications are real and verifiable — click any one to confirm it.</p>
-          <div className="cert-cluster-grid">
-            {clusters.map((cluster, i) => (
-              <div key={cluster.issuer} className={`cert-cluster reveal reveal-delay-${i + 1}`}>
-                <h4 className="cert-cluster-issuer">{cluster.issuer}</h4>
-                <div className="cert-cluster-chips">
-                  {cluster.certs.map((cert) => (
-                    <a
-                      key={cert.name}
-                      href={cert.verifyUrl}
-                      target="_blank"
-                      rel="noopener"
-                      className="cert-chip"
-                      title={`${cert.date} · Verify →`}
-                    >
-                      {cert.name}
-                    </a>
-                  ))}
-                </div>
-              </div>
+        <div className="cert-list-block reveal">
+          <h3 className="cert-list-label">Certifications</h3>
+          <p className="cert-list-note">
+            {certifications.length} earned · {certIssuerCount} issuers · every credential links to its issuer.
+          </p>
+          <ol className="cert-list">
+            {certifications.map((cert) => (
+              <li key={cert.name} className="cert-row">
+                <a href={cert.verifyUrl} target="_blank" rel="noopener" className="cert-row-link">
+                  <span className="cert-issuer">
+                    <span className="cert-dot" aria-hidden="true" />
+                    {cert.issuerShort}
+                  </span>
+                  <span className="cert-name">{cert.name}</span>
+                  <span className="cert-tag">{cert.category}</span>
+                  <span className="cert-date">{cert.date}</span>
+                  <span className="cert-check">
+                    {CheckIcon}
+                    <span className="sr-only">Verified — opens the issuer&apos;s record</span>
+                  </span>
+                </a>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </div>
     </section>

@@ -1,65 +1,161 @@
 /* =============================================================================
-   ABOUT SECTION — Photo, merged bio, soft skills, "what I build" capabilities.
+   ABOUT SECTION — context for a person, kept compact. A small portrait + an
+   education block, two short paragraphs, real recognition, a focus tag row.
+   The old big framed photo and the "what I build" list were dropped — the
+   projects section carries capability now.
    ============================================================================= */
 
-/* ── Photo frame ─────────────────────────────────────── */
-.about-photo-frame {
-  border-radius: var(--radius);
-  overflow     : hidden;
-  border       : 2px solid var(--border-2);
-  box-shadow   : var(--shadow-lg);
-  transition   : border-color var(--transition-base), box-shadow var(--transition-base);
-}
-.about-photo-frame:hover {
-  border-color: var(--accent);
-  box-shadow  : 0 0 40px var(--accent-glow);
-}
-.about-photo-real {
-  width: 100%; display: block;
-  object-fit: cover; aspect-ratio: 3/4;
-  filter: grayscale(15%) contrast(1.05);
+/* ── Education block ──────────────────────────────────── */
+.about-edu {
+  display              : grid;
+  grid-template-columns: auto 1fr auto;
+  align-items          : center;
+  gap                  : clamp(var(--space-lg), 4vw, var(--space-2xl));
+  margin-top           : var(--space-lg);
+  padding-top          : var(--space-xl);
+  border-top           : 1px solid var(--border-2);
 }
 
-/* Logo below photo */
-.about-logo-below {
+.about-portrait {
+  width        : clamp(132px, 15vw, 168px);
+  flex-shrink  : 0;
+  border-radius : var(--radius);
+  overflow     : hidden;
+  border       : 1px solid var(--border-2);
+}
+.about-portrait img {
+  width       : 100%;
+  display     : block;
+  aspect-ratio: 1 / 1;
+  object-fit  : cover;
+  filter      : grayscale(12%) contrast(1.03);
+}
+
+.about-track {
+  display       : block;
+  font-family   : var(--font-mono);
+  font-size     : 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color         : var(--text-3);
+  margin-bottom : 8px;
+}
+.about-degree {
+  font-family   : var(--font-display);
+  font-size     : clamp(1.4rem, 3vw, 2rem);
+  font-weight   : 800;
+  letter-spacing: -0.03em;
+  line-height   : 1.1;
+  margin-bottom : 10px;
+}
+.about-school {
   display    : flex;
   align-items: center;
-  gap        : 12px;
-  margin-top : var(--space-md);
-  padding    : 12px var(--space-md);
-  background : var(--surface);
-  border     : 1px solid var(--border);
-  border-radius: var(--radius-sm);
+  gap        : 8px;
+  font-size  : 0.9rem;
+  color      : var(--text-2);
 }
-.about-logo-img { width: 34px; height: 34px; object-fit: contain; flex-shrink: 0; }
-[data-theme="dark"] .about-logo-img { filter: invert(1) brightness(2) sepia(1) saturate(4) hue-rotate(175deg); }
-.about-logo-handle { font-family: var(--font-display); font-weight: 800; font-size: 1rem; }
-.about-logo-role   { font-size: 0.75rem; color: var(--text-3); }
-
-/* ── Bio ── */
-.about-bio { color: var(--text-2); line-height: 1.85; margin-bottom: var(--space-lg); }
-.about-bio p { margin-bottom: var(--space-md); }
-
-/* ── Soft skills ── */
-.soft-skills-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: var(--space-lg); }
-.soft-skill {
-  font-size: 0.78rem; padding: 5px 13px;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--border-2); background: var(--surface); color: var(--text-2);
+.about-school-crest { flex-shrink: 0; object-fit: contain; opacity: 0.85; }
+[data-theme="dark"] .about-school-crest {
+  filter: invert(1) brightness(2) sepia(1) saturate(4) hue-rotate(175deg);
 }
 
-/* ── "What I build" capabilities, nested inside About ── */
-.about-capabilities { margin-top: var(--space-2xl); }
-.about-capabilities-label {
+.about-honor {
+  display     : inline-flex;
+  align-items : center;
+  gap         : 7px;
+  align-self  : start;
+  font-family : var(--font-mono);
+  font-size   : 0.76rem;
+  color       : var(--green);
+  white-space : nowrap;
+}
+.about-honor svg { flex-shrink: 0; }
+
+/* ── Bio ──────────────────────────────────────────────── */
+.about-bio {
+  margin-top : clamp(var(--space-xl), 5vw, var(--space-2xl));
+  color      : var(--text-2);
+  font-size  : var(--fs-400);
+  line-height: 1.7;
+}
+.about-bio p { margin-bottom: var(--space-sm); max-width: 66ch; text-wrap: pretty; }
+.about-bio p:last-child { margin-bottom: 0; }
+
+/* ── Recognition ─────────────────────────────────────── */
+.about-recognition { margin-top: clamp(var(--space-xl), 5vw, var(--space-2xl)); }
+.about-recognition-label {
   font-family   : var(--font-mono);
-  font-size     : 0.78rem;
-  letter-spacing: 0.18em;
+  font-size     : 0.72rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color         : var(--accent);
+  color         : var(--text-3);
   margin-bottom : var(--space-md);
 }
-.index-rows--tight { margin-top: var(--space-md); }
+.rec-list {
+  list-style           : none;
+  padding              : 0;
+  margin               : 0;
+  display              : grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap                  : 0 var(--space-2xl);
+  border-top           : 1px solid var(--border);
+}
+.rec-row {
+  display      : flex;
+  gap          : var(--space-md);
+  padding      : 12px 4px;
+  border-bottom : 1px solid var(--border);
+}
+.rec-n {
+  font-family : var(--font-mono);
+  font-size   : 0.7rem;
+  color       : var(--text-3);
+  padding-top : 3px;
+  flex-shrink : 0;
+}
+.rec-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.rec-title {
+  font-family   : var(--font-display);
+  font-weight   : 700;
+  font-size     : 0.95rem;
+  letter-spacing: -0.01em;
+  color         : var(--text);
+}
+.rec-detail { font-size: 0.82rem; color: var(--text-3); }
+.rec-row--draft { opacity: 0.5; }
+.rec-row--draft .rec-title { font-weight: 600; color: var(--text-2); }
 
-@media (max-width: 768px) {
-  .about-capabilities { margin-top: var(--space-xl); }
+/* ── Focus tags ──────────────────────────────────────── */
+.about-focus { margin-top: clamp(var(--space-lg), 4vw, var(--space-xl)); }
+.about-focus-label {
+  display       : block;
+  font-family   : var(--font-mono);
+  font-size     : 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color         : var(--text-3);
+  margin-bottom : var(--space-sm);
+}
+.about-focus-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+.focus-tag {
+  font-size    : 0.78rem;
+  padding      : 5px 12px;
+  border-radius : var(--radius-pill);
+  border       : 1px solid var(--border-2);
+  background    : var(--surface);
+  color        : var(--text-2);
+}
+
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 680px) {
+  .about-edu {
+    grid-template-columns: auto 1fr;
+    grid-template-areas  : "portrait text" "honor honor";
+    row-gap              : var(--space-md);
+    column-gap           : var(--space-lg);
+  }
+  .about-portrait  { grid-area: portrait; width: 104px; align-self: start; }
+  .about-edu-text  { grid-area: text; }
+  .about-honor     { grid-area: honor; }
 }

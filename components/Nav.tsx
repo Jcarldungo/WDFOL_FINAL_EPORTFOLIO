@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { SECTIONS, SECTION_IDS } from '@/lib/sections';
+import { NAV_SECTIONS, SECTION_IDS } from '@/lib/sections';
 import { useActiveSection } from '@/lib/useActiveSection';
 import { useTheme } from './ThemeProvider';
 
@@ -122,7 +122,7 @@ export function Nav() {
         aria-hidden={!menuOpen}
         inert={!menuOpen}
       >
-        {SECTIONS.map((s) => (
+        {NAV_SECTIONS.map((s) => (
           <a
             key={s.id}
             href={`#${s.id}`}
@@ -136,7 +136,7 @@ export function Nav() {
           <button className="theme-toggle" aria-label="Toggle light/dark mode" onClick={toggleTheme}>
             {theme === 'dark' ? SunIcon : MoonIcon}
           </button>
-          <a href="#contact" className="btn btn-primary" onClick={closeMenu}>Hire Me</a>
+          <a href="#contact" className="btn btn-primary" onClick={closeMenu}>Start a project</a>
         </div>
       </nav>
 
@@ -148,7 +148,7 @@ export function Nav() {
             </a>
 
             <nav className="nav-links" aria-label="Primary navigation">
-              {SECTIONS.map((s) => (
+              {NAV_SECTIONS.map((s) => (
                 <a
                   key={s.id}
                   href={`#${s.id}`}
@@ -163,7 +163,7 @@ export function Nav() {
               <button className="theme-toggle nav-actions-toggle" aria-label="Toggle light/dark mode" onClick={toggleTheme}>
                 {theme === 'dark' ? SunIcon : MoonIcon}
               </button>
-              <a href="#contact" className="btn btn-primary btn-sm">Hire Me</a>
+              <a href="#contact" className="btn btn-primary btn-sm">Start a project</a>
               <button
                 ref={hamburgerRef}
                 className={`hamburger${menuOpen ? ' open' : ''}`}

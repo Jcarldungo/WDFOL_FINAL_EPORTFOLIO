@@ -1,37 +1,80 @@
 /* =============================================================================
-   STACK SECTION — the tech list reframed as a connected pipeline
-   (Interface → Server → Data, plus Foundation & Workflow) instead of a
-   flat grid of buzzwords.
+   TOOLKIT SECTION — "Technologies I work with": every tool grouped by
+   discipline, each with its brand mark. Icons render single-colour (they're
+   simple-icons paths filled with currentColor) so 24 marks read as one set
+   rather than a colour explosion.
    ============================================================================= */
 
-.stack-pipeline {
-  display   : flex;
-  align-items: stretch;
-  gap       : 0;
-  margin-top: var(--space-2xl);
+.tech-groups {
+  margin-top : var(--section-head-gap);
+  border-top : 1px solid var(--border);
 }
 
-.stack-stage {
+.tech-group {
+  display              : grid;
+  grid-template-columns: 32px minmax(110px, 168px) 1fr;
+  gap                  : var(--space-lg);
+  align-items          : baseline;
+  padding              : var(--space-lg) 0;
+  border-bottom        : 1px solid var(--border);
+}
+
+.tech-group-n {
+  font-family : var(--font-mono);
+  font-size   : 0.7rem;
+  color       : var(--text-3);
+}
+
+.tech-group-label {
+  font-family   : var(--font-display);
+  font-size     : 1.15rem;
+  font-weight   : 800;
+  letter-spacing: -0.02em;
+  line-height   : 1.2;
+  color         : var(--text);
+}
+
+.tech-list {
+  list-style : none;
+  padding    : 0;
+  margin     : 0;
   display    : flex;
-  align-items: center;
-  flex       : 1;
-  min-width  : 0;
+  flex-wrap  : wrap;
+  gap        : 10px 22px;
 }
 
-.stack-stage .skill-cat-card {
-  flex     : 1;
-  min-width: 0;
+.tech-item {
+  display     : inline-flex;
+  align-items : center;
+  gap         : 7px;
+  font-size   : 0.86rem;
+  color       : var(--text-2);
+  transition  : color var(--transition-fast);
 }
+.tech-item:hover { color: var(--text); }
 
-.stack-connector {
-  width      : clamp(16px, 3vw, 32px);
-  height     : 1px;
-  background : var(--border-2);
+.tech-icon {
   flex-shrink: 0;
+  color      : var(--text-3);
+  transition : color var(--transition-fast);
+}
+.tech-item:hover .tech-icon { color: var(--text); }
+
+.tech-icon--none {
+  width        : 5px;
+  height       : 5px;
+  border-radius : 50%;
+  background    : var(--border-2);
+  display      : inline-block;
 }
 
-@media (max-width: 900px) {
-  .stack-pipeline { flex-direction: column; }
-  .stack-stage    { flex-direction: column; }
-  .stack-connector { width: 1px; height: 24px; margin: 0 auto; }
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 720px) {
+  .tech-group {
+    grid-template-columns: 1fr;
+    gap                  : var(--space-sm);
+    padding              : var(--space-md) 0;
+  }
+  .tech-group-n { display: none; }
+  .tech-list { gap: 10px 18px; }
 }

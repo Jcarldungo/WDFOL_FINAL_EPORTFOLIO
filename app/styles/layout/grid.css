@@ -21,7 +21,7 @@
 .two-col {
   display              : grid;
   grid-template-columns: 1fr 1fr;
-  gap                  : var(--space-3xl);
+  gap                  : clamp(var(--space-xl), 5vw, var(--space-3xl));
   align-items          : start;
 }
 
@@ -36,7 +36,7 @@
 
 /* ── Section head block ───────────────────────────────── */
 .section-head {
-  margin-bottom: var(--space-2xl);
+  margin-bottom: var(--section-head-gap);
 }
 
 /* ── 404 ──────────────────────────────────────────────── */

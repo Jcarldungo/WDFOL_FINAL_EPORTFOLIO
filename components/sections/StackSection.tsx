@@ -1,31 +1,35 @@
-import { skills } from '@/lib/content';
+import { techGroups, techToolCount } from '@/lib/content';
+import { TechIcon } from '@/components/TechIcon';
 
-/** The same real tech list as before, regrouped into a client → server → data
- *  pipeline (plus the cross-cutting Foundation & Workflow tools) so it reads
- *  as a system rather than a flat list of buzzwords. */
+/** The toolkit — every tool grouped by discipline, each with its brand mark.
+ *  Curated to what's actually behind the projects, not padded to look big. */
 export function StackSection() {
   return (
-    <section id="stack" className="section section-alt" aria-labelledby="stack-title">
+    <section id="stack" className="section section-alt section--tight" aria-labelledby="stack-title">
       <div className="container">
         <div className="section-head reveal">
-          <div className="section-label"><span className="c-comment">{'// '}</span>the system</div>
-          <h2 className="section-title" id="stack-title">How it <span className="gradient-text">connects</span></h2>
+          <div className="section-label"><span className="c-comment">{'// '}</span>the toolkit</div>
+          <h2 className="section-title" id="stack-title">
+            Technologies I <span className="gradient-text">work with</span>
+          </h2>
           <p className="section-subtitle">
-            The same stack behind the proof above, laid out the way a request actually
-            flows — interface to server to data.
+            {techToolCount} tools across {techGroups.length} areas — the real set behind the projects above.
           </p>
         </div>
 
-        <div className="stack-pipeline">
-          {skills.map((cat, i) => (
-            <div key={cat.title} className="stack-stage">
-              <div className={`skill-cat-card reveal reveal-delay-${i + 1}`}>
-                <h3 className="skill-cat-title">{cat.title}</h3>
-                <ul className="skill-list">
-                  {cat.items.map((item) => <li key={item}>{item}</li>)}
-                </ul>
-              </div>
-              {i < skills.length - 1 && <span className="stack-connector" aria-hidden="true" />}
+        <div className="tech-groups reveal">
+          {techGroups.map((group, i) => (
+            <div key={group.label} className="tech-group">
+              <span className="tech-group-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <h3 className="tech-group-label">{group.label}</h3>
+              <ul className="tech-list">
+                {group.tools.map((tool) => (
+                  <li key={tool.name} className="tech-item">
+                    <TechIcon name={tool.icon} />
+                    <span>{tool.name}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>

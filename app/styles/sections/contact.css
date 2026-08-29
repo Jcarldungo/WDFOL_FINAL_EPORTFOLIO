@@ -5,22 +5,23 @@
 .contact-grid {
   display              : grid;
   grid-template-columns: 1fr 1.4fr;
-  gap                  : var(--space-3xl);
+  gap                  : clamp(var(--space-xl), 5vw, var(--space-3xl));
   align-items          : start;
-  margin-top           : var(--space-2xl);
+  margin-top           : var(--section-head-gap);
 }
 
 .contact-info h2 {
   font-family  : var(--font-display);
-  font-size    : 1.4rem;
+  font-size    : 1.25rem;
   font-weight  : 700;
-  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
 }
 
 .contact-info > p {
   color        : var(--text-2);
-  line-height  : var(--lh-normal);
-  margin-bottom: var(--space-lg);
+  line-height  : 1.6;
+  margin-bottom: var(--space-md);
   max-width    : 42ch;
 }
 
@@ -47,19 +48,19 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color         : var(--green);
-  margin        : var(--space-md) 0 var(--space-xl);
+  margin        : var(--space-sm) 0 var(--space-lg);
 }
 
 .contact-meta {
   display    : grid;
-  gap        : 14px;
-  margin-bottom: var(--space-xl);
+  gap        : 10px;
+  margin-bottom: var(--space-lg);
 }
 .contact-meta > div {
   display       : grid;
   grid-template-columns: 84px 1fr;
   gap           : 12px;
-  padding-bottom: 12px;
+  padding-bottom: 10px;
   border-bottom : 1px solid var(--border);
 }
 .contact-meta > div:last-child { border-bottom: none; padding-bottom: 0; }
@@ -78,7 +79,7 @@
 .contact-resume {
   font-size    : var(--fs-300);
   color        : var(--text-3);
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-lg);
 }
 .contact-resume a { color: var(--text-2); border-bottom: 1px solid var(--border-2); transition: color var(--transition-fast); }
 .contact-resume a:hover { color: var(--accent); }
