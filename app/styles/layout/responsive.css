@@ -8,13 +8,14 @@
 
 /* ── Mobile (≤ 768px) ─────────────────────────────────── */
 @media (max-width: 768px) {
-  /* Desktop nav + its inline actions collapse into the hamburger menu,
-     which carries the links, the theme toggle and the primary CTA button. */
-  .nav-links          { display: none; }
-  .nav-actions .btn   { display: none; }
-  .nav-actions-toggle { display: none; }
-  .hamburger          { display: flex; }
-  .mobile-menu        { display: flex; }
+  /* Desktop nav links and the inline CTA collapse into the hamburger menu.
+     The theme toggle stays in the header beside the hamburger: buried in the
+     menu it cost two taps and a full-screen overlay to change one setting,
+     and you couldn't see the result until you closed the menu again. */
+  .nav-links        { display: none; }
+  .nav-actions .btn { display: none; }
+  .hamburger        { display: flex; }
+  .mobile-menu      { display: flex; }
 }
 
 /* ── Small mobile (≤ 430px) ───────────────────────────── */
