@@ -1,59 +1,69 @@
 /* =============================================================================
-   CONTACT SECTION — Two-column: info left (email is the obvious action), form right.
+   CONTACT SECTION — two columns: the direct routes on the left (email is the
+   loudest thing on the page), the form on the right. The columns are close to
+   even so neither ends far above the other.
    ============================================================================= */
 
 .contact-grid {
   display              : grid;
-  grid-template-columns: 1fr 1.4fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
   gap                  : clamp(var(--space-xl), 5vw, var(--space-3xl));
   align-items          : start;
   margin-top           : var(--section-head-gap);
 }
 
-.contact-info h2 {
-  font-family  : var(--font-display);
-  font-size    : 1.25rem;
-  font-weight  : 700;
-  letter-spacing: -0.01em;
-  margin-bottom: 10px;
+/* Heading was styled as `.contact-info h2` while the component renders an
+   <h3> (correct, under the section's <h2>), so it matched nothing and the
+   heading rendered at body size. Named class, no tag coupling. */
+.contact-info-title {
+  font-family   : var(--font-display);
+  font-size     : 1.3rem;
+  font-weight   : 800;
+  letter-spacing: -0.02em;
+  margin-bottom : 10px;
 }
 
-.contact-info > p {
+.contact-info-lede {
   color        : var(--text-2);
   line-height  : 1.6;
-  margin-bottom: var(--space-md);
-  max-width    : 42ch;
+  margin-bottom: var(--space-lg);
+  max-width    : 44ch;
+  text-wrap    : pretty;
 }
 
 /* Primary action — visually the loudest thing in the column */
 .contact-email {
   display       : block;
   font-family   : var(--font-mono);
-  font-size     : clamp(1rem, 2.2vw, 1.35rem);
+  font-size     : clamp(0.95rem, 2.1vw, 1.3rem);
   letter-spacing: -0.01em;
   color         : var(--text);
-  word-break    : break-all;
-  padding-bottom: 4px;
+  overflow-wrap : anywhere;
+  padding-bottom: 6px;
   border-bottom : 2px solid var(--accent);
-  transition    : color var(--transition-fast);
+  transition    : color var(--transition-fast), border-color var(--transition-fast);
 }
-.contact-email:hover { color: var(--accent); }
+.contact-email:hover,
+.contact-email:focus-visible { color: var(--text-2); border-bottom-color: var(--border-2); }
 
 .contact-status {
   display       : flex;
-  align-items   : center;
+  align-items   : baseline;
   gap           : 9px;
   font-family   : var(--font-mono);
   font-size     : var(--fs-100);
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  line-height   : 1.5;
   color         : var(--green);
-  margin        : var(--space-sm) 0 var(--space-lg);
+  margin        : var(--space-md) 0 var(--space-lg);
 }
+/* Baseline-align the dot to the first line, not the centre of a wrapped block. */
+.contact-status .status-dot { flex-shrink: 0; transform: translateY(-1px); }
 
 .contact-meta {
-  display    : grid;
-  gap        : 10px;
+  display      : grid;
+  gap          : 10px;
   margin-bottom: var(--space-lg);
 }
 .contact-meta > div {
@@ -76,15 +86,25 @@
 .contact-meta dd a { transition: color var(--transition-fast); }
 .contact-meta dd a:hover { color: var(--accent); }
 
-.contact-resume {
-  font-size    : var(--fs-300);
-  color        : var(--text-3);
-  margin-bottom: var(--space-lg);
+.contact-actions {
+  display    : flex;
+  align-items: center;
+  gap        : var(--space-lg);
+  flex-wrap  : wrap;
 }
-.contact-resume a { color: var(--text-2); border-bottom: 1px solid var(--border-2); transition: color var(--transition-fast); }
-.contact-resume a:hover { color: var(--accent); }
+.contact-resume {
+  display      : inline-flex;
+  align-items  : center;
+  min-height   : 42px;
+  font-size    : var(--fs-300);
+  color        : var(--text-2);
+  border-bottom: 1px solid var(--border-2);
+  transition   : color var(--transition-fast), border-color var(--transition-fast);
+}
+.contact-resume:hover,
+.contact-resume:focus-visible { color: var(--accent); border-bottom-color: var(--accent); }
 
 /* ── Responsive ───────────────────────────────────────── */
 @media (max-width: 1024px) {
-  .contact-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: minmax(0, 1fr); }
 }

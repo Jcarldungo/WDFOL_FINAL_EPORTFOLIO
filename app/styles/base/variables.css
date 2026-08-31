@@ -3,14 +3,13 @@
    All other CSS files consume these variables. Never hard-code values.
    Separation rationale: Changing a theme means editing ONE file only.
 
-   MONOCHROME NOTE: --accent and --purple used to be a cyan/violet pair
-   (#38bdf8 / #a78bfa). Every gradient, glow, tag, and hover state in the
-   site reads off these two tokens (plus a large number of hardcoded
-   rgba(56,189,248,…) glows that got swept to grayscale alongside this
-   file), so redefining just these two here is what makes the whole site
-   monochrome — no separate per-component edits needed beyond that sweep.
-   --green/--red/--yellow stay real colour on purpose: status is the one
-   thing colour is still allowed to carry (live/fail/in-progress).
+   MONOCHROME NOTE: --accent was half of a cyan/violet pair (#38bdf8 /
+   #a78bfa). Every glow, tag, rule, and hover state reads off it, so
+   redefining it here is what makes the whole site monochrome — there are
+   no per-component colour values left to chase.
+   --green/--red stay real colour on purpose: status is the one thing
+   colour is still allowed to carry (available / verified / invalid).
+   --purple and --yellow were dropped once nothing consumed them.
    ============================================================================= */
 
 :root {
@@ -63,8 +62,12 @@
   /* Space below a section's heading block, before its content. */
   --section-head-gap     : clamp(30px, 3.5vw, 44px);
 
-  /* ── Container widths ────────────────────────────────── */
-  --container-narrow : min(760px, 92vw);
+  /* ── Media ───────────────────────────────────────────────
+     The aspect every product screenshot in /public/images/work is
+     captured and stored at. The browser-window frame reads this, so a
+     shot is never cropped between the file and the page. Recapture at
+     a different viewport → change this one value. */
+  --shot-ratio : 1600 / 741;
 
   /* ── Border Radius ───────────────────────────────────── */
   --radius-sm   : 8px;
@@ -77,6 +80,9 @@
   --transition-base   : 0.3s ease;
   --transition-slow   : 0.5s ease;
   --transition-spring : 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Scroll-reveal: shorter than the spring it replaced. The observer now
+     pre-triggers a viewport early, so this only has to finish the arrival. */
+  --transition-reveal : 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   --ease-spring       : cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-soft     : cubic-bezier(0.33, 1, 0.68, 1);
 
@@ -86,7 +92,6 @@
   --z-navbar   : 1000;
   --z-mobile   : 999;
   --z-overlay  : 1100;
-  --z-noise    : 9999;
 }
 
 /* ── DARK THEME (default) ─────────────────────────────── */
@@ -106,9 +111,7 @@
   --accent-2    : #ffffff;
   --accent-glow : rgba(255, 255, 255, 0.14);
   --green       : #34d399;
-  --purple      : #9aa1a9;
   --red         : #f87171;
-  --yellow      : #fbbf24;
   --shadow      : 0 8px 32px rgba(0, 0, 0, 0.45);
   --shadow-lg   : 0 24px 64px rgba(0, 0, 0, 0.6);
 }
@@ -128,10 +131,8 @@
   --accent      : #14171a;
   --accent-2    : #000000;
   --accent-glow : rgba(18, 22, 26, 0.12);
-  --green       : #059669;
-  --purple      : #52585f;
+  --green       : #047857;
   --red         : #dc2626;
-  --yellow      : #d97706;
   --shadow      : 0 8px 32px rgba(0, 0, 0, 0.08);
   --shadow-lg   : 0 24px 64px rgba(0, 0, 0, 0.14);
 }

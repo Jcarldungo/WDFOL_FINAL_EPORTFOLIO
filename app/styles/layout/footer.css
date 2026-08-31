@@ -49,7 +49,8 @@ footer {
   border-radius: var(--radius-pill);
   transition  : color var(--transition-fast);
 }
-.footer-link:hover { color: var(--text); }
+.footer-link:hover,
+.footer-link:focus-visible { color: var(--text); }
 
 .footer-base {
   display        : flex;
@@ -67,11 +68,18 @@ footer {
   letter-spacing: -0.02em;
 }
 .footer-back-top {
-  font-size : var(--fs-200);
-  color     : var(--text-3);
-  transition: color var(--transition-fast);
+  display     : inline-flex;
+  align-items : center;
+  gap         : 6px;
+  min-height  : 36px;
+  font-size   : var(--fs-200);
+  color       : var(--text-3);
+  transition  : color var(--transition-fast);
 }
-.footer-back-top:hover { color: var(--accent); }
+.footer-back-top:hover,
+.footer-back-top:focus-visible { color: var(--accent); }
+.footer-back-top span { transition: transform var(--transition-base); }
+.footer-back-top:hover span { transform: translateY(-2px); }
 .footer-copy {
   font-family: var(--font-mono);
   font-size  : var(--fs-100);

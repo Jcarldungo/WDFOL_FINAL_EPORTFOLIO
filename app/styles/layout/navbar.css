@@ -1,20 +1,23 @@
 /* ============================================================
-   NAVBAR — Fixed header, bare logo, nav links, theme toggle
+   NAVBAR — Fixed header, wordmark, nav links, theme toggle, scroll progress
    ============================================================ */
 
 #navbar {
   position : fixed;
   top: 0; left: 0; right: 0;
   z-index  : var(--z-navbar);
-  transition: all var(--transition-slow);
+  /* Scoped rather than `all`: transitioning backdrop-filter on a fixed
+     element that repaints every scroll frame is expensive for no gain. */
+  transition: background var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+  border-bottom: 1px solid transparent;
 }
 
 #navbar.scrolled {
   background      : var(--bg-glass);
-  backdrop-filter : blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border-bottom   : 1px solid var(--border);
-  box-shadow      : 0 4px 32px rgba(0,0,0,.2);
+  backdrop-filter : blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border-bottom-color: var(--border);
+  box-shadow      : 0 6px 28px rgba(0, 0, 0, 0.18);
 }
 
 .nav-inner {
@@ -26,35 +29,31 @@
 }
 #navbar.scrolled .nav-inner { padding: 12px 0; }
 
-/* ── Logo: BARE image, no box, no border ── */
+/* ── Wordmark ─────────────────────────────────────────────
+   Text, not an image (see Nav.tsx). currentColor means it is correct in
+   both themes with no filter, and it matches the /work top bar. */
 .nav-logo {
-  display    : flex;
-  align-items: center;
-  gap        : 0;
-  cursor     : pointer;
+  display        : inline-flex;
+  align-items    : center;
+  justify-content: center;
+  min-width      : 44px;
+  min-height     : 44px;
+  margin-left    : -6px;   /* optical: pull the glyph flush to the container */
+  padding-inline : 6px;
+  border-radius  : var(--radius-sm);
+  color          : var(--text);
   text-decoration: none;
 }
 
-.logo-img {
-  width    : 46px;
-  height   : 46px;
-  object-fit: contain;
-  display  : block;
-  transition: transform var(--transition-base), filter var(--transition-base), opacity var(--transition-base);
+.nav-logo-mark {
+  font-family   : var(--font-display);
+  font-weight   : 800;
+  font-size     : 1.35rem;
+  line-height   : 1;
+  letter-spacing: -0.055em;
+  transition    : opacity var(--transition-fast);
 }
-
-/* Dark mode: invert black logo → glowing accent color */
-[data-theme="dark"] .logo-img {
-  filter: invert(1) brightness(2) sepia(1) saturate(4) hue-rotate(175deg);
-}
-[data-theme="light"] .logo-img {
-  filter: none;
-}
-
-.nav-logo:hover .logo-img {
-  transform: scale(1.08) rotate(-3deg);
-  opacity  : 0.85;
-}
+.nav-logo:hover .nav-logo-mark { opacity: 0.62; }
 
 /* ── Desktop nav links ── */
 .nav-links { display: flex; align-items: center; gap: 4px; }
@@ -170,7 +169,7 @@
   left            : 0;
   width           : 100%;
   height          : 3px;
-  background       : linear-gradient(90deg, var(--accent), var(--purple));
+  background      : var(--accent);
   z-index         : var(--z-overlay);
   transform       : scaleX(0);
   transform-origin: left;

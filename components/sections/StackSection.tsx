@@ -10,7 +10,7 @@ export function StackSection() {
         <div className="section-head reveal">
           <div className="section-label"><span className="c-comment">{'// '}</span>the toolkit</div>
           <h2 className="section-title" id="stack-title">
-            Technologies I <span className="gradient-text">work with</span>
+            Technologies I <span className="title-em">work with</span>
           </h2>
           <p className="section-subtitle">
             {techToolCount} tools across {techGroups.length} areas — the real set behind the projects above.
@@ -18,9 +18,8 @@ export function StackSection() {
         </div>
 
         <div className="tech-groups reveal">
-          {techGroups.map((group, i) => (
+          {techGroups.map((group) => (
             <div key={group.label} className="tech-group">
-              <span className="tech-group-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
               <h3 className="tech-group-label">{group.label}</h3>
               <ul className="tech-list">
                 {group.tools.map((tool) => (

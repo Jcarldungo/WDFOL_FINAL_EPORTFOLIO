@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { NAV_SECTIONS, SECTION_IDS } from '@/lib/sections';
 import { useActiveSection } from '@/lib/useActiveSection';
@@ -112,7 +111,7 @@ export function Nav() {
 
   return (
     <>
-      <div id="progress-bar" ref={progressRef} role="progressbar" aria-label="Reading progress" />
+      <div id="progress-bar" ref={progressRef} aria-hidden="true" />
 
       <nav
         id="mobile-menu"
@@ -143,8 +142,13 @@ export function Nav() {
       <header id="navbar" role="banner" className={scrolled ? 'scrolled' : ''}>
         <div className="container">
           <div className="nav-inner">
-            <a href="#home" className="nav-logo" aria-label="Jann Carl Dungo — Home">
-              <Image src="/icons/logo.png" alt="JD Logo" width={46} height={46} className="logo-img" />
+            {/* Typographic wordmark, not an image: the old 117 KB PNG needed a
+                filter hack to be visible on dark and still read as a faint grey.
+                Set in the site's own display face it themes for free, stays
+                crisp at any density, and matches the /work top bar. */}
+            <a href="#home" className="nav-logo">
+              <span className="nav-logo-mark" aria-hidden="true">JD</span>
+              <span className="sr-only">Jann Carl Dungo — back to top</span>
             </a>
 
             <nav className="nav-links" aria-label="Primary navigation">

@@ -5,52 +5,79 @@ import { usePathname } from 'next/navigation';
 
 const SELECTOR = '.reveal, .reveal-left, .reveal-right';
 
+/** Reveal a little before an element reaches the fold, so the transition is
+ *  finishing as it arrives rather than starting. */
+const LEAD = 0.18;
+
 /**
- * Reveals `.reveal*` elements as they scroll into view. Re-scans on every
- * route change (App Router keeps the layout mounted, so a one-time effect
- * would miss pages navigated to client-side). Under `prefers-reduced-motion`
- * it shows everything immediately and never observes — matching the CSS
- * reduced-motion reset rather than depending on it.
+ * Reveals `.reveal*` elements as they approach the viewport, and re-scans on
+ * every route change (App Router keeps the layout mounted, so a one-time
+ * effect would miss client-side navigations).
+ *
+ * Deliberately a rAF-throttled scroll pass rather than an IntersectionObserver.
+ * The observer only fires when an intersection ratio *changes*: an instant jump
+ * — a `#contact` anchor, End, a restored scroll position — can carry a whole
+ * section from below the fold to above it inside one frame, so the ratio never
+ * leaves 0 and no callback ever runs. Those sections then stayed at opacity 0
+ * for as long as the visitor stayed past them, and scrolling back up showed
+ * blank space. Measuring position directly has no such blind spot; the pending
+ * list only shrinks, and the listeners detach once it is empty.
+ *
+ * Under `prefers-reduced-motion` everything is shown at once and nothing is
+ * observed, matching the CSS reduced-motion reset rather than depending on it.
  */
 export function useScrollReveal() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const els = Array.from(document.querySelectorAll<HTMLElement>(SELECTOR));
+    let pending = Array.from(document.querySelectorAll<HTMLElement>(SELECTOR)).filter(
+      (el) => !el.classList.contains('visible')
+    );
+    if (pending.length === 0) return;
 
     const reduced =
       typeof window.matchMedia === 'function' &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (reduced) {
-      els.forEach((el) => el.classList.add('visible'));
+      pending.forEach((el) => el.classList.add('visible'));
       return;
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          // Reveal when it scrolls into view, and also if it was scrolled
-          // past faster than the observer could fire (top above the fold) —
-          // otherwise a quick flick leaves whole sections stuck invisible.
-          if (entry.isIntersecting || entry.boundingClientRect.top < 0) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.05, rootMargin: '0px 0px -4% 0px' }
-    );
+    let ticking = false;
+    let detached = false;
 
-    const vh = window.innerHeight;
-    els.forEach((el) => {
-      if (el.classList.contains('visible')) return;
-      // Anything already on screen at mount reveals immediately (its
-      // entrance transition still plays); the rest waits for scroll.
-      if (el.getBoundingClientRect().top < vh) el.classList.add('visible');
-      else observer.observe(el);
-    });
+    function sweep() {
+      ticking = false;
+      const line = window.innerHeight * (1 + LEAD);
+      const next: HTMLElement[] = [];
+      for (const el of pending) {
+        if (el.getBoundingClientRect().top < line) el.classList.add('visible');
+        else next.push(el);
+      }
+      pending = next;
+      if (pending.length === 0) detach();
+    }
 
-    return () => observer.disconnect();
+    function onScroll() {
+      if (ticking || detached) return;
+      ticking = true;
+      requestAnimationFrame(sweep);
+    }
+
+    function detach() {
+      if (detached) return;
+      detached = true;
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    }
+
+    sweep();
+    if (!detached) {
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+    }
+
+    return detach;
   }, [pathname]);
 }

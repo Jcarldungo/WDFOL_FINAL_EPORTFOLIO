@@ -16,7 +16,7 @@ export function ExperienceSection() {
         <div className="section-head reveal">
           <div className="section-label"><span className="c-comment">{'// '}</span>track record</div>
           <h2 className="section-title" id="experience-title">
-            Experience &amp; <span className="gradient-text">Credentials</span>
+            Experience &amp; <span className="title-em">Credentials</span>
           </h2>
         </div>
 

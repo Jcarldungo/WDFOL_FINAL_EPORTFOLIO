@@ -18,8 +18,10 @@ export function HeroSection() {
               Jann Carl Dungo
               <span className="hero-role">Full-Stack Developer</span>
             </h1>
+            {/* Non-breaking space before each separator so a wrap never starts
+                a line with a lone "·". */}
             <p className="hero-support">
-              BSIT — Web Development · Holy Angel University · Dean&apos;s Lister (2023–present)
+              BSIT — Web Development&nbsp;· Holy Angel University&nbsp;· Dean&apos;s Lister (2023–present)
             </p>
             <p className="hero-desc">
               I design and build <strong>structured full-stack systems</strong> — from

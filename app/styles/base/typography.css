@@ -43,12 +43,22 @@
   text-wrap  : pretty;
 }
 
-/* ── Gradient text ────────────────────────────────────── */
-.gradient-text {
-  background             : linear-gradient(135deg, var(--accent) 0%, var(--purple) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip        : text;
+/* ── Title emphasis ───────────────────────────────────────
+   Was a gradient fill (accent → purple). Once the palette went
+   monochrome that gradient faded the *emphasised* word to grey — the
+   opposite of emphasis. This underscores it instead: the key word keeps
+   full text colour and picks up a rule that echoes the nav's active
+   underline. `box-decoration-break` keeps it correct across a wrap. */
+.title-em {
+  background-image  : linear-gradient(var(--accent), var(--accent));
+  background-repeat : no-repeat;
+  background-size   : 100% 0.055em;
+  background-position: 0 100%;
+  /* Clear of the descender: "proof" and "Connect" both hang below the
+     baseline, and a rule struck through a descender reads as a mistake. */
+  padding-bottom    : 0.1em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 /* ── Inline code ──────────────────────────────────────── */

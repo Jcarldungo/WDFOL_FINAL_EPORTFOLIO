@@ -13,7 +13,9 @@
   border-radius : var(--radius-pill);
   font-weight   : 500;
   font-size     : 0.95rem;
-  transition    : all var(--transition-base);
+  transition    : transform var(--transition-base), box-shadow var(--transition-base),
+                  border-color var(--transition-base), color var(--transition-base),
+                  background var(--transition-base);
   position      : relative;
   overflow      : hidden;
   cursor        : pointer;
@@ -22,17 +24,22 @@
   text-decoration: none;
 }
 
-/* Hover shimmer layer */
+/* Hover wash. currentColor rather than a fixed white: on a near-white
+   primary button in the dark theme a white wash was invisible, and on a
+   light-theme outline button it was invisible too. currentColor is always
+   the opposite end of the pair from the button's own surface. */
 .btn::after {
   content   : '';
   position  : absolute;
   inset     : 0;
-  background: rgba(255, 255, 255, 0.08);
+  background: currentColor;
   opacity   : 0;
   transition: opacity var(--transition-fast);
+  pointer-events: none;
 }
 
-.btn:hover::after { opacity: 1; }
+.btn:hover::after,
+.btn:focus-visible::after { opacity: 0.09; }
 
 /* ── Primary (filled, accent color) ──────────────────── */
 .btn-primary {
@@ -72,23 +79,6 @@
 .btn-sm {
   padding  : 10px 18px;
   font-size: 0.85rem;
-}
-
-/* ── Icon-only button ─────────────────────────────────── */
-.btn-icon {
-  width        : 42px;
-  height       : 42px;
-  padding      : 0;
-  border-radius: 50%;
-  display      : inline-flex;
-  align-items  : center;
-  justify-content: center;
-}
-
-/* ── Full-width (submit) ──────────────────────────────── */
-.btn-block {
-  width          : 100%;
-  justify-content: center;
 }
 
 /* ── Disabled state ───────────────────────────────────── */
