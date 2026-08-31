@@ -1,6 +1,5 @@
 export type ProjectScreen = {
-  /** Path under /public. Point at the shared placeholder until the real
-   *  16:10 capture exists, then swap the file — no code change needed. */
+  /** Path under /public — a real capture of the running build. */
   src: string;
   label: string;
   caption?: string;
@@ -12,14 +11,16 @@ export type ProjectPoint = { title: string; desc: string };
 export type Project = {
   slug: string;
   title: string;
-  /** Short category label — "Offline-first PWA", "Client website", "Draft". */
+  /** Short category label — "Offline-first PWA", "Client website". */
   category: string;
   /** One sentence. Used on the catalogue card and the detail hero. */
   lede: string;
   status: 'live' | 'client' | 'in-progress';
 
-  /** Catalogue placeholder: renders a dimmed, non-clickable card and gets
-   *  no detail route. Fill the rest of the fields and drop this to publish. */
+  /** Publish gate. A draft is hidden from the catalogue, the sitemap and the
+   *  detail routes — there is deliberately no placeholder card, because an
+   *  empty slot on a portfolio reads worse than a shorter catalogue. Fill the
+   *  fields below and drop this flag to publish. */
   draft?: boolean;
   /** One restrained accent (hex). Falls back to the monochrome ink accent. */
   accent?: string;
@@ -28,6 +29,9 @@ export type Project = {
   shortDesc?: string;
   previewImage?: string;
   frameUrl?: string;
+  /** Up to 4 tools shown as chips on the card — the fastest thing a
+   *  recruiter scans for. Falls back to the first entries of builtWith. */
+  cardTech?: string[];
 
   /* ── links ──────────────────────────────────────── */
   liveUrl?: string;
@@ -48,8 +52,6 @@ export type Project = {
   roles?: string[];
 };
 
-const PLACEHOLDER_SCREEN = '/images/placeholder-16x10.svg';
-
 export const projects: Project[] = [
   {
     slug: 'gastos',
@@ -60,13 +62,14 @@ export const projects: Project[] = [
     accent: '#34d399',
     shortDesc:
       'Offline-first expense tracker built around a free-tier function cap — ~32 routes folded into 10 dispatchers with zero URL changes.',
-    previewImage: '/images/project-gastos.jpg',
+    previewImage: '/images/work/gastos-overview.jpg',
     frameUrl: 'gastos-xi-rose.vercel.app',
+    cardTech: ['Vanilla JS', 'Vercel Serverless', 'PostgreSQL', 'Service Worker'],
     liveUrl: 'https://gastos-xi-rose.vercel.app',
     githubUrl: 'https://github.com/Jcarldungo/gastos',
     focus: 'Offline-first full-stack PWA',
     roles: ['Full-Stack Developer', 'Database Design'],
-    heroImage: '/images/project-gastos.jpg',
+    heroImage: '/images/work/gastos-overview.jpg',
     stats: [
       { label: 'Serverless functions', value: '10 / 12' },
       { label: 'Works offline', value: 'Full outbox' },
@@ -74,11 +77,31 @@ export const projects: Project[] = [
       { label: 'Status', value: 'Live' },
     ],
     screens: [
-      { src: '/images/project-gastos.jpg', label: 'Dashboard', caption: 'Card balances, the month so far, and a quick-add that stays one tap away.' },
-      { src: PLACEHOLDER_SCREEN, label: 'Add expense', caption: 'Amount, category, card — logged before the keyboard closes, online or off.' },
-      { src: PLACEHOLDER_SCREEN, label: 'Offline state', caption: 'Entries made with no signal queue on the device with a clear pending marker.' },
-      { src: PLACEHOLDER_SCREEN, label: 'Card detail', caption: 'Every balance is derived from the transaction ledger, never a stored number.' },
-      { src: PLACEHOLDER_SCREEN, label: 'Budgets & bills', caption: 'Per-category budgets and recurring bills, with Web Push before a limit or due date.' },
+      {
+        src: '/images/work/gastos-overview.jpg',
+        label: 'Overview',
+        caption: 'Balances across every card, the month so far, and a quick-add that stays one tap away.',
+      },
+      {
+        src: '/images/work/gastos-cards.jpg',
+        label: 'Cards',
+        caption: 'Every balance is derived from the transaction ledger, never a stored number.',
+      },
+      {
+        src: '/images/work/gastos-history.jpg',
+        label: 'History',
+        caption: 'The full ledger, filterable by date and by direction — each entry tagged and tied to a card.',
+      },
+      {
+        src: '/images/work/gastos-insights.jpg',
+        label: 'Insights',
+        caption: 'Where the money went and how the weeks compare, computed from that same ledger.',
+      },
+      {
+        src: '/images/work/gastos-budgets.jpg',
+        label: 'Budgets',
+        caption: 'A ceiling per tag that resets monthly, with Web Push before a limit is crossed.',
+      },
     ],
     theBuild: [
       'gastos had to do something most expense trackers skip: work with no connection, and fit inside a free hosting plan that caps a project at 12 serverless functions — while the app needed around 32 distinct API routes.',
@@ -92,6 +115,7 @@ export const projects: Project[] = [
       { title: 'Ledger-derived balances', desc: 'Every card balance is computed from its transactions, so it always matches the history behind it.' },
       { title: 'Bills & budgets', desc: 'Recurring bills and per-category budgets, with Web Push alerts before a due date or a limit is crossed.' },
       { title: 'Installable', desc: "Adds to a phone's home screen and opens full-screen — no app store, no install prompt friction." },
+      { title: 'Try it without an account', desc: 'A demo mode seeds a full ledger and resets on the next visit, so the app can be judged in one click.' },
     ],
     underTheHood: [
       { title: '10 functions for 32 routes', desc: 'One vercel.json rewrite table dispatches every original path to a thin function — zero URL or response-shape changes.' },
@@ -116,12 +140,13 @@ export const projects: Project[] = [
     accent: '#d8a262',
     shortDesc:
       'Live client website for a pediatric therapy clinic — hand-built CSS design system, mobile-first and accessible, no framework.',
-    previewImage: '/images/project-weeplay-preview.jpg',
+    previewImage: '/images/work/weeplay-home.jpg',
     frameUrl: 'weeplay-therapy.vercel.app',
+    cardTech: ['HTML5', 'CSS3', 'Vanilla JS', 'Vercel'],
     liveUrl: 'https://weeplay-therapy.vercel.app',
     focus: 'Live client website',
     roles: ['Frontend Developer', 'UI Implementation'],
-    heroImage: '/images/project-weeplay.jpg',
+    heroImage: '/images/work/weeplay-home.jpg',
     stats: [
       { label: 'Framework', value: 'None' },
       { label: 'Client', value: 'Real business' },
@@ -129,11 +154,26 @@ export const projects: Project[] = [
       { label: 'Status', value: 'Live' },
     ],
     screens: [
-      { src: '/images/project-weeplay-preview.jpg', label: 'Home', caption: 'Warmth and trust up front, tuned to load fast on a low-end phone.' },
-      { src: PLACEHOLDER_SCREEN, label: 'Services', caption: 'Occupational, speech & language, and physical therapy, plus SPED tutorials.' },
-      { src: PLACEHOLDER_SCREEN, label: 'Our space', caption: 'The clinic itself, so a parent can picture the visit before booking.' },
-      { src: PLACEHOLDER_SCREEN, label: 'Therapists', caption: 'The people, structured so a parent can judge fit in seconds.' },
-      { src: PLACEHOLDER_SCREEN, label: 'Contact', caption: 'Click-to-call, Messenger, and an enquiry form — one tap from anywhere.' },
+      {
+        src: '/images/work/weeplay-home.jpg',
+        label: 'Home',
+        caption: 'Warmth and trust up front, tuned to load fast on the low-end phones most parents browse on.',
+      },
+      {
+        src: '/images/work/weeplay-services.jpg',
+        label: 'Services',
+        caption: 'Occupational, speech & language, and physical therapy, plus SPED tutorials.',
+      },
+      {
+        src: '/images/work/weeplay-space.jpg',
+        label: 'Our space',
+        caption: 'The clinic itself, so a parent can picture the visit before booking.',
+      },
+      {
+        src: '/images/work/weeplay-contact.jpg',
+        label: 'Contact',
+        caption: 'Clinic hours, the map, and one-tap Messenger — the paths a parent actually takes.',
+      },
     ],
     theBuild: [
       'WeePlay Therapy Center is a real clinic in Mabalacat, Pampanga. The brief was warmth and trust for parents, on a site that stays fast on the low-end Android phones most of them actually browse on.',
@@ -160,35 +200,19 @@ export const projects: Project[] = [
     builtWith: ['HTML5', 'CSS3', 'Vanilla JS', 'Vercel'],
     builtFor: ['Healthcare / clinics', 'Parents on mobile', 'Local businesses'],
   },
-
-  /* ── Placeholders ─────────────────────────────────────────────────────────
-     Catalogue slots for work in progress. Each renders a dimmed, non-clickable
-     card and gets NO detail route. To publish one: fill category / lede /
-     shortDesc / stats / screens / theBuild / whatItDoes / underTheHood /
-     builtWith, add a real previewImage, and delete `draft: true`. */
-  { slug: 'draft-3', title: 'Project three', category: 'Draft', status: 'in-progress', draft: true,
-    lede: 'A one-sentence summary of what this project is and who it is for.',
-    shortDesc: 'Short catalogue summary — one line on what it does.' },
-  { slug: 'draft-4', title: 'Project four', category: 'Draft', status: 'in-progress', draft: true,
-    lede: 'A one-sentence summary of what this project is and who it is for.',
-    shortDesc: 'Short catalogue summary — one line on what it does.' },
-  { slug: 'draft-5', title: 'Project five', category: 'Draft', status: 'in-progress', draft: true,
-    lede: 'A one-sentence summary of what this project is and who it is for.',
-    shortDesc: 'Short catalogue summary — one line on what it does.' },
-  { slug: 'draft-6', title: 'Project six', category: 'Draft', status: 'in-progress', draft: true,
-    lede: 'A one-sentence summary of what this project is and who it is for.',
-    shortDesc: 'Short catalogue summary — one line on what it does.' },
-  { slug: 'draft-7', title: 'Project seven', category: 'Draft', status: 'in-progress', draft: true,
-    lede: 'A one-sentence summary of what this project is and who it is for.',
-    shortDesc: 'Short catalogue summary — one line on what it does.' },
 ];
 
-/** Live projects only — drives the catalogue links, the detail routes, and
- *  the ‹ N / M › pager. */
+/** Everything the site renders — the catalogue, the detail routes, the
+ *  sitemap and the ‹ N / M › pager all read off this. */
 export const publishedProjects = projects.filter((p) => !p.draft);
 
 export function getProject(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug && !p.draft);
+}
+
+/** The chips shown on a catalogue card. */
+export function cardTechOf(p: Project): string[] {
+  return p.cardTech ?? p.builtWith?.slice(0, 4) ?? [];
 }
 
 /** Previous / next published project for the detail-page pager (wraps). */
@@ -244,19 +268,24 @@ export const techGroups: TechGroup[] = [
     ],
   },
   {
-    label: 'Databases',
+    label: 'Database & cloud',
     tools: [
       { name: 'PostgreSQL', icon: 'postgresql' },
       { name: 'MySQL', icon: 'mysql' },
       { name: 'MongoDB', icon: 'mongodb' },
+      { name: 'Vercel', icon: 'vercel' },
+      { name: 'Netlify', icon: 'netlify' },
+      { name: 'Hostinger', icon: 'hostinger' },
     ],
   },
   {
-    label: 'Tooling',
+    label: 'AI & dev tools',
     tools: [
+      { name: 'Claude Code', icon: 'claude' },
+      { name: 'ChatGPT', icon: 'chatgpt' },
+      { name: 'Gemini', icon: 'gemini' },
       { name: 'Git', icon: 'git' },
       { name: 'GitHub', icon: 'github' },
-      { name: 'Vercel', icon: 'vercel' },
       { name: 'Figma', icon: 'figma' },
       { name: 'Postman', icon: 'postman' },
     ],
@@ -319,24 +348,29 @@ export const experience: ExperienceEntry[] = [
   },
 ];
 
-/** Short "what I focus on" tags for the About section (real interests, not
- *  résumé soft-skills). */
+/** The About section's focus row.
+ *
+ *  This is positioning, not inventory — the only place on the page that says
+ *  what *kind* of engineer he is. Deliberately names no framework: the Stack
+ *  section below already lists 30 tools, so repeating React / Laravel /
+ *  PostgreSQL here would be the third telling of the same thing and would
+ *  collapse the one distinction worth keeping (stack = tools I know, focus =
+ *  problems I choose).
+ *
+ *  Rule for editing: every entry must be provable from the work on this page.
+ *  As it stands —
+ *    Offline-first web apps ..... gastos: service worker + IndexedDB outbox
+ *    REST API design ............ gastos: 32 routes folded into 10 dispatchers
+ *    Database & schema design ... gastos: ledger-derived balances, money as strings
+ *    Accessible by default ...... WeePlay: skip link, ARIA, keyboard, from commit one
+ *    Shipping under constraints . gastos: the 12-function cap; WeePlay: low-end phones
+ */
 export const focusAreas = [
-  'Full-stack systems',
-  'Offline-first',
+  'Offline-first web apps',
   'REST API design',
-  'Database design',
-  'Accessibility',
-];
-
-export type Recognition = { title: string; detail?: string; draft?: boolean };
-
-/** Academic / extracurricular recognition. Item 1 is real; the rest are
- *  placeholder slots — fill `title` + `detail` and drop `draft` to publish. */
-export const recognition: Recognition[] = [
-  { title: "Dean's Lister", detail: 'Every semester since 2023' },
-  { title: 'Add a recognition', detail: 'Award, scholarship, or org leadership', draft: true },
-  { title: 'Add a recognition', detail: 'Award, scholarship, or org leadership', draft: true },
+  'Database & schema design',
+  'Accessible by default',
+  'Shipping under constraints',
 ];
 
 export const siteInfo = {
@@ -347,6 +381,7 @@ export const siteInfo = {
   phoneHref: 'tel:09152468287',
   location: 'Sapang Maisac, Mexico, Pampanga',
   university: 'Holy Angel University — BSIT (Web Dev)',
+  url: 'https://janncarl.vercel.app',
   education: {
     track: 'Web Development track',
     degree: 'BS Information Technology',

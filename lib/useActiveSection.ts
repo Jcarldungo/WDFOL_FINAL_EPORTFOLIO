@@ -2,35 +2,63 @@
 
 import { useEffect, useState } from 'react';
 
-/** Tracks whichever of the given section ids is currently nearest the
- *  vertical center of the viewport, driving nav/footer active-link state
- *  without any route dependency (a static single page, so no need to
- *  re-observe on navigation the way `useScrollReveal` does). */
+/** A section counts as current once its top passes this line — a third of the
+ *  way down, just under the fixed header, so the nav flips at the moment the
+ *  new heading actually arrives rather than half a screen later. */
+const ACTIVATION_LINE = 0.34;
+
+/**
+ * Tracks which of the given section ids the reader is currently in, driving
+ * nav/footer active-link state.
+ *
+ * Reads scroll position directly rather than using IntersectionObserver: the
+ * observer version picked "topmost currently intersecting a centre band",
+ * which held a stale value whenever nothing intersected and could never mark
+ * a short trailing section active at all. This is exact at every position,
+ * costs one rAF-batched measurement per scroll, and always resolves the last
+ * section when the page is scrolled to the bottom.
+ */
 export function useActiveSection(ids: string[]): string {
   const [active, setActive] = useState(ids[0] ?? '');
 
   useEffect(() => {
-    if (typeof IntersectionObserver === 'undefined') return;
+    let ticking = false;
+    let last = '';
 
-    const elements = ids
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => el !== null);
-    if (elements.length === 0) return;
+    function measure() {
+      ticking = false;
+      const line = window.innerHeight * ACTIVATION_LINE;
+      const atBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter((e) => e.isIntersecting);
-        if (visible.length === 0) return;
-        const topmost = visible.reduce((a, b) =>
-          a.boundingClientRect.top < b.boundingClientRect.top ? a : b
-        );
-        setActive(topmost.target.id);
-      },
-      { rootMargin: '-45% 0px -45% 0px', threshold: 0 }
-    );
+      let current = ids[0] ?? '';
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        // Bottom of the page: whatever section is last wins, however short.
+        if (atBottom) current = id;
+        else if (el.getBoundingClientRect().top <= line) current = id;
+      }
 
-    elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+      if (current !== last) {
+        last = current;
+        setActive(current);
+      }
+    }
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(measure);
+    }
+
+    measure();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
   }, [ids]);
 
   return active;

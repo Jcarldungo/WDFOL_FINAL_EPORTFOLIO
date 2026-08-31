@@ -4,16 +4,20 @@ import Script from 'next/script';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { AmbientBackground } from '@/components/AmbientBackground';
 import { RevealScope } from '@/components/RevealScope';
+import { siteInfo, publishedProjects } from '@/lib/content';
 import './globals.css';
 
+const SITE_URL = siteInfo.url;
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://janncarl.vercel.app'),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: 'Jann Carl Dungo | Full-Stack Developer',
-    template: '%s',
+    template: '%s | Jann Carl Dungo',
   },
   description:
     'Jann Carl Dungo (jcdungoo20) — Full-Stack Developer building efficient full-stack systems with React, Vue.js, Node.js, PHP, and REST APIs.',
+  applicationName: 'Jann Carl Dungo — Portfolio',
   keywords: [
     'Jann Carl Dungo',
     'jcdungoo20',
@@ -30,14 +34,21 @@ export const metadata: Metadata = {
     'web development',
     'Pampanga',
   ],
-  authors: [{ name: 'Jann Carl Dungo' }],
+  authors: [{ name: siteInfo.name, url: SITE_URL }],
+  creator: siteInfo.name,
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
+  },
   openGraph: {
     title: 'Jann Carl Dungo | Full-Stack Developer',
     description:
       'Building structured, efficient full-stack systems with React, Vue.js, Node.js, PHP, and RESTful APIs.',
     type: 'website',
+    locale: 'en_PH',
     siteName: 'Jann Carl Dungo',
-    url: 'https://janncarl.vercel.app',
+    url: SITE_URL,
     images: [
       {
         url: '/images/og-image.jpg',
@@ -60,6 +71,30 @@ export const viewport: Viewport = {
     { media: '(prefers-color-scheme: dark)', color: '#0b0d10' },
     { media: '(prefers-color-scheme: light)', color: '#f6f7f8' },
   ],
+};
+
+/** Structured data so a search for the name resolves to a person with a
+ *  known role, school and project list — not just a page title. */
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: siteInfo.name,
+  alternateName: siteInfo.handle,
+  url: SITE_URL,
+  image: `${SITE_URL}/images/profile.jpg`,
+  jobTitle: 'Full-Stack Developer',
+  email: `mailto:${siteInfo.email}`,
+  address: { '@type': 'PostalAddress', addressRegion: 'Pampanga', addressCountry: 'PH' },
+  alumniOf: { '@type': 'CollegeOrUniversity', name: siteInfo.education.school },
+  sameAs: [siteInfo.github, siteInfo.linkedin],
+  knowsAbout: ['Full-stack development', 'React', 'Node.js', 'Laravel', 'PHP', 'REST API design', 'PostgreSQL', 'MySQL', 'MongoDB'],
+  mainEntityOfPage: SITE_URL,
+  subjectOf: publishedProjects.map((p) => ({
+    '@type': 'CreativeWork',
+    name: p.title,
+    description: p.lede,
+    url: `${SITE_URL}/work/${p.slug}`,
+  })),
 };
 
 const THEME_INIT_SCRIPT = `
@@ -105,6 +140,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body>
         <Script id="theme-init" strategy="beforeInteractive">{THEME_INIT_SCRIPT}</Script>
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
         <ThemeProvider>
           <AmbientBackground />
           <RevealScope />

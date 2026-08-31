@@ -17,9 +17,9 @@ export function Footer() {
       <div className="container">
         <div className="footer-bar">
           <div className="footer-socials">
-            <a href={siteInfo.github} target="_blank" rel="noopener" className="footer-social-link" aria-label="GitHub">{GitHubIcon}</a>
-            <a href={siteInfo.linkedin} target="_blank" rel="noopener" className="footer-social-link" aria-label="LinkedIn">{LinkedInIcon}</a>
-            <a href={`mailto:${siteInfo.email}`} className="footer-social-link" aria-label="Email">{EmailIcon}</a>
+            <a href={siteInfo.github} target="_blank" rel="noopener" className="footer-social-link" aria-label="GitHub profile">{GitHubIcon}</a>
+            <a href={siteInfo.linkedin} target="_blank" rel="noopener" className="footer-social-link" aria-label="LinkedIn profile">{LinkedInIcon}</a>
+            <a href={`mailto:${siteInfo.email}`} className="footer-social-link" aria-label="Email Jann Carl Dungo">{EmailIcon}</a>
           </div>
           <nav className="footer-links" aria-label="Footer navigation">
             {NAV_SECTIONS.map((s) => (
@@ -30,7 +30,9 @@ export function Footer() {
 
         <div className="footer-base">
           <span className="footer-brand">{siteInfo.name}</span>
-          <a href="#home" className="footer-back-top">Back to top ↑</a>
+          <a href="#home" className="footer-back-top">
+            Back to top <span aria-hidden="true">↑</span>
+          </a>
           <span className="footer-copy">© {new Date().getFullYear()} · Built with Next.js</span>
         </div>
       </div>

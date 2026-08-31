@@ -3,6 +3,15 @@ import type { Config } from 'tailwindcss';
 const config: Config = {
   content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
   darkMode: ['selector', '[data-theme="dark"]'],
+  corePlugins: {
+    /* The site has its own `.container` (app/styles/layout/grid.css). Tailwind
+       emits a utility of the same name whenever the word appears in a scanned
+       file, and — landing later in the cascade at equal specificity — it was
+       silently winning: `width:100%` with breakpoint max-widths instead of
+       `min(1200px, 92vw)`. Below 640px that left the page with no side gutter
+       at all, so body copy ran into the screen edge on every phone. */
+    container: false,
+  },
   theme: {
     extend: {
       colors: {
@@ -19,8 +28,6 @@ const config: Config = {
         'border-2': 'var(--border-2)',
         green: 'var(--green)',
         red: 'var(--red)',
-        yellow: 'var(--yellow)',
-        purple: 'var(--purple)',
       },
       fontFamily: {
         display: ['var(--font-display)'],

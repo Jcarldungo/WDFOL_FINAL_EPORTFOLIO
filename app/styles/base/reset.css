@@ -78,13 +78,19 @@ h1, h2, h3, h4, h5, h6 {
   color      : var(--bg);
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar       { width: 5px; }
-::-webkit-scrollbar-track { background: var(--bg); }
+/* Custom scrollbar — wide enough to grab, quiet enough not to compete. */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-2) transparent;
+}
+::-webkit-scrollbar       { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background   : var(--accent);
+  background   : var(--border-2);
+  border       : 3px solid var(--bg);
   border-radius: 99px;
 }
+::-webkit-scrollbar-thumb:hover { background: var(--text-3); }
 
 /* Focus ring — visible for keyboard users, hidden for mouse */
 :focus-visible {

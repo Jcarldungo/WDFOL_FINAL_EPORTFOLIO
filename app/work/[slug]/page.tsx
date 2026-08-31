@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getProject, projectSiblings, publishedProjects, siteInfo } from '@/lib/content';
@@ -15,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!project) return {};
   const url = `/work/${project.slug}`;
   return {
-    title: `${project.title} — ${project.category} | Jann Carl Dungo`,
+    title: `${project.title} — ${project.category}`,
     description: project.lede,
     alternates: { canonical: url },
     openGraph: {
@@ -33,7 +34,7 @@ export default async function WorkDetail({ params }: { params: Promise<{ slug: s
   if (!project) notFound();
 
   const { index, total, prev, next } = projectSiblings(slug);
-  const primaryShot = project.heroImage ?? project.previewImage ?? '/images/placeholder-16x10.svg';
+  const primaryShot = project.heroImage ?? project.previewImage;
   const accentStyle = project.accent
     ? ({ ['--proj-accent' as string]: project.accent } as React.CSSProperties)
     : undefined;
@@ -84,16 +85,24 @@ export default async function WorkDetail({ params }: { params: Promise<{ slug: s
             </div>
           </div>
 
-          <div className="work-hero-shot reveal-right">
-            <div className="wf">
-              <div className="wf-bar">
-                <i /><i /><i />
-                {project.frameUrl && <span className="wf-url">{project.frameUrl}</span>}
+          {primaryShot && (
+            <div className="work-hero-shot reveal-right">
+              <div className="wf">
+                <div className="wf-bar">
+                  <i /><i /><i />
+                  {project.frameUrl && <span className="wf-url">{project.frameUrl}</span>}
+                </div>
+                <Image
+                  src={primaryShot}
+                  alt={`${project.title} — screenshot of the running build`}
+                  width={1600}
+                  height={741}
+                  sizes="(max-width: 900px) 92vw, 560px"
+                  priority
+                />
               </div>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={primaryShot} alt={`${project.title} screenshot`} width={1600} height={1000} />
             </div>
-          </div>
+          )}
         </header>
 
         {project.screens && project.screens.length > 0 && (

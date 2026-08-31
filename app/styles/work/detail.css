@@ -6,7 +6,10 @@
    `--proj-accent` is set per project (falls back to the mono ink accent).
    ============================================================================= */
 
-.work { --proj-accent: var(--accent); min-height: 100vh; }
+.work { --proj-accent: var(--accent); --proj-ink: var(--proj-accent); min-height: 100vh; }
+/* Light theme darkens the project accent for text only; the raw hue stays
+   for rules and the thumbnail highlight, where contrast rules don't apply. */
+[data-theme="light"] .work { --proj-ink: color-mix(in srgb, var(--proj-accent) 55%, #000); }
 
 /* ── Top bar ──────────────────────────────────────────── */
 .work-topbar {
@@ -43,7 +46,7 @@
   font-size  : 0.8rem;
   color      : var(--text-2);
 }
-.work-pager-count { color: var(--proj-accent); letter-spacing: 0.08em; }
+.work-pager-count { color: var(--proj-ink); letter-spacing: 0.08em; }
 .work-pager-btn,
 .work-x {
   width          : 34px;
@@ -82,20 +85,28 @@
   align-items          : center;
   margin-bottom        : clamp(48px, 8vw, 96px);
 }
+/* Oversized title ghost. Clipped to the text column — left to run the full
+   width it slid under the screenshot and read as a render artefact — and
+   faded out to the right so it dissolves rather than ending on a hard edge. */
 .work-hero-watermark {
   position      : absolute;
-  top           : -0.34em;
+  top           : -0.3em;
   left          : -0.04em;
+  right         : 38%;
+  overflow      : hidden;
   z-index       : 0;
   font-family   : var(--font-display);
   font-weight   : 800;
-  font-size     : clamp(4rem, 15vw, 11rem);
+  font-size     : clamp(4rem, 14vw, 10rem);
+  line-height   : 1;
   letter-spacing: -0.05em;
   color         : var(--text);
-  opacity       : 0.035;
+  opacity       : 0.03;
   white-space   : nowrap;
   pointer-events: none;
   user-select   : none;
+  -webkit-mask-image: linear-gradient(90deg, #000 55%, transparent);
+  mask-image        : linear-gradient(90deg, #000 55%, transparent);
 }
 .work-hero-text { position: relative; z-index: 1; min-width: 0; }
 .work-hero-shot { position: relative; z-index: 1; min-width: 0; }
@@ -106,7 +117,7 @@
   font-size     : 0.74rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color         : var(--proj-accent);
+  color         : var(--proj-ink);
   margin-bottom : var(--space-md);
 }
 .work-title {
@@ -186,7 +197,7 @@
   font-size     : 0.72rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color         : var(--proj-accent);
+  color         : var(--proj-ink);
   margin-bottom : var(--space-lg);
 }
 
@@ -203,7 +214,9 @@
 
 .work-feature-grid {
   display              : grid;
-  grid-template-columns: repeat(auto-fit, minmax(238px, 1fr));
+  /* min(100%, 300px) caps the track count at three on the 1120px column, so
+     a 5- or 6-item list breaks 3+2 or 3+3 instead of orphaning one card. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   gap                  : var(--space-md);
 }
 .work-feature {
@@ -232,7 +245,7 @@
 .work-hood-n {
   font-family : var(--font-mono);
   font-size   : 0.72rem;
-  color       : var(--proj-accent);
+  color       : var(--proj-ink);
   padding-top : 3px;
   flex-shrink : 0;
 }
@@ -345,7 +358,7 @@
   flex-wrap  : wrap;
   margin-top : var(--space-md);
 }
-.walker-caption-n { font-family: var(--font-mono); font-size: 0.75rem; color: var(--proj-accent); }
+.walker-caption-n { font-family: var(--font-mono); font-size: 0.75rem; color: var(--proj-ink); }
 .walker-caption-label { font-family: var(--font-display); font-weight: 700; font-size: 1rem; }
 .walker-caption-text {
   flex-basis : 100%;
@@ -374,11 +387,17 @@
   transition   : opacity var(--transition-fast), border-color var(--transition-fast);
 }
 .walker-thumb:hover { opacity: 0.8; }
+.walker-thumb:focus-visible {
+  opacity       : 1;
+  outline       : 2px solid var(--accent);
+  outline-offset: 2px;
+}
 .walker-thumb[aria-selected='true'] { opacity: 1; border-color: var(--proj-accent); }
 .walker-thumb img {
   width          : 100%;
+  height         : auto;
   display        : block;
-  aspect-ratio   : 16 / 10;
+  aspect-ratio   : var(--shot-ratio);
   object-fit     : cover;
   object-position: top center;
 }
@@ -387,9 +406,9 @@
   left         : 5px;
   bottom       : 4px;
   font-family  : var(--font-mono);
-  font-size    : 0.6rem;
-  color        : var(--text-2);
-  background    : var(--bg-glass);
+  font-size    : 0.62rem;
+  color        : var(--text);
+  background    : var(--bg);
   padding      : 1px 5px;
   border-radius : 4px;
 }

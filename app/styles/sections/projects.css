@@ -1,11 +1,13 @@
 /* =============================================================================
-   PROJECTS SECTION — the catalogue. A responsive grid of project cards; each
-   live one links to its own /work/[slug] detail view, drafts render dimmed
-   and non-clickable. The old inline <details> case study moved to the route.
+   PROJECTS SECTION — the catalogue. A short, entirely-real list; each entry
+   links to its own /work/[slug] case study. Cards are wide by design: with a
+   handful of shipped projects, two generous cards read as a considered
+   selection where a six-up grid of thumbnails reads as filler.
    ============================================================================= */
 
 /* Shared browser-window frame — used by the catalogue card, the detail hero,
-   and the screen walker. */
+   and the screen walker. --shot-ratio is the aspect the captures ship at, so
+   nothing is cropped away between the file and the frame. */
 .wf {
   position     : relative;
   border       : 1px solid var(--border-2);
@@ -35,8 +37,9 @@
 }
 .wf img {
   width          : 100%;
+  height         : auto;
   display        : block;
-  aspect-ratio   : 16 / 10;
+  aspect-ratio   : var(--shot-ratio);
   object-fit     : cover;
   object-position: top center;
 }
@@ -47,20 +50,27 @@
   padding              : 0;
   margin               : var(--section-head-gap) 0 0;
   display              : grid;
-  grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
-  gap                  : clamp(var(--space-lg), 3vw, var(--space-2xl));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap                  : clamp(var(--space-lg), 2.6vw, var(--space-xl));
 }
 
 /* ── Card ─────────────────────────────────────────────── */
 .work-card {
   --proj-accent: var(--accent);
+  --proj-ink   : var(--proj-accent);
   position     : relative;
   border       : 1px solid var(--border);
-  border-radius : var(--radius-lg);
+  border-radius : var(--radius);
   background   : var(--surface);
   overflow     : hidden;
   transition   : border-color var(--transition-base), transform var(--transition-base);
 }
+/* Light theme darkens the project accent for text only — the raw hue stays
+   for rules and glows, where contrast rules don't apply. */
+[data-theme="light"] .work-card {
+  --proj-ink: color-mix(in srgb, var(--proj-accent) 55%, #000);
+}
+
 .work-card::after {
   content   : '';
   position  : absolute;
@@ -70,7 +80,7 @@
   opacity   : 0;
   transition: opacity var(--transition-base);
 }
-.work-card.reveal:hover,
+.work-card:hover,
 .work-card:focus-within {
   border-color: var(--border-2);
   transform   : translateY(-3px);
@@ -85,28 +95,28 @@
   color         : inherit;
 }
 .work-card-link:focus-visible {
-  outline       : 2px solid var(--proj-accent);
+  outline       : 2px solid var(--proj-ink);
   outline-offset: -3px;
-  border-radius  : var(--radius-lg);
+  border-radius  : var(--radius);
 }
 
 .work-card-head {
   display        : flex;
   align-items    : center;
   justify-content: space-between;
-  padding        : 14px 16px 0;
+  padding        : 16px 18px 0;
   font-family    : var(--font-mono);
   font-size      : 0.7rem;
   letter-spacing : 0.12em;
   text-transform : uppercase;
   color          : var(--text-3);
 }
-.work-card-n { color: var(--proj-accent); }
+.work-card-n { color: var(--proj-ink); }
 
-.work-card-shot { position: relative; padding: 14px 16px; }
+.work-card-shot { position: relative; padding: 14px 18px; }
 .work-card-glow {
   position     : absolute;
-  inset        : 22% 8% 6%;
+  inset        : 22% 10% 8%;
   background    : radial-gradient(60% 70% at 50% 0%,
                   color-mix(in srgb, var(--proj-accent) 22%, transparent), transparent 72%);
   filter       : blur(26px);
@@ -115,10 +125,10 @@
 }
 
 .work-card-body {
-  padding       : 4px 16px 0;
+  padding       : 6px 18px 0;
   display       : flex;
   flex-direction: column;
-  gap           : 6px;
+  gap           : 8px;
   flex          : 1;
 }
 .work-card-cat {
@@ -126,20 +136,41 @@
   font-size     : 0.68rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color         : var(--proj-accent);
+  color         : var(--proj-ink);
 }
 .work-card-title {
   font-family   : var(--font-display);
-  font-size     : 1.15rem;
+  font-size     : clamp(1.25rem, 2vw, 1.5rem);
   font-weight   : 800;
-  letter-spacing: -0.02em;
-  line-height   : 1.15;
+  letter-spacing: -0.025em;
+  line-height   : 1.1;
 }
 .work-card-desc {
-  font-size  : 0.9rem;
+  font-size  : 0.925rem;
   color      : var(--text-2);
-  line-height: 1.5;
+  line-height: 1.55;
+  max-width  : 48ch;
   text-wrap  : pretty;
+}
+
+/* The stack, at a glance — the first thing a recruiter scans a card for. */
+.work-card-tech {
+  list-style: none;
+  padding   : 0;
+  margin    : 2px 0 0;
+  display   : flex;
+  flex-wrap : wrap;
+  gap       : 6px;
+}
+.work-card-tech li {
+  font-family   : var(--font-mono);
+  font-size     : 0.68rem;
+  letter-spacing: 0.02em;
+  color         : var(--text-3);
+  border        : 1px solid var(--border);
+  border-radius : var(--radius-sm);
+  padding       : 3px 8px;
+  white-space   : nowrap;
 }
 
 .work-card-foot {
@@ -148,22 +179,26 @@
   align-items    : center;
   justify-content: space-between;
   gap            : var(--space-sm);
-  padding        : 14px 16px 16px;
+  padding        : 16px 18px 18px;
   font-family    : var(--font-mono);
   font-size      : 0.72rem;
   color          : var(--text-3);
 }
-.work-card-open { color: var(--proj-accent); font-weight: 500; }
-
-/* ── Draft placeholder ────────────────────────────────── */
-.work-card--draft {
-  opacity: 0.5;
-  --proj-accent: var(--text-3);
+.work-card-open {
+  color      : var(--proj-ink);
+  font-weight: 500;
+  display    : inline-flex;
+  align-items: center;
+  gap        : 6px;
 }
-.work-card--draft .wf img { filter: grayscale(1) brightness(0.9); }
-.work-card--draft .work-card-title { color: var(--text-2); }
+.work-card-open span { transition: transform var(--transition-base); }
+.work-card:hover .work-card-open span { transform: translateX(3px); }
 
 /* ── Responsive ───────────────────────────────────────── */
-@media (max-width: 520px) {
-  .work-grid { grid-template-columns: 1fr; }
+@media (max-width: 430px) {
+  .work-card-head,
+  .work-card-shot,
+  .work-card-body,
+  .work-card-foot { padding-inline: 14px; }
+  .work-card-foot { flex-wrap: wrap; row-gap: 6px; }
 }

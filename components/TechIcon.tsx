@@ -3,7 +3,9 @@ import {
   siReact, siNextdotjs, siVuedotjs, siAngular, siInertia, siTailwindcss,
   siNodedotjs, siExpress, siLaravel, siJsonwebtokens,
   siPostgresql, siMysql, siMongodb,
-  siGit, siGithub, siVercel, siFigma, siPostman,
+  siVercel, siNetlify, siHostinger,
+  siClaude, siOpenai, siGooglegemini,
+  siGit, siGithub, siFigma, siPostman,
 } from 'simple-icons';
 
 /** Brand marks from simple-icons, rendered single-colour so the row reads as
@@ -13,7 +15,10 @@ const ICONS: Record<string, { path: string }> = {
   react: siReact, next: siNextdotjs, vue: siVuedotjs, angular: siAngular, inertia: siInertia, tailwind: siTailwindcss,
   node: siNodedotjs, express: siExpress, laravel: siLaravel, jwt: siJsonwebtokens,
   postgresql: siPostgresql, mysql: siMysql, mongodb: siMongodb,
-  git: siGit, github: siGithub, vercel: siVercel, figma: siFigma, postman: siPostman,
+  vercel: siVercel, netlify: siNetlify, hostinger: siHostinger,
+  // ChatGPT ships under OpenAI's mark in simple-icons; there is no separate one.
+  claude: siClaude, chatgpt: siOpenai, gemini: siGooglegemini,
+  git: siGit, github: siGithub, figma: siFigma, postman: siPostman,
 };
 
 export function TechIcon({ name }: { name?: string }) {

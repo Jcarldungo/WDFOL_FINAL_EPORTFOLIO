@@ -1,49 +1,92 @@
 'use client';
 
-import { useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from 'react';
 import emailjs from '@emailjs/browser';
 import { siteInfo } from '@/lib/content';
 
 type FieldName = 'name' | 'email' | 'subject' | 'message';
 
+const MESSAGE_MIN = 20;
+
 const VALIDATORS: Record<FieldName, (v: string) => boolean> = {
   name: (v) => v.trim().length > 1,
   email: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v),
   subject: (v) => v.trim().length > 2,
-  message: (v) => v.trim().length >= 20,
+  message: (v) => v.trim().length >= MESSAGE_MIN,
 };
 
 const ERROR_MESSAGES: Record<FieldName, string> = {
   name: 'Please enter your name.',
-  email: 'Please enter a valid email.',
-  subject: 'Please enter a subject.',
-  message: 'Please write a message (min. 20 characters).',
+  email: 'Please enter a valid email — that’s where the reply goes.',
+  subject: 'Please add a short subject.',
+  message: `Please write at least ${MESSAGE_MIN} characters so I know what this is about.`,
 };
 
+const FIELDS = Object.keys(VALIDATORS) as FieldName[];
+
 type Status = 'idle' | 'sending' | 'success' | 'error';
+type Errors = Partial<Record<FieldName, boolean>>;
 
 export function ContactForm() {
   const [values, setValues] = useState({ name: '', email: '', subject: '', message: '' });
-  const [errors, setErrors] = useState<Partial<Record<FieldName, boolean>>>({});
+  const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>('idle');
+  const successRef = useRef<HTMLDivElement>(null);
 
-  function update(field: FieldName, value: string) {
-    setValues((v) => ({ ...v, [field]: value }));
+  /** The form is replaced wholesale on success, so focus would otherwise drop
+   *  back to the top of the document with nothing announced. */
+  useEffect(() => {
+    if (status === 'success') successRef.current?.focus();
+  }, [status]);
+
+  function update(name: FieldName, value: string) {
+    setValues((v) => ({ ...v, [name]: value }));
+    // Clear the error the moment the value becomes valid. The previous
+    // version cleared on blur instead, which wiped the message while the
+    // field was still wrong.
+    if (errors[name] && VALIDATORS[name](value)) {
+      setErrors((e) => ({ ...e, [name]: false }));
+    }
   }
 
-  function clearError(field: FieldName) {
-    setErrors((e) => ({ ...e, [field]: false }));
+  function revalidate(name: FieldName) {
+    // Only re-check a field the visitor has already been told about, so a
+    // half-typed email doesn't turn red the first time they tab past it.
+    if (!errors[name]) return;
+    setErrors((e) => ({ ...e, [name]: !VALIDATORS[name](values[name]) }));
+  }
+
+  /** Shared wiring for every control: id, value, change/blur, and the ARIA
+   *  that ties an input to its error text. */
+  function bind(name: FieldName, describedBy?: string) {
+    const ids = [errors[name] ? `cf-${name}-error` : null, describedBy].filter(Boolean).join(' ');
+    return {
+      id: `cf-${name}`,
+      name,
+      value: values[name],
+      required: true,
+      'aria-invalid': errors[name] ? (true as const) : undefined,
+      'aria-describedby': ids || undefined,
+      onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => update(name, e.target.value),
+      onBlur: () => revalidate(name),
+    };
   }
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
-    const nextErrors: Partial<Record<FieldName, boolean>> = {};
-    (Object.keys(VALIDATORS) as FieldName[]).forEach((field) => {
-      nextErrors[field] = !VALIDATORS[field](values[field]);
+    const nextErrors: Errors = {};
+    FIELDS.forEach((name) => {
+      nextErrors[name] = !VALIDATORS[name](values[name]);
     });
     setErrors(nextErrors);
-    if (Object.values(nextErrors).some(Boolean)) return;
+
+    // Send focus to the first problem rather than leaving the visitor to hunt.
+    const firstInvalid = FIELDS.find((f) => nextErrors[f]);
+    if (firstInvalid) {
+      document.getElementById(`cf-${firstInvalid}`)?.focus();
+      return;
+    }
 
     setStatus('sending');
     try {
@@ -67,9 +110,12 @@ export function ContactForm() {
 
   if (status === 'success') {
     return (
-      <div className="form-success" role="status" aria-live="polite">
-        <h3>Message Sent!</h3>
-        <p>Thanks for reaching out! I&apos;ll get back to you as soon as possible.</p>
+      <div className="form-success" role="status" tabIndex={-1} ref={successRef}>
+        <h3>Message sent</h3>
+        <p>
+          Thanks for reaching out{values.name.trim() ? `, ${values.name.trim().split(/\s+/)[0]}` : ''} — I&apos;ll
+          reply to <strong>{values.email.trim()}</strong> within 24–48 hours.
+        </p>
       </div>
     );
   }
@@ -77,58 +123,63 @@ export function ContactForm() {
   return (
     <form onSubmit={handleSubmit} noValidate aria-label="Contact form">
       <div className="form-group">
-        <label className="form-label" htmlFor="cf-name">Your Name</label>
+        <label className="form-label" htmlFor="cf-name">Your name</label>
         <input
           className={`form-input${errors.name ? ' error' : ''}`}
-          type="text" id="cf-name" name="from_name" placeholder="Juan dela Cruz" autoComplete="name"
-          aria-required="true" aria-invalid={errors.name || undefined}
-          value={values.name} onChange={(e) => update('name', e.target.value)} onBlur={() => clearError('name')}
+          type="text" placeholder="Juan dela Cruz" autoComplete="name"
+          {...bind('name')}
         />
-        {errors.name && <span className="form-error visible" role="alert">{ERROR_MESSAGES.name}</span>}
+        {errors.name && <span className="form-error" id="cf-name-error" role="alert">{ERROR_MESSAGES.name}</span>}
       </div>
 
       <div className="form-group">
-        <label className="form-label" htmlFor="cf-email">Your Email</label>
+        <label className="form-label" htmlFor="cf-email">Your email</label>
         <input
           className={`form-input${errors.email ? ' error' : ''}`}
-          type="email" id="cf-email" name="from_email" placeholder="juan@example.com" autoComplete="email"
-          aria-required="true" aria-invalid={errors.email || undefined}
-          value={values.email} onChange={(e) => update('email', e.target.value)} onBlur={() => clearError('email')}
+          type="email" placeholder="juan@example.com" autoComplete="email" inputMode="email"
+          {...bind('email')}
         />
-        {errors.email && <span className="form-error visible" role="alert">{ERROR_MESSAGES.email}</span>}
+        {errors.email && <span className="form-error" id="cf-email-error" role="alert">{ERROR_MESSAGES.email}</span>}
       </div>
 
       <div className="form-group">
         <label className="form-label" htmlFor="cf-subject">Subject</label>
         <input
           className={`form-input${errors.subject ? ' error' : ''}`}
-          type="text" id="cf-subject" name="subject" placeholder="Internship / Collaboration / etc." autoComplete="off"
-          aria-required="true" aria-invalid={errors.subject || undefined}
-          value={values.subject} onChange={(e) => update('subject', e.target.value)} onBlur={() => clearError('subject')}
+          type="text" placeholder="Internship / Collaboration / etc." autoComplete="off"
+          {...bind('subject')}
         />
-        {errors.subject && <span className="form-error visible" role="alert">{ERROR_MESSAGES.subject}</span>}
+        {errors.subject && <span className="form-error" id="cf-subject-error" role="alert">{ERROR_MESSAGES.subject}</span>}
       </div>
 
       <div className="form-group">
         <label className="form-label" htmlFor="cf-message">Message</label>
         <textarea
           className={`form-textarea${errors.message ? ' error' : ''}`}
-          id="cf-message" name="message" placeholder="Tell me about the opportunity..." rows={5}
-          aria-required="true" aria-invalid={errors.message || undefined}
-          value={values.message} onChange={(e) => update('message', e.target.value)} onBlur={() => clearError('message')}
+          placeholder="Tell me about the role, the project, or what you're building…" rows={5}
+          {...bind('message', 'cf-message-hint')}
         />
-        {errors.message && <span className="form-error visible" role="alert">{ERROR_MESSAGES.message}</span>}
+        <span className="form-hint" id="cf-message-hint">
+          A couple of sentences is plenty — {MESSAGE_MIN} characters minimum.
+        </span>
+        {errors.message && <span className="form-error" id="cf-message-error" role="alert">{ERROR_MESSAGES.message}</span>}
       </div>
 
       {status === 'error' && (
-        <p className="form-error visible" role="alert" style={{ marginBottom: 12 }}>
-          Couldn&apos;t send that — try again, or email {siteInfo.email} directly.
+        <p className="form-error form-error--block" role="alert">
+          That didn&apos;t send. Try again, or email{' '}
+          <a href={`mailto:${siteInfo.email}`}>{siteInfo.email}</a> directly.
         </p>
       )}
 
-      <button type="submit" className={`submit-btn${status === 'sending' ? ' loading' : ''}`} disabled={status === 'sending'} aria-label="Send message">
-        {status === 'sending' && <div className="spinner" aria-hidden="true" />}
-        <span className="btn-text">{status === 'sending' ? 'Sending…' : 'Send Message →'}</span>
+      <button
+        type="submit"
+        className={`submit-btn${status === 'sending' ? ' loading' : ''}`}
+        disabled={status === 'sending'}
+      >
+        {status === 'sending' && <span className="spinner" aria-hidden="true" />}
+        <span className="btn-text">{status === 'sending' ? 'Sending…' : 'Send message'}</span>
+        {status !== 'sending' && <span aria-hidden="true">→</span>}
       </button>
     </form>
   );

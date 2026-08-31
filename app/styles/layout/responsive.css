@@ -6,15 +6,6 @@
    and give a single place to audit responsive behavior at a macro level.
    ============================================================================= */
 
-/* ── Tablet (≤ 1024px) ────────────────────────────────── */
-@media (max-width: 1024px) {
-  /* Two-column layouts collapse to one */
-  .two-col,
-  .two-col--offset {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* ── Mobile (≤ 768px) ─────────────────────────────────── */
 @media (max-width: 768px) {
   /* Desktop nav + its inline actions collapse into the hamburger menu,
@@ -31,21 +22,61 @@
   .container { width: 94vw; }
 }
 
-/* ── Reduced motion ───────────────────────────────────── */
+/* ── Reduced motion ───────────────────────────────────────
+   Not a blanket 0.01ms freeze. Decorative, looping, and travelling
+   motion stops outright; state feedback (hover, focus, colour, the
+   theme fade) keeps a short transition, because killing those removes
+   the very cues that tell someone a control responded. Anything that
+   moved *in* from an offset simply starts in place. */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration  : 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration : 0.01ms !important;
-    scroll-behavior     : auto !important;
-  }
+  html { scroll-behavior: auto; }
 
+  /* Entrances resolve instantly, in their final position. */
   .reveal,
   .reveal-left,
   .reveal-right {
-    opacity  : 1;
+    opacity   : 1;
+    transform : none;
+    transition: none;
+  }
+
+  .hero-kicker,
+  .hero-name,
+  .hero-support,
+  .hero-desc,
+  .hero-cta,
+  .hero-stack,
+  .hero-media,
+  .form-success {
+    animation: none;
+  }
+
+  /* Looping ambient motion stops; the elements stay where they are. */
+  .blob,
+  .status-dot,
+  .hero-portrait::before {
+    animation: none;
+  }
+
+  /* Nothing should travel on hover. */
+  .btn:hover,
+  .submit-btn:hover:not(:disabled),
+  .social-link:hover,
+  .work-card:hover {
     transform: none;
+  }
+
+  /* Colour/opacity feedback survives, just quicker. */
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.12s !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  /* The submit spinner is the one loop that must keep turning — it is the
+     only signal that a message is still sending. */
+  .submit-btn .spinner {
+    animation: spin 1.2s linear infinite !important;
   }
 }

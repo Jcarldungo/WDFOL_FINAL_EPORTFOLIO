@@ -4,32 +4,25 @@
    Centralizing here avoids duplicated keyframes and ensures consistency.
    ============================================================================= */
 
-/* ── Scroll Reveal Utilities ──────────────────────────────── */
-/* Applied via JS IntersectionObserver; .visible class triggers the transition */
+/* ── Scroll Reveal Utilities ──────────────────────────────────
+   Applied via IntersectionObserver in lib/useScrollReveal; `.visible`
+   triggers the transition. Deliberately short and shallow: the observer
+   now fires a full viewport early, so this is the last beat of an
+   entrance the reader has already begun scrolling into — not a curtain
+   that has to be waited out. */
 
-.reveal {
-  opacity  : 0;
-  transform: translateY(20px);
-  transition:
-    opacity   var(--transition-spring),
-    transform var(--transition-spring);
-}
-
-.reveal-left {
-  opacity  : 0;
-  transform: translateX(-22px);
-  transition:
-    opacity   var(--transition-spring),
-    transform var(--transition-spring);
-}
-
+.reveal,
+.reveal-left,
 .reveal-right {
   opacity  : 0;
-  transform: translateX(22px);
   transition:
-    opacity   var(--transition-spring),
-    transform var(--transition-spring);
+    opacity   var(--transition-reveal),
+    transform var(--transition-reveal);
 }
+
+.reveal       { transform: translateY(14px); }
+.reveal-left  { transform: translateX(-16px); }
+.reveal-right { transform: translateX(16px); }
 
 .reveal.visible,
 .reveal-left.visible,
@@ -37,13 +30,6 @@
   opacity  : 1;
   transform: translate(0, 0);
 }
-
-/* Staggered delay helpers */
-.reveal-delay-1 { transition-delay: 0.10s; }
-.reveal-delay-2 { transition-delay: 0.20s; }
-.reveal-delay-3 { transition-delay: 0.30s; }
-.reveal-delay-4 { transition-delay: 0.40s; }
-.reveal-delay-5 { transition-delay: 0.50s; }
 
 /* ── Entrance (hero stagger + form messages) ──────────── */
 @keyframes slideDown {
@@ -64,7 +50,7 @@
 
 @keyframes pulse {
   0%, 100% { opacity: 1;   transform: scale(1); }
-  50%       { opacity: 0.6; transform: scale(0.85); }
+  50%      { opacity: 0.6; transform: scale(0.85); }
 }
 
 @keyframes spin {

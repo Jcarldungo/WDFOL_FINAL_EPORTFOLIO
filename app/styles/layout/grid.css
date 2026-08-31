@@ -1,5 +1,5 @@
 /* =============================================================================
-   LAYOUT — Container, section wrapper, SPA page system, glass card primitive.
+   LAYOUT — Container, section wrapper, section head, 404 block.
    Separation rationale: Layout primitives are the skeleton. They must never
    contain component-specific rules — they are composable "slots" only.
    ============================================================================= */
@@ -14,20 +14,7 @@
    One default rhythm + intentional density modifiers. */
 .section          { padding-block: var(--section-pad); }
 .section--tight   { padding-block: var(--section-pad-tight); }
-.section--generous{ padding-block: var(--section-pad-generous); }
 .section--page-top{ padding-top: var(--section-pad-page-top); }
-
-/* ── Two-column layout ────────────────────────────────── */
-.two-col {
-  display              : grid;
-  grid-template-columns: 1fr 1fr;
-  gap                  : clamp(var(--space-xl), 5vw, var(--space-3xl));
-  align-items          : start;
-}
-
-.two-col--offset {
-  grid-template-columns: 1fr 1.5fr;
-}
 
 /* ── Alt section background ───────────────────────────── */
 .section-alt {
@@ -39,27 +26,29 @@
   margin-bottom: var(--section-head-gap);
 }
 
-/* ── 404 ──────────────────────────────────────────────── */
+/* ── 404 ──────────────────────────────────────────────────
+   Brings its own chrome (see app/not-found.tsx) and centres the block
+   rather than parking it against the top of a tall empty page. */
+.notfound-page {
+  min-height    : 100vh;
+  min-height    : 100svh;
+  display       : flex;
+  flex-direction: column;
+}
+.notfound-main {
+  flex           : 1;
+  display        : flex;
+  align-items    : center;
+  width          : min(1120px, 92vw);
+  margin-inline  : auto;
+  padding-block  : var(--section-pad);
+}
 .notfound { max-width: 46ch; }
 .notfound .section-title { margin-top: 10px; }
 .notfound-actions {
-  display  : flex;
-  gap      : 14px;
-  flex-wrap: wrap;
-  margin-top: var(--space-xl);
-}
-
-/* ── Centered section head ────────────────────────────── */
-.section-head--center {
-  text-align: center;
-}
-
-.section-head--center .section-label {
-  justify-content: center;
-}
-
-.section-head--center .section-label::before { display: none; }
-
-.section-head--center .section-subtitle {
-  margin-inline: auto;
+  display    : flex;
+  align-items: center;
+  gap        : 14px;
+  flex-wrap  : wrap;
+  margin-top : var(--space-xl);
 }
