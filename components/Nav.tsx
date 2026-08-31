@@ -131,10 +131,9 @@ export function Nav() {
             {s.label}
           </a>
         ))}
+        {/* No theme toggle here — it lives in the header on mobile, where it
+            stays reachable and shows its effect immediately. */}
         <div className="mobile-menu-actions">
-          <button className="theme-toggle" aria-label="Toggle light/dark mode" onClick={toggleTheme}>
-            {theme === 'dark' ? SunIcon : MoonIcon}
-          </button>
           <a href="#contact" className="btn btn-primary" onClick={closeMenu}>Start a project</a>
         </div>
       </nav>
@@ -164,7 +163,7 @@ export function Nav() {
             </nav>
 
             <div className="nav-actions">
-              <button className="theme-toggle nav-actions-toggle" aria-label="Toggle light/dark mode" onClick={toggleTheme}>
+              <button className="theme-toggle" aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`} onClick={toggleTheme}>
                 {theme === 'dark' ? SunIcon : MoonIcon}
               </button>
               <a href="#contact" className="btn btn-primary btn-sm">Start a project</a>

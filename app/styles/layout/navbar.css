@@ -103,6 +103,14 @@
 }
 .theme-toggle:hover { border-color: var(--accent); transform: rotate(20deg); }
 
+/* Toggle + hamburger sit together in the mobile header; tighten the gap and
+   trim the control so both stay comfortably inside a 320px viewport while
+   keeping a 44px touch target. */
+@media (max-width: 430px) {
+  .nav-actions  { gap: 4px; }
+  .theme-toggle { width: 42px; height: 42px; }
+}
+
 /* ── Hamburger ── */
 .hamburger {
   display        : none;
