@@ -88,6 +88,7 @@
   text-align: left;
   cursor: pointer;
   font-family: inherit;
+  position: relative;
   transition: color var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
 }
 .lab-rail-item:hover { color: var(--lab-text); }
@@ -95,6 +96,21 @@
   color: var(--lab-text);
   background: var(--lab-surface);
   border-color: var(--lab-border-2);
+}
+/* When the JS indicator can render (see LabRailIndicator.tsx), it owns the
+   fill exclusively — otherwise the static background above and the sliding
+   pill would double up. */
+.lab-rail--animated .lab-rail-item.active {
+  background: none;
+  border-color: transparent;
+}
+.lab-rail-indicator {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--lab-surface);
+  border: 1px solid var(--lab-border-2);
+  border-radius: var(--radius-sm);
 }
 .lab-rail-item:focus-visible {
   outline: 2px solid var(--lab-accent);
@@ -137,6 +153,16 @@
   letter-spacing: -0.02em;
   margin: 0;
   color: var(--lab-text);
+}
+
+.lab-trace-line {
+  display: block;
+  height: 1px;
+  width: 100%;
+  margin-bottom: 28px;
+  background: var(--lab-accent);
+  transform-origin: left;
+  opacity: 0.6;
 }
 
 /* ── Exit control ─────────────────────────────────────── */

@@ -160,3 +160,35 @@ export function SlabMotion({
     </motion.div>
   );
 }
+
+// ---------------------------------------------------------------------------
+// Rail active-item indicator
+// ---------------------------------------------------------------------------
+
+export function RailIndicator() {
+  return (
+    <motion.span
+      layoutId="lab-rail-active"
+      className="lab-rail-indicator"
+      aria-hidden="true"
+      transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+    />
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Stage entry trace line
+// ---------------------------------------------------------------------------
+
+export function StageTraceLine({ id }: { id: string }) {
+  return (
+    <motion.span
+      key={id}
+      className="lab-trace-line"
+      aria-hidden="true"
+      initial={{ scaleX: 0 }}
+      animate={{ scaleX: 1 }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+    />
+  );
+}
