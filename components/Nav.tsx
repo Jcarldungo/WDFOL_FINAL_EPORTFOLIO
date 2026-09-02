@@ -1,9 +1,14 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from 'react';
+import { useRouter } from 'next/navigation';
 import { NAV_SECTIONS, SECTION_IDS } from '@/lib/sections';
 import { useActiveSection } from '@/lib/useActiveSection';
 import { useTheme } from './ThemeProvider';
+import { useDeveloperMode } from './DeveloperModeProvider';
+import { suppressNextModeTransition } from './ModeTransition';
+import { NavActiveIndicator } from './motion/NavActiveIndicator';
+import { requestLabWipe } from '@/lib/labWipeSignal';
 
 const SunIcon = (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
@@ -15,17 +20,56 @@ const MoonIcon = (
     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" />
   </svg>
 );
+const CodeIcon = (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <polyline points="9 8 4 12 9 16" /><polyline points="15 8 20 12 15 16" />
+  </svg>
+);
+const TerminalIcon = (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <polyline points="4 6 10 12 4 18" /><line x1="12" y1="18" x2="20" y2="18" />
+  </svg>
+);
 
 export function Nav() {
   const { theme, toggleTheme } = useTheme();
+  const { devMode, toggleDevMode } = useDeveloperMode();
+  const router = useRouter();
   const active = useActiveSection(SECTION_IDS);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const progressRef = useRef<HTMLDivElement>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLElement>(null);
+  const devToggleRef = useRef<HTMLButtonElement>(null);
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
+
+  // Turning it on from here means "take me to the full Developer Mode
+  // environment" — /lab's own entrance sequence owns that transition, so the
+  // local glow flash is suppressed rather than playing underneath it.
+  // Turning it off (devMode was already true, e.g. persisted from a prior
+  // visit) just reverts the homepage's bonus polish in place — no navigation.
+  const handleDevToggle = useCallback(() => {
+    if (devMode) {
+      toggleDevMode();
+      return;
+    }
+    suppressNextModeTransition();
+    toggleDevMode();
+    const rect = devToggleRef.current?.getBoundingClientRect();
+    const origin = rect
+      ? { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }
+      : { x: window.innerWidth, y: 0 };
+    requestLabWipe(origin, 'lab').then(() => {
+      try {
+        sessionStorage.setItem('portfolio-lab-wiped', '1');
+      } catch {
+        /* ignore */
+      }
+      router.push('/lab?enter=1');
+    });
+  }, [devMode, toggleDevMode, router]);
 
   // One rAF-batched read per frame. The progress bar is written straight
   // to the DOM (transform: scaleX) so scrolling never triggers a render;
@@ -121,18 +165,20 @@ export function Nav() {
         aria-hidden={!menuOpen}
         inert={!menuOpen}
       >
-        {NAV_SECTIONS.map((s) => (
+        {NAV_SECTIONS.map((s, i) => (
           <a
             key={s.id}
             href={`#${s.id}`}
             className={`mobile-link${active === s.id ? ' active' : ''}`}
+            style={{ '--i': i } as CSSProperties}
             onClick={closeMenu}
           >
             {s.label}
           </a>
         ))}
-        {/* No theme toggle here — it lives in the header on mobile, where it
-            stays reachable and shows its effect immediately. */}
+        {/* No theme or dev-mode toggle here — both live in the header on
+            mobile, where they stay reachable and show their effect
+            immediately. */}
         <div className="mobile-menu-actions">
           <a href="#contact" className="btn btn-primary" onClick={closeMenu}>Start a project</a>
         </div>
@@ -158,11 +204,21 @@ export function Nav() {
                   className={`nav-link${active === s.id ? ' active' : ''}`}
                 >
                   {s.label}
+                  {active === s.id && <NavActiveIndicator />}
                 </a>
               ))}
             </nav>
 
             <div className="nav-actions">
+              <button
+                ref={devToggleRef}
+                className={`dev-toggle${devMode ? ' active' : ''}`}
+                aria-pressed={devMode}
+                aria-label={devMode ? 'Switch to Professional Mode' : 'Enter Developer Mode'}
+                onClick={handleDevToggle}
+              >
+                {devMode ? TerminalIcon : CodeIcon}
+              </button>
               <button className="theme-toggle" aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`} onClick={toggleTheme}>
                 {theme === 'dark' ? SunIcon : MoonIcon}
               </button>
