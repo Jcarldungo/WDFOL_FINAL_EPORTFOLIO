@@ -59,9 +59,28 @@ export function ModeWipeOverlay() {
             inFlightRef.current = false;
             return;
           }
-          const { animate } = await import('motion');
-          const maxRadius = Math.hypot(window.innerWidth, window.innerHeight);
+          // Guards resolve() being called more than once: it's normally
+          // fired from the inner finally below (as soon as the cover
+          // animation settles), but if the dynamic import itself throws —
+          // e.g. a chunk-load failure — there's no cover animation to wait
+          // on, so the outer finally has to fire it instead. Calling a
+          // Promise executor's resolve twice is harmless in JS, but tracking
+          // this keeps the "fires exactly once" contract explicit.
+          let resolved = false;
+          const resolveOnce = () => {
+            if (resolved) return;
+            resolved = true;
+            resolve();
+          };
           try {
+            // The import (and the hypot call that only needs its result) live
+            // inside this try too: if the dynamic import rejects, nothing
+            // below it can run, so without this the catch/finally pair would
+            // never fire — resolve() would hang the caller forever and
+            // inFlightRef would stay true forever, silently locking out every
+            // later requestLabWipe() call for the rest of the page's life.
+            const { animate } = await import('motion');
+            const maxRadius = Math.hypot(window.innerWidth, window.innerHeight);
             try {
               await animate(
                 el,
@@ -79,16 +98,19 @@ export function ModeWipeOverlay() {
               // navigate now either way; worst case the overlay is left in
               // some intermediate covered-ish state, which still beats
               // hanging the navigation forever.
-              resolve();
+              resolveOnce();
             }
 
             await new Promise((r) => setTimeout(r, REVEAL_HOLD_MS));
             await animate(el, { opacity: [1, 0] }, { duration: 0.4, ease: [0.22, 1, 0.36, 1] }).finished;
           } catch {
-            // Either animation was interrupted/rejected. Fall through to the
-            // finally below so the overlay never stays stuck mounted over
-            // the viewport with no recovery short of a reload.
+            // The import failed, or either animation was interrupted/
+            // rejected. Fall through to the finally below so the overlay
+            // never stays stuck mounted over the viewport with no recovery
+            // short of a reload, and so resolve() still fires even when the
+            // import itself is what threw.
           } finally {
+            resolveOnce();
             setActive(null);
             inFlightRef.current = false;
           }
