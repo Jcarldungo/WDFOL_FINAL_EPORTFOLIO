@@ -11,6 +11,10 @@ const SlabMotion = dynamic(() => import('../labMotion').then((m) => ({ default: 
   ssr: false,
 });
 
+const StatReveal = dynamic(() => import('../labMotion').then((m) => ({ default: m.StatReveal })), {
+  ssr: false,
+});
+
 /** Same layoutId, same className, different children across the
  *  collapsed/expanded render — Motion measures the difference and animates
  *  it as a shared-element grow. Falls back to a plain div (still fully
@@ -39,6 +43,18 @@ function Slab({
       {children}
     </SlabMotion>
   );
+}
+
+function StatItem({ label, value, index }: { label: string; value: string; index: number }) {
+  const enabled = useMotionEnabled();
+  const body = (
+    <div>
+      <dt>{label}</dt>
+      <dd>{value}</dd>
+    </div>
+  );
+  if (!enabled) return body;
+  return <StatReveal index={index}>{body}</StatReveal>;
 }
 
 export function ArchiveEntry({
@@ -77,11 +93,8 @@ export function ArchiveEntry({
 
           {project.stats && (
             <dl className="lab-slab-stats">
-              {project.stats.map((s) => (
-                <div key={s.label}>
-                  <dt>{s.label}</dt>
-                  <dd>{s.value}</dd>
-                </div>
+              {project.stats.map((s, i) => (
+                <StatItem key={s.label} label={s.label} value={s.value} index={i} />
               ))}
             </dl>
           )}
