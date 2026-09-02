@@ -123,10 +123,10 @@ export function StageTransition({ id, children }: { id: string; children: ReactN
     <AnimatePresence mode="wait" initial={false}>
       <motion.div
         key={id}
-        initial={{ opacity: 0, y: 14, scale: 0.99 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: -10, scale: 0.99 }}
-        transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+        initial={{ opacity: 0, y: 14, scale: 1.02, filter: 'blur(4px)' }}
+        animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+        exit={{ opacity: 0, y: -10, scale: 0.97, filter: 'blur(4px)' }}
+        transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
       >
         {children}
       </motion.div>
