@@ -18,15 +18,6 @@
   font-family: var(--font-mono);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .lab-root--leaving {
-    transition: opacity 0.26s ease, filter 0.26s ease;
-    opacity: 0;
-    filter: blur(6px);
-  }
-}
-.lab-root--leaving { opacity: 0; }
-
 /* ── Backdrop ─────────────────────────────────────────── */
 .lab-backdrop {
   position: fixed;
