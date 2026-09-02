@@ -2,8 +2,11 @@ import type { Metadata, Viewport } from 'next';
 import { Syne, DM_Sans, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
 import { ThemeProvider } from '@/components/ThemeProvider';
+import { DeveloperModeProvider } from '@/components/DeveloperModeProvider';
 import { AmbientBackground } from '@/components/AmbientBackground';
 import { RevealScope } from '@/components/RevealScope';
+import { ModeTransition } from '@/components/ModeTransition';
+import { ModeWipeOverlay } from '@/components/ModeWipeOverlay';
 import { siteInfo, publishedProjects } from '@/lib/content';
 import './globals.css';
 
@@ -109,6 +112,15 @@ const THEME_INIT_SCRIPT = `
 })();
 `;
 
+const DEV_MODE_INIT_SCRIPT = `
+(function() {
+  try {
+    var on = localStorage.getItem('portfolio-dev-mode') === 'on';
+    document.documentElement.setAttribute('data-mode', on ? 'developer' : 'professional');
+  } catch (e) {}
+})();
+`;
+
 const syne = Syne({
   subsets: ['latin'],
   weight: ['400', '600', '700', '800'],
@@ -135,20 +147,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       data-theme="dark"
+      data-mode="professional"
       className={`${syne.variable} ${dmSans.variable} ${jetBrainsMono.variable}`}
       suppressHydrationWarning
     >
       <body>
         <Script id="theme-init" strategy="beforeInteractive">{THEME_INIT_SCRIPT}</Script>
+        <Script id="dev-mode-init" strategy="beforeInteractive">{DEV_MODE_INIT_SCRIPT}</Script>
         <script
           type="application/ld+json"
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
         />
         <ThemeProvider>
-          <AmbientBackground />
-          <RevealScope />
-          {children}
+          <DeveloperModeProvider>
+            <AmbientBackground />
+            <RevealScope />
+            <ModeTransition />
+            <ModeWipeOverlay />
+            {children}
+          </DeveloperModeProvider>
         </ThemeProvider>
       </body>
     </html>

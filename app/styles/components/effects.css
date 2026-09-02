@@ -64,6 +64,36 @@
   .blob { animation: none; }
 }
 
+/* ── Mode transition sweep ────────────────────────────── */
+/* Fixed overlay animated by ModeTransition.tsx via motion's animate(); the
+   opacity keyframes live in JS, this just positions and colors it. Sourced
+   from the top-right (where the mode toggle sits) so the glow reads as
+   coming from the control the visitor just pressed. */
+.mode-transition-overlay {
+  position      : fixed;
+  inset         : 0;
+  z-index       : var(--z-overlay);
+  pointer-events: none;
+  opacity       : 0;
+  background    : radial-gradient(circle at 92% 4%, var(--accent-glow), transparent 55%);
+}
+
+/* ── Mode wipe overlay (enter/exit Developer Mode) ───────── */
+/* Animated imperatively by components/ModeWipeOverlay.tsx via motion's
+   animate() — clip-path and opacity keyframes live in JS, this just
+   positions and colors it per direction. --lab-bg / --bg are both global
+   tokens (app/styles/base/variables.css) so this never needs to duplicate
+   a hex value. */
+.mode-wipe-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  pointer-events: none;
+  opacity: 1;
+}
+.mode-wipe-overlay--lab { background: var(--lab-bg); }
+.mode-wipe-overlay--site { background: var(--bg); }
+
 /* ── Social link icons ────────────────────────────────── */
 .social-links {
   display: flex;
