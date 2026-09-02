@@ -18,6 +18,11 @@ const REVEAL_HOLD_MS = 280;
 export function ModeWipeOverlay() {
   const [active, setActive] = useState<{ origin: LabWipeOrigin; theme: 'lab' | 'site' } | null>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  // Synchronous in-flight guard — separate from `active` state because a
+  // second wipe request can arrive in the same tick a setState from the
+  // first hasn't flushed yet. Read/written only inside the listener and its
+  // rAF callback below, both on the main thread, so no race between checks.
+  const inFlightRef = useRef(false);
   const reduced = usePrefersReducedMotion();
 
   useEffect(
@@ -29,6 +34,18 @@ export function ModeWipeOverlay() {
           resolve();
           return;
         }
+        if (inFlightRef.current) {
+          // A wipe is already animating. Starting a second animate() call on
+          // the same element/property would race the first WAAPI animation
+          // (and risk interrupting it — see the try/finally below). Queuing
+          // or canceling-and-restarting is unnecessary complexity for what
+          // should be a rare edge case; just resolve immediately so the new
+          // caller isn't blocked — the same "fail open" behavior as the
+          // no-listener-registered fallback in labWipeSignal.ts.
+          resolve();
+          return;
+        }
+        inFlightRef.current = true;
         setActive({ origin, theme });
 
         // rAF gives the browser one paint with the overlay mounted (and its
@@ -39,26 +56,42 @@ export function ModeWipeOverlay() {
           const el = overlayRef.current;
           if (!el) {
             resolve();
+            inFlightRef.current = false;
             return;
           }
           const { animate } = await import('motion');
           const maxRadius = Math.hypot(window.innerWidth, window.innerHeight);
-          await animate(
-            el,
-            {
-              clipPath: [
-                `circle(0px at ${origin.x}px ${origin.y}px)`,
-                `circle(${maxRadius}px at ${origin.x}px ${origin.y}px)`,
-              ],
-            },
-            { duration: 0.5, ease: [0.65, 0, 0.35, 1] }
-          ).finished;
+          try {
+            try {
+              await animate(
+                el,
+                {
+                  clipPath: [
+                    `circle(0px at ${origin.x}px ${origin.y}px)`,
+                    `circle(${maxRadius}px at ${origin.x}px ${origin.y}px)`,
+                  ],
+                },
+                { duration: 0.5, ease: [0.65, 0, 0.35, 1] }
+              ).finished;
+            } finally {
+              // Resolve as soon as the cover animation settles — whether it
+              // completed or was interrupted/rejected. The caller can
+              // navigate now either way; worst case the overlay is left in
+              // some intermediate covered-ish state, which still beats
+              // hanging the navigation forever.
+              resolve();
+            }
 
-          resolve();
-
-          await new Promise((r) => setTimeout(r, REVEAL_HOLD_MS));
-          await animate(el, { opacity: [1, 0] }, { duration: 0.4, ease: [0.22, 1, 0.36, 1] }).finished;
-          setActive(null);
+            await new Promise((r) => setTimeout(r, REVEAL_HOLD_MS));
+            await animate(el, { opacity: [1, 0] }, { duration: 0.4, ease: [0.22, 1, 0.36, 1] }).finished;
+          } catch {
+            // Either animation was interrupted/rejected. Fall through to the
+            // finally below so the overlay never stays stuck mounted over
+            // the viewport with no recovery short of a reload.
+          } finally {
+            setActive(null);
+            inFlightRef.current = false;
+          }
         });
       }),
     [reduced]
