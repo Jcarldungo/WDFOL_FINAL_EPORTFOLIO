@@ -1,0 +1,172 @@
+/* =============================================================================
+   DEVELOPER MODE MODULES — content styling for each /lab module. Reuses
+   .lab-root's tokens (lab.css) throughout; nothing here is theme-aware since
+   the whole environment is deliberately dark-only.
+   ============================================================================= */
+
+.lab-module { max-width: 880px; }
+
+/* ── About ────────────────────────────────────────────── */
+.lab-about-edu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  align-items: baseline;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--lab-border);
+}
+.lab-about-track {
+  width: 100%;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--lab-accent);
+}
+.lab-about-degree { font-family: var(--font-display); font-size: 1.2rem; margin: 0; color: var(--lab-text); }
+.lab-about-school,
+.lab-about-honor { color: var(--lab-text-2); font-size: 0.88rem; margin: 0; }
+.lab-about-bio { display: flex; flex-direction: column; gap: 16px; color: var(--lab-text-2); max-width: 64ch; margin-bottom: 32px; line-height: var(--lh-normal); }
+.lab-about-bio strong { color: var(--lab-text); }
+.lab-focus-list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.lab-focus-list li {
+  font-size: 0.78rem;
+  border: 1px solid var(--lab-border-2);
+  border-radius: var(--radius-pill);
+  padding: 6px 14px;
+  color: var(--lab-text-2);
+}
+
+/* ── Archive ──────────────────────────────────────────── */
+.lab-archive-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+.lab-archive-grid--focused { grid-template-columns: 1fr; }
+@media (max-width: 860px) {
+  .lab-archive-grid { grid-template-columns: 1fr; }
+}
+
+.lab-slab {
+  border: 1px solid var(--lab-border);
+  border-radius: var(--radius-lg);
+  background: var(--lab-surface);
+  overflow: hidden;
+}
+.lab-slab--expanded { grid-column: 1 / -1; }
+
+/* Opacity only — never transform/scale here. .lab-slab is a motion.div with
+   a layoutId when Developer Mode's motion is on (see labMotion.tsx's
+   SlabMotion), and Motion owns that element's transform for the
+   expand/collapse grow animation; a competing CSS transform would fight it
+   on the next layout measurement. */
+.lab-slab--receded {
+  opacity: 0.4;
+  transition: opacity var(--transition-base);
+}
+.lab-slab--receded:hover,
+.lab-slab--receded:focus-within {
+  opacity: 0.7;
+}
+
+.lab-slab-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+  padding: 28px;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  font-family: inherit;
+}
+.lab-slab-head:focus-visible { outline: 2px solid var(--lab-accent); outline-offset: -2px; }
+.lab-slab-cat {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--proj-accent, var(--lab-accent));
+}
+.lab-slab-title { font-family: var(--font-display); font-size: 1.5rem; margin: 0; color: var(--lab-text); }
+.lab-slab-lede { color: var(--lab-text-2); margin: 0; line-height: var(--lh-snug); }
+.lab-slab-cta { font-size: 0.78rem; color: var(--lab-accent); margin-top: 6px; }
+.lab-slab-head:hover .lab-slab-cta { text-decoration: underline; }
+
+.lab-slab-body { padding: 0 28px 28px; display: flex; flex-direction: column; gap: 22px; }
+.lab-slab-roles { font-size: 0.8rem; color: var(--lab-text-2); margin: 0; }
+.lab-slab-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 14px; margin: 0; }
+.lab-slab-stats dt { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--lab-text-3); margin: 0; }
+.lab-slab-stats dd { margin: 4px 0 0; font-size: 1rem; color: var(--lab-text); }
+.lab-slab-highlights { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; color: var(--lab-text-2); font-family: var(--font-body); line-height: var(--lh-normal); }
+.lab-slab-highlights strong { color: var(--lab-text); font-family: var(--font-mono); font-size: 0.85rem; }
+.lab-slab-outcome { color: var(--lab-text-2); font-family: var(--font-body); font-style: italic; margin: 0; }
+.lab-slab-links { display: flex; flex-wrap: wrap; gap: 18px; padding-top: 8px; border-top: 1px solid var(--lab-border); }
+.lab-link { font-size: 0.85rem; color: var(--lab-accent); }
+.lab-link:hover,
+.lab-link:focus-visible { text-decoration: underline; }
+
+/* Reused ScreenWalker/browser-frame — the site's default surface/border
+   tokens read as lighter "Professional" colours inside Lab's darker frame,
+   so retint just the surfaces, not the whole component. */
+.lab-slab-body .wf,
+.lab-slab-body .wf-bar { background: var(--lab-surface-2); border-color: var(--lab-border-2); }
+.lab-slab-body .walker-thumb { border-color: var(--lab-border); }
+.lab-slab-body .walker-caption-label { color: var(--lab-text); }
+.lab-slab-body .walker-caption-text,
+.lab-slab-body .walker-hint { color: var(--lab-text-2); }
+
+/* ── Stack ────────────────────────────────────────────── */
+.lab-stack-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; }
+.lab-stack-group h3 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--lab-text-3); margin: 0 0 14px; }
+.lab-stack-group ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.lab-stack-item { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: var(--radius-sm); color: var(--lab-text-2); font-size: 0.88rem; transition: background var(--transition-fast), color var(--transition-fast); }
+.lab-stack-item:hover { background: var(--lab-surface); color: var(--lab-text); }
+.lab-stack-item .tech-icon { color: var(--lab-accent); }
+
+/* ── Experience ───────────────────────────────────────── */
+.lab-timeline { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 32px; border-left: 1px solid var(--lab-border); }
+.lab-timeline-item { display: flex; gap: 20px; padding-left: 26px; position: relative; }
+.lab-timeline-index {
+  font-size: 0.82rem;
+  color: var(--lab-accent);
+  position: absolute;
+  left: -12px;
+  top: 0;
+  background: var(--lab-bg);
+  padding: 2px 4px;
+}
+.lab-timeline-body h3 { margin: 0 0 4px; font-family: var(--font-display); font-size: 1.1rem; color: var(--lab-text); }
+.lab-timeline-org { color: var(--lab-text-3); font-size: 0.85rem; margin: 0 0 10px; }
+.lab-timeline-body ul { margin: 0; padding-left: 18px; color: var(--lab-text-2); display: flex; flex-direction: column; gap: 6px; font-family: var(--font-body); line-height: var(--lh-normal); }
+
+/* ── Certifications ───────────────────────────────────── */
+.lab-cert-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; }
+.lab-cert-row a {
+  display: grid;
+  grid-template-columns: 110px 1fr auto auto;
+  gap: 16px;
+  align-items: center;
+  padding: 14px 6px;
+  border-bottom: 1px solid var(--lab-border);
+  color: var(--lab-text-2);
+}
+.lab-cert-row a:hover,
+.lab-cert-row a:focus-visible { color: var(--lab-text); }
+.lab-cert-issuer { font-size: 0.78rem; color: var(--lab-accent); }
+.lab-cert-name { font-size: 0.9rem; font-family: var(--font-body); }
+.lab-cert-tag { font-size: 0.72rem; color: var(--lab-text-3); border: 1px solid var(--lab-border); border-radius: var(--radius-sm); padding: 2px 8px; justify-self: start; }
+.lab-cert-date { font-size: 0.78rem; color: var(--lab-text-3); text-align: right; }
+@media (max-width: 640px) {
+  .lab-cert-row a { grid-template-columns: 1fr; gap: 4px; }
+  .lab-cert-date { text-align: left; }
+}
+
+/* ── Contact ──────────────────────────────────────────── */
+.lab-contact-lede { color: var(--lab-text-2); max-width: 56ch; margin: 8px 0 0; font-family: var(--font-body); }
+.lab-contact .form-field,
+.lab-contact form { max-width: 560px; }
