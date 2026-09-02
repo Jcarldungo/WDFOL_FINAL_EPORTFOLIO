@@ -136,3 +136,23 @@
   --shadow      : 0 8px 32px rgba(0, 0, 0, 0.08);
   --shadow-lg   : 0 24px 64px rgba(0, 0, 0, 0.14);
 }
+
+/* ── DEVELOPER MODE TOKENS (theme-independent) ──────────
+   /lab is deliberately dark regardless of the light/dark toggle (see
+   app/styles/lab/lab.css's header comment) — these live here, not scoped
+   under .lab-root, so cross-route pieces like the mode-transition wipe
+   overlay (components/ModeWipeOverlay.tsx) can read them without
+   duplicating the values or hard-coding a hex outside this file. */
+:root {
+  --lab-bg: #08090b;
+  --lab-bg-2: #0e1013;
+  --lab-surface: #121519;
+  --lab-surface-2: #191d22;
+  --lab-border: rgba(255, 255, 255, 0.08);
+  --lab-border-2: rgba(255, 255, 255, 0.16);
+  --lab-text: #eef0f2;
+  --lab-text-2: #99a0a8;
+  --lab-text-3: #6c7278;
+  --lab-accent: #7dd3fc;
+  --lab-spot: rgba(125, 211, 252, 0.10);
+}

@@ -1,0 +1,226 @@
+/* =============================================================================
+   DEVELOPER MODE SHELL — /lab's own visual identity: reuses the site's
+   existing design tokens (--font-mono, --radius-*, --space-*, --transition-*,
+   --shadow, --z-*) but defines its own deeper, fixed-dark surface tokens and
+   a single restrained accent, scoped under .lab-root so they never leak into
+   Professional Mode. Mono type is the primary display voice here — a
+   deliberate, on-brand shift, not a new visual language invented from
+   scratch. Deliberately theme-independent: this environment is dark by
+   design, not a dark variant of the light/dark toggle.
+   ============================================================================= */
+
+.lab-root {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--lab-bg);
+  color: var(--lab-text);
+  font-family: var(--font-mono);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lab-root--leaving {
+    transition: opacity 0.26s ease, filter 0.26s ease;
+    opacity: 0;
+    filter: blur(6px);
+  }
+}
+.lab-root--leaving { opacity: 0; }
+
+/* ── Backdrop ─────────────────────────────────────────── */
+.lab-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.lab-backdrop-grid {
+  position: absolute;
+  inset: -1px;
+  background-image:
+    linear-gradient(var(--lab-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--lab-border) 1px, transparent 1px);
+  background-size: 64px 64px;
+  opacity: 0.5;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 0%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 0%, transparent 80%);
+}
+.lab-spotlight {
+  position: absolute;
+  inset: 0;
+}
+
+/* ── Shell: rail + stage ──────────────────────────────── */
+.lab-shell {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 100vh;
+}
+
+.lab-rail {
+  flex: 0 0 232px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 40px 16px;
+  border-right: 1px solid var(--lab-border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.lab-rail-item {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 13px 14px;
+  border-radius: var(--radius-sm);
+  background: none;
+  border: 1px solid transparent;
+  color: var(--lab-text-2);
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+}
+.lab-rail-item:hover { color: var(--lab-text); }
+.lab-rail-item.active {
+  color: var(--lab-text);
+  background: var(--lab-surface);
+  border-color: var(--lab-border-2);
+}
+.lab-rail-item:focus-visible {
+  outline: 2px solid var(--lab-accent);
+  outline-offset: 2px;
+}
+.lab-rail-index {
+  font-size: 0.78rem;
+  color: var(--lab-accent);
+  flex-shrink: 0;
+}
+.lab-rail-label {
+  font-size: 0.85rem;
+  letter-spacing: 0.01em;
+}
+
+.lab-stage {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+}
+.lab-stage-panel {
+  height: 100vh;
+  overflow-y: auto;
+  padding: clamp(48px, 8vh, 80px) clamp(24px, 5vw, 80px) 80px;
+}
+.lab-stage-panel:focus-visible { outline: none; }
+
+.lab-module-eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--lab-accent);
+  margin: 0 0 10px;
+}
+.lab-module-head { margin-bottom: 40px; }
+.lab-module-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  font-weight: 700;
+  margin: 0;
+  color: var(--lab-text);
+}
+
+/* ── Exit control ─────────────────────────────────────── */
+.lab-exit {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: var(--z-overlay);
+}
+.lab-exit-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  padding: 10px 16px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--lab-border-2);
+  background: var(--lab-surface);
+  color: var(--lab-text-2);
+  cursor: pointer;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+.lab-exit-btn:hover,
+.lab-exit-btn:focus-visible { color: var(--lab-text); border-color: var(--lab-accent); }
+.lab-exit-btn:focus-visible { outline: 2px solid var(--lab-accent); outline-offset: 2px; }
+
+/* ── Entrance sequence ────────────────────────────────── */
+.lab-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 18vh;
+  background: var(--lab-bg);
+  cursor: pointer;
+}
+.lab-intro-iris {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 8%, color-mix(in srgb, var(--lab-accent) 16%, var(--lab-bg)), var(--lab-bg) 70%);
+}
+.lab-intro-line {
+  position: relative;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  color: var(--lab-text-2);
+  margin: 0;
+}
+.lab-intro-skip {
+  position: absolute;
+  bottom: 24px;
+  font-size: 0.7rem;
+  color: var(--lab-text-3);
+  margin: 0;
+}
+
+/* ── Responsive: rail becomes a bottom tab bar ───────── */
+@media (max-width: 860px) {
+  .lab-shell { flex-direction: column; }
+  .lab-rail {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: auto;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: visible;
+    border-right: none;
+    border-top: 1px solid var(--lab-border);
+    background: var(--lab-bg);
+    padding: 8px 10px;
+    gap: 4px;
+    z-index: 15;
+  }
+  .lab-rail-item {
+    flex: 0 0 auto;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 8px 14px;
+    min-width: 64px;
+  }
+  .lab-rail-label { font-size: 0.68rem; }
+  .lab-stage-panel { height: 100vh; padding: 32px 20px 110px; }
+  .lab-exit { top: 16px; right: 16px; }
+}
