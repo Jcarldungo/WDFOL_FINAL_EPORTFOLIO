@@ -37,7 +37,7 @@
 }
 .lab-backdrop-grid {
   position: absolute;
-  inset: -1px;
+  inset: -40px;
   background-image:
     linear-gradient(var(--lab-border) 1px, transparent 1px),
     linear-gradient(90deg, var(--lab-border) 1px, transparent 1px);
